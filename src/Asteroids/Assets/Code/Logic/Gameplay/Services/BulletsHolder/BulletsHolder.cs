@@ -1,0 +1,18 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class BulletsHolder : IBulletsHolder
+{
+    public IReadOnlyList<Bullet> Bullets => _bullets;
+    
+    private readonly List<Bullet> _bullets = new();
+    
+    public void Add(Bullet bullet) => _bullets.Add(bullet);
+    public void Remove(Bullet bullet) => _bullets.Remove(bullet);
+    public void DestroyAll()
+    {
+        _bullets.ToList().ForEach(x => Object.Destroy(x.gameObject));
+        _bullets.Clear();
+    }
+}
