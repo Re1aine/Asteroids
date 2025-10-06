@@ -1,3 +1,16 @@
+# Asteroids
+A classic arcade-style Asteroids game built in Unity.
 
-https://github.com/user-attachments/assets/30266f17-ca7e-48c0-92a9-936616f8944a
+## 🕹️ Controls
+| Action | Key |
+|--------|-----|
+| **Shoot Bullet** | `SPACE` (Press) |
+| **Shoot Laser** | `SHIFT` (Hold) |
 
+## 📥 Setup
+1. Install `Unity 6000.0.34f1`  
+2. Open `Gameplay` scene
+3. Play
+
+# Gameplay
+![Gameplay](https://github.com/user-attachments/assets/b40d5423-daac-4d10-a7d0-30596022fadc)
