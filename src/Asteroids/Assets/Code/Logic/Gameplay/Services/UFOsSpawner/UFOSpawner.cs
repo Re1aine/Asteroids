@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class UFOSpawner : IUFOSpawner
 {
-    private const float SpawnCooldown = 8f;
-    private const float MinRadiusSpawn = 15f;
-    private const float MaxRadiusSpawn = 20f;
+    private const float SpawnCooldown = 3f;
+    private const float MinRadiusSpawn = 10f;
+    private const float MaxRadiusSpawn = 11f;
     
     private readonly IGameFactory _gameFactory;
     private readonly ICoroutineRunner _coroutineRunner;
