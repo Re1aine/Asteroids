@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UFOPresenter : PresenterBase
 {
-    public event Action Destroyed;
+    public event Action<UFOPresenter> Destroyed;
     public UFOView View { get; private set; }
     public UFOModel Model { get; private set; }
     public IDamageReceiver  DamageReceiver { get; private set; }
@@ -28,7 +28,7 @@ public class UFOPresenter : PresenterBase
 
     public void Destroy(DamageType damageType)
     {
-        Destroyed?.Invoke();
+        Destroyed?.Invoke(this);
         _destroyer.Destroy(damageType);
     }
 }

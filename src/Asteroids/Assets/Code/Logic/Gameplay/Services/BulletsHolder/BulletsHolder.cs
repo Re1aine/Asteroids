@@ -8,11 +8,22 @@ public class BulletsHolder : IBulletsHolder
     
     private readonly List<Bullet> _bullets = new();
     
-    public void Add(Bullet bullet) => _bullets.Add(bullet);
-    public void Remove(Bullet bullet) => _bullets.Remove(bullet);
+    public void Add(Bullet bullet)
+    {
+        _bullets.Add(bullet);
+        bullet.Destroyed += OnDestroyed;
+    }
+    
+    public void Remove(Bullet bullet)
+    {
+        _bullets.Remove(bullet);
+        bullet.Destroyed -= OnDestroyed;
+    }
+
     public void DestroyAll()
     {
         _bullets.ToList().ForEach(x => Object.Destroy(x.gameObject));
         _bullets.Clear();
     }
+    private void OnDestroyed(Bullet bullet) => Remove(bullet);
 }

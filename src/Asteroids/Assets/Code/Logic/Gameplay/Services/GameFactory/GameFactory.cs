@@ -43,8 +43,6 @@ public class GameFactory : IGameFactory
 
         _asteroidsHolder.Add(presenter);
         
-        presenter.Destroyed += () => _asteroidsHolder.Remove(presenter);
-        
         return presenter;
     }
 
@@ -57,8 +55,6 @@ public class GameFactory : IGameFactory
         ufoView.Init(presenter);
         
         _ufOsHolder.Add(presenter);
-
-        presenter.Destroyed += () => _ufOsHolder.Remove(presenter);
         
         return presenter;
     }
@@ -68,7 +64,6 @@ public class GameFactory : IGameFactory
         Bullet bullet = _assetsProvider.InstantiateAt<Bullet>(AssetPath.Bullet, position, rotation);
         
         _bulletsHolder.Add(bullet);
-        bullet.Destroyed += () => _bulletsHolder.Remove(bullet);
         
         return bullet;
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class Bullet : MonoBehaviour
 { 
-    public event Action Destroyed;
+    public event Action<Bullet> Destroyed;
     
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private float _speed;
@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
 
     public void Destroy()
     {
-        Destroyed?.Invoke();
+        Destroyed?.Invoke(this);
         Destroy(gameObject);
     }
     

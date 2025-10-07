@@ -2,7 +2,7 @@
 
 public class AsteroidPresenter : PresenterBase
 {
-    public event Action Destroyed;
+    public event Action<AsteroidPresenter> Destroyed;
     public AsteroidView View { get; private set; }
     public AsteroidModel Model { get; private set; }
     public IDamageReceiver DamageReceiver { get; private set; }
@@ -26,7 +26,7 @@ public class AsteroidPresenter : PresenterBase
 
     public void Destroy(DamageType damageType)
     {
-        Destroyed?.Invoke();
+        Destroyed?.Invoke(this);
         _destroyer.Destroy(damageType);
     }
 }
