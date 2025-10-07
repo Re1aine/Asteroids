@@ -1,5 +1,5 @@
 ﻿public interface IPlayerDeathObserver
 {
-    void StartObserveDeath();
-    void StopObserveDeath();
+    void Start();
+    void Stop();
 }

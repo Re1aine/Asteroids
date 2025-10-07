@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
+﻿
 public class GameplayLoopState : IState
 {
-    private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly IInputService _inputService;
     private readonly IAsteroidSpawner _asteroidSpawner;
     private readonly IUFOSpawner _ufoSpawner;
@@ -12,12 +10,12 @@ public class GameplayLoopState : IState
 
     private PlayerStatsWindow _playerStatsWindow;
 
-    public GameplayLoopState(GameplayStateMachine gameplayStateMachine,IInputService inputService,
+    public GameplayLoopState(IInputService inputService,
         IAsteroidSpawner asteroidSpawner,
         IUFOSpawner ufoSpawner,
-        IGameFactory gameFactory, IHUDProvider hudProvider, IPlayerDeathObserver playerDeathObserver)
+        IGameFactory gameFactory, IHUDProvider hudProvider,
+        IPlayerDeathObserver playerDeathObserver)
     {
-        _gameplayStateMachine = gameplayStateMachine;
         _inputService = inputService;
         _asteroidSpawner = asteroidSpawner;
         _ufoSpawner = ufoSpawner;
@@ -41,7 +39,7 @@ public class GameplayLoopState : IState
         _asteroidSpawner.Disable();
         _ufoSpawner.Disable();
         
-        _playerDeathObserver.StopObserveDeath();
+        _playerDeathObserver.Stop();
         
         _playerStatsWindow.Destroy();
     }

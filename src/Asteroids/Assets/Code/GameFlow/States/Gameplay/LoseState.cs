@@ -6,6 +6,7 @@ public class LoseState : IState
     private readonly IUFOsHolder _ufosHolder;
     private readonly IAsteroidsHolder _asteroidsHolder;
     private readonly IBulletsHolder _bulletsHolder;
+    private readonly IScoreCountService _scoreCountService;
 
     private LoseWindow _loseWindow;
 

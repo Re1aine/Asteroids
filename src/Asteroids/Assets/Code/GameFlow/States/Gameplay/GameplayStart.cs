@@ -1,21 +1,22 @@
-﻿using UnityEngine;
-
+﻿
 public class GameplayStart : IState
 {
     private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly IHUDProvider _hudProvider;
     private readonly IPlayerProvider _playerProvider;
     private readonly IPlayerDeathObserver _playerDeathObserver;
+    private readonly IScoreCountService _scoreCountService;
 
     public GameplayStart(GameplayStateMachine gameplayStateMachine, 
         IHUDProvider hudProvider,
         IPlayerProvider playerProvider,
-        IPlayerDeathObserver playerDeathObserver)
+        IPlayerDeathObserver playerDeathObserver, IScoreCountService scoreCountService)
     {
         _gameplayStateMachine = gameplayStateMachine;
         _hudProvider = hudProvider;
         _playerProvider = playerProvider;
         _playerDeathObserver = playerDeathObserver;
+        _scoreCountService = scoreCountService;
     }
 
     public void Enter()
@@ -23,7 +24,9 @@ public class GameplayStart : IState
         _hudProvider.Initialize();
         _playerProvider.Initialize();
         
-        _playerDeathObserver.StartObserveDeath();
+        _playerDeathObserver.Start();
+        
+        _scoreCountService.Reset();
         
         _gameplayStateMachine.Enter<GameplayLoopState>();
     }

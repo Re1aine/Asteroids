@@ -72,8 +72,8 @@ public static class RandomHelper
     
     public static Vector2 GetRandomPointOnCircle(Vector2 center, float minRadius, float maxRadius)
     {
-        if (minRadius < 0 || maxRadius < minRadius) 
-            Debug.LogError($"Invalid radius: minRadius={minRadius}, maxRadius={maxRadius}. Must be minRadius >= 0 and maxRadius >= minRadius.");
+        minRadius = Mathf.Max(0, minRadius);
+        maxRadius = Mathf.Max(minRadius, maxRadius);
         
         float angle = Random.Range(0f, 2f * Mathf.PI);
         float radius = Random.Range(minRadius, maxRadius);

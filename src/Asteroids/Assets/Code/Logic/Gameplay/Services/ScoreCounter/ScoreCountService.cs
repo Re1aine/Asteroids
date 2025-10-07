@@ -5,4 +5,5 @@
     private int _score;
     
     public void Add(int value) => _score += value;
+    public void Reset() => _score = 0;
 }

@@ -9,7 +9,7 @@
         _playerProvider = playerProvider;
     }
 
-    public void StartObserveDeath() => _playerProvider.Player.Destroyed += OnPlayerDeath;
-    public void StopObserveDeath() => _playerProvider.Player.Destroyed -= OnPlayerDeath;
+    public void Start() => _playerProvider.Player.Destroyed += OnPlayerDeath;
+    public void Stop() => _playerProvider.Player.Destroyed -= OnPlayerDeath;
     private void OnPlayerDeath() => _gameplayStateMachine.Enter<LoseState>();
 }
