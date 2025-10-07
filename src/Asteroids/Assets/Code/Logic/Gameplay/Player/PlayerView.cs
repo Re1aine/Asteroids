@@ -83,11 +83,10 @@ public class PlayerView : ViewBase
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.TryGetComponent(out AsteroidPart asteroidPart))
-            _presenter.ReceiveDamage(DamageType.AsteroidPart);
-        else if (other.gameObject.TryGetComponent(out AsteroidView asteroid))
-            _presenter.ReceiveDamage(DamageType.Asteroid);
-        else if (other.gameObject.TryGetComponent(out UFOView ufo)) 
-            _presenter.ReceiveDamage(DamageType.UFO);
+        if (other.gameObject.TryGetComponent(out IDamageDealer damageDealer))
+        {
+            Debug.Log(damageDealer.DamageType);
+            _presenter.ReceiveDamage(damageDealer.DamageType);
+        }
     }
 }

@@ -2,8 +2,9 @@
 using UnityEngine;
 using VContainer;
 
-public class AsteroidView : ViewBase, IDamageable
+public class AsteroidView : ViewBase, IDamageable, IDamageDealer
 {
+    public virtual DamageType DamageType => DamageType.Asteroid;
     public IDamageReceiver DamageReceiver { get; private set; }
 
     [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -15,6 +16,7 @@ public class AsteroidView : ViewBase, IDamageable
     private IBoundaries _boundaries;
 
     Vector3 _direction;
+
 
     [Inject]
     public void Construct(IBoundaries boundaries)
