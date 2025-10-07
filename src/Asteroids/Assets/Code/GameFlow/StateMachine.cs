@@ -8,22 +8,22 @@
         _stateFactory = stateFactory;
     }
     
-    public void Enter<TState>() where TState : class, IState
+    public void Enter<TState>() where TState : IState
     {
         IState state = ChangeState<TState>();
         state?.Enter();
     }
 
-    public void Enter<TState, TArg>(TArg arg) where TState : class, IStateWithArg<TArg>
+    public void Enter<TState, TArg>(TArg arg) where TState : IStateWithArg<TArg>
     {
         TState state = ChangeState<TState>();
         state.Enter(arg);
     }
 
-    private TState GetState<TState>() where TState : class, IExitableState => 
+    private TState GetState<TState>() where TState : IExitableState => 
         _stateFactory.Create<TState>();
 
-    private TState ChangeState<TState>() where TState : class, IExitableState
+    private TState ChangeState<TState>() where TState : IExitableState
     {
         TState state = GetState<TState>();
         
