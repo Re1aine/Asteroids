@@ -83,10 +83,7 @@ public class PlayerView : ViewBase
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.TryGetComponent(out IDamageDealer damageDealer))
-        {
-            Debug.Log(damageDealer.DamageType);
+        if (other.gameObject.TryGetComponent(out IDamageDealer damageDealer)) 
             _presenter.ReceiveDamage(damageDealer.DamageType);
-        }
     }
 }
