@@ -8,6 +8,9 @@ public class GameplayScope : LifetimeScope
     
     protected override void Configure(IContainerBuilder builder)
     {
+        builder.Register<AssetsLoader>(Lifetime.Singleton).As<IAssetsLoader>();
+        builder.Register<AssetsProvider>(Lifetime.Singleton).As<IAssetsProvider>();
+        
         builder.RegisterComponentInHierarchy<CoroutineRunner>().As<ICoroutineRunner>();
         
         builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
