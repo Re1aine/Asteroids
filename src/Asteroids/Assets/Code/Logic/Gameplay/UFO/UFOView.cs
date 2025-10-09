@@ -6,34 +6,27 @@ using VContainer;
 [RequireComponent(typeof(Collider2D))]
 public class UFOView : MonoBehaviour, IDamageable, IDamageDealer
 {
+    public event Action<DamageType> OnDamageReceived;
     public DamageType DamageType => DamageType.UFO;
     public IDamageReceiver DamageReceiver { get; private set; }
 
     [SerializeField] private float _speed;
 
     private IPlayerProvider _playerProvider;
-
-    UFOPresenter _presenter;
-
+    
     Vector3 _direction;
-
-
+    
     [Inject]
     public void Construct(IPlayerProvider playerProvider)
     {
         _playerProvider = playerProvider;
     }
-
-    private void Start()
+    
+    public void Init(IDamageReceiver damageReceiver)
     {
-        DamageReceiver = _presenter.DamageReceiver;
+        DamageReceiver = damageReceiver;
     }
-
-    public void Init(UFOPresenter presenter)
-    {
-        _presenter = presenter;
-    }
-
+    
     private void Update()
     {
         MoveToPlayer();
@@ -51,6 +44,6 @@ public class UFOView : MonoBehaviour, IDamageable, IDamageDealer
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.TryGetComponent(out Bullet bullet)) 
-            _presenter.ReceiveDamage(DamageType.Bullet);
+            OnDamageReceived?.Invoke(DamageType.Bullet);
     }
 }

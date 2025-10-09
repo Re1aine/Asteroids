@@ -21,6 +21,10 @@ public class UFOPresenter
     {
         DamageReceiver = damageReceiver;
         _destroyer = destroyer;
+
+        View.Init(damageReceiver);
+        
+        View.OnDamageReceived += ReceiveDamage;
     }
 
     public void ReceiveDamage(DamageType damageType) => 
@@ -29,6 +33,9 @@ public class UFOPresenter
     public void Destroy(DamageType damageType)
     {
         Destroyed?.Invoke(this);
+        
+        View.OnDamageReceived -= ReceiveDamage;
+        
         _destroyer.Destroy(damageType);
     }
 }

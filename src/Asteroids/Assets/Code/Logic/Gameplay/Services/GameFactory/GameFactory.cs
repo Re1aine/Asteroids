@@ -52,7 +52,7 @@ public class GameFactory : IGameFactory
         UFOPresenter presenter = new UFOPresenter(new UFOModel(scoreReward), ufoView);
 
         presenter.Init(new UfoDamageReceiver(presenter), new UFODestroyer(presenter, _scoreCountService));
-        ufoView.Init(presenter);
+        //ufoView.Init(presenter);
         
         _ufOsHolder.Add(presenter);
         
