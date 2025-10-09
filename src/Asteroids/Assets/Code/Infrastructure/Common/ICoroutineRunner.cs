@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public interface ICoroutineRunner
+namespace Code.Infrastructure.Common
 {
-    Coroutine StartCoroutine(IEnumerator coroutine, CoroutineScopes scope);
-    void StopCoroutine(Coroutine coroutine, CoroutineScopes scope);
-    void StopCoroutines(CoroutineScopes scope);
+    public interface ICoroutineRunner
+    {
+        Coroutine StartCoroutine(IEnumerator coroutine, CoroutineScopes scope);
+        void StopCoroutine(Coroutine coroutine, CoroutineScopes scope);
+        void StopCoroutines(CoroutineScopes scope);
+    }
 }

@@ -2,28 +2,31 @@
 using System.Linq;
 using UnityEngine;
 
-public class BulletsHolder : IBulletsHolder
+namespace Code.Logic.Gameplay.Services.BulletsHolder
 {
-    public IReadOnlyList<Bullet> Bullets => _bullets;
-    
-    private readonly List<Bullet> _bullets = new();
-    
-    public void Add(Bullet bullet)
+    public class BulletsHolder : IBulletsHolder
     {
-        _bullets.Add(bullet);
-        bullet.Destroyed += OnDestroyed;
-    }
+        public IReadOnlyList<Bullet.Bullet> Bullets => _bullets;
     
-    public void Remove(Bullet bullet)
-    {
-        _bullets.Remove(bullet);
-        bullet.Destroyed -= OnDestroyed;
-    }
+        private readonly List<Bullet.Bullet> _bullets = new();
+    
+        public void Add(Bullet.Bullet bullet)
+        {
+            _bullets.Add(bullet);
+            bullet.Destroyed += OnDestroyed;
+        }
+    
+        public void Remove(Bullet.Bullet bullet)
+        {
+            _bullets.Remove(bullet);
+            bullet.Destroyed -= OnDestroyed;
+        }
 
-    public void DestroyAll()
-    {
-        _bullets.ToList().ForEach(x => Object.Destroy(x.gameObject));
-        _bullets.Clear();
+        public void DestroyAll()
+        {
+            _bullets.ToList().ForEach(x => Object.Destroy(x.gameObject));
+            _bullets.Clear();
+        }
+        private void OnDestroyed(Bullet.Bullet bullet) => Remove(bullet);
     }
-    private void OnDestroyed(Bullet bullet) => Remove(bullet);
 }

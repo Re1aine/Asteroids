@@ -1,6 +1,9 @@
-﻿public interface IScoreCountService
+﻿namespace Code.Logic.Gameplay.Services.ScoreCounter
 {
-    int Score { get; }
-    void Add(int value);
-    void Reset();
+    public interface IScoreCountService
+    {
+        int Score { get; }
+        void Add(int value);
+        void Reset();
+    }
 }

@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 
-public interface IBulletsHolder
+namespace Code.Logic.Gameplay.Services.BulletsHolder
 {
-    IReadOnlyList<Bullet> Bullets { get; }
-    void Add(Bullet bullet);
-    void Remove(Bullet bullet);
-    void DestroyAll();
+    public interface IBulletsHolder
+    {
+        IReadOnlyList<Bullet.Bullet> Bullets { get; }
+        void Add(Bullet.Bullet bullet);
+        void Remove(Bullet.Bullet bullet);
+        void DestroyAll();
+    }
 }

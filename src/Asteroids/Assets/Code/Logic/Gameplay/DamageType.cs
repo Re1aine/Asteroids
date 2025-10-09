@@ -1,8 +1,11 @@
-﻿public enum DamageType
+﻿namespace Code.Logic.Gameplay
 {
-    Bullet = 0,
-    LaserBeam = 1,
-    Asteroid = 2,
-    AsteroidPart = 3,
-    UFO = 4
+    public enum DamageType
+    {
+        Bullet = 0,
+        LaserBeam = 1,
+        Asteroid = 2,
+        AsteroidPart = 3,
+        UFO = 4
+    }
 }

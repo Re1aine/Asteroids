@@ -1,5 +1,8 @@
-﻿public interface IPlayerDeathObserver
+﻿namespace Code.Logic.Gameplay.Services.PlayerDeathObserver
 {
-    void Start();
-    void Stop();
+    public interface IPlayerDeathObserver
+    {
+        void Start();
+        void Stop();
+    }
 }

@@ -1,9 +1,12 @@
-﻿public class ScoreCountService : IScoreCountService
+﻿namespace Code.Logic.Gameplay.Services.ScoreCounter
 {
-    public int Score => _score;
+    public class ScoreCountService : IScoreCountService
+    {
+        public int Score => _score;
 
-    private int _score;
+        private int _score;
     
-    public void Add(int value) => _score += value;
-    public void Reset() => _score = 0;
+        public void Add(int value) => _score += value;
+        public void Reset() => _score = 0;
+    }
 }

@@ -1,5 +1,10 @@
-﻿public interface IHUDProvider
+﻿using Code.UI;
+
+namespace Code.Logic.Gameplay.Services.HUDProvider
 {
-    HUD HUD {get;}   
-    void Initialize();
+    public interface IHUDProvider
+    {
+        HUD HUD {get;}   
+        void Initialize();
+    }
 }

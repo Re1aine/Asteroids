@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using Code.Logic.Gameplay.Services;
+using UnityEngine;
 
-public class PlayerDestroyer : IDestroyer
+namespace Code.Logic.Gameplay.Player
 {
-    private readonly PlayerPresenter _playerPresenter;
-    
-    public PlayerDestroyer(PlayerPresenter presenter)
+    public class PlayerDestroyer : IDestroyer
     {
-        _playerPresenter = presenter;
-    }
+        private readonly PlayerPresenter _playerPresenter;
+    
+        public PlayerDestroyer(PlayerPresenter presenter)
+        {
+            _playerPresenter = presenter;
+        }
 
-    public void Destroy(DamageType damageType) => 
-        Object.Destroy(_playerPresenter.View.gameObject);
+        public void Destroy(DamageType damageType) => 
+            Object.Destroy(_playerPresenter.View.gameObject);
+    }
 }

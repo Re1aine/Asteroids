@@ -1,13 +1,17 @@
+using Code.GameFlow.States.Gameplay;
 using VContainer.Unity;
 
-public class GameplayEntryPoint : IInitializable
+namespace Code.EntryPoints
 {
-    private readonly GameplayStateMachine _gameStateMachine;
-
-    public GameplayEntryPoint(GameplayStateMachine gameStateMachine)
+    public class GameplayEntryPoint : IInitializable
     {
-        _gameStateMachine = gameStateMachine;
-    }
+        private readonly GameplayStateMachine _gameStateMachine;
 
-    public void Initialize() => _gameStateMachine.Enter<GameplayStart>();
+        public GameplayEntryPoint(GameplayStateMachine gameStateMachine)
+        {
+            _gameStateMachine = gameStateMachine;
+        }
+
+        public void Initialize() => _gameStateMachine.Enter<GameplayStart>();
+    }
 }

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IPointWrapService
+namespace Code.Logic.Gameplay.Services.PointWrapper
 {
-    Vector2 WrapPoint(Vector2 point, Vector2 correction);
+    public interface IPointWrapService
+    {
+        Vector2 WrapPoint(Vector2 point, Vector2 correction);
+    }
 }

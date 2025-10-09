@@ -1,26 +1,29 @@
 ﻿using System;
 
-public class AsteroidModel
+namespace Code.Logic.Gameplay.Asteroid
 {
-    public event Action<AsteroidType> AsteroidTypeChanged;
-
-    public int ScoreReward { get; }
-
-    public AsteroidType AsteroidType
+    public class AsteroidModel
     {
-        get => _asteroidType;
-        private set
+        public event Action<AsteroidType> AsteroidTypeChanged;
+
+        public int ScoreReward { get; }
+
+        public AsteroidType AsteroidType
         {
-            _asteroidType = value;
-            AsteroidTypeChanged?.Invoke(value);
+            get => _asteroidType;
+            private set
+            {
+                _asteroidType = value;
+                AsteroidTypeChanged?.Invoke(value);
+            }
         }
-    }
 
-    private AsteroidType _asteroidType;
+        private AsteroidType _asteroidType;
 
-    public AsteroidModel(AsteroidType asteroidType, int scoreReward)
-    {
-        _asteroidType = asteroidType;
-        ScoreReward = scoreReward;
+        public AsteroidModel(AsteroidType asteroidType, int scoreReward)
+        {
+            _asteroidType = asteroidType;
+            ScoreReward = scoreReward;
+        }
     }
 }

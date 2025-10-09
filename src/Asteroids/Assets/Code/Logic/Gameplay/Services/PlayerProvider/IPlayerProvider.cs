@@ -1,5 +1,10 @@
-﻿public interface IPlayerProvider
+﻿using Code.Logic.Gameplay.Player;
+
+namespace Code.Logic.Gameplay.Services.PlayerProvider
 {
-    PlayerPresenter Player { get; set; }
-    void Initialize();
+    public interface IPlayerProvider
+    {
+        PlayerPresenter Player { get; set; }
+        void Initialize();
+    }
 }

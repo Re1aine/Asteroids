@@ -2,60 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoroutineRunner : MonoBehaviour, ICoroutineRunner
+namespace Code.Infrastructure.Common
 {
-    private readonly Dictionary<CoroutineScopes, List<Coroutine>> _coroutines = new()
+    public class CoroutineRunner : MonoBehaviour, ICoroutineRunner
     {
-        { CoroutineScopes.Global, new List<Coroutine>()},
-        { CoroutineScopes.Menu, new List<Coroutine>() },
-        { CoroutineScopes.Gameplay, new List<Coroutine>() }
-    };
-    
-    private void Awake() => DontDestroyOnLoad(this);
-    
-    public Coroutine StartCoroutine(IEnumerator coroutine, CoroutineScopes scope)
-    {
-        var wrappedCoroutine = StartCoroutine(WrapCoroutine(coroutine, scope));
-        _coroutines[scope].Add(wrappedCoroutine);
-        return wrappedCoroutine;
-    }
-
-    public void StopCoroutine(Coroutine coroutine, CoroutineScopes scope)
-    {
-        if (coroutine == null || !_coroutines.TryGetValue(scope, out var list)) 
-            return;
-
-        if (list.Remove(coroutine))
+        private readonly Dictionary<CoroutineScopes, List<Coroutine>> _coroutines = new()
         {
-            StopCoroutine(coroutine);
+            { CoroutineScopes.Global, new List<Coroutine>()},
+            { CoroutineScopes.Menu, new List<Coroutine>() },
+            { CoroutineScopes.Gameplay, new List<Coroutine>() }
+        };
+    
+        private void Awake() => DontDestroyOnLoad(this);
+    
+        public Coroutine StartCoroutine(IEnumerator coroutine, CoroutineScopes scope)
+        {
+            var wrappedCoroutine = StartCoroutine(WrapCoroutine(coroutine, scope));
+            _coroutines[scope].Add(wrappedCoroutine);
+            return wrappedCoroutine;
         }
-    }
 
-    public void StopCoroutines(CoroutineScopes scope)
-    {
-        if (!_coroutines.TryGetValue(scope, out var list)) 
-            return;
-
-        foreach (var cor in list.ToArray())
+        public void StopCoroutine(Coroutine coroutine, CoroutineScopes scope)
         {
-            if (cor != null)
+            if (coroutine == null || !_coroutines.TryGetValue(scope, out var list)) 
+                return;
+
+            if (list.Remove(coroutine))
             {
-                StopCoroutine(cor);
+                StopCoroutine(coroutine);
             }
         }
-        list.Clear();
-    }
+
+        public void StopCoroutines(CoroutineScopes scope)
+        {
+            if (!_coroutines.TryGetValue(scope, out var list)) 
+                return;
+
+            foreach (var cor in list.ToArray())
+            {
+                if (cor != null)
+                {
+                    StopCoroutine(cor);
+                }
+            }
+            list.Clear();
+        }
 
 
-    private IEnumerator WrapCoroutine(IEnumerator coroutine, CoroutineScopes scope)
-    {
-        yield return coroutine;
-        RemoveCoroutine(scope);
-    }
+        private IEnumerator WrapCoroutine(IEnumerator coroutine, CoroutineScopes scope)
+        {
+            yield return coroutine;
+            RemoveCoroutine(scope);
+        }
     
-    private void RemoveCoroutine(CoroutineScopes scope)
-    {
-        if (_coroutines.TryGetValue(scope, out var list)) 
-            list.RemoveAll(c => c == null);
+        private void RemoveCoroutine(CoroutineScopes scope)
+        {
+            if (_coroutines.TryGetValue(scope, out var list)) 
+                list.RemoveAll(c => c == null);
+        }
     }
 }

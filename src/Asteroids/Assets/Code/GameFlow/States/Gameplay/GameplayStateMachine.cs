@@ -1,7 +1,10 @@
-﻿public sealed class GameplayStateMachine : StateMachine
+﻿namespace Code.GameFlow.States.Gameplay
 {
-    public GameplayStateMachine(StateFactory stateFactory) : base(stateFactory)
+    public sealed class GameplayStateMachine : StateMachine
     {
+        public GameplayStateMachine(StateFactory stateFactory) : base(stateFactory)
+        {
         
+        }
     }
 }

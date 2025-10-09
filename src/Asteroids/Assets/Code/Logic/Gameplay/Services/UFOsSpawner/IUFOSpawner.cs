@@ -1,5 +1,8 @@
-﻿public interface IUFOSpawner
+﻿namespace Code.Logic.Gameplay.Services.UFOsSpawner
 {
-    void Enable();
-    void Disable();
+    public interface IUFOSpawner
+    {
+        void Enable();
+        void Disable();
+    }
 }

@@ -1,6 +1,11 @@
-﻿public interface IDamageable
-{
-    IDamageReceiver DamageReceiver { get; }
+﻿using Code.Logic.Gameplay.Services;
 
-    void ReceiveDamage(DamageType damageType) => DamageReceiver.ReceiverDamage(damageType);
+namespace Code.Logic.Gameplay
+{
+    public interface IDamageable
+    {
+        IDamageReceiver DamageReceiver { get; }
+
+        void ReceiveDamage(DamageType damageType) => DamageReceiver.ReceiverDamage(damageType);
+    }
 }

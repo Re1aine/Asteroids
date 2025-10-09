@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-public interface IInputService
+namespace Code.Logic.Gameplay.Services.Input
 {
-    Vector2 Movement { get; }
-    bool IsBulletShoot { get; }
-    bool IsLaserShoot { get; }
-    void Enable();
-    void Disable();
+    public interface IInputService
+    {
+        Vector2 Movement { get; }
+        bool IsBulletShoot { get; }
+        bool IsLaserShoot { get; }
+        void Enable();
+        void Disable();
+    }
 }

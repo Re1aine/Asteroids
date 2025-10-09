@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IAssetsLoader
+namespace Code.Logic.Gameplay.Services.GameFactory
 {
-    T Load<T>(string path) where T : MonoBehaviour;
+    public interface IAssetsLoader
+    {
+        T Load<T>(string path) where T : MonoBehaviour;
+    }
 }

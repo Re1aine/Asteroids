@@ -1,4 +1,7 @@
-﻿public interface IDamageDealer
+﻿namespace Code.Logic.Gameplay.Player
 {
-    DamageType DamageType { get; }
+    public interface IDamageDealer
+    {
+        DamageType DamageType { get; }
+    }
 }

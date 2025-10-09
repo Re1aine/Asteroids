@@ -1,4 +1,7 @@
-﻿public interface IDamageReceiver
+﻿namespace Code.Logic.Gameplay.Services
 {
-    void ReceiverDamage(DamageType damageType);    
+    public interface IDamageReceiver
+    {
+        void ReceiverDamage(DamageType damageType);    
+    }
 }

@@ -1,6 +1,9 @@
-﻿public enum CoroutineScopes
+﻿namespace Code.Infrastructure.Common
 {
-    Global = 0,
-    Menu = 1,
-    Gameplay = 2,
+    public enum CoroutineScopes
+    {
+        Global = 0,
+        Menu = 1,
+        Gameplay = 2,
+    }
 }

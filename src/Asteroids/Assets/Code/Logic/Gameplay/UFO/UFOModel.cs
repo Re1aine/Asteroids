@@ -1,9 +1,12 @@
-﻿public class UFOModel
+﻿namespace Code.Logic.Gameplay.UFO
 {
-    public int ScoreReward { get; }
-
-    public UFOModel(int scoreReward)
+    public class UFOModel
     {
-        ScoreReward = scoreReward;
+        public int ScoreReward { get; }
+
+        public UFOModel(int scoreReward)
+        {
+            ScoreReward = scoreReward;
+        }
     }
 }

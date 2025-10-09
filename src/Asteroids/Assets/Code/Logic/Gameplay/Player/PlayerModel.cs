@@ -1,28 +1,31 @@
 ﻿using System;
 
-public class PlayerModel
+namespace Code.Logic.Gameplay.Player
 {
-    public event Action<int> HealthChanged;
-
-    public int Health
+    public class PlayerModel
     {
-        get => _health;
-        private set
+        public event Action<int> HealthChanged;
+
+        public int Health
         {
-            _health = value;
-            HealthChanged?.Invoke(value);
+            get => _health;
+            private set
+            {
+                _health = value;
+                HealthChanged?.Invoke(value);
+            }
         }
-    }
 
-    private int _health;
+        private int _health;
 
-    public PlayerModel(int health)
-    {
-        _health = health;
-    }
+        public PlayerModel(int health)
+        {
+            _health = health;
+        }
     
-    public void DecrementHealth()
-    {
-        Health--;
+        public void DecrementHealth()
+        {
+            Health--;
+        }
     }
 }

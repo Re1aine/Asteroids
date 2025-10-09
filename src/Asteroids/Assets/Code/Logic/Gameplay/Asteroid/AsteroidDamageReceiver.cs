@@ -1,15 +1,20 @@
-﻿public class AsteroidDamageReceiver :  IDamageReceiver
-{
-    private readonly AsteroidPresenter _asteroidPresenter;
-    
-    public AsteroidDamageReceiver(AsteroidPresenter presenter)
-    {
-        _asteroidPresenter = presenter;
-    }
+﻿using Code.Logic.Gameplay.Services;
 
-    public void ReceiverDamage(DamageType damageType)
+namespace Code.Logic.Gameplay.Asteroid
+{
+    public class AsteroidDamageReceiver :  IDamageReceiver
     {
-        _asteroidPresenter.Destroy(damageType);
+        private readonly AsteroidPresenter _asteroidPresenter;
+    
+        public AsteroidDamageReceiver(AsteroidPresenter presenter)
+        {
+            _asteroidPresenter = presenter;
+        }
+
+        public void ReceiverDamage(DamageType damageType)
+        {
+            _asteroidPresenter.Destroy(damageType);
+        }
     }
 }
 

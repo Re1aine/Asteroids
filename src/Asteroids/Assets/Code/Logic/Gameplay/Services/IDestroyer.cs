@@ -1,4 +1,7 @@
-﻿public interface IDestroyer
+﻿namespace Code.Logic.Gameplay.Services
 {
-    void Destroy(DamageType damageType);
+    public interface IDestroyer
+    {
+        void Destroy(DamageType damageType);
+    }
 }

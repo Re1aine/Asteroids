@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface ICameraProvider
+namespace Code.Logic.Gameplay.Services.CameraProvider
 {
-    Camera Camera { get; }
+    public interface ICameraProvider
+    {
+        Camera Camera { get; }
+    }
 }

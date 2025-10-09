@@ -1,13 +1,16 @@
-﻿public interface IState : IExitableState
+﻿namespace Code.GameFlow.States
 {
-    void Enter();
-}
-public interface IStateWithArg<TArg> : IExitableState
-{
-    void Enter(TArg arg);
-}
+    public interface IState : IExitableState
+    {
+        void Enter();
+    }
+    public interface IStateWithArg<TArg> : IExitableState
+    {
+        void Enter(TArg arg);
+    }
 
-public interface IExitableState
-{
-    void Exit();
+    public interface IExitableState
+    {
+        void Exit();
+    }
 }

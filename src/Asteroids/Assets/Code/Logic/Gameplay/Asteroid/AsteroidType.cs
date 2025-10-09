@@ -1,5 +1,8 @@
-﻿public enum AsteroidType
+﻿namespace Code.Logic.Gameplay.Asteroid
 {
-    Asteroid = 0,
-    AsteroidPart = 1
+    public enum AsteroidType
+    {
+        Asteroid = 0,
+        AsteroidPart = 1
+    }
 }

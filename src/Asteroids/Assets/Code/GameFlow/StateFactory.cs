@@ -1,12 +1,16 @@
-﻿using VContainer;
+﻿using Code.GameFlow.States;
+using VContainer;
 
-public class StateFactory
+namespace Code.GameFlow
 {
-    private readonly IObjectResolver _resolver;
+    public class StateFactory
+    {
+        private readonly IObjectResolver _resolver;
     
-    public StateFactory(IObjectResolver resolver) => 
-        _resolver = resolver;
+        public StateFactory(IObjectResolver resolver) => 
+            _resolver = resolver;
     
-    public TState Create<TState>() where TState : IExitableState => 
-        _resolver.ResolveInstance<TState>();
+        public TState Create<TState>() where TState : IExitableState => 
+            _resolver.ResolveInstance<TState>();
+    }
 }

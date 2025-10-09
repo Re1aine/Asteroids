@@ -1,15 +1,21 @@
-﻿public class PlayerDeathObserver : IPlayerDeathObserver
+﻿using Code.GameFlow.States.Gameplay;
+using Code.Logic.Gameplay.Services.PlayerProvider;
+
+namespace Code.Logic.Gameplay.Services.PlayerDeathObserver
 {
-    private readonly GameplayStateMachine _gameplayStateMachine;
-    private readonly IPlayerProvider _playerProvider;
-
-    public PlayerDeathObserver(GameplayStateMachine gameplayStateMachine, IPlayerProvider playerProvider)
+    public class PlayerDeathObserver : IPlayerDeathObserver
     {
-        _gameplayStateMachine = gameplayStateMachine;
-        _playerProvider = playerProvider;
-    }
+        private readonly GameplayStateMachine _gameplayStateMachine;
+        private readonly IPlayerProvider _playerProvider;
 
-    public void Start() => _playerProvider.Player.Destroyed += OnPlayerDeath;
-    public void Stop() => _playerProvider.Player.Destroyed -= OnPlayerDeath;
-    private void OnPlayerDeath() => _gameplayStateMachine.Enter<LoseState>();
+        public PlayerDeathObserver(GameplayStateMachine gameplayStateMachine, IPlayerProvider playerProvider)
+        {
+            _gameplayStateMachine = gameplayStateMachine;
+            _playerProvider = playerProvider;
+        }
+
+        public void Start() => _playerProvider.Player.Destroyed += OnPlayerDeath;
+        public void Stop() => _playerProvider.Player.Destroyed -= OnPlayerDeath;
+        private void OnPlayerDeath() => _gameplayStateMachine.Enter<LoseState>();
+    }
 }

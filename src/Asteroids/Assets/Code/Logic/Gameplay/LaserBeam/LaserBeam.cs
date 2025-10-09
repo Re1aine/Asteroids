@@ -1,11 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LaserBeam : MonoBehaviour
+namespace Code.Logic.Gameplay.LaserBeam
 {
-    [field: SerializeField] public LineRenderer LineRenderer {get; private set;}
-    [SerializeField] private float _distance;
+    public class LaserBeam : MonoBehaviour
+    {
+        [field: SerializeField] public LineRenderer LineRenderer {get; private set;}
+        [SerializeField] private float _distance;
 
-    public void ClearAllLinePositions() => LineRenderer.positionCount = 0;
+        public void ClearAllLinePositions() => LineRenderer.positionCount = 0;
+    }
 }
 

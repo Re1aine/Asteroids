@@ -1,19 +1,24 @@
-﻿using UnityEngine;
+﻿using Code.Logic.Gameplay.Services;
+using Code.Logic.Gameplay.Services.ScoreCounter;
+using UnityEngine;
 
-public class UFODestroyer : IDestroyer
+namespace Code.Logic.Gameplay.UFO
 {
-    private readonly UFOPresenter _ufoPresenter;
-    private readonly IScoreCountService _scoreCountService;
-
-    public UFODestroyer(UFOPresenter ufoPresenter, IScoreCountService scoreCountService)
+    public class UFODestroyer : IDestroyer
     {
-        _ufoPresenter = ufoPresenter;
-        _scoreCountService = scoreCountService;
-    }
+        private readonly UFOPresenter _ufoPresenter;
+        private readonly IScoreCountService _scoreCountService;
 
-    public void Destroy(DamageType damageType)
-    {
-        _scoreCountService.Add(_ufoPresenter.Model.ScoreReward);
-        Object.Destroy(_ufoPresenter.View.gameObject);
+        public UFODestroyer(UFOPresenter ufoPresenter, IScoreCountService scoreCountService)
+        {
+            _ufoPresenter = ufoPresenter;
+            _scoreCountService = scoreCountService;
+        }
+
+        public void Destroy(DamageType damageType)
+        {
+            _scoreCountService.Add(_ufoPresenter.Model.ScoreReward);
+            Object.Destroy(_ufoPresenter.View.gameObject);
+        }
     }
 }

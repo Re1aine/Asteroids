@@ -1,5 +1,8 @@
-﻿public interface IAsteroidSpawner
+﻿namespace Code.Logic.Gameplay.Services.AsteroidsSpawner
 {
-    void Enable();
-    void Disable();
+    public interface IAsteroidSpawner
+    {
+        void Enable();
+        void Disable();
+    }
 }
