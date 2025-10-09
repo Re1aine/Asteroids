@@ -38,7 +38,6 @@ public class GameFactory : IGameFactory
         AsteroidPresenter presenter = new AsteroidPresenter(new AsteroidModel(asteroidType, scoreReward), asteroidView);
 
         presenter.Init(new AsteroidDamageReceiver(presenter), new AsteroidDestroyer(presenter, this, _scoreCountService));
-        asteroidView.Init(presenter);
 
         _asteroidsHolder.Add(presenter);
         

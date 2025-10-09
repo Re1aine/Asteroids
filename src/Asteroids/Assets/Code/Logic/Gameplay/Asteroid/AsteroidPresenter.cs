@@ -15,10 +15,14 @@ public class AsteroidPresenter
         Model = model;
     }
 
-    public void Init(IDamageReceiver receiver, IDestroyer destroyer)
+    public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer)
     {
-        DamageReceiver = receiver;
+        DamageReceiver = damageReceiver;
         _destroyer = destroyer;
+        
+        View.Init(damageReceiver);
+
+        View.OnDamageReceived += ReceiveDamage;
     }
 
     public void ReceiveDamage(DamageType damageType) => 
@@ -27,6 +31,9 @@ public class AsteroidPresenter
     public void Destroy(DamageType damageType)
     {
         Destroyed?.Invoke(this);
+        
+        View.OnDamageReceived -= ReceiveDamage;
+        
         _destroyer.Destroy(damageType);
     }
 }

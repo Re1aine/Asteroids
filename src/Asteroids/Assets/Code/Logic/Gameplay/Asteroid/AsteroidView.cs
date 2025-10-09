@@ -4,6 +4,7 @@ using VContainer;
 
 public class AsteroidView : MonoBehaviour, IDamageable, IDamageDealer
 {
+    public event Action<DamageType> OnDamageReceived;
     public virtual DamageType DamageType => DamageType.Asteroid;
     public IDamageReceiver DamageReceiver { get; private set; }
 
@@ -11,27 +12,19 @@ public class AsteroidView : MonoBehaviour, IDamageable, IDamageDealer
     [SerializeField] private float _speed;
     [field: SerializeField] public AsteroidType AsteroidType {get; private set;}
 
-    private AsteroidPresenter _presenter;
-
     private IBoundaries _boundaries;
 
     Vector3 _direction;
-
-
+    
     [Inject]
     public void Construct(IBoundaries boundaries)
     {
         _boundaries = boundaries;
     }
 
-    public void Init(AsteroidPresenter presenter)
+    public void Init(IDamageReceiver damageReceiver)
     {
-        _presenter = presenter;
-    }
-
-    private void Start()
-    {
-        DamageReceiver = _presenter.DamageReceiver;
+        DamageReceiver = damageReceiver;
     }
 
     public void LaunchInDirection(Vector3 direction)
@@ -54,6 +47,6 @@ public class AsteroidView : MonoBehaviour, IDamageable, IDamageDealer
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.TryGetComponent(out Bullet bullet)) 
-            _presenter.ReceiveDamage(DamageType.Bullet);
+            OnDamageReceived?.Invoke(DamageType.Bullet); 
     }
 }
