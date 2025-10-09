@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class PlayerPresenter : PresenterBase
+public class PlayerPresenter
 {
     public event Action Destroyed;
     
@@ -10,7 +10,7 @@ public class PlayerPresenter : PresenterBase
     public PlayerModel Model {get ; private set; }
     public PlayerView View  {get; private set; }
     
-    public PlayerPresenter(PlayerModel model, PlayerView view) : base(model, view)
+    public PlayerPresenter(PlayerModel model, PlayerView view)
     {
         Model = model;
         View = view;

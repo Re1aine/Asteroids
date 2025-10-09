@@ -1,4 +1,4 @@
-﻿public class UFOModel : ModelBase
+﻿public class UFOModel
 {
     public int ScoreReward { get; }
 

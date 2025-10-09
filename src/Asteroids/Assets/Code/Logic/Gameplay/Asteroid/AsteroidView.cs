@@ -2,7 +2,7 @@
 using UnityEngine;
 using VContainer;
 
-public class AsteroidView : ViewBase, IDamageable, IDamageDealer
+public class AsteroidView : MonoBehaviour, IDamageable, IDamageDealer
 {
     public virtual DamageType DamageType => DamageType.Asteroid;
     public IDamageReceiver DamageReceiver { get; private set; }

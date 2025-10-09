@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class PlayerModel : ModelBase
+public class PlayerModel
 {
     public event Action<int> HealthChanged;
 

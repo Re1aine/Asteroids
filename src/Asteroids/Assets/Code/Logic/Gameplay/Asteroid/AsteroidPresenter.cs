@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class AsteroidPresenter : PresenterBase
+public class AsteroidPresenter
 {
     public event Action<AsteroidPresenter> Destroyed;
     public AsteroidView View { get; private set; }
@@ -9,7 +9,7 @@ public class AsteroidPresenter : PresenterBase
     
     private IDestroyer _destroyer;
     
-    public AsteroidPresenter(AsteroidModel model, AsteroidView view) : base(model, view)
+    public AsteroidPresenter(AsteroidModel model, AsteroidView view)
     {
         View = view;
         Model = model;

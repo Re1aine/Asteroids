@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class AsteroidModel : ModelBase
+public class AsteroidModel
 {
     public event Action<AsteroidType> AsteroidTypeChanged;
 

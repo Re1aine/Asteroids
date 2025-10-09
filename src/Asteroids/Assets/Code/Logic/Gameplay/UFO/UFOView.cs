@@ -4,7 +4,7 @@ using VContainer;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class UFOView : ViewBase, IDamageable, IDamageDealer
+public class UFOView : MonoBehaviour, IDamageable, IDamageDealer
 {
     public DamageType DamageType => DamageType.UFO;
     public IDamageReceiver DamageReceiver { get; private set; }

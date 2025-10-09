@@ -2,7 +2,7 @@
 using UnityEngine;
 using VContainer;
 
-public class PlayerView : ViewBase
+public class PlayerView : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody;
 

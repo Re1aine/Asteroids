@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class UFOPresenter : PresenterBase
+public class UFOPresenter
 {
     public event Action<UFOPresenter> Destroyed;
     public UFOView View { get; private set; }
@@ -11,7 +11,7 @@ public class UFOPresenter : PresenterBase
     
     private IDestroyer _destroyer;
 
-    public UFOPresenter(UFOModel model, UFOView view) : base(model, view)
+    public UFOPresenter(UFOModel model, UFOView view)
     {
         Model = model;
         View = view;
