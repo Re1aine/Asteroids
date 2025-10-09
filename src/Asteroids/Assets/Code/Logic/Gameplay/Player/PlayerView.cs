@@ -4,6 +4,8 @@ using VContainer;
 
 public class PlayerView : MonoBehaviour
 {
+    public event Action<DamageType>  OnDamageReceived;
+    
     [SerializeField] private Rigidbody2D _rigidbody;
 
     [SerializeField] private Gun _gun;
@@ -14,8 +16,6 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private float _rotateSpeed;
 
     private IInputService _inputService;
-
-    private PlayerPresenter _presenter;
 
     private float _rotateAngle;
 
@@ -28,9 +28,6 @@ public class PlayerView : MonoBehaviour
         _inputService = inputService;
     }
     
-    public void Init(PlayerPresenter presenter) => 
-        _presenter = presenter;
-
     public void SetMoveDirection(Vector3 direction) => 
         _moveDirection = direction;
 
@@ -84,6 +81,6 @@ public class PlayerView : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.TryGetComponent(out IDamageDealer damageDealer)) 
-            _presenter.ReceiveDamage(damageDealer.DamageType);
+            OnDamageReceived?.Invoke(damageDealer.DamageType);
     }
 }

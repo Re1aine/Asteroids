@@ -20,6 +20,8 @@ public class PlayerPresenter
     {
         _damageReceiver = damageReceiver;
         _destroyer = destroyer;
+
+        View.OnDamageReceived += ReceiveDamage;
     }
 
     public void ReceiveDamage(DamageType damageType) => 
@@ -31,6 +33,9 @@ public class PlayerPresenter
     public void Destroy(DamageType  damageType)
     {
         Destroyed?.Invoke();
+        
+        View.OnDamageReceived -= ReceiveDamage;
+        
         _destroyer.Destroy(damageType);
     }
 }
