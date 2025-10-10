@@ -13,8 +13,8 @@ namespace Code.Logic.Gameplay.Services.GameFactory
         UFOPresenter CreateUfo(Vector3 position, Quaternion rotation, int scoreReward = 4);
         Bullet.Bullet CreateBullet(Vector3 position, Quaternion rotation);
         LaserBeam.LaserBeam CreateLaserBeam(Vector2 position, Quaternion rotation);
-        HUD CreateHUD();
+        HUDPresenter CreateHUD();
         LoseWindowPresenter CreateLoseWindow(Transform parent);
-        PlayerStatsWindow CreatePlayerStatsWindow(Transform parent);
+        PlayerStatsWindowPresenter CreatePlayerStatsWindow(Transform parent);
     }
 }

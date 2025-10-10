@@ -14,22 +14,20 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IInputService _inputService;
         private readonly IAsteroidSpawner _asteroidSpawner;
         private readonly IUFOSpawner _ufoSpawner;
-        private readonly IGameFactory _gameFactory;
         private readonly IPlayerDeathObserver _playerDeathObserver;
         private readonly IHUDProvider _hudProvider;
 
-        private PlayerStatsWindow _playerStatsWindow;
+        private PlayerStatsWindowPresenter _playerStatsWindow;
 
         public GameplayLoopState(IInputService inputService,
             IAsteroidSpawner asteroidSpawner,
-            IUFOSpawner ufoSpawner,
-            IGameFactory gameFactory, IHUDProvider hudProvider,
+            IUFOSpawner ufoSpawner, 
+            IHUDProvider hudProvider,
             IPlayerDeathObserver playerDeathObserver)
         {
             _inputService = inputService;
             _asteroidSpawner = asteroidSpawner;
             _ufoSpawner = ufoSpawner;
-            _gameFactory = gameFactory;
             _playerDeathObserver = playerDeathObserver;
             _hudProvider = hudProvider;
         }
@@ -40,7 +38,6 @@ namespace Code.GameFlow.States.Gameplay
             _asteroidSpawner.Enable();
             _ufoSpawner.Enable();
 
-            _playerStatsWindow = _gameFactory.CreatePlayerStatsWindow(_hudProvider.HUD.transform);
         }
 
         public void Exit()
@@ -51,7 +48,7 @@ namespace Code.GameFlow.States.Gameplay
         
             _playerDeathObserver.Stop();
         
-            _playerStatsWindow.Destroy();
+            _hudProvider.HUD.DestroyPlayerStatsWindow();
         }
     }
 }

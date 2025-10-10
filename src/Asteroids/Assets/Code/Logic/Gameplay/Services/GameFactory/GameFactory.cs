@@ -2,6 +2,7 @@
 using Code.Logic.Gameplay.Player;
 using Code.Logic.Gameplay.Services.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.BulletsHolder;
+using Code.Logic.Gameplay.Services.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.Logic.Gameplay.Services.UFOsHolder;
 using Code.Logic.Gameplay.UFO;
@@ -17,7 +18,7 @@ namespace Code.Logic.Gameplay.Services.GameFactory
         private readonly IAsteroidsHolder _asteroidsHolder;
         private readonly IBulletsHolder _bulletsHolder;
         private readonly IAssetsProvider _assetsProvider;
-    
+
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
             IAsteroidsHolder asteroidsHolder,
@@ -83,15 +84,26 @@ namespace Code.Logic.Gameplay.Services.GameFactory
             LoseWindowView view =  _assetsProvider.Instantiate<LoseWindowView>(AssetPath.LoseWindow, parent);
             LoseWindowPresenter presenter = new LoseWindowPresenter(new LoseWindowModel(), view);
             
-            presenter.Init(_scoreCountService);
+            return presenter;
+        }
+
+        public PlayerStatsWindowPresenter CreatePlayerStatsWindow(Transform parent)
+        {
+            PlayerStatsWindowView view = _assetsProvider.Instantiate<PlayerStatsWindowView>(AssetPath.PlayerStatsWindow, parent);
+            PlayerStatsWindowPresenter presenter = new PlayerStatsWindowPresenter(new PlayerStatsWindowModel(), view);
             
             return presenter;
         }
 
-        public PlayerStatsWindow CreatePlayerStatsWindow(Transform parent) => 
-            _assetsProvider.Instantiate<PlayerStatsWindow>(AssetPath.PlayerStatsWindow, parent);
-
-        public HUD CreateHUD() => 
-            _assetsProvider.Instantiate<HUD>(AssetPath.HUD);
+        public HUDPresenter CreateHUD()
+        {
+            HUDView hudView =  _assetsProvider.Instantiate<HUDView>(AssetPath.HUD);
+            
+            HUDPresenter presenter = new HUDPresenter(new HUDModel(), hudView);
+            
+            presenter.Init(this, _scoreCountService);
+            
+            return presenter;
+        }
     }
 }

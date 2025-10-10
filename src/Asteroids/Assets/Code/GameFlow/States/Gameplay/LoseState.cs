@@ -31,7 +31,7 @@ namespace Code.GameFlow.States.Gameplay
 
         public void Enter()
         {
-            _loseWindow = _gameFactory.CreateLoseWindow(_hudProvider.HUD.transform);
+            _hudProvider.HUD.CreateLoseWindow();
         
             _ufosHolder.DestroyAll();
             _asteroidsHolder.DestroyAll();
@@ -40,7 +40,7 @@ namespace Code.GameFlow.States.Gameplay
 
         public void Exit()
         {
-            _loseWindow.Destroy();
+            _hudProvider.HUD.Destroy();
         }
     }
 }

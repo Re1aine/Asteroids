@@ -28,9 +28,9 @@ namespace Code.GameFlow.States.Gameplay
 
         public void Enter()
         {
-            _hudProvider.Initialize();
             _playerProvider.Initialize();
-        
+            _hudProvider.Initialize();
+
             _playerDeathObserver.Start();
         
             _scoreCountService.Reset();
