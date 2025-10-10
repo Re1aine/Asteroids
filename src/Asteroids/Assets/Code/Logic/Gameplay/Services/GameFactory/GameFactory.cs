@@ -78,8 +78,15 @@ namespace Code.Logic.Gameplay.Services.GameFactory
         public LaserBeam.LaserBeam CreateLaserBeam(Vector2 position, Quaternion rotation) => 
             _assetsProvider.InstantiateAt<LaserBeam.LaserBeam>(AssetPath.LaserBeam, position, rotation);
 
-        public LoseWindow CreateLoseWindow(Transform parent) => 
-            _assetsProvider.Instantiate<LoseWindow>(AssetPath.LoseWindow, parent);
+        public LoseWindowPresenter CreateLoseWindow(Transform parent)
+        {
+            LoseWindowView view =  _assetsProvider.Instantiate<LoseWindowView>(AssetPath.LoseWindow, parent);
+            LoseWindowPresenter presenter = new LoseWindowPresenter(new LoseWindowModel(), view);
+            
+            presenter.Init(_scoreCountService);
+            
+            return presenter;
+        }
 
         public PlayerStatsWindow CreatePlayerStatsWindow(Transform parent) => 
             _assetsProvider.Instantiate<PlayerStatsWindow>(AssetPath.PlayerStatsWindow, parent);

@@ -18,7 +18,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IBulletsHolder _bulletsHolder;
         private readonly IScoreCountService _scoreCountService;
 
-        private LoseWindow _loseWindow;
+        private LoseWindowPresenter _loseWindow;
 
         public LoseState(IGameFactory gameFactory, IHUDProvider hudProvider, IUFOsHolder ufosHolder, IAsteroidsHolder  asteroidsHolder, IBulletsHolder bulletsHolder)
         {
