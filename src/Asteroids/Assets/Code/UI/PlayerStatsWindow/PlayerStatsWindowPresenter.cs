@@ -1,4 +1,4 @@
-﻿using Code.Logic.Gameplay.Services.PlayerProvider;
+﻿using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 
 namespace Code.UI.PlayerStatsWindow
 {

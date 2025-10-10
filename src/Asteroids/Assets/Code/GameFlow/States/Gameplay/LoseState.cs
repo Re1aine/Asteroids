@@ -1,10 +1,9 @@
-﻿
-using Code.Logic.Gameplay.Services.AsteroidsHolder;
-using Code.Logic.Gameplay.Services.BulletsHolder;
-using Code.Logic.Gameplay.Services.GameFactory;
-using Code.Logic.Gameplay.Services.HUDProvider;
+﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
+using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
+using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
+using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.Logic.Gameplay.Services.UFOsHolder;
 using Code.UI;
 using Code.UI.LoseWindow;
 

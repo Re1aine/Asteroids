@@ -1,7 +1,6 @@
-﻿
-using Code.Logic.Gameplay.Services.HUDProvider;
-using Code.Logic.Gameplay.Services.PlayerDeathObserver;
-using Code.Logic.Gameplay.Services.PlayerProvider;
+﻿using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
+using Code.Logic.Gameplay.Services.Providers.HUDProvider;
+using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 
 namespace Code.GameFlow.States.Gameplay

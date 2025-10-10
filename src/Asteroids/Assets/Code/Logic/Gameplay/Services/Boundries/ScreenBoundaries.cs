@@ -1,4 +1,4 @@
-﻿using Code.Logic.Gameplay.Services.CameraProvider;
+﻿using Code.Logic.Gameplay.Services.Providers.CameraProvider;
 using UnityEngine;
 using VContainer;
 

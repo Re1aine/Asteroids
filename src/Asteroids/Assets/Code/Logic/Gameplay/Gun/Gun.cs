@@ -1,11 +1,14 @@
 ﻿using System.Collections;
-using Code.Logic.Gameplay.Services.GameFactory;
+using Code.Logic.Gameplay.Entities;
+using Code.Logic.Gameplay.Projectiles.Bullet;
+using Code.Logic.Gameplay.Projectiles.LaserBeam;
+using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.PlayerProvider;
+using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay.Gun
+namespace Code.Logic.Gameplay
 {
     public class Gun : MonoBehaviour
     {
@@ -37,7 +40,7 @@ namespace Code.Logic.Gameplay.Gun
 
         private bool _isLaserActive;
     
-        private LaserBeam.LaserBeam _laserBeam;
+        private LaserBeam _laserBeam;
 
         [Inject]
         public void Construct(IInputService inputService, IGameFactory gameFactory, IPlayerProvider playerProvider)
@@ -147,7 +150,7 @@ namespace Code.Logic.Gameplay.Gun
     
         private void Shoot()
         {
-            Bullet.Bullet bullet = _gameFactory.CreateBullet(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection));
+            Bullet bullet = _gameFactory.CreateBullet(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection));
             bullet.MoveToDirection(transform.up);
         }
 

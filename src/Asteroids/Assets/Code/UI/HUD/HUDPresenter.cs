@@ -1,5 +1,5 @@
-﻿using Code.Logic.Gameplay.Services.GameFactory;
-using Code.Logic.Gameplay.Services.PlayerProvider;
+﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
+using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.UI.LoseWindow;
 

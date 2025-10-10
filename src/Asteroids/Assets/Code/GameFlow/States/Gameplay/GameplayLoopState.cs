@@ -1,10 +1,8 @@
-﻿
-using Code.Logic.Gameplay.Services.AsteroidsSpawner;
-using Code.Logic.Gameplay.Services.GameFactory;
-using Code.Logic.Gameplay.Services.HUDProvider;
-using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.PlayerDeathObserver;
-using Code.Logic.Gameplay.Services.UFOsSpawner;
+﻿using Code.Logic.Gameplay.Services.Input;
+using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
+using Code.Logic.Gameplay.Services.Providers.HUDProvider;
+using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
+using Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
 using Code.UI;
 using Code.UI.PlayerStatsWindow;
 

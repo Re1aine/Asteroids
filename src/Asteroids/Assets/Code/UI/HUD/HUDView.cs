@@ -1,5 +1,5 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.PlayerProvider;
+using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.UI.PlayerStatsWindow;
 using UnityEngine;
 using VContainer;
