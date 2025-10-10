@@ -4,7 +4,7 @@ namespace Code.Logic.Gameplay.Services.HUDProvider
 {
     public interface IHUDProvider
     {
-        HUD HUD {get;}   
+        HUDPresenter HUD {get;}   
         void Initialize();
     }
 }

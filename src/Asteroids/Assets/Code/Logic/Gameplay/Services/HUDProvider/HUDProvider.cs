@@ -5,7 +5,7 @@ namespace Code.Logic.Gameplay.Services.HUDProvider
 {
     public class HUDProvider : IHUDProvider
     {
-        public HUD HUD { get; private set; }
+        public HUDPresenter HUD { get; private set; }
     
         private readonly IGameFactory _gameFactory;
 
