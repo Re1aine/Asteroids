@@ -6,6 +6,7 @@ using Code.Logic.Gameplay.Services.HUDProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.Logic.Gameplay.Services.UFOsHolder;
 using Code.UI;
+using Code.UI.LoseWindow;
 
 namespace Code.GameFlow.States.Gameplay
 {

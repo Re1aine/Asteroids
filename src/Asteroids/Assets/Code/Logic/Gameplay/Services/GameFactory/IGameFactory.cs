@@ -2,6 +2,9 @@
 using Code.Logic.Gameplay.Player;
 using Code.Logic.Gameplay.UFO;
 using Code.UI;
+using Code.UI.HUD;
+using Code.UI.LoseWindow;
+using Code.UI.PlayerStatsWindow;
 using UnityEngine;
 
 namespace Code.Logic.Gameplay.Services.GameFactory

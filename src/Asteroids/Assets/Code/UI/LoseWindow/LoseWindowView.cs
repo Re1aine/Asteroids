@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace Code.UI
+namespace Code.UI.LoseWindow
 {
     public class LoseWindowView : MonoBehaviour
     {

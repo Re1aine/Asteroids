@@ -1,5 +1,6 @@
 ﻿using Code.Logic.Gameplay.Services.GameFactory;
 using Code.UI;
+using Code.UI.HUD;
 
 namespace Code.Logic.Gameplay.Services.HUDProvider
 {

@@ -6,6 +6,7 @@ using Code.Logic.Gameplay.Services.Input;
 using Code.Logic.Gameplay.Services.PlayerDeathObserver;
 using Code.Logic.Gameplay.Services.UFOsSpawner;
 using Code.UI;
+using Code.UI.PlayerStatsWindow;
 
 namespace Code.GameFlow.States.Gameplay
 {
