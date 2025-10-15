@@ -2,6 +2,8 @@ using Code.EntryPoints;
 using Code.GameFlow;
 using Code.GameFlow.States.Gameplay;
 using Code.Infrastructure.Common;
+using Code.Infrastructure.Common.AssetsManagement.AssetsLoader;
+using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
 using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay;
 using Code.Logic.Gameplay.Services.Boundries;

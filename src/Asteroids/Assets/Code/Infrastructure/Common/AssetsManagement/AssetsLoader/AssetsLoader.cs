@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace Code.Infrastructure.Common.AssetsManagement.AssetsLoader
 {
     public class AssetsLoader : IAssetsLoader
     {

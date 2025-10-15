@@ -1,4 +1,6 @@
-﻿using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+﻿using Code.Infrastructure.Common.AssetsManagement;
+using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
+using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Entities.Enemy.UFO;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;

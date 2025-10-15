@@ -1,7 +1,7 @@
 ﻿using System;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace Code.Infrastructure.Common.AssetsManagement
 {
     public static class AssetPath
     {

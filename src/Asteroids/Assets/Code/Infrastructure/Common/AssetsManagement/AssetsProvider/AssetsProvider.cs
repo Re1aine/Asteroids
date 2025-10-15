@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Code.Infrastructure.Common.AssetsManagement.AssetsLoader;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace Code.Infrastructure.Common.AssetsManagement.AssetsProvider
 {
     public class AssetsProvider : IAssetsProvider
     {
