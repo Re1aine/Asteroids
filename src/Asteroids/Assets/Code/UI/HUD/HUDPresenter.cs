@@ -2,6 +2,7 @@
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.UI.LoseWindow;
+using Code.UI.PlayerStatsWindow;
 
 namespace Code.UI.HUD
 {
@@ -14,52 +15,39 @@ namespace Code.UI.HUD
         private IGameFactory _gameFactory;
         private IScoreCountService _scoreCountService;
 
+        private PlayerStatsWindowPresenter _playerStats;
+        private LoseWindowPresenter _loseWindow;
+        
         public HUDPresenter(HUDModel model, HUDView view)
         {
             Model = model;
             View = view;
-
-            view.OnPlayerStatsWindowCreated += CreatePlayerStatsWindow;
-            model.PlayerStatsWindow.OnValueChanged += view.SetPlayerStatsWindow;
         }
 
-        public void Init(IGameFactory gameFactory, IScoreCountService scoreCountService)
+        public void Init(IGameFactory gameFactory, IScoreCountService scoreCountService, IPlayerProvider playerProvider)
         {
             _gameFactory = gameFactory;
             _scoreCountService = scoreCountService;
-        }
-
-        public void Destroy()
-        {
-            View.Destroy();
+            _playerProvider = playerProvider;
         }
 
         public void CreateLoseWindow()
         {
-            LoseWindowPresenter loseWindow = _gameFactory.CreateLoseWindow(View.transform);
-            Model.SetLoseWindow(loseWindow);
-            loseWindow.Init(_scoreCountService);
+            _loseWindow = _gameFactory.CreateLoseWindow(View.transform);
+            _loseWindow.Init(_scoreCountService);
         }
 
-        public void DestroyLoseWindow()
+        public void CreatePlayerStatsWindow()
         {
-            Model.LoseWindow.Value.Destroy();
-        
-            Model.SetLoseWindow(null);
+            _playerStats = _gameFactory.CreatePlayerStatsWindow(View.transform);
+            _playerStats.Init(_playerProvider);
         }
-    
-        private void CreatePlayerStatsWindow() => 
-            Model.SetPlayerStatsWindow(_gameFactory.CreatePlayerStatsWindow(View.transform));
 
-        public void DestroyPlayerStatsWindow()
-        {
-            View.OnPlayerStatsWindowCreated -= CreatePlayerStatsWindow;
-        
-            Model.PlayerStatsWindow.OnValueChanged -= View.SetPlayerStatsWindow;
-
-            Model.PlayerStatsWindow.Value.Destroy();
-        
-            Model.SetPlayerStatsWindow(null);
-        }
+        public void Destroy() => 
+            View.Destroy();
+        public void DestroyLoseWindow() =>
+            _loseWindow.Destroy();
+        public void DestroyPlayerStatsWindow() =>
+            _playerStats.Destroy();
     }
 }

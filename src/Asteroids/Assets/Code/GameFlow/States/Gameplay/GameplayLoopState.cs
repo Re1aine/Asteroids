@@ -36,7 +36,8 @@ namespace Code.GameFlow.States.Gameplay
             _inputService.Enable();
             _asteroidSpawner.Enable();
             _ufoSpawner.Enable();
-
+            
+            _hudProvider.HUD.CreatePlayerStatsWindow();
         }
 
         public void Exit()

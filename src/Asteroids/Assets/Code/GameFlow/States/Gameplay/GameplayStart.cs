@@ -16,7 +16,8 @@ namespace Code.GameFlow.States.Gameplay
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
             IPlayerProvider playerProvider,
-            IPlayerDeathObserver playerDeathObserver, IScoreCountService scoreCountService)
+            IPlayerDeathObserver playerDeathObserver,
+            IScoreCountService scoreCountService)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -24,7 +25,7 @@ namespace Code.GameFlow.States.Gameplay
             _playerDeathObserver = playerDeathObserver;
             _scoreCountService = scoreCountService;
         }
-
+        
         public void Enter()
         {
             _playerProvider.Initialize();

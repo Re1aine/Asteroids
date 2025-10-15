@@ -6,11 +6,13 @@ using Code.Logic.Gameplay.Projectiles.LaserBeam;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.UI.HUD;
 using Code.UI.LoseWindow;
 using Code.UI.PlayerStatsWindow;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 {
@@ -21,18 +23,21 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAsteroidsHolder _asteroidsHolder;
         private readonly IBulletsHolder _bulletsHolder;
         private readonly IAssetsProvider _assetsProvider;
+        private readonly IObjectResolver _resolver;
 
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
             IAsteroidsHolder asteroidsHolder,
             IBulletsHolder bulletsHolder,
-            IAssetsProvider assetsProvider)
+            IAssetsProvider assetsProvider,
+            IObjectResolver resolver)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
             _asteroidsHolder = asteroidsHolder;
             _bulletsHolder = bulletsHolder;
             _assetsProvider = assetsProvider;
+            _resolver = resolver;
         }
 
         public PlayerPresenter CreatePlayer(Vector3 position, Quaternion rotation)
@@ -101,10 +106,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         public HUDPresenter CreateHUD()
         {
             HUDView hudView =  _assetsProvider.Instantiate<HUDView>(AssetPath.HUD);
-            
             HUDPresenter presenter = new HUDPresenter(new HUDModel(), hudView);
             
-            presenter.Init(this, _scoreCountService);
+            presenter.Init(this, _scoreCountService, _resolver.Resolve<IPlayerProvider>());
             
             return presenter;
         }
