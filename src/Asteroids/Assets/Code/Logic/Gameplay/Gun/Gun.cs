@@ -19,29 +19,28 @@ namespace Code.Logic.Gameplay
 
         [Header("LaserBeam")]
         [SerializeField] private LayerMask _obstacleLayer;
-
         [SerializeField] private float _laserShootCooldown;
         [SerializeField] private float _laserShootTime;
         [SerializeField] private float _laserRange;
         [SerializeField] private int _laserChargesMax;
-        [SerializeField] public int _laserChargesCurrent;
+        [SerializeField] private int _laserChargesCurrent;
         [SerializeField] private int _laserChargeRefillCooldown;
 
         private IGameFactory _gameFactory;
         private IInputService _inputService;
         private IPlayerProvider _playerProvider;
 
+        private LaserBeam _laserBeam;
+        
         private Vector3 _shootDirection;
-    
+
         private float _laserShootCooldownTimer;
         private float _laserShootTimer;
         private float _laserChargeRefillTimer;
         private float _bulletTimer;
 
         private bool _isLaserActive;
-    
-        private LaserBeam _laserBeam;
-
+        
         [Inject]
         public void Construct(IInputService inputService, IGameFactory gameFactory, IPlayerProvider playerProvider)
         {
@@ -61,8 +60,10 @@ namespace Code.Logic.Gameplay
             HandleLaserShoot();
         }
     
-        public int GetLaserChargesCount() => _laserChargesCurrent;
-        public float GetLaserCooldownTimer() => _laserShootCooldownTimer; 
+        public int GetLaserChargesCount() =>
+            _laserChargesCurrent;
+        public float GetLaserCooldownTimer() =>
+            _laserShootCooldownTimer; 
     
         private IEnumerator ShootLaserRoutine()
         {

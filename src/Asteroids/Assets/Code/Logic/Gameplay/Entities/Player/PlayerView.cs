@@ -26,19 +26,20 @@ namespace Code.Logic.Gameplay.Entities.Player
         private Vector2 _velocity;
 
         [Inject]
-        public void Construct(IInputService inputService)
-        {
+        public void Construct(IInputService inputService) => 
             _inputService = inputService;
-        }
-    
+
         public void SetMoveDirection(Vector3 direction) => 
             _moveDirection = direction;
 
-        public float GetVelocity() => _velocity.magnitude;
+        public float GetVelocity() =>
+            _velocity.magnitude;
 
-        public float GetLaserCooldown() => _gun.GetLaserCooldownTimer();
+        public float GetLaserCooldown() =>
+            _gun.GetLaserCooldownTimer();
 
-        public int GetLaserCharges() => _gun.GetLaserChargesCount();
+        public int GetLaserCharges() =>
+            _gun.GetLaserChargesCount();
 
         private void Start()
         {
@@ -54,7 +55,8 @@ namespace Code.Logic.Gameplay.Entities.Player
             HandleRotate();
         }
     
-        private void FixedUpdate() => HandleMove();
+        private void FixedUpdate() =>
+            HandleMove();
 
         private void HandleRotate()
         {

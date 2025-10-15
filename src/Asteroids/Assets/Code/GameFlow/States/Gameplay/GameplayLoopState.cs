@@ -3,7 +3,6 @@ using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
 using Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
-using Code.UI;
 using Code.UI.PlayerStatsWindow;
 
 namespace Code.GameFlow.States.Gameplay

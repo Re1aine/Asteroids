@@ -1,7 +1,6 @@
 ﻿using System;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
-using Code.Logic.Gameplay.Services;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using UnityEngine;
 using VContainer;
@@ -23,20 +22,14 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
         Vector3 _direction;
     
         [Inject]
-        public void Construct(IPlayerProvider playerProvider)
-        {
+        public void Construct(IPlayerProvider playerProvider) => 
             _playerProvider = playerProvider;
-        }
-    
-        public void Init(IDamageReceiver damageReceiver)
-        {
+
+        public void Init(IDamageReceiver damageReceiver) => 
             DamageReceiver = damageReceiver;
-        }
-    
-        private void Update()
-        {
+
+        private void Update() => 
             MoveToPlayer();
-        }
 
         private void MoveToPlayer()
         {

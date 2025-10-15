@@ -5,7 +5,7 @@ namespace Code.Infrastructure.Common.AssetsManagement.AssetsLoader
 {
     public class AssetsLoader : IAssetsLoader
     {
-        private readonly Dictionary<string, MonoBehaviour> _cachedAssets = new Dictionary<string, MonoBehaviour>();    
+        private readonly Dictionary<string, MonoBehaviour> _cachedAssets = new();    
     
         public T Load<T>(string path) where T : MonoBehaviour
         {

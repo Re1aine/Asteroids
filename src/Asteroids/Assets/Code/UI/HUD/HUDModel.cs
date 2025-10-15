@@ -1,5 +1,4 @@
-﻿
-namespace Code.UI.HUD
+﻿namespace Code.UI.HUD
 {
     public class HUDModel
     {
