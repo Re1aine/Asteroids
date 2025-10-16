@@ -11,7 +11,6 @@ namespace Code.GameFlow.States.Gameplay
 {
     public class LoseState : IState
     {
-        private readonly IGameFactory _gameFactory;
         private readonly IHUDProvider _hudProvider;
         private readonly IUFOsHolder _ufosHolder;
         private readonly IAsteroidsHolder _asteroidsHolder;
@@ -20,9 +19,11 @@ namespace Code.GameFlow.States.Gameplay
 
         private LoseWindowPresenter _loseWindow;
 
-        public LoseState(IGameFactory gameFactory, IHUDProvider hudProvider, IUFOsHolder ufosHolder, IAsteroidsHolder  asteroidsHolder, IBulletsHolder bulletsHolder)
+        public LoseState(IHUDProvider hudProvider,
+            IUFOsHolder ufosHolder,
+            IAsteroidsHolder  asteroidsHolder,
+            IBulletsHolder bulletsHolder)
         {
-            _gameFactory = gameFactory;
             _hudProvider = hudProvider;
             _ufosHolder = ufosHolder;
             _asteroidsHolder = asteroidsHolder;

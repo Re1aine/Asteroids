@@ -1,4 +1,5 @@
 ﻿using Code.Logic.Gameplay.Services.ScoreCounter;
+using R3;
 
 namespace Code.UI.LoseWindow
 {
@@ -9,6 +10,8 @@ namespace Code.UI.LoseWindow
     
         private IScoreCountService _scoreCountService;
 
+        private readonly CompositeDisposable _disposables = new();
+
         public LoseWindowPresenter(LoseWindowModel loseWindowModel, LoseWindowView loseWindowView)
         {
             LoseWindowModel = loseWindowModel;
@@ -18,9 +21,11 @@ namespace Code.UI.LoseWindow
         public void Init(IScoreCountService scoreCountService)
         {
             _scoreCountService = scoreCountService;
-        
-            LoseWindowModel.Score.OnValueChanged += LoseWindowView.SetScore;
-        
+            
+            LoseWindowModel.Score
+                .Subscribe(score => LoseWindowView.SetScore(score))
+                .AddTo(_disposables);
+            
             SetScore(_scoreCountService.Score);
         }
 
@@ -29,7 +34,8 @@ namespace Code.UI.LoseWindow
 
         public void Destroy()
         {
-            LoseWindowModel.Score.OnValueChanged -= LoseWindowView.SetScore;
+            _disposables.Dispose();
+            LoseWindowModel.Dispose();
             LoseWindowView.Destroy();
         }
     }
