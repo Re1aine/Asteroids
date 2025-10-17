@@ -6,21 +6,14 @@ namespace Code.UI.PlayerStatsWindow
 {
     public class PlayerStatsWindowView : MonoBehaviour
     {
-        public event Action OnPlayerStatsChanged;
-        
         [SerializeField] private TextMeshProUGUI _position;
         [SerializeField] private TextMeshProUGUI _rotation;
         [SerializeField] private TextMeshProUGUI _velocity;
         [SerializeField] private TextMeshProUGUI _laserCharges;
         [SerializeField] private TextMeshProUGUI _laserCooldown;
         
-        private void Update()
-        {
-            OnPlayerStatsChanged?.Invoke();
-        }
-
         public void SetPosition(Vector3 value) => 
-            _position.text = $"Position - " + $"X: {value.x:0.00}" + $"Y: {value.y:0.00}";
+            _position.text = $"Position - " + $"X: {value.x:0.00} " + $"Y: {value.y:0.00}";
 
         public void SetRotation(Quaternion value) => 
             _rotation.text = $"Rotation - {value.eulerAngles.z:0°}";

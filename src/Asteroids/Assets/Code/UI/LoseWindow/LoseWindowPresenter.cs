@@ -35,7 +35,6 @@ namespace Code.UI.LoseWindow
         public void Destroy()
         {
             _disposables.Dispose();
-            LoseWindowModel.Dispose();
             LoseWindowView.Destroy();
         }
     }

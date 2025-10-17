@@ -180,8 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018e0acf58984703b27db455b26c2dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 1595330409046315514}
-  _gun: {fileID: 7109203945711521459}
+  <Gun>k__BackingField: {fileID: 7109203945711521459}
   _decelerationMove: 1
   _accelerationMove: 5
   _moveSpeed: 5

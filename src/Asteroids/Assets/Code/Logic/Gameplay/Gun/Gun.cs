@@ -5,6 +5,7 @@ using Code.Logic.Gameplay.Projectiles.LaserBeam;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Input;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using R3;
 using UnityEngine;
 using VContainer;
 
@@ -31,6 +32,14 @@ namespace Code.Logic.Gameplay
         private IPlayerProvider _playerProvider;
 
         private LaserBeam _laserBeam;
+
+        public R3.ReadOnlyReactiveProperty<int> LaserCharges;
+        public R3.ReadOnlyReactiveProperty<float> CooldownLaser;
+        
+        private R3.ReactiveProperty<int> _laserCharges;
+        private R3.ReactiveProperty<float> _cooldownLaser;
+
+        private readonly CompositeDisposable _disposables = new();
         
         private Vector3 _shootDirection;
 
@@ -49,9 +58,27 @@ namespace Code.Logic.Gameplay
             _playerProvider = playerProvider;
         }
 
-        private void Awake() => 
-            _shootDirection = (_shootPoint.position -  transform.position);
-    
+        private void Awake()
+        {
+            _shootDirection = (_shootPoint.position - transform.position);
+
+            _laserCharges = new R3.ReactiveProperty<int>(_laserChargesCurrent);
+            _cooldownLaser = new R3.ReactiveProperty<float>(_laserShootCooldownTimer);
+
+            LaserCharges = _laserCharges.ToReadOnlyReactiveProperty();
+            CooldownLaser = _cooldownLaser.ToReadOnlyReactiveProperty();
+
+            Observable.EveryValueChanged(this, x => _laserChargesCurrent)
+                .DistinctUntilChanged()
+                .Subscribe(x => _laserCharges.Value = _laserChargesCurrent)
+                .AddTo(_disposables);
+         
+            Observable.EveryValueChanged(this, x => _laserShootCooldownTimer)
+                .DistinctUntilChanged()
+                .Subscribe(x => _cooldownLaser.Value = _laserShootCooldownTimer)
+                .AddTo(_disposables);
+        }
+
         private void Update()
         {
             _shootDirection = _shootPoint.position -  transform.position;
@@ -159,6 +186,8 @@ namespace Code.Logic.Gameplay
         {
             if (_laserBeam != null)
                 _laserBeam.ClearAllLinePositions();
+            
+            _disposables.Dispose();
         }
     }
 }

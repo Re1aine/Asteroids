@@ -1,53 +1,73 @@
 ﻿using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using R3;
+using UnityEngine;
 
 namespace Code.UI.PlayerStatsWindow
 {
     public class PlayerStatsWindowPresenter
     {
-        private readonly PlayerStatsWindowModel _model;
-        private readonly PlayerStatsWindowView _view;
+        public PlayerStatsWindowModel Model {get; private set;}
+        public PlayerStatsWindowView View {get; private set;}
     
         private IPlayerProvider _playerProvider;
 
+        private readonly CompositeDisposable _disposables = new();
+        
         public PlayerStatsWindowPresenter(PlayerStatsWindowModel model, PlayerStatsWindowView view)
         {
-            _model = model;
-            _view = view;
+            Model = model;
+            View = view;
         }
     
         public void Init(IPlayerProvider playerProvider)
         {
             _playerProvider = playerProvider;
-        
-            _model.Position.OnValueChanged += _view.SetPosition;
-            _model.Rotation.OnValueChanged += _view.SetRotation;
-            _model.Velocity.OnValueChanged += _view.SetVelocity;
-            _model.LaserCharges.OnValueChanged += _view.SetLaserCharges;
-            _model.LaserCooldown.OnValueChanged += _view.SetLaserCooldown;
-
-            _view.OnPlayerStatsChanged += SetPlayerStats;
-        }
-
-        private void SetPlayerStats()
-        {
-            _model.SetPosition(_playerProvider.Player.View.transform.position);
-            _model.SetRotation(_playerProvider.Player.View.transform.rotation);
-            _model.SetVelocity(_playerProvider.Player.View.GetVelocity());
-            _model.SetLaserCharges(_playerProvider.Player.View.GetLaserCharges());
-            _model.SetLaserCooldown(_playerProvider.Player.View.GetLaserCooldown());
+            
+            _playerProvider.Player.View.Position
+                .Subscribe(position => Model.SetPosition(position))
+                .AddTo(_disposables);
+            
+            _playerProvider.Player.View.Rotation
+                .Subscribe(rotation => Model.SetRotation(rotation))
+                .AddTo(_disposables);
+            
+            _playerProvider.Player.View.Velocity
+                .Subscribe(velocity => Model.SetVelocity(velocity))
+                .AddTo(_disposables);
+            
+            _playerProvider.Player.View.Gun.LaserCharges
+                .Subscribe(charges => Model.SetLaserCharges(charges))
+                .AddTo(_disposables);
+            
+            _playerProvider.Player.View.Gun.CooldownLaser
+                .Subscribe(cooldown => Model.SetLaserCooldown(cooldown))
+                .AddTo(_disposables);
+            
+            Model.Position
+                .Subscribe(position => View.SetPosition(position))
+                .AddTo(_disposables);
+            
+            Model.Rotation
+                .Subscribe(rotation => View.SetRotation(rotation))
+                .AddTo(_disposables);
+            
+            Model.Velocity
+                .Subscribe(velocity => View.SetVelocity(velocity))
+                .AddTo(_disposables);
+            
+            Model.LaserCharges
+                .Subscribe(charges  => View.SetLaserCharges(charges))
+                .AddTo(_disposables);
+            
+            Model.LaserCooldown
+                .Subscribe(cooldown => View.SetLaserCooldown(cooldown))
+                .AddTo(_disposables);
         }
 
         public void Destroy()
-        {
-            _model.Position.OnValueChanged -= _view.SetPosition;
-            _model.Rotation.OnValueChanged -= _view.SetRotation;
-            _model.Velocity.OnValueChanged -= _view.SetVelocity;
-            _model.LaserCharges.OnValueChanged -= _view.SetLaserCharges;
-            _model.LaserCooldown.OnValueChanged -= _view.SetLaserCooldown;
-        
-            _view.OnPlayerStatsChanged -= SetPlayerStats;
-        
-            _view.Destroy();
+        { 
+            _disposables.Dispose();
+            View.Destroy();
         }
     }
 }
