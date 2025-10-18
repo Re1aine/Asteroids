@@ -1,41 +1,55 @@
-﻿using Code.Logic.Gameplay.Services.ScoreCounter;
+﻿using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using Code.Logic.Gameplay.Services.Repository.Player;
+using Code.Logic.Gameplay.Services.ScoreCounter;
 using R3;
 
 namespace Code.UI.LoseWindow
 {
     public class LoseWindowPresenter
     {
-        public LoseWindowModel LoseWindowModel {get; private set;}
-        public LoseWindowView LoseWindowView {get; private set;}
+        public LoseWindowModel Model {get; private set;}
+        public LoseWindowView View {get; private set;}
     
         private IScoreCountService _scoreCountService;
 
         private readonly CompositeDisposable _disposables = new();
+        private IRepositoriesHolder _repositoriesHolder;
 
         public LoseWindowPresenter(LoseWindowModel loseWindowModel, LoseWindowView loseWindowView)
         {
-            LoseWindowModel = loseWindowModel;
-            LoseWindowView = loseWindowView;
+            Model = loseWindowModel;
+            View = loseWindowView;
         }
 
-        public void Init(IScoreCountService scoreCountService)
+        public void Init(IScoreCountService scoreCountService, IRepositoriesHolder repositoriesHolder)
         {
             _scoreCountService = scoreCountService;
+            _repositoriesHolder = repositoriesHolder;
             
-            LoseWindowModel.Score
-                .Subscribe(score => LoseWindowView.SetScore(score))
+            Model.Score
+                .Subscribe(score => View.SetScore(score))
                 .AddTo(_disposables);
             
             SetScore(_scoreCountService.Score);
+            SetHighScore();
         }
 
         private void SetScore(int value) => 
-            LoseWindowModel.SetScore(value);
+            Model.SetScore(value);
+        
+        private void SetHighScore()
+        {
+            int highScore = _repositoriesHolder
+                .GetRepository<PlayerRepository>()
+                .PlayerSaveData.HighScore;
+            
+            View.SetHighScore(highScore);
+        }
 
         public void Destroy()
         {
             _disposables.Dispose();
-            LoseWindowView.Destroy();
+            View.Destroy();
         }
     }
 }

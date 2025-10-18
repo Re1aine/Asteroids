@@ -8,9 +8,10 @@ namespace Code.UI.LoseWindow
 {
     public class LoseWindowView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _score;
+        [SerializeField] private TextMeshProUGUI _currentScore;
+        [SerializeField] private TextMeshProUGUI _highScore;
         [SerializeField] private Button _restart; 
-    
+        
         private GameplayStateMachine _gameplayStateMachine;
 
         [Inject]
@@ -22,9 +23,12 @@ namespace Code.UI.LoseWindow
         private void Start() => 
             _restart.onClick.AddListener(() => _gameplayStateMachine.Enter<GameplayStart>());
 
-        public void SetScore(int value) => 
-            _score.text = $"Score: {value.ToString()}";
+        public void SetScore(int value) =>
+            _currentScore.text = value.ToString();
 
+        public void SetHighScore(int value) =>
+            _highScore.text = value.ToString(); 
+        
         public void Destroy() => Destroy(gameObject);
     }
 }

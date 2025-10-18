@@ -1,4 +1,5 @@
 ﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
+using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.UI.LoseWindow;
@@ -17,24 +18,26 @@ namespace Code.UI.HUD
 
         private PlayerStatsWindowPresenter _playerStats;
         private LoseWindowPresenter _loseWindow;
-        
+        private IRepositoriesHolder _repositoreiesHolder;
+
         public HUDPresenter(HUDModel model, HUDView view)
         {
             Model = model;
             View = view;
         }
 
-        public void Init(IGameFactory gameFactory, IScoreCountService scoreCountService, IPlayerProvider playerProvider)
+        public void Init(IGameFactory gameFactory, IScoreCountService scoreCountService, IPlayerProvider playerProvider, IRepositoriesHolder repositoriesHolder)
         {
             _gameFactory = gameFactory;
             _scoreCountService = scoreCountService;
             _playerProvider = playerProvider;
+            _repositoreiesHolder = repositoriesHolder;
         }
 
         public void CreateLoseWindow()
         {
             _loseWindow = _gameFactory.CreateLoseWindow(View.transform);
-            _loseWindow.Init(_scoreCountService);
+            _loseWindow.Init(_scoreCountService, _repositoreiesHolder);
         }
 
         public void CreatePlayerStatsWindow()

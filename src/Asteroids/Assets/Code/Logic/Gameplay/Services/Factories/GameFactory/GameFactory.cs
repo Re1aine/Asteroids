@@ -7,6 +7,7 @@ using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
+using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
@@ -25,6 +26,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAsteroidsHolder _asteroidsHolder;
         private readonly IBulletsHolder _bulletsHolder;
         private readonly IAssetsProvider _assetsProvider;
+        private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IObjectResolver _resolver;
 
         public GameFactory(IScoreCountService scoreCountService,
@@ -32,6 +34,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IAsteroidsHolder asteroidsHolder,
             IBulletsHolder bulletsHolder,
             IAssetsProvider assetsProvider,
+            IRepositoriesHolder repositoriesHolder,
             IObjectResolver resolver)
         {
             _scoreCountService = scoreCountService;
@@ -39,6 +42,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _asteroidsHolder = asteroidsHolder;
             _bulletsHolder = bulletsHolder;
             _assetsProvider = assetsProvider;
+            _repositoriesHolder = repositoriesHolder;
             _resolver = resolver;
         }
 
@@ -110,7 +114,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             HUDView hudView =  _assetsProvider.Instantiate<HUDView>(AssetPath.HUD);
             HUDPresenter presenter = new HUDPresenter(new HUDModel(), hudView);
             
-            presenter.Init(this, _scoreCountService, _resolver.Resolve<IPlayerProvider>());
+            presenter.Init(this, _scoreCountService, _resolver.Resolve<IPlayerProvider>(), _repositoriesHolder);
             
             return presenter;
         }

@@ -10,6 +10,7 @@ using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
+using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Input;
 using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
@@ -17,6 +18,8 @@ using Code.Logic.Gameplay.Services.PointWrapper;
 using Code.Logic.Gameplay.Services.Providers.CameraProvider;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using Code.Logic.Gameplay.Services.Repository;
+using Code.Logic.Gameplay.Services.Repository.Player;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
 using Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
@@ -34,7 +37,13 @@ namespace Code.Scopes
         {
             builder.Register<AssetsLoader>(Lifetime.Singleton).As<IAssetsLoader>();
             builder.Register<AssetsProvider>(Lifetime.Singleton).As<IAssetsProvider>();
-        
+            
+            builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
+
+            builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
+            
+            builder.Register<RepositoriesHolder>(Lifetime.Singleton).As<IRepositoriesHolder>();
+            
             builder.RegisterComponentInHierarchy<CoroutineRunner>().As<ICoroutineRunner>();
         
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
