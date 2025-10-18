@@ -2,11 +2,14 @@
 {
     public class ScoreCountService : IScoreCountService
     {
-        public int Score => _score;
-
-        private int _score;
-    
-        public void Add(int value) => _score += value;
-        public void Reset() => _score = 0;
+        private readonly R3.ReactiveProperty<int> _score = new(0);
+        
+        public R3.ReadOnlyReactiveProperty<int> Score => _score;
+        
+        public void Add(int value) =>
+            _score.Value += value;
+        
+        public void Reset() =>
+            _score.Value = 0;
     }
 }

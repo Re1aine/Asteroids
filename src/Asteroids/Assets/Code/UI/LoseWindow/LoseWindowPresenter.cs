@@ -25,27 +25,24 @@ namespace Code.UI.LoseWindow
         {
             _scoreCountService = scoreCountService;
             _repositoriesHolder = repositoriesHolder;
+
+            _repositoriesHolder.GetRepository<PlayerRepository>().HighScore
+                .Subscribe(highScore => Model.SetHighScore(highScore))
+                .AddTo(_disposables);
+            
+            _scoreCountService.Score.
+                Subscribe(score => Model.SetScore(score))
+                .AddTo(_disposables);
             
             Model.Score
                 .Subscribe(score => View.SetScore(score))
                 .AddTo(_disposables);
             
-            SetScore(_scoreCountService.Score);
-            SetHighScore();
+            Model.HighScore
+                .Subscribe(highScore => View.SetHighScore(highScore))
+                .AddTo(_disposables);
         }
-
-        private void SetScore(int value) => 
-            Model.SetScore(value);
         
-        private void SetHighScore()
-        {
-            int highScore = _repositoriesHolder
-                .GetRepository<PlayerRepository>()
-                .PlayerSaveData.HighScore;
-            
-            View.SetHighScore(highScore);
-        }
-
         public void Destroy()
         {
             _disposables.Dispose();
