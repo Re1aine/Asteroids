@@ -4,32 +4,17 @@ namespace Code.UI.PlayerStatsWindow
 {
     public class PlayerStatsWindowModel
     {
-        public readonly R3.ReadOnlyReactiveProperty<Vector3> Position;
-        public readonly R3.ReadOnlyReactiveProperty<Quaternion> Rotation;
-        public readonly R3.ReadOnlyReactiveProperty<float> Velocity;
-        public readonly R3.ReadOnlyReactiveProperty<int> LaserCharges;
-        public readonly R3.ReadOnlyReactiveProperty<float> LaserCooldown;
+        public R3.ReadOnlyReactiveProperty<Vector3> Position => _position;
+        public R3.ReadOnlyReactiveProperty<Quaternion> Rotation => _rotation;
+        public R3.ReadOnlyReactiveProperty<float> Velocity => _velocity;
+        public R3.ReadOnlyReactiveProperty<int> LaserCharges => _laserCharges;
+        public R3.ReadOnlyReactiveProperty<float> LaserCooldown => _laserCooldown;
         
-        private readonly R3.ReactiveProperty<Vector3> _position;
-        private readonly R3.ReactiveProperty<Quaternion> _rotation;
-        private readonly R3.ReactiveProperty<float> _velocity;
-        private readonly R3.ReactiveProperty<int> _laserCharges;
-        private readonly R3.ReactiveProperty<float> _laserCooldown;
-        
-        public PlayerStatsWindowModel()
-        {
-            _position = new R3.ReactiveProperty<Vector3>();
-            _rotation = new R3.ReactiveProperty<Quaternion>();
-            _velocity = new R3.ReactiveProperty<float>();
-            _laserCharges =  new R3.ReactiveProperty<int>();
-            _laserCooldown = new R3.ReactiveProperty<float>();
-    
-            Position = _position.ToReadOnlyReactiveProperty();
-            Rotation = _rotation.ToReadOnlyReactiveProperty();
-            Velocity = _velocity.ToReadOnlyReactiveProperty();
-            LaserCharges =  _laserCharges.ToReadOnlyReactiveProperty();
-            LaserCooldown = _laserCooldown.ToReadOnlyReactiveProperty();
-        }
+        private readonly R3.ReactiveProperty<Vector3> _position = new();
+        private readonly R3.ReactiveProperty<Quaternion> _rotation = new();
+        private readonly R3.ReactiveProperty<float> _velocity = new();
+        private readonly R3.ReactiveProperty<int> _laserCharges = new();
+        private readonly R3.ReactiveProperty<float> _laserCooldown = new();
 
         public void SetPosition(Vector3 value) => _position.Value = value;
         public void SetRotation(Quaternion value) => _rotation.Value = value;
