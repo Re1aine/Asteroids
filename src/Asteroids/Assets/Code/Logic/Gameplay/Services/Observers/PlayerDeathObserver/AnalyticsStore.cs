@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
-public class AnalyticsStore : IAnalyticsStore
+public class AnalyticsStore : IAnalyticsStore, IInitializable
 {
     private int _bulletReleaseCount;
     private int _laserReleaseCount;
@@ -33,5 +34,10 @@ public class AnalyticsStore : IAnalyticsStore
         _laserReleaseCount = 0;
         _asteroidKills = 0;
         _ufoKills = 0;
+    }
+
+    public void Initialize()
+    {
+        DebugAnalytic();
     }
 }
