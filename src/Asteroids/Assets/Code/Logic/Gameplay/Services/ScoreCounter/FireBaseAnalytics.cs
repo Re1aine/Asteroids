@@ -2,56 +2,68 @@
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
-using Firebase.Extensions;
 using UnityEngine;
 
-public class FireBaseAnalytics : IAnalytics
-{
-    public event Action GameStarted;
-    public event Action LaserUsed;
-    public event Action GameEnded;
-    
-    public FireBaseAnalytics()
+    public class FireBaseAnalytics : IAnalytics
     {
-        Initialize();
+        private FirebaseApp _firebaseApp;
         
-    }
-    private FirebaseApp _firebaseApp;
-    
-    public void Initialize()
-    {
-        FirebaseApp.CheckAndFixDependenciesAsync()
-            .ContinueWithOnMainThread(OnDependencyStatusReceived);
-    }
-    
-    private void OnDependencyStatusReceived(Task<DependencyStatus> task)
-    {
-        try
+        private bool _isInitialized;
+        
+        public async Task InitializeAsync()
         {
-            if (!task.IsCompletedSuccessfully)
-                throw new Exception("Could not resolve all Firebase dependencies", task.Exception);
+            if (_isInitialized)
+                return;
             
-            if (task.Result != DependencyStatus.Available)
-                throw new Exception($"Could not resolve all Firebase dependencies: {task.Result}");
-            
-            Debug.Log("Firebase initialized successfully");
-            FirebaseAnalytics.LogEvent("Test");
-
+            try
+            {
+                var dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
+                if (dependencyStatus != DependencyStatus.Available)
+                {
+                    Debug.LogError($"Failed to initialize Firebase: {dependencyStatus}");
+                    return;
+                }
+       
+                _firebaseApp = FirebaseApp.DefaultInstance;
+                _isInitialized = true;
+                
+                Debug.Log("<b><color=green> Firebase initialized successfully! </color></b>");
+            }
+            catch (Exception e)
+            {
+                _isInitialized = false;
+                Debug.LogException(e);
+            }
         }
-        catch (Exception e)
+        
+        private bool IsCanLogEvent()
         {
-            Debug.LogException(e);
-        }   
+            if (_isInitialized)
+                return true;
+            
+            Debug.LogWarning("Firebase is not initialized. Event logging skipped.");
+            return false;
+        }
+        
+        public void StartSession()
+        {
+            if(IsCanLogEvent())
+                FirebaseAnalytics.LogEvent(AnalyticsEventsName.StartSession);
+        }
+
+        public void SendLaserUsedEvent()
+        {
+            if(IsCanLogEvent())
+                FirebaseAnalytics.LogEvent(AnalyticsEventsName.LaserUsed);
+        }
+
+        public void EndSession(IAnalyticsStore analyticsStore)
+        {
+            if (IsCanLogEvent())
+                FirebaseAnalytics.LogEvent(AnalyticsEventsName.EndSession,
+                    new Parameter(AnalyticsEventParameters.BulletReleaseCount, analyticsStore.BulletReleaseCount),
+                    new Parameter(AnalyticsEventParameters.LaserReleaseCount, analyticsStore.LaserReleaseCount),
+                    new Parameter(AnalyticsEventParameters.AsteroidKills, analyticsStore.AsteroidKills),
+                    new Parameter(AnalyticsEventParameters.UfoKills, analyticsStore.UfoKills));
+        }
     }
-
-    public void StartSession()
-    {
-        GameStarted?.Invoke();
-    }
-
-    public void SendLaserUsedEvent() => 
-        LaserUsed?.Invoke();
-
-    public void EndSession() => 
-        GameEnded?.Invoke();
-}
