@@ -1,8 +1,11 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
-
-public class AnalyticsStore : IAnalyticsStore, IInitializable
+﻿
+public class AnalyticsStore : IAnalyticsStore
 {
+    public int BulletReleaseCount => _bulletReleaseCount;
+    public int LaserReleaseCount => _laserReleaseCount;
+    public int AsteroidKills => _asteroidKills;
+    public int UfoKills => _ufoKills;
+    
     private int _bulletReleaseCount;
     private int _laserReleaseCount;
     private int _asteroidKills;
@@ -19,25 +22,12 @@ public class AnalyticsStore : IAnalyticsStore, IInitializable
 
     public void AddUfo() => 
         _ufoKills++;
-
-    public void DebugAnalytic()
-    {
-        Debug.Log($"BulletReleaseCount - {_bulletReleaseCount}");
-        Debug.Log($"LaserReleaseCount - {_laserReleaseCount}");
-        Debug.Log($"AsteroidKills - {_asteroidKills}");
-        Debug.Log($"UfoKills - {_ufoKills}");
-    }
-
+    
     public void Flush()
     {
         _bulletReleaseCount = 0;
         _laserReleaseCount = 0;
         _asteroidKills = 0;
         _ufoKills = 0;
-    }
-
-    public void Initialize()
-    {
-        DebugAnalytic();
     }
 }
