@@ -53,7 +53,7 @@ namespace Code.GameFlow.States.Gameplay
             
             _analytics.EndSession();
             
-            _analyticsStore.DebugAnalytic();
+            _analyticsStore.Flush();
         }
 
         public void Exit() => 

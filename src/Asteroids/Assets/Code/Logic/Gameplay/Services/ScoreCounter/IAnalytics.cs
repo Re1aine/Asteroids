@@ -3,5 +3,4 @@
     void StartSession();
     void SendLaserUsedEvent();
     void EndSession();
-    void Flush();
 }

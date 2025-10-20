@@ -7,11 +7,6 @@ public class FireBaseAnalytics : IAnalytics
     public event Action GameEnded;
     
     private readonly IAnalyticsStore _analyticsStore;
-
-    public FireBaseAnalytics(IAnalyticsStore analyticsStore)
-    {
-        _analyticsStore = analyticsStore;
-    }
     
     public void StartSession() => 
         GameStarted?.Invoke();
@@ -21,7 +16,4 @@ public class FireBaseAnalytics : IAnalytics
 
     public void EndSession() => 
         GameEnded?.Invoke();
-
-    public void Flush() => 
-        _analyticsStore.Flush();
 }

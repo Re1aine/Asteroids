@@ -11,15 +11,11 @@ public class AsteroidDeathObserver : IAsteroidDeathObserver
         _analyticsStore = analyticsStore;
     }
 
-    public void Start()
-    {
+    public void Start() => 
         _asteroidPresenter.Destroyed += OnDeath;
-    }
 
-    public void Stop()
-    {
+    public void Stop() => 
         _asteroidPresenter.Destroyed -= OnDeath;
-    }
 
     private void OnDeath(AsteroidPresenter asteroidPresenter) => 
         _analyticsStore.AddAsteroid();

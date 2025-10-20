@@ -14,8 +14,13 @@ namespace Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver
             _playerProvider = playerProvider;
         }
 
-        public void Start() => _playerProvider.Player.Destroyed += OnDeath;
-        public void Stop() => _playerProvider.Player.Destroyed -= OnDeath;
-        private void OnDeath() => _gameplayStateMachine.Enter<LoseState>();
+        public void Start() =>
+            _playerProvider.Player.Destroyed += OnDeath;
+        
+        public void Stop() =>
+            _playerProvider.Player.Destroyed -= OnDeath;
+        
+        private void OnDeath() =>
+            _gameplayStateMachine.Enter<LoseState>();
     }
 }
