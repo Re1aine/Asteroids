@@ -1,5 +1,6 @@
 ﻿using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
+using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Entities.Enemy.UFO;
 using Code.Logic.Gameplay.Entities.Player;
@@ -9,6 +10,8 @@ using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using Code.Logic.Gameplay.Services.Observers.Asteroid;
+using Code.Logic.Gameplay.Services.Observers.UFO;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.UI.HUD;

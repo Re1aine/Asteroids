@@ -6,6 +6,8 @@ using Code.Infrastructure.Common.AssetsManagement.AssetsLoader;
 using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
 using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay;
+using Code.Logic.Gameplay.Analytics;
+using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;

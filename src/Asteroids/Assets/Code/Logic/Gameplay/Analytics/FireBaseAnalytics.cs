@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
+using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Firebase;
 using Firebase.Analytics;
 using UnityEngine;
 
+namespace Code.Logic.Gameplay.Analytics
+{
     public class FireBaseAnalytics : IAnalytics
     {
         private FirebaseApp _firebaseApp;
@@ -67,3 +71,4 @@ using UnityEngine;
                     new Parameter(AnalyticsEventParameters.UfoKills, analyticsStore.UfoKills));
         }
     }
+}

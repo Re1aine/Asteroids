@@ -1,4 +1,6 @@
-﻿using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
+﻿using Code.Logic.Gameplay.Analytics;
+using Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;

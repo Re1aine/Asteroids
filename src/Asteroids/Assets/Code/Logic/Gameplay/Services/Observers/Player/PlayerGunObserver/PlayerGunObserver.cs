@@ -1,4 +1,6 @@
-﻿using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+﻿using Code.Logic.Gameplay.Analytics;
+using Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 
 public class PlayerGunObserver : IPlayerGunObserver
 {

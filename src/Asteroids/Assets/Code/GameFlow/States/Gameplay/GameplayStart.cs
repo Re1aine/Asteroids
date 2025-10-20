@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+﻿using Code.Logic.Gameplay.Analytics;
+using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;

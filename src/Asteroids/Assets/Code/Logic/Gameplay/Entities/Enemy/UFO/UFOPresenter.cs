@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services;
+using Code.Logic.Gameplay.Services.Observers.UFO;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.UFO
 {
