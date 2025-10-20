@@ -28,6 +28,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAssetsProvider _assetsProvider;
         private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IObjectResolver _resolver;
+        private readonly IAnalyticsStore _analyticsStore;
 
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
@@ -35,7 +36,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IBulletsHolder bulletsHolder,
             IAssetsProvider assetsProvider,
             IRepositoriesHolder repositoriesHolder,
-            IObjectResolver resolver)
+            IObjectResolver resolver,
+            IAnalyticsStore analyticsStore)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -44,6 +46,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _assetsProvider = assetsProvider;
             _repositoriesHolder = repositoriesHolder;
             _resolver = resolver;
+            _analyticsStore = analyticsStore;
         }
 
         public PlayerPresenter CreatePlayer(Vector3 position, Quaternion rotation)
@@ -51,7 +54,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             PlayerView playerView = _assetsProvider.Instantiate<PlayerView>(AssetPath.Player);
             PlayerPresenter presenter = new PlayerPresenter(new PlayerModel(1), playerView);
 
-            presenter.Init(new PlayerDamageReceiver(presenter), new PlayerDestroyer(presenter));
+            presenter.Init(
+                new PlayerDamageReceiver(presenter),
+                new PlayerDestroyer(presenter));
         
             return presenter;
         }
@@ -62,7 +67,10 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         
             AsteroidPresenter presenter = new AsteroidPresenter(new AsteroidModel(asteroidType, scoreReward), asteroidView);
 
-            presenter.Init(new AsteroidDamageReceiver(presenter), new AsteroidDestroyer(presenter, this, _scoreCountService));
+            presenter.Init(
+                new AsteroidDamageReceiver(presenter),
+                new AsteroidDestroyer(presenter, this, _scoreCountService),
+                new AsteroidDeathObserver(presenter, _analyticsStore));
 
             _asteroidsHolder.Add(presenter);
         
@@ -74,7 +82,10 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             UFOView ufoView = _assetsProvider.InstantiateAt<UFOView>(AssetPath.UFO,  position, rotation);
             UFOPresenter presenter = new UFOPresenter(new UFOModel(scoreReward), ufoView);
 
-            presenter.Init(new UfoDamageReceiver(presenter), new UFODestroyer(presenter, _scoreCountService));
+            presenter.Init(
+                new UfoDamageReceiver(presenter),
+                new UFODestroyer(presenter, _scoreCountService),
+                new UFODeathObserver(presenter, _analyticsStore));
         
             _ufOsHolder.Add(presenter);
         

@@ -37,6 +37,9 @@ namespace Code.Scopes
         {
             builder.Register<AssetsLoader>(Lifetime.Singleton).As<IAssetsLoader>();
             builder.Register<AssetsProvider>(Lifetime.Singleton).As<IAssetsProvider>();
+
+            builder.Register<FireBaseAnalytics>(Lifetime.Singleton).As<IAnalytics>();
+            builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             
             builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
 
@@ -60,6 +63,7 @@ namespace Code.Scopes
             builder.Register<GameFactory>(Lifetime.Singleton).As<IGameFactory>();
 
             builder.Register<PlayerDeathObserver>(Lifetime.Singleton).As<IPlayerDeathObserver>();
+            builder.Register<PlayerGunObserver>(Lifetime.Singleton).As<IPlayerGunObserver>();
 
             builder.Register<UFOsHolder>(Lifetime.Singleton).As<IUFOsHolder>();
             builder.Register<AsteroidsHolder>(Lifetime.Singleton).As<IAsteroidsHolder>();

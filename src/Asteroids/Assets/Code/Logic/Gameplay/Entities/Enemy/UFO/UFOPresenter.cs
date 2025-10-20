@@ -8,9 +8,10 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
         public event Action<UFOPresenter> Destroyed;
         public UFOView View { get; private set; }
         public UFOModel Model { get; private set; }
-        public IDamageReceiver  DamageReceiver { get; private set; }
-    
+        
+        private IDamageReceiver _damageReceiver;
         private IDestroyer _destroyer;
+        private IUFODeathObserver _ufoDeathObserver;
 
         public UFOPresenter(UFOModel model, UFOView view)
         {
@@ -18,26 +19,31 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
             View = view;
         }
 
-        public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer)
+        public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer, IUFODeathObserver ufoDeathObserver)
         {
-            DamageReceiver = damageReceiver;
+            _damageReceiver = damageReceiver;
             _destroyer = destroyer;
+            _ufoDeathObserver = ufoDeathObserver;
 
             View.Init(damageReceiver);
         
             View.OnDamageReceived += ReceiveDamage;
+            
+            _ufoDeathObserver.Start();
         }
 
-        public void ReceiveDamage(DamageType damageType) => 
-            DamageReceiver.ReceiverDamage(damageType);
+        private void ReceiveDamage(DamageType damageType) => 
+            _damageReceiver.ReceiverDamage(damageType);
 
         public void Destroy(DamageType damageType)
         {
             Destroyed?.Invoke(this);
-        
+
             View.OnDamageReceived -= ReceiveDamage;
-        
+
             _destroyer.Destroy(damageType);
+            
+            _ufoDeathObserver.Stop();
         }
     }
 }
