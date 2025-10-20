@@ -1,5 +1,4 @@
-﻿using Code.Logic.Gameplay.Services;
-
+﻿
 namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
     public class AsteroidDamageReceiver :  IDamageReceiver
@@ -11,10 +10,8 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             _asteroidPresenter = presenter;
         }
 
-        public void ReceiverDamage(DamageType damageType)
-        {
+        public void ReceiverDamage(DamageType damageType) => 
             _asteroidPresenter.Destroy(damageType);
-        }
     }
 }
 
