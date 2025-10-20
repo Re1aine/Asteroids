@@ -1,13 +1,10 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
+﻿using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.UI;
 using Code.UI.LoseWindow;
-using UnityEngine;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -51,7 +48,7 @@ namespace Code.GameFlow.States.Gameplay
             _asteroidsHolder.DestroyAll();
             _bulletsHolder.DestroyAll();
             
-            _analytics.EndSession();
+            _analytics.EndSession(_analyticsStore);
             
             _analyticsStore.Flush();
         }

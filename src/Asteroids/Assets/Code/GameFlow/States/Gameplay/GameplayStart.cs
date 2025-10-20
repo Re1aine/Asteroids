@@ -36,8 +36,10 @@ namespace Code.GameFlow.States.Gameplay
             _analytics = analytics;
         }
         
-        public void Enter()
+        public async void Enter()
         {
+            await _analytics.InitializeAsync();
+            
             _repositoriesHolder.LoadAll();
             
             _playerProvider.Initialize();

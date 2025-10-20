@@ -38,9 +38,9 @@ namespace Code.Scopes
             builder.Register<AssetsLoader>(Lifetime.Singleton).As<IAssetsLoader>();
             builder.Register<AssetsProvider>(Lifetime.Singleton).As<IAssetsProvider>();
 
-            builder.Register<FireBaseAnalytics>(Lifetime.Singleton).As<IAnalytics>();
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
-            
+            builder.Register<FireBaseAnalytics>(Lifetime.Singleton).As<IAnalytics>();
+
             builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
 
             builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
