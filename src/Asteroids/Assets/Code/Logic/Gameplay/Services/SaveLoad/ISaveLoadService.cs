@@ -1,6 +1,11 @@
-﻿public interface ISaveLoadService
+﻿using Code.Logic.Gameplay.Services.Repository.Player;
+
+namespace Code.Logic.Gameplay.Services.SaveLoad
 {
-    void SetInt(string key, int value);
-    int GetInt(string key, int value = 0);
-    void Save();
+    public interface ISaveLoadService
+    {
+        void SetPlayerData(PlayerSaveData data);
+        PlayerSaveData GetPlayerData(PlayerSaveData defaultValue);
+        void Save();
+    }
 }

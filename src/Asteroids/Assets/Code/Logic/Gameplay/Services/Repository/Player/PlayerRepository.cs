@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Logic.Gameplay.Services.SaveLoad;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using R3;
 
@@ -6,8 +7,6 @@ namespace Code.Logic.Gameplay.Services.Repository.Player
 {
     public class PlayerRepository : IRepository, IDisposable
     {
-        private const string HighScoreKey = "HighScore";
-    
         private readonly ISaveLoadService _saveLoadService;
         private readonly IScoreCountService _scoreCountService;
     
@@ -29,11 +28,12 @@ namespace Code.Logic.Gameplay.Services.Repository.Player
         }
         
         public void Load() => 
-            _highScore.Value = _saveLoadService.GetInt(HighScoreKey);
+            _highScore.Value = _saveLoadService.GetPlayerData(new PlayerSaveData()).HighScore;
 
         public void Delete()
         {
-            _saveLoadService.SetInt(HighScoreKey, 0);
+            _saveLoadService.SetPlayerData(_playerSaveData);
+            
             _highScore.Value = 0;
         }
 
@@ -47,7 +47,8 @@ namespace Code.Logic.Gameplay.Services.Repository.Player
 
         public void Save()
         {
-            _saveLoadService.SetInt(HighScoreKey, _playerSaveData.HighScore);
+            _saveLoadService.SetPlayerData(_playerSaveData);
+            
             _saveLoadService.Save();
         }
 
