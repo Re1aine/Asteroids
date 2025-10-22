@@ -1,56 +1,38 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.UI.LoseWindow;
-using Code.UI.PlayerStatsWindow;
-
+﻿
 namespace Code.UI.HUD
 {
     public class HUDPresenter
     {
-        public HUDModel Model { get; private set; }
-        public HUDView View { get; private set; }
-    
-        private IPlayerProvider _playerProvider;
-        private IGameFactory _gameFactory;
-        private IScoreCountService _scoreCountService;
+        public HUDModel Model { get; }
+        public HUDView View { get; }
+        
+        private readonly HUDService _hudService;
 
-        private PlayerStatsWindowPresenter _playerStats;
-        private LoseWindowPresenter _loseWindow;
-        private IRepositoriesHolder _repositoreiesHolder;
-
-        public HUDPresenter(HUDModel model, HUDView view)
+        public HUDPresenter(HUDModel model, HUDView view, HUDService hudService)
         {
             Model = model;
             View = view;
+            
+            _hudService = hudService;
         }
 
-        public void Init(IGameFactory gameFactory, IScoreCountService scoreCountService, IPlayerProvider playerProvider, IRepositoriesHolder repositoriesHolder)
+        public void ShowLoseWindow() => 
+            Model.ShowLoseWindow();
+
+        public void ShowPlayerStatsWindow() => 
+            Model.ShowPlayerStatsWindow();
+
+        public void HidePlayerStatsWindow() => 
+            Model.HidePlayerStatsWindow();
+
+        public void HideLoseWindow() => 
+            Model.HideLoseWindow();
+
+        public void Destroy()
         {
-            _gameFactory = gameFactory;
-            _scoreCountService = scoreCountService;
-            _playerProvider = playerProvider;
-            _repositoreiesHolder = repositoriesHolder;
-        }
-
-        public void CreateLoseWindow()
-        {
-            _loseWindow = _gameFactory.CreateLoseWindow(View.transform);
-            _loseWindow.Init(_scoreCountService, _repositoreiesHolder);
-        }
-
-        public void CreatePlayerStatsWindow()
-        {
-            _playerStats = _gameFactory.CreatePlayerStatsWindow(View.transform);
-            _playerStats.Init(_playerProvider);
-        }
-
-        public void Destroy() => 
+            _hudService.Dispose();
+            Model.Dispose();
             View.Destroy();
-        public void DestroyLoseWindow() =>
-            _loseWindow.Destroy();
-        public void DestroyPlayerStatsWindow() =>
-            _playerStats.Destroy();
+        }
     }
 }
