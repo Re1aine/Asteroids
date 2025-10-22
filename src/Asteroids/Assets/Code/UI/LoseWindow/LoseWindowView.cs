@@ -29,6 +29,7 @@ namespace Code.UI.LoseWindow
         public void SetHighScore(int value) =>
             _highScore.text = value.ToString(); 
         
-        public void Destroy() => Destroy(gameObject);
+        public void Destroy() =>
+            Destroy(gameObject);
     }
 }

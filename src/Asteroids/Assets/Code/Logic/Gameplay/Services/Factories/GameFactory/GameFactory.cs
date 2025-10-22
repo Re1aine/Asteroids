@@ -9,6 +9,7 @@ using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.UI.HUD;
@@ -93,30 +94,36 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         public LaserBeam CreateLaserBeam(Vector2 position, Quaternion rotation) => 
             _assetsProvider.InstantiateAt<LaserBeam>(AssetPath.LaserBeam, position, rotation);
 
-        public LoseWindowPresenter CreateLoseWindow(Transform parent)
+        public LoseWindowPresenter CreateLoseWindow()
         {
-            LoseWindowView view =  _assetsProvider.Instantiate<LoseWindowView>(AssetPath.LoseWindow, parent);
-            LoseWindowPresenter presenter = new LoseWindowPresenter(new LoseWindowModel(), view);
+            LoseWindowView view =  _assetsProvider.Instantiate<LoseWindowView>(AssetPath.LoseWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+
+            LoseWindowModel model = new LoseWindowModel(
+                _scoreCountService,
+                _repositoriesHolder);
             
-            return presenter;
+             return new LoseWindowPresenter(model, view);
         }
 
-        public PlayerStatsWindowPresenter CreatePlayerStatsWindow(Transform parent)
+        public PlayerStatsWindowPresenter CreatePlayerStatsWindow()
         {
-            PlayerStatsWindowView view = _assetsProvider.Instantiate<PlayerStatsWindowView>(AssetPath.PlayerStatsWindow, parent);
-            PlayerStatsWindowPresenter presenter = new PlayerStatsWindowPresenter(new PlayerStatsWindowModel(), view);
+            PlayerStatsWindowView view = _assetsProvider.Instantiate<PlayerStatsWindowView>(AssetPath.PlayerStatsWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+
+            PlayerStatsWindowModel model = new PlayerStatsWindowModel(
+                _resolver.Resolve<IPlayerProvider>());
             
-            return presenter;
+             return new PlayerStatsWindowPresenter(model, view);
         }
 
         public HUDPresenter CreateHUD()
         {
             HUDView hudView =  _assetsProvider.Instantiate<HUDView>(AssetPath.HUD);
-            HUDPresenter presenter = new HUDPresenter(new HUDModel(), hudView);
             
-            presenter.Init(this, _scoreCountService, _resolver.Resolve<IPlayerProvider>(), _repositoriesHolder);
+            HUDModel model = new HUDModel();
             
-            return presenter;
+            HUDService  hudService = new HUDService(this, model);
+            
+            return new HUDPresenter(model, hudView, hudService);
         }
     }
 }

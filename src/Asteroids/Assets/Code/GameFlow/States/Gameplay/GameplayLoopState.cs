@@ -36,7 +36,7 @@ namespace Code.GameFlow.States.Gameplay
             _asteroidSpawner.Enable();
             _ufoSpawner.Enable();
             
-            _hudProvider.HUD.CreatePlayerStatsWindow();
+            _hudProvider.HUD.ShowPlayerStatsWindow();
         }
 
         public void Exit()
@@ -47,7 +47,7 @@ namespace Code.GameFlow.States.Gameplay
         
             _playerDeathObserver.Stop();
         
-            _hudProvider.HUD.DestroyPlayerStatsWindow();
+            _hudProvider.HUD.HidePlayerStatsWindow();
         }
     }
 }

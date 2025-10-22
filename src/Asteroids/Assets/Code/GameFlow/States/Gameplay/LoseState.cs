@@ -1,13 +1,10 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
+﻿using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.UI;
 using Code.UI.LoseWindow;
-using UnityEngine;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -39,7 +36,7 @@ namespace Code.GameFlow.States.Gameplay
         {
             _repositoriesHolder.SaveAll();
             
-            _hudProvider.HUD.CreateLoseWindow();
+            _hudProvider.HUD.ShowLoseWindow();
             
             _ufosHolder.DestroyAll();
             _asteroidsHolder.DestroyAll();

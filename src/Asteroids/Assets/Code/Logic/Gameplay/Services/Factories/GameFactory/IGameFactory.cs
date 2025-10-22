@@ -18,7 +18,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         Bullet CreateBullet(Vector3 position, Quaternion rotation);
         LaserBeam CreateLaserBeam(Vector2 position, Quaternion rotation);
         HUDPresenter CreateHUD();
-        LoseWindowPresenter CreateLoseWindow(Transform parent);
-        PlayerStatsWindowPresenter CreatePlayerStatsWindow(Transform parent);
+        LoseWindowPresenter CreateLoseWindow();
+        PlayerStatsWindowPresenter CreatePlayerStatsWindow();
     }
 }
