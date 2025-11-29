@@ -30,16 +30,28 @@ public class GamePushAnalytics : IAnalytics
 
     public void StartSession()
     {
-        GP_Analytics.Goal(AnalyticsEventsName.StartSession, 0);
+        if(IsCanLogEvent())
+            GP_Analytics.Goal(AnalyticsEventsName.StartSession, 0);
+    }
+
+    private bool IsCanLogEvent()
+    {
+        if (_isInitialized)
+            return true;
+            
+        Debug.LogWarning("GamePush is not initialized. Event logging skipped.");
+        return false;
     }
 
     public void SendLaserUsedEvent()
     {
-        GP_Analytics.Goal(AnalyticsEventsName.LaserUsed, AnalyticsEventParameters.LaserReleaseCount);
+        if(IsCanLogEvent())
+            GP_Analytics.Goal(AnalyticsEventsName.LaserUsed, AnalyticsEventParameters.LaserReleaseCount);
     }
 
     public void EndSession(IAnalyticsStore analyticsStore)
     {
-        GP_Analytics.Goal(AnalyticsEventsName.EndSession, 0);
+        if(IsCanLogEvent())
+            GP_Analytics.Goal(AnalyticsEventsName.EndSession, 0);
     }
 }
