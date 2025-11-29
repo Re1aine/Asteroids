@@ -34,34 +34,34 @@ namespace Code.Scopes
     public class GameplayScope : LifetimeScope
     {
         [SerializeField] private Camera _camera;
-    
+
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<AssetsLoader>(Lifetime.Singleton).As<IAssetsLoader>();
             builder.Register<AssetsProvider>(Lifetime.Singleton).As<IAssetsProvider>();
 
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
-            builder.Register<FireBaseAnalytics>(Lifetime.Singleton).As<IAnalytics>();
+            InitializeAnalytics(builder);
 
             builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
 
             builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
-            
+
             builder.Register<RepositoriesHolder>(Lifetime.Singleton).As<IRepositoriesHolder>();
-            
+
             builder.RegisterComponentInHierarchy<CoroutineRunner>().As<ICoroutineRunner>();
-        
+
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
 
             builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
-        
+
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
 
             builder.Register<ScoreCountService>(Lifetime.Singleton).As<IScoreCountService>();
-        
+
             builder.Register<GameFactory>(Lifetime.Singleton).As<IGameFactory>();
 
             builder.Register<PlayerDeathObserver>(Lifetime.Singleton).As<IPlayerDeathObserver>();
@@ -70,16 +70,25 @@ namespace Code.Scopes
             builder.Register<UFOsHolder>(Lifetime.Singleton).As<IUFOsHolder>();
             builder.Register<AsteroidsHolder>(Lifetime.Singleton).As<IAsteroidsHolder>();
             builder.Register<BulletsHolder>(Lifetime.Singleton).As<IBulletsHolder>();
-        
+
             builder.Register<UFOSpawner>(Lifetime.Singleton).As<IUFOSpawner>();
             builder.Register<AsteroidSpawner>(Lifetime.Singleton).As<IAsteroidSpawner>();
-        
+
             builder.RegisterComponentInHierarchy<BackgroundResizer>();
-        
+
             builder.Register<StateFactory>(Lifetime.Singleton);
             builder.Register<GameplayStateMachine>(Lifetime.Singleton);
-        
+
             builder.RegisterEntryPoint<GameplayEntryPoint>();
+        }
+
+        private void InitializeAnalytics(IContainerBuilder builder)
+        {
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+                builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();
+            else
+                builder.Register<FireBaseAnalytics>(Lifetime.Singleton).As<IAnalytics>();
         }
     }
 }
+
