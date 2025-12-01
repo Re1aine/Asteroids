@@ -6,7 +6,7 @@ using Firebase;
 using Firebase.Analytics;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Analytics
+namespace Code.Logic.Gameplay.Analytics.FireBase
 {
     public class FireBaseAnalytics : IAnalytics
     {
