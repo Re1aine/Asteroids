@@ -1,13 +1,19 @@
-﻿using UnityEngine;
+﻿using Code.Logic.Gameplay.Services.Repository.Player;
+using UnityEngine;
 
-public class SaveLoadService : ISaveLoadService
+namespace Code.Logic.Gameplay.Services.SaveLoad
 {
-    public void SetInt(string key, int value) => 
-        PlayerPrefs.SetInt(key, value);
+    public class SaveLoadService : ISaveLoadService
+    {
+        private const string PlayerSaveDataKey = "PlayerSaveData";
+        
+        public void SetPlayerData(PlayerSaveData data) => 
+            PlayerPrefs.SetString(PlayerSaveDataKey, JsonUtility.ToJson(data));
 
-    public int GetInt(string key, int defaultValue = 0) => 
-        PlayerPrefs.HasKey(key) ? PlayerPrefs.GetInt(key) : defaultValue;
+        public PlayerSaveData GetPlayerData(PlayerSaveData defaultValue) => 
+            PlayerPrefs.HasKey(PlayerSaveDataKey) ? JsonUtility.FromJson<PlayerSaveData>(PlayerPrefs.GetString(PlayerSaveDataKey)) : defaultValue;
 
-    public void Save() => 
-        PlayerPrefs.Save();
+        public void Save() => 
+            PlayerPrefs.Save();
+    }
 }

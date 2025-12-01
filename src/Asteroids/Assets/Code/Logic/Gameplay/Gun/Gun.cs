@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Code.Logic.Gameplay.Entities;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
@@ -13,6 +14,9 @@ namespace Code.Logic.Gameplay
 {
     public class Gun : MonoBehaviour
     {
+        public event Action BulletShoot;
+        public event Action LaserShoot;
+        
         [SerializeField] private Transform _shootPoint;
     
         [Header("Bullet")]
@@ -86,14 +90,11 @@ namespace Code.Logic.Gameplay
             HandleShoot();
             HandleLaserShoot();
         }
-    
-        public int GetLaserChargesCount() =>
-            _laserChargesCurrent;
-        public float GetLaserCooldownTimer() =>
-            _laserShootCooldownTimer; 
-    
+        
         private IEnumerator ShootLaserRoutine()
         {
+            LaserShoot?.Invoke();
+            
             _isLaserActive = true;
             _laserShootTimer = _laserShootTime;
         
@@ -180,6 +181,8 @@ namespace Code.Logic.Gameplay
         {
             Bullet bullet = _gameFactory.CreateBullet(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection));
             bullet.MoveToDirection(transform.up);
+            
+            BulletShoot?.Invoke();
         }
 
         private void OnDestroy()

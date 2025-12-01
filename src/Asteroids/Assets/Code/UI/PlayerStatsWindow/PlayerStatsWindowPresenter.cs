@@ -1,47 +1,18 @@
-﻿using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using R3;
-using UnityEngine;
+﻿using R3;
 
 namespace Code.UI.PlayerStatsWindow
 {
     public class PlayerStatsWindowPresenter
     {
-        public PlayerStatsWindowModel Model {get; private set;}
-        public PlayerStatsWindowView View {get; private set;}
-    
-        private IPlayerProvider _playerProvider;
-
+        public PlayerStatsWindowModel Model {get; }
+        public PlayerStatsWindowView View {get; }
+        
         private readonly CompositeDisposable _disposables = new();
         
         public PlayerStatsWindowPresenter(PlayerStatsWindowModel model, PlayerStatsWindowView view)
         {
             Model = model;
             View = view;
-        }
-    
-        public void Init(IPlayerProvider playerProvider)
-        {
-            _playerProvider = playerProvider;
-            
-            _playerProvider.Player.View.Position
-                .Subscribe(position => Model.SetPosition(position))
-                .AddTo(_disposables);
-            
-            _playerProvider.Player.View.Rotation
-                .Subscribe(rotation => Model.SetRotation(rotation))
-                .AddTo(_disposables);
-            
-            _playerProvider.Player.View.Velocity
-                .Subscribe(velocity => Model.SetVelocity(velocity))
-                .AddTo(_disposables);
-            
-            _playerProvider.Player.View.Gun.LaserCharges
-                .Subscribe(charges => Model.SetLaserCharges(charges))
-                .AddTo(_disposables);
-            
-            _playerProvider.Player.View.Gun.CooldownLaser
-                .Subscribe(cooldown => Model.SetLaserCooldown(cooldown))
-                .AddTo(_disposables);
             
             Model.Position
                 .Subscribe(position => View.SetPosition(position))
@@ -63,10 +34,11 @@ namespace Code.UI.PlayerStatsWindow
                 .Subscribe(cooldown => View.SetLaserCooldown(cooldown))
                 .AddTo(_disposables);
         }
-
+        
         public void Destroy()
         { 
             _disposables.Dispose();
+            Model.Dispose();
             View.Destroy();
         }
     }
