@@ -22,9 +22,9 @@ public class HUDService : IDisposable
             .Subscribe(isVisible =>
             {
                 if (isVisible) 
-                    _loseWindow = _gameFactory.CreateLoseWindow();
+                    ShowLoseWindow();
                 else 
-                    _loseWindow?.Destroy();
+                    HideLoseWindow();
             })
             .AddTo(_disposables);
 
@@ -32,24 +32,24 @@ public class HUDService : IDisposable
             .Subscribe(isVisible =>
             {
                 if (isVisible)
-                    _playerStatsWindow = _gameFactory.CreatePlayerStatsWindow();
+                    ShowPlayerStatsWindow();
                 else
-                    _playerStatsWindow?.Destroy();
+                    HidePlayerStatsWindow();
             })
             .AddTo(_disposables);
     }
 
-    public void ShowLoseWindow() => 
+    private void ShowLoseWindow() => 
         _loseWindow = _gameFactory.CreateLoseWindow();
-
-    public void ShowPlayerStatsWindow() => 
+    
+    private void ShowPlayerStatsWindow() => 
         _playerStatsWindow = _gameFactory.CreatePlayerStatsWindow();
-
-    public void HideLoseWindow() => 
-        _loseWindow.Destroy();
-
-    public void HidePlayerStatsWindow() => 
-        _playerStatsWindow.Destroy();
+    
+    private void HideLoseWindow() => 
+        _loseWindow?.Destroy();
+    
+    private void HidePlayerStatsWindow() => 
+        _playerStatsWindow?.Destroy();
 
     public void Dispose() =>
         _disposables.Dispose();
