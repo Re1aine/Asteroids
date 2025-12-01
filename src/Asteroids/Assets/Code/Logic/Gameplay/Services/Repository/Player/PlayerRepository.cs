@@ -28,7 +28,7 @@ namespace Code.Logic.Gameplay.Services.Repository.Player
         }
         
         public void Load() => 
-            _highScore.Value = _saveLoadService.GetPlayerData(new PlayerSaveData()).HighScore;
+            _highScore.Value = _saveLoadService.GetPlayerData().HighScore;
 
         public void Delete()
         {
