@@ -5,7 +5,7 @@ namespace Code.Logic.Gameplay.Services.SaveLoad
     public interface ISaveLoadService
     {
         void SetPlayerData(PlayerSaveData data);
-        PlayerSaveData GetPlayerData(PlayerSaveData defaultValue);
+        PlayerSaveData GetPlayerData();
         void Save();
     }
 }
