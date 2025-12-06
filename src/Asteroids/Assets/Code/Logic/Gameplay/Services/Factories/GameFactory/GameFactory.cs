@@ -33,7 +33,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IObjectResolver _resolver;
         private readonly IAnalyticsStore _analyticsStore;
-
+        private readonly IVFXHolder _vfxHolder;
+        
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
             IAsteroidsHolder asteroidsHolder,
@@ -41,7 +42,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IAssetsProvider assetsProvider,
             IRepositoriesHolder repositoriesHolder,
             IObjectResolver resolver,
-            IAnalyticsStore analyticsStore)
+            IAnalyticsStore analyticsStore,
+            IVFXHolder vfxHolder)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -51,6 +53,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _repositoriesHolder = repositoriesHolder;
             _resolver = resolver;
             _analyticsStore = analyticsStore;
+            _vfxHolder = vfxHolder;
         }
 
         public PlayerPresenter CreatePlayer(Vector3 position, Quaternion rotation)
@@ -74,7 +77,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             presenter.Init(
                 new AsteroidDamageReceiver(presenter),
                 new AsteroidDestroyer(presenter, this, _scoreCountService),
-                new AsteroidDeathObserver(presenter, _analyticsStore));
+                new AsteroidDeathObserver(presenter, _analyticsStore),
+                this);
 
             _asteroidsHolder.Add(presenter);
         
@@ -89,7 +93,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             presenter.Init(
                 new UfoDamageReceiver(presenter),
                 new UFODestroyer(presenter, _scoreCountService),
-                new UFODeathObserver(presenter, _analyticsStore));
+                new UFODeathObserver(presenter, _analyticsStore),
+                this);
         
             _ufOsHolder.Add(presenter);
         
@@ -139,5 +144,21 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             
             return new HUDPresenter(model, hudView, hudService);
         }
+
+        public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
+        {
+            VFX vfx = _assetsProvider.InstantiateAt<VFX>(AssetPath.GetPathForVFX(type), position, rotation);
+            
+            _vfxHolder.Add(vfx);
+
+            return vfx;
+        }
     }
+}
+
+public enum VFXType
+{
+    None = 0,
+    AsteroidDestroyVFX = 1,
+    UFODestroyVFX = 2,
 }

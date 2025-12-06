@@ -72,7 +72,8 @@ namespace Code.Scopes
             builder.Register<UFOsHolder>(Lifetime.Singleton).As<IUFOsHolder>();
             builder.Register<AsteroidsHolder>(Lifetime.Singleton).As<IAsteroidsHolder>();
             builder.Register<BulletsHolder>(Lifetime.Singleton).As<IBulletsHolder>();
-
+            builder.Register<VFXHolder>(Lifetime.Singleton).As<IVFXHolder>();
+            
             builder.Register<UFOSpawner>(Lifetime.Singleton).As<IUFOSpawner>();
             builder.Register<AsteroidSpawner>(Lifetime.Singleton).As<IAsteroidSpawner>();
 
@@ -93,4 +94,3 @@ namespace Code.Scopes
         }
     }
 }
-

@@ -20,6 +20,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IScoreCountService _scoreCountService;
         private readonly IAnalytics _analytics;
         private readonly IAnalyticsStore _analyticsStore;
+        private readonly IVFXHolder _vfxHolder;
 
         private LoseWindowPresenter _loseWindow;
 
@@ -29,7 +30,8 @@ namespace Code.GameFlow.States.Gameplay
             IBulletsHolder bulletsHolder,
             IRepositoriesHolder repositoriesHolder,
             IAnalytics analytics,
-            IAnalyticsStore analyticsStore)
+            IAnalyticsStore analyticsStore,
+            IVFXHolder vfxHolder)
         {
             _hudProvider = hudProvider;
             _ufosHolder = ufosHolder;
@@ -38,6 +40,7 @@ namespace Code.GameFlow.States.Gameplay
             _repositoriesHolder = repositoriesHolder;
             _analytics = analytics;
             _analyticsStore = analyticsStore;
+            _vfxHolder = vfxHolder;
         }
 
         public void Enter()
@@ -49,6 +52,7 @@ namespace Code.GameFlow.States.Gameplay
             _ufosHolder.DestroyAll();
             _asteroidsHolder.DestroyAll();
             _bulletsHolder.DestroyAll();
+            _vfxHolder.DestroyAll();
             
             _analytics.EndSession(_analyticsStore);
             

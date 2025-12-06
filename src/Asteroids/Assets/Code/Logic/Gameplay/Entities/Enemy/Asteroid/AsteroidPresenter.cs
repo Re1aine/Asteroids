@@ -1,6 +1,7 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services;
+using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Observers.Asteroid;
+using UnityEngine;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
@@ -13,6 +14,7 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
         private IDamageReceiver _damageReceiver;
         private IDestroyer _destroyer;
         private IAsteroidDeathObserver _asteroidDeathObserver;
+        private IGameFactory _gameFactory;
 
         public AsteroidPresenter(AsteroidModel model, AsteroidView view)
         {
@@ -20,11 +22,12 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             Model = model;
         }
 
-        public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer, IAsteroidDeathObserver asteroidDeathObserver)
+        public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer, IAsteroidDeathObserver asteroidDeathObserver, IGameFactory gameFactory)
         {
             _damageReceiver = damageReceiver;
             _destroyer = destroyer;
             _asteroidDeathObserver = asteroidDeathObserver;
+            _gameFactory =  gameFactory;
 
             View.Init(damageReceiver);
 
@@ -41,8 +44,10 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             Destroyed?.Invoke(this);
 
             View.OnDamageReceived -= ReceiveDamage;
-
+            
             _destroyer.Destroy(damageType);
+
+            _gameFactory.CreateVFX(VFXType.AsteroidDestroyVFX, View.transform.position, Quaternion.identity);
             
             _asteroidDeathObserver.Stop();
         }

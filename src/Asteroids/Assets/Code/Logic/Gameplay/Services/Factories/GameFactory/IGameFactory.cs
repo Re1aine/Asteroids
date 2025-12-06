@@ -20,5 +20,6 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         HUDPresenter CreateHUD();
         LoseWindowPresenter CreateLoseWindow();
         PlayerStatsWindowPresenter CreatePlayerStatsWindow();
+        VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation);
     }
 }

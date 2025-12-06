@@ -13,7 +13,7 @@ namespace Code.Infrastructure.Common.AssetsManagement
         public static readonly string HUD = "UI/HUD";
         public static readonly string LoseWindow = "UI/LoseWindow";
         public static readonly string PlayerStatsWindow = "UI/PlayerStatsWindow";
-
+        
         public static string GetPathForAsteroid(AsteroidType type)
         {
             return type switch
@@ -23,5 +23,15 @@ namespace Code.Infrastructure.Common.AssetsManagement
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }
-    }
+
+        public static string GetPathForVFX(VFXType type)
+        {
+            return type switch
+            {
+                VFXType.UFODestroyVFX => "VFX/UFODestroyVFX",
+                VFXType.AsteroidDestroyVFX => "VFX/AsteroidDestroyVFX",
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+            };
+        }
+}
 }
