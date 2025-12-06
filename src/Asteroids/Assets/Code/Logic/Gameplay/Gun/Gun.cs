@@ -37,11 +37,11 @@ namespace Code.Logic.Gameplay
 
         private LaserBeam _laserBeam;
 
-        public R3.ReadOnlyReactiveProperty<int> LaserCharges;
-        public R3.ReadOnlyReactiveProperty<float> CooldownLaser;
+        public ReadOnlyReactiveProperty<int> LaserCharges;
+        public ReadOnlyReactiveProperty<float> CooldownLaser;
         
-        private R3.ReactiveProperty<int> _laserCharges;
-        private R3.ReactiveProperty<float> _cooldownLaser;
+        private ReactiveProperty<int> _laserCharges;
+        private ReactiveProperty<float> _cooldownLaser;
 
         private readonly CompositeDisposable _disposables = new();
         
@@ -66,8 +66,8 @@ namespace Code.Logic.Gameplay
         {
             _shootDirection = (_shootPoint.position - transform.position);
 
-            _laserCharges = new R3.ReactiveProperty<int>(_laserChargesCurrent);
-            _cooldownLaser = new R3.ReactiveProperty<float>(_laserShootCooldownTimer);
+            _laserCharges = new ReactiveProperty<int>(_laserChargesCurrent);
+            _cooldownLaser = new ReactiveProperty<float>(_laserShootCooldownTimer);
 
             LaserCharges = _laserCharges.ToReadOnlyReactiveProperty();
             CooldownLaser = _cooldownLaser.ToReadOnlyReactiveProperty();

@@ -1,14 +1,15 @@
 ﻿using System;
+using R3;
 
 namespace Code.UI.HUD
 {
     public class HUDModel : IDisposable
     {
-        public R3.ReadOnlyReactiveProperty<bool> IsLoseWindowVisible  => _isLoseWindowVisible;
-        public R3.ReadOnlyReactiveProperty<bool> IsPlayerStatsWindowVisible  => _isPlayerStatsWindowVisible;
+        public ReadOnlyReactiveProperty<bool> IsLoseWindowVisible  => _isLoseWindowVisible;
+        public ReadOnlyReactiveProperty<bool> IsPlayerStatsWindowVisible  => _isPlayerStatsWindowVisible;
 
-        private readonly R3.ReactiveProperty<bool> _isLoseWindowVisible = new();
-        private readonly R3.ReactiveProperty<bool> _isPlayerStatsWindowVisible = new();
+        private readonly ReactiveProperty<bool> _isLoseWindowVisible = new();
+        private readonly ReactiveProperty<bool> _isPlayerStatsWindowVisible = new();
         
         public void ShowLoseWindow() => 
             _isLoseWindowVisible.Value = true;

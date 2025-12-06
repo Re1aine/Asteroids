@@ -12,8 +12,8 @@ namespace Code.Logic.Gameplay.Services.Repository.Player
     
         private readonly PlayerSaveData _playerSaveData = new();
 
-        public R3.ReadOnlyReactiveProperty<int> HighScore => _highScore;
-        private readonly R3.ReactiveProperty<int> _highScore = new();
+        public ReadOnlyReactiveProperty<int> HighScore => _highScore;
+        private readonly ReactiveProperty<int> _highScore = new();
         
         private readonly CompositeDisposable _disposables = new();
         
@@ -45,12 +45,8 @@ namespace Code.Logic.Gameplay.Services.Repository.Player
             _highScore.Value = _scoreCountService.Score.CurrentValue;
         }
 
-        public void Save()
-        {
+        public void Save() => 
             _saveLoadService.SetPlayerData(_playerSaveData);
-            
-            _saveLoadService.Save();
-        }
 
         public void Dispose() => 
             _disposables.Dispose();
