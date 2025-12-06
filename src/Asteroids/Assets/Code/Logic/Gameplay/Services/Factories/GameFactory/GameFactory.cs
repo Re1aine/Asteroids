@@ -133,11 +133,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         {
             HUDView hudView =  _assetsProvider.Instantiate<HUDView>(AssetPath.HUD);
             
-            HUDModel model = new HUDModel();
+            HUDModel model = new HUDModel(new HUDService(this));
             
-            HUDService  hudService = new HUDService(this, model);
-            
-            return new HUDPresenter(model, hudView, hudService);
+            return new HUDPresenter(model, hudView);
         }
     }
 }

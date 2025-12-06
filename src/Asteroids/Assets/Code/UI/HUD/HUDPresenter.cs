@@ -1,19 +1,14 @@
-﻿
-namespace Code.UI.HUD
+﻿namespace Code.UI.HUD
 {
     public class HUDPresenter
     {
         public HUDModel Model { get; }
         public HUDView View { get; }
         
-        private readonly HUDService _hudService;
-
-        public HUDPresenter(HUDModel model, HUDView view, HUDService hudService)
+        public HUDPresenter(HUDModel model, HUDView view)
         {
             Model = model;
             View = view;
-            
-            _hudService = hudService;
         }
 
         public void ShowLoseWindow() => 
@@ -30,7 +25,6 @@ namespace Code.UI.HUD
 
         public void Destroy()
         {
-            _hudService.Dispose();
             Model.Dispose();
             View.Destroy();
         }
