@@ -137,5 +137,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             
             return new HUDPresenter(model, hudView);
         }
+
+        public AudioPlayer CreateAudioPlayer() => 
+            _assetsProvider.Instantiate<AudioPlayer>(AssetPath.AudioPlayer);
     }
 }

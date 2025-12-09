@@ -16,6 +16,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IPlayerGunObserver _playerGunObserver;
         private readonly IScoreCountService _scoreCountService;
         private readonly IRepositoriesHolder _repositoriesHolder;
+        private readonly IAudioService _audioService;
         private readonly IAnalytics _analytics;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
@@ -25,6 +26,7 @@ namespace Code.GameFlow.States.Gameplay
             IPlayerGunObserver playerGunObserver,
             IScoreCountService scoreCountService,
             IRepositoriesHolder repositoriesHolder,
+            IAudioService audioService,
             IAnalytics analytics)
         {
             _gameplayStateMachine = gameplayStateMachine;
@@ -34,6 +36,7 @@ namespace Code.GameFlow.States.Gameplay
             _playerGunObserver = playerGunObserver;
             _scoreCountService = scoreCountService;
             _repositoriesHolder = repositoriesHolder;
+            _audioService = audioService;
             _analytics = analytics;
         }
         
@@ -49,6 +52,8 @@ namespace Code.GameFlow.States.Gameplay
             _playerDeathObserver.Start();
             _playerGunObserver.Start();
         
+            _audioService.Initialize();
+            
             _scoreCountService.Reset();
         
             _analytics.StartSession();

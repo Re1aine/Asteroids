@@ -20,5 +20,6 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         HUDPresenter CreateHUD();
         LoseWindowPresenter CreateLoseWindow();
         PlayerStatsWindowPresenter CreatePlayerStatsWindow();
+        AudioPlayer CreateAudioPlayer();
     }
 }

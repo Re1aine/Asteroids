@@ -13,7 +13,9 @@ namespace Code.Infrastructure.Common.AssetsManagement
         public static readonly string HUD = "UI/HUD";
         public static readonly string LoseWindow = "UI/LoseWindow";
         public static readonly string PlayerStatsWindow = "UI/PlayerStatsWindow";
-
+        
+        public static readonly string AudioPlayer = "AudioPlayer";
+        
         public static string GetPathForAsteroid(AsteroidType type)
         {
             return type switch

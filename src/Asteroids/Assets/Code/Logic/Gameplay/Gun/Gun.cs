@@ -15,7 +15,8 @@ namespace Code.Logic.Gameplay
     public class Gun : MonoBehaviour
     {
         public event Action BulletShoot;
-        public event Action LaserShoot;
+        public event Action LaserShootStarted;
+        public event Action LaserShootEnded;
         
         [SerializeField] private Transform _shootPoint;
     
@@ -93,7 +94,7 @@ namespace Code.Logic.Gameplay
         
         private IEnumerator ShootLaserRoutine()
         {
-            LaserShoot?.Invoke();
+            LaserShootStarted?.Invoke();
             
             _isLaserActive = true;
             _laserShootTimer = _laserShootTime;
@@ -124,7 +125,9 @@ namespace Code.Logic.Gameplay
         
             _isLaserActive = false;
             _laserChargesCurrent--;
-        
+            
+            LaserShootEnded?.Invoke();
+            
             Destroy(_laserBeam.gameObject);
 
             StartCoroutine(CountLaserShootCooldownTimer());
