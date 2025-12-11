@@ -1,8 +1,8 @@
 using Code.EntryPoints;
 using Code.GameFlow;
 using Code.GameFlow.States.Gameplay;
-using Code.Infrastructure.Common.AssetsManagement.AssetsLoader;
-using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
+using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
 using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay;
 using Code.Logic.Gameplay.Analytics;
@@ -39,8 +39,8 @@ namespace Code.Scopes
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<AssetsLoader>(Lifetime.Singleton).As<IAssetsLoader>();
-            builder.Register<AssetsProvider>(Lifetime.Singleton).As<IAssetsProvider>();
+            builder.Register<AddressablesAssetsLoader>(Lifetime.Singleton).As<IAddressablesAssetsLoader>();
+            builder.Register<AddressablesAssetsProvider>(Lifetime.Singleton).As<IAddressablesAssetsProvider>();
 
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             InitializeAnalytics(builder);

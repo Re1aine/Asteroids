@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Threading.Tasks;
 using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Services.Boundries;
@@ -28,19 +29,23 @@ namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
 
         public void Enable() => 
             _coroutine = _coroutineRunner.StartCoroutine(SpawnAsteroids(), CoroutineScopes.Gameplay);
-
+        
         public void Disable() => 
             _coroutineRunner.StopCoroutine(_coroutine, CoroutineScopes.Gameplay);
-
+        
         private IEnumerator SpawnAsteroids()
         {
             while (true)
             {
                 Vector3 randomPos = RandomHelper.GetRandomPointOnCircle(_boundaries.Center, MinRadiusSpawn, MaxRadiusSpawn);
             
-                AsteroidPresenter asteroid = _gameFactory.CreateAsteroid(randomPos, Quaternion.identity, AsteroidType.Asteroid);
-                asteroid.View.LaunchInRandomDirection();
-            
+                Task<AsteroidPresenter> asteroidTask = _gameFactory.CreateAsteroid(randomPos, Quaternion.identity, AsteroidType.Asteroid);
+                
+                yield return new WaitUntil(() => asteroidTask.IsCompleted);
+
+                var asteroid = asteroidTask.Result;
+                asteroid.View.LaunchInRandomDirection();            
+                
                 yield return new WaitForSeconds(SpawnCooldown);
             }
         }

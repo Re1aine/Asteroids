@@ -6,6 +6,5 @@ namespace Code.Logic.Gameplay.Services.SaveLoad
     {
         void SetPlayerData(PlayerSaveData data);
         PlayerSaveData GetPlayerData();
-        void Save();
     }
 }

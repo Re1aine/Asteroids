@@ -1,5 +1,7 @@
-﻿using Code.Infrastructure.Common.AssetsManagement;
-using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
+﻿using System.Threading.Tasks;
+using Code.Infrastructure.Common.AssetsManagement;
+using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Entities.Enemy.UFO;
@@ -29,34 +31,43 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IUFOsHolder _ufOsHolder;
         private readonly IAsteroidsHolder _asteroidsHolder;
         private readonly IBulletsHolder _bulletsHolder;
-        private readonly IAssetsProvider _assetsProvider;
         private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IObjectResolver _resolver;
         private readonly IAnalyticsStore _analyticsStore;
+        private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
+        private readonly IAddressablesAssetsLoader _assetsLoader;
 
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
             IAsteroidsHolder asteroidsHolder,
             IBulletsHolder bulletsHolder,
-            IAssetsProvider assetsProvider,
             IRepositoriesHolder repositoriesHolder,
             IObjectResolver resolver,
-            IAnalyticsStore analyticsStore)
+            IAnalyticsStore analyticsStore,
+            IAddressablesAssetsProvider addressablesAssetsProvider,
+            IAddressablesAssetsLoader assetsLoader)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
             _asteroidsHolder = asteroidsHolder;
             _bulletsHolder = bulletsHolder;
-            _assetsProvider = assetsProvider;
             _repositoriesHolder = repositoriesHolder;
             _resolver = resolver;
             _analyticsStore = analyticsStore;
+            _addressablesAssetsProvider = addressablesAssetsProvider;
+            _assetsLoader = assetsLoader;
         }
 
-        public PlayerPresenter CreatePlayer(Vector3 position, Quaternion rotation)
+        public async void WarmUp()
         {
-            PlayerView playerView = _assetsProvider.Instantiate<PlayerView>(AssetPath.Player);
-            PlayerPresenter presenter = new PlayerPresenter(new PlayerModel(1), playerView);
+            await _assetsLoader.LoadAsset<GameObject>(AssetsAddress.Bullet);
+        }
+        
+        public async Task<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
+        {
+            PlayerView playerView = await _addressablesAssetsProvider.Instantiate<PlayerView>(AssetsAddress.Player);
+            
+            PlayerPresenter presenter = new PlayerPresenter(new PlayerModel(1),  playerView);
 
             presenter.Init(
                 new PlayerDamageReceiver(presenter),
@@ -65,11 +76,11 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return presenter;
         }
 
-        public AsteroidPresenter CreateAsteroid(Vector3 position, Quaternion rotation, AsteroidType asteroidType, int scoreReward)
+        public async Task<AsteroidPresenter> CreateAsteroid(Vector3 position, Quaternion rotation, AsteroidType type, int scoreReward)
         {
-            AsteroidView asteroidView = _assetsProvider.InstantiateAt<AsteroidView>(AssetPath.GetPathForAsteroid(asteroidType), position, rotation);
-        
-            AsteroidPresenter presenter = new AsteroidPresenter(new AsteroidModel(asteroidType, scoreReward), asteroidView);
+            AsteroidView view = await _addressablesAssetsProvider.InstantiateAt<AsteroidView>(AssetsAddress.GetAddressForAsteroid(type), position, rotation);
+            
+            AsteroidPresenter presenter = new AsteroidPresenter(new AsteroidModel(type, scoreReward), view);
 
             presenter.Init(
                 new AsteroidDamageReceiver(presenter),
@@ -81,10 +92,11 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return presenter;
         }
 
-        public UFOPresenter CreateUfo(Vector3 position, Quaternion rotation, int scoreReward)
+        public async Task<UFOPresenter> CreateUfo(Vector3 position, Quaternion rotation, int scoreReward)
         {
-            UFOView ufoView = _assetsProvider.InstantiateAt<UFOView>(AssetPath.UFO,  position, rotation);
-            UFOPresenter presenter = new UFOPresenter(new UFOModel(scoreReward), ufoView);
+            UFOView view = await _addressablesAssetsProvider.InstantiateAt<UFOView>(AssetsAddress.UFO, position, rotation);
+            
+            UFOPresenter presenter = new UFOPresenter(new UFOModel(scoreReward), view);
 
             presenter.Init(
                 new UfoDamageReceiver(presenter),
@@ -96,22 +108,22 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return presenter;
         }
 
-        public Bullet CreateBullet(Vector3 position, Quaternion rotation)
+        public async Task<Bullet> CreateBullet(Vector3 position, Quaternion rotation)
         {
-            Bullet bullet = _assetsProvider.InstantiateAt<Bullet>(AssetPath.Bullet, position, rotation);
-        
+            Bullet bullet = await _addressablesAssetsProvider.InstantiateAt<Bullet>(AssetsAddress.Bullet, position, rotation);
+            
             _bulletsHolder.Add(bullet);
         
             return bullet;
         }
 
-        public LaserBeam CreateLaserBeam(Vector2 position, Quaternion rotation) => 
-            _assetsProvider.InstantiateAt<LaserBeam>(AssetPath.LaserBeam, position, rotation);
+        public async Task<LaserBeam> CreateLaserBeam(Vector2 position, Quaternion rotation) => 
+            await _addressablesAssetsProvider.InstantiateAt<LaserBeam>(AssetsAddress.LaserBeam,position, rotation);
 
-        public LoseWindowPresenter CreateLoseWindow()
+        public async Task<LoseWindowPresenter> CreateLoseWindow()
         {
-            LoseWindowView view =  _assetsProvider.Instantiate<LoseWindowView>(AssetPath.LoseWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
-
+            LoseWindowView view =  await _addressablesAssetsProvider.Instantiate<LoseWindowView>(AssetsAddress.LoseWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+            
             LoseWindowModel model = new LoseWindowModel(
                 _scoreCountService,
                 _repositoriesHolder);
@@ -119,25 +131,23 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
              return new LoseWindowPresenter(model, view);
         }
 
-        public PlayerStatsWindowPresenter CreatePlayerStatsWindow()
+        public async Task<PlayerStatsWindowPresenter> CreatePlayerStatsWindow()
         {
-            PlayerStatsWindowView view = _assetsProvider.Instantiate<PlayerStatsWindowView>(AssetPath.PlayerStatsWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
-
+            PlayerStatsWindowView view = await _addressablesAssetsProvider.Instantiate<PlayerStatsWindowView>(AssetsAddress.PlayerStatsWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+            
             PlayerStatsWindowModel model = new PlayerStatsWindowModel(
                 _resolver.Resolve<IPlayerProvider>());
             
              return new PlayerStatsWindowPresenter(model, view);
         }
 
-        public HUDPresenter CreateHUD()
+        public async Task<HUDPresenter> CreateHUD()
         {
-            HUDView hudView =  _assetsProvider.Instantiate<HUDView>(AssetPath.HUD);
+            HUDView view =  await _addressablesAssetsProvider.Instantiate<HUDView>(AssetsAddress.HUD);
             
-            HUDModel model = new HUDModel();
+            HUDModel model = new HUDModel(new HUDService(this));
             
-            HUDService  hudService = new HUDService(this, model);
-            
-            return new HUDPresenter(model, hudView, hudService);
+            return new HUDPresenter(model, view);
         }
     }
 }

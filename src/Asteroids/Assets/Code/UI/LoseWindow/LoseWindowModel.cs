@@ -8,11 +8,11 @@ namespace Code.UI.LoseWindow
 {
     public class LoseWindowModel : IDisposable
     {
-        public R3.ReadOnlyReactiveProperty<int> Score => _score;
-        public R3.ReactiveProperty<int> HighScore => _highScore;
+        public ReadOnlyReactiveProperty<int> Score => _score;
+        public ReactiveProperty<int> HighScore => _highScore;
 
-        private readonly R3.ReactiveProperty<int> _score = new();
-        private readonly R3.ReactiveProperty<int> _highScore = new();
+        private readonly ReactiveProperty<int> _score = new();
+        private readonly ReactiveProperty<int> _highScore = new();
 
         private readonly CompositeDisposable _disposables = new();
 

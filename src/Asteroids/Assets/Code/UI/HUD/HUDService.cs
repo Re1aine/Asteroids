@@ -1,56 +1,30 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.UI.HUD;
 using Code.UI.LoseWindow;
 using Code.UI.PlayerStatsWindow;
-using R3;
 
-public class HUDService : IDisposable
+public class HUDService
 {
     private readonly IGameFactory _gameFactory;
-
+    
     private LoseWindowPresenter _loseWindow;
     private PlayerStatsWindowPresenter _playerStatsWindow;
-    
-    private readonly CompositeDisposable _disposables = new();
 
-    public HUDService(IGameFactory gameFactory, HUDModel model)
+    public HUDService(IGameFactory gameFactory)
     {
         _gameFactory = gameFactory;
-        
-        model.IsLoseWindowVisible
-            .Subscribe(isVisible =>
-            {
-                if (isVisible) 
-                    ShowLoseWindow();
-                else 
-                    HideLoseWindow();
-            })
-            .AddTo(_disposables);
-
-        model.IsPlayerStatsWindowVisible
-            .Subscribe(isVisible =>
-            {
-                if (isVisible)
-                    ShowPlayerStatsWindow();
-                else
-                    HidePlayerStatsWindow();
-            })
-            .AddTo(_disposables);
     }
 
-    private void ShowLoseWindow() => 
-        _loseWindow = _gameFactory.CreateLoseWindow();
-    
-    private void ShowPlayerStatsWindow() => 
-        _playerStatsWindow = _gameFactory.CreatePlayerStatsWindow();
-    
-    private void HideLoseWindow() => 
-        _loseWindow?.Destroy();
-    
-    private void HidePlayerStatsWindow() => 
-        _playerStatsWindow?.Destroy();
+    public async void ShowLoseWindow() => 
+        _loseWindow = await _gameFactory.CreateLoseWindow();
 
-    public void Dispose() =>
-        _disposables.Dispose();
+    public async void ShowPlayerStatsWindow() => 
+        _playerStatsWindow = await _gameFactory.CreatePlayerStatsWindow();
+
+    public void HideLoseWindow() => 
+        _loseWindow.Destroy();
+
+    public void HidePlayerStatsWindow() =>
+        _playerStatsWindow.Destroy();
+    
 }

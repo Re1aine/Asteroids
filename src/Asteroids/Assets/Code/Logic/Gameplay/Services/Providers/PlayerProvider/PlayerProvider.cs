@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Entities.Player;
+﻿using System.Threading.Tasks;
+using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Code.Logic.Gameplay.Services.Providers.PlayerProvider
             _boundaries = boundaries;
         }
 
-        public void Initialize() => 
-            Player = _gameFactory.CreatePlayer(_boundaries.Center, Quaternion.identity);
+        public async Task Initialize() => 
+            Player = await _gameFactory.CreatePlayer(_boundaries.Center, Quaternion.identity);
     }
 }

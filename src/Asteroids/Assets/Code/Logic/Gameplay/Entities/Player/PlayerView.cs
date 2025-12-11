@@ -22,13 +22,13 @@ namespace Code.Logic.Gameplay.Entities.Player
 
         private Rigidbody2D _rigidbody;
 
-        public R3.ReadOnlyReactiveProperty<Vector3> Position => _position;
-        public R3.ReadOnlyReactiveProperty<Quaternion> Rotation => _rotation;
-        public R3.ReadOnlyReactiveProperty<float> Velocity => _velocity;
+        public ReadOnlyReactiveProperty<Vector3> Position => _position;
+        public ReadOnlyReactiveProperty<Quaternion> Rotation => _rotation;
+        public ReadOnlyReactiveProperty<float> Velocity => _velocity;
         
-        private R3.ReactiveProperty<Vector3> _position;
-        private R3.ReactiveProperty<Quaternion> _rotation;
-        private R3.ReactiveProperty<float> _velocity;
+        private ReactiveProperty<Vector3> _position;
+        private ReactiveProperty<Quaternion> _rotation;
+        private ReactiveProperty<float> _velocity;
         
         private readonly CompositeDisposable _disposables = new();
         
@@ -48,9 +48,9 @@ namespace Code.Logic.Gameplay.Entities.Player
         {
             _rigidbody = GetComponent<Rigidbody2D>();
 
-            _position = new R3.ReactiveProperty<Vector3>();
-            _rotation = new R3.ReactiveProperty<Quaternion>();
-            _velocity =  new R3.ReactiveProperty<float>();
+            _position = new ReactiveProperty<Vector3>();
+            _rotation = new ReactiveProperty<Quaternion>();
+            _velocity =  new ReactiveProperty<float>();
             
             Observable.EveryValueChanged(this, x => transform.position)
                 .DistinctUntilChanged()

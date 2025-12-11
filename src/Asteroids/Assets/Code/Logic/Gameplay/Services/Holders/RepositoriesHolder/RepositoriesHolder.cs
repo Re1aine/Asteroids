@@ -7,7 +7,6 @@ namespace Code.Logic.Gameplay.Services.Holders.RepositoriesHolder
 {
     public class RepositoriesHolder : IRepositoriesHolder
     {
-    
         private readonly Dictionary<Type, IRepository> _repositories;
 
         public RepositoriesHolder(IEnumerable<IRepository> repositories)

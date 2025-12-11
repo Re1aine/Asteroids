@@ -10,10 +10,11 @@ namespace Code.Logic.Gameplay.Services.SaveLoad
         public void SetPlayerData(PlayerSaveData data) => 
             PlayerPrefs.SetString(PlayerSaveDataKey, JsonUtility.ToJson(data));
 
-        public PlayerSaveData GetPlayerData() => 
-            PlayerPrefs.HasKey(PlayerSaveDataKey) ? JsonUtility.FromJson<PlayerSaveData>(PlayerPrefs.GetString(PlayerSaveDataKey)) : new PlayerSaveData();
-
-        public void Save() => 
-            PlayerPrefs.Save();
+        public PlayerSaveData GetPlayerData()
+        {
+            return PlayerPrefs.HasKey(PlayerSaveDataKey)
+                ? JsonUtility.FromJson<PlayerSaveData>(PlayerPrefs.GetString(PlayerSaveDataKey))
+                : new PlayerSaveData();
+        }
     }
 }
