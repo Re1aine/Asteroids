@@ -15,10 +15,10 @@ public class HUDService
         _gameFactory = gameFactory;
     }
 
-    public async Task ShowLoseWindow() => 
+    public async void ShowLoseWindow() => 
         _loseWindow = await _gameFactory.CreateLoseWindow();
 
-    public async Task ShowPlayerStatsWindow() => 
+    public async void ShowPlayerStatsWindow() => 
         _playerStatsWindow = await _gameFactory.CreatePlayerStatsWindow();
 
     public void HideLoseWindow() => 
