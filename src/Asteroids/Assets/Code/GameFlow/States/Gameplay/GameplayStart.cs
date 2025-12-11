@@ -20,6 +20,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IAnalytics _analytics;
         private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
+        private readonly IGameFactory _gameFactory;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
@@ -29,7 +30,7 @@ namespace Code.GameFlow.States.Gameplay
             IScoreCountService scoreCountService,
             IRepositoriesHolder repositoriesHolder,
             IAnalytics analytics,
-            IAddressablesAssetsLoader addressablesAssetsLoader)
+            IAddressablesAssetsLoader addressablesAssetsLoader, IGameFactory gameFactory)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -40,6 +41,7 @@ namespace Code.GameFlow.States.Gameplay
             _repositoriesHolder = repositoriesHolder;
             _analytics = analytics;
             _addressablesAssetsLoader = addressablesAssetsLoader;
+            _gameFactory = gameFactory;
         }
         
         public async void Enter()
@@ -48,6 +50,8 @@ namespace Code.GameFlow.States.Gameplay
             await _analytics.InitializeAsync();
             
             _repositoriesHolder.LoadAll();
+            
+            _gameFactory.WarmUp();
 
             await _playerProvider.Initialize();
             await _hudProvider.Initialize();

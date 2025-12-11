@@ -21,5 +21,6 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         Task<HUDPresenter> CreateHUD();
         Task<LoseWindowPresenter> CreateLoseWindow();
         Task<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
+        void WarmUp();
     }
 }

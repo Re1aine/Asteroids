@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Code.Infrastructure.Common.AssetsManagement;
+using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
@@ -34,6 +35,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IObjectResolver _resolver;
         private readonly IAnalyticsStore _analyticsStore;
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
+        private readonly IAddressablesAssetsLoader _assetsLoader;
 
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
@@ -42,7 +44,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IRepositoriesHolder repositoriesHolder,
             IObjectResolver resolver,
             IAnalyticsStore analyticsStore,
-            IAddressablesAssetsProvider addressablesAssetsProvider)
+            IAddressablesAssetsProvider addressablesAssetsProvider,
+            IAddressablesAssetsLoader assetsLoader)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -52,6 +55,12 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _resolver = resolver;
             _analyticsStore = analyticsStore;
             _addressablesAssetsProvider = addressablesAssetsProvider;
+            _assetsLoader = assetsLoader;
+        }
+
+        public async void WarmUp()
+        {
+            await _assetsLoader.LoadAsset<GameObject>(AssetsAddress.Bullet);
         }
         
         public async Task<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
