@@ -1,7 +1,8 @@
-﻿using Code.Logic.Gameplay.Services;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
+﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
@@ -41,10 +42,10 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             }
         }
     
-        private void CreateSplitAsteroid(Vector2 direction)
+        private async void CreateSplitAsteroid(Vector2 direction)
         {
             Vector2 spawnPos = (Vector2)_asteroidPresenter.View.transform.position + direction * 0.5f;
-            AsteroidPresenter asteroid = _gameFactory.CreateAsteroid(spawnPos, RandomHelper.GetRandomRotation(true), AsteroidType.AsteroidPart);
+            AsteroidPresenter asteroid = await _gameFactory.CreateAsteroid(spawnPos, RandomHelper.GetRandomRotation(true), AsteroidType.AsteroidPart);
             asteroid.View.SetSpeed(3);
             asteroid.View.LaunchInDirection(direction);
         }

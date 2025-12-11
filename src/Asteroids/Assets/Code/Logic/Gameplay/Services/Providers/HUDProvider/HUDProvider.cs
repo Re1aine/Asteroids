@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
+﻿using System.Threading.Tasks;
+using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.UI.HUD;
 
 namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
@@ -12,7 +13,7 @@ namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
         public HUDProvider(IGameFactory gameFactory) => 
             _gameFactory = gameFactory;
 
-        public void Initialize() => 
-            HUD = _gameFactory.CreateHUD();
+        public async Task Initialize() => 
+            HUD = await _gameFactory.CreateHUD();
     }
 }

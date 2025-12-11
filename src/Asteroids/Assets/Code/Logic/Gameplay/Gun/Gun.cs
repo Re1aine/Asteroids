@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Code.Logic.Gameplay.Entities;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
@@ -65,7 +66,7 @@ namespace Code.Logic.Gameplay
         private void Awake()
         {
             _shootDirection = (_shootPoint.position - transform.position);
-
+            
             _laserCharges = new ReactiveProperty<int>(_laserChargesCurrent);
             _cooldownLaser = new ReactiveProperty<float>(_laserShootCooldownTimer);
 
@@ -91,45 +92,49 @@ namespace Code.Logic.Gameplay
             HandleLaserShoot();
         }
         
-        private IEnumerator ShootLaserRoutine()
-        {
-            LaserShoot?.Invoke();
+         private IEnumerator ShootLaserRoutine()
+         {
+             LaserShoot?.Invoke();
+             
+             _isLaserActive = true;
+             _laserShootTimer = _laserShootTime;
+        
+             Task<LaserBeam> laserBeam = _gameFactory.CreateLaserBeam(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection)); 
+             
+             yield return new WaitUntil(() => laserBeam.IsCompleted);
+             
+             _laserBeam = laserBeam.Result;
+             
+             while (_inputService.IsLaserShoot && _laserShootTimer > 0)
+             {
+                 _laserShootTimer -= Time.deltaTime;
+             
+                 _playerProvider.Player.View.SetMoveDirection(new Vector3(_inputService.Movement.x, 0, 0));
+        
+                 Vector3 direction = (_shootPoint.position - transform.position).normalized;
+                 Vector3 endPos = _shootPoint.position + direction * _laserRange;
+        
+                 RaycastHit2D hit = Physics2D.Raycast(_shootPoint.position, direction, _laserRange, _obstacleLayer);
+        
+                 if (hit.collider != null)
+                 {
+                     if(hit.collider.TryGetComponent(out IDamageable damageable))
+                         damageable.ReceiveDamage(DamageType.LaserBeam);
+                 } 
             
-            _isLaserActive = true;
-            _laserShootTimer = _laserShootTime;
+                 _laserBeam.LineRenderer.SetPosition(0, _shootPoint.position);
+                 _laserBeam.LineRenderer.SetPosition(1, endPos); 
+                 yield return null; 
+             }
         
-            _laserBeam = _gameFactory.CreateLaserBeam(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection)); 
+             _isLaserActive = false;
+             _laserChargesCurrent--;
         
-            while (_inputService.IsLaserShoot && _laserShootTimer > 0)
-            {
-                _laserShootTimer -= Time.deltaTime;
-            
-                _playerProvider.Player.View.SetMoveDirection(new Vector3(_inputService.Movement.x, 0, 0));
-
-                Vector3 direction = (_shootPoint.position - transform.position).normalized;
-                Vector3 endPos = _shootPoint.position + direction * _laserRange;
-
-                RaycastHit2D hit = Physics2D.Raycast(_shootPoint.position, direction, _laserRange, _obstacleLayer);
-
-                if (hit.collider != null)
-                {
-                    if(hit.collider.TryGetComponent(out IDamageable damageable))
-                        damageable.ReceiveDamage(DamageType.LaserBeam);
-                } 
-           
-                _laserBeam.LineRenderer.SetPosition(0, _shootPoint.position);
-                _laserBeam.LineRenderer.SetPosition(1, endPos); 
-                yield return null; 
-            }
+             Destroy(_laserBeam.gameObject);
         
-            _isLaserActive = false;
-            _laserChargesCurrent--;
-        
-            Destroy(_laserBeam.gameObject);
-
-            StartCoroutine(CountLaserShootCooldownTimer());
-        }
-    
+             StartCoroutine(CountLaserShootCooldownTimer());
+         }
+         
         private void HandleShoot()
         {
             _bulletTimer -= Time.deltaTime;
@@ -142,7 +147,7 @@ namespace Code.Logic.Gameplay
         private void HandleLaserShoot()
         {
             if (IsCanLaserShoot()) 
-                StartCoroutine(ShootLaserRoutine());
+                StartCoroutine(ShootLaserRoutine()); 
         
             RefillLaserCharge();
         }
@@ -177,9 +182,9 @@ namespace Code.Logic.Gameplay
         private bool IsCanShoot() => 
             _bulletTimer <= 0 && _inputService.IsBulletShoot;
     
-        private void Shoot()
+        private async void Shoot()
         {
-            Bullet bullet = _gameFactory.CreateBullet(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection));
+            Bullet bullet = await _gameFactory.CreateBullet(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection));
             bullet.MoveToDirection(transform.up);
             
             BulletShoot?.Invoke();

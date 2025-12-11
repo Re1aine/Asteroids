@@ -1,4 +1,6 @@
-﻿using Code.Logic.Gameplay.Analytics;
+﻿using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using Code.Logic.Gameplay.Analytics;
+using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
@@ -17,6 +19,8 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IScoreCountService _scoreCountService;
         private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IAnalytics _analytics;
+        private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
+        private readonly IGameFactory _gameFactory;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
@@ -25,7 +29,7 @@ namespace Code.GameFlow.States.Gameplay
             IPlayerGunObserver playerGunObserver,
             IScoreCountService scoreCountService,
             IRepositoriesHolder repositoriesHolder,
-            IAnalytics analytics)
+            IAnalytics analytics, IAddressablesAssetsLoader addressablesAssetsLoader, IGameFactory gameFactory)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -35,16 +39,19 @@ namespace Code.GameFlow.States.Gameplay
             _scoreCountService = scoreCountService;
             _repositoriesHolder = repositoriesHolder;
             _analytics = analytics;
+            _addressablesAssetsLoader = addressablesAssetsLoader;
+            _gameFactory = gameFactory;
         }
         
         public async void Enter()
         {
+            await _addressablesAssetsLoader.Initialize();
             await _analytics.InitializeAsync();
             
             _repositoriesHolder.LoadAll();
-            
-            _playerProvider.Initialize();
-            _hudProvider.Initialize();
+
+            await _playerProvider.Initialize();
+            await _hudProvider.Initialize();
             
             _playerDeathObserver.Start();
             _playerGunObserver.Start();
