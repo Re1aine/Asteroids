@@ -183,8 +183,8 @@ MonoBehaviour:
   <Gun>k__BackingField: {fileID: 7109203945711521459}
   _decelerationMove: 1
   _accelerationMove: 5
-  _moveSpeed: 5
-  _rotateSpeed: 2
+  _moveSpeed: 7
+  _rotateSpeed: 200
 --- !u!1 &4989687802462731921
 GameObject:
   m_ObjectHideFlags: 0
