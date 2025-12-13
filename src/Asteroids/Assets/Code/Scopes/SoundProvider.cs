@@ -11,16 +11,16 @@ public class SoundProvider : ISoundProvider
         _config = config;
     }
 
-    public AudioClip GetClipByType(SFXType type)
+    public AudioClip GetClipByType(SoundType type)
     {
-        foreach (var vo in _config.SFXs)
+        foreach (var sound in _config.Sounds)
         {
-            if (vo.type != type)
+            if (sound.type != type)
                 continue;
 
-            var clipsLength = vo.clips.Length;
+            var clipsLength = sound.clips.Length;
             var randomIndex = Random.Range(0, clipsLength);
-            return vo.clips[randomIndex];
+            return sound.clips[randomIndex];
         }
         
         throw new Exception($"Doesn't exist settings with type : {type}");
@@ -29,5 +29,5 @@ public class SoundProvider : ISoundProvider
 
 public interface ISoundProvider
 {
-    AudioClip GetClipByType(SFXType type);
+    AudioClip GetClipByType(SoundType type);
 }
