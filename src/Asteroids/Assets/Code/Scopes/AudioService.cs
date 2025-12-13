@@ -1,5 +1,4 @@
 ﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using UnityEngine;
 
 public class AudioService : IAudioService
 {
@@ -16,42 +15,19 @@ public class AudioService : IAudioService
 
     public void Initialize() => 
         _audioPlayer = _gameFactory.CreateAudioPlayer();
-    
-    public void PlayShortSound(SFXType type)
+
+    public void PlaySound(SoundType type)
     {
         var clip = _soundProvider.GetClipByType(type);
-        _audioPlayer.Play(type, clip);
+        _audioPlayer.PlaySound(type, clip);
     }
+    
+    public void StopSound(SoundType type) => 
+        _audioPlayer.StopSound(type);
 
-    public void PlayMusic()
-    {
-        var clip = _soundProvider.GetClipByType(SFXType.Music);
-        _audioPlayer.Play(SFXType.Music, clip);
-    }
-
-    public void StopShortSound(SFXType type) => 
-        _audioPlayer.StopShortSound(type);
-
-    public void StopAllShortSounds() => 
-        _audioPlayer.StopAllShortSounds();
-
-    public void StopMusic() => 
-        _audioPlayer.StopMusic();
-
-    public void StopAllSounds()
-    {
-        StopAllShortSounds();
-        StopMusic();
-    }
-}
-
-public interface IAudioService
-{
-    void Initialize();
-    void PlayShortSound(SFXType type);
-    void StopShortSound(SFXType type);
-    void StopAllShortSounds();
-    void StopAllSounds();
-    void PlayMusic();
-    void StopMusic();
+    public void StopSoundCategory(SoundCategory category) => 
+        _audioPlayer.StopSoundCategory(category);
+    
+    public void StopAllSounds() => 
+        _audioPlayer.StopAllSounds();
 }
