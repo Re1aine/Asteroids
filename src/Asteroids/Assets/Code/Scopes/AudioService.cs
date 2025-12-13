@@ -1,24 +1,29 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
+﻿using System.Threading.Tasks;
+using Code.Logic.Gameplay.Services.Factories.GameFactory;
 
 public class AudioService : IAudioService
 {
-    private readonly ISoundProvider _soundProvider;
+    private readonly IConfigsProvider _configsProvider;
     private readonly IGameFactory _gameFactory;
     
     private AudioPlayer _audioPlayer;
-    
-    public AudioService(ISoundProvider soundProvider, IGameFactory gameFactory)
+    private AudioConfig _audioConfig;
+
+    public AudioService(IConfigsProvider configsProvider, IGameFactory gameFactory)
     {
-        _soundProvider = soundProvider;
+        _configsProvider = configsProvider;
         _gameFactory = gameFactory;
     }
 
-    public async void Initialize() => 
+    public async Task Initialize()
+    {
         _audioPlayer = await _gameFactory.CreateAudioPlayer();
+        _audioConfig = _configsProvider.GetAudioConfig();
+    }
 
     public void PlaySound(SoundType type)
     {
-        var clip = _soundProvider.GetClipByType(type);
+        var clip = _audioConfig.GetRandomClipByType(type);
         _audioPlayer.PlaySound(type, clip);
     }
     

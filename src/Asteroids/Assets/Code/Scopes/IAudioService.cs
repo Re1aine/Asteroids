@@ -2,7 +2,7 @@
 
 public interface IAudioService
 {
-    void Initialize();
+    Task Initialize();
     void PlaySound(SoundType type);
     void StopSound(SoundType type);
     void StopSoundCategory(SoundCategory category);

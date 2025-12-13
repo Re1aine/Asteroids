@@ -16,6 +16,8 @@ namespace Code.Infrastructure.Common.AssetsManagement
     
         public static readonly string AudioPlayer = "AudioPlayer";
         
+        public static readonly string AudioConfig = "AudioConfig";
+        
         public static string GetAddressForAsteroid(AsteroidType type)
         {
             return type switch
