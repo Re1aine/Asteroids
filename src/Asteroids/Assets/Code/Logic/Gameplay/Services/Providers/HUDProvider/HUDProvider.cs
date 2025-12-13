@@ -13,7 +13,7 @@ namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
         public HUDProvider(IGameFactory gameFactory) => 
             _gameFactory = gameFactory;
 
-        public async Task Initialize() => 
+        public async void Initialize() => 
             HUD = await _gameFactory.CreateHUD();
     }
 }

@@ -36,7 +36,8 @@ namespace Code.Scopes
     public class GameplayScope : LifetimeScope
     {
         [SerializeField] private Camera _camera;
-
+        [SerializeField] private AudioConfig _audioConfig;
+        
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<AddressablesAssetsLoader>(Lifetime.Singleton).As<IAddressablesAssetsLoader>();
@@ -52,12 +53,16 @@ namespace Code.Scopes
             builder.Register<RepositoriesHolder>(Lifetime.Singleton).As<IRepositoriesHolder>();
 
             builder.RegisterComponentInHierarchy<CoroutineRunner>().As<ICoroutineRunner>();
-
+            
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
 
             builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
+            
+            builder.Register<SoundProvider>(Lifetime.Singleton).As<ISoundProvider>().WithParameter(_audioConfig);
+            //builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
+            
 
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
@@ -77,7 +82,9 @@ namespace Code.Scopes
             builder.Register<AsteroidSpawner>(Lifetime.Singleton).As<IAsteroidSpawner>();
 
             builder.RegisterComponentInHierarchy<BackgroundResizer>();
-
+            
+            builder.Register<AudioService>(Lifetime.Singleton).As<IAudioService>().WithParameter(_audioConfig);
+            
             builder.Register<StateFactory>(Lifetime.Singleton);
             builder.Register<GameplayStateMachine>(Lifetime.Singleton);
 
@@ -91,6 +98,5 @@ namespace Code.Scopes
             else
                 builder.Register<FireBaseAnalytics>(Lifetime.Singleton).As<IAnalytics>();
         }
-    }
+    } 
 }
-

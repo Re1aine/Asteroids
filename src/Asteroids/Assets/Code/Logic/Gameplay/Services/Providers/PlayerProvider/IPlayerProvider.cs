@@ -6,6 +6,6 @@ namespace Code.Logic.Gameplay.Services.Providers.PlayerProvider
     public interface IPlayerProvider
     {
         PlayerPresenter Player { get; set; }
-        Task Initialize();
+        void Initialize();
     }
 }

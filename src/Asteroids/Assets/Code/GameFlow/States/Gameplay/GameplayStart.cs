@@ -21,6 +21,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IAnalytics _analytics;
         private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
         private readonly IGameFactory _gameFactory;
+        private readonly IAudioService _audioService;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
@@ -30,7 +31,9 @@ namespace Code.GameFlow.States.Gameplay
             IScoreCountService scoreCountService,
             IRepositoriesHolder repositoriesHolder,
             IAnalytics analytics,
-            IAddressablesAssetsLoader addressablesAssetsLoader, IGameFactory gameFactory)
+            IAddressablesAssetsLoader addressablesAssetsLoader,
+            IGameFactory gameFactory,
+            IAudioService audioService)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -42,6 +45,7 @@ namespace Code.GameFlow.States.Gameplay
             _analytics = analytics;
             _addressablesAssetsLoader = addressablesAssetsLoader;
             _gameFactory = gameFactory;
+            _audioService = audioService;
         }
         
         public async void Enter()
@@ -50,15 +54,17 @@ namespace Code.GameFlow.States.Gameplay
             await _analytics.InitializeAsync();
             
             _repositoriesHolder.LoadAll();
-            
-            _gameFactory.WarmUp();
 
-            await _playerProvider.Initialize();
-            await _hudProvider.Initialize();
+            _gameFactory.WarmUp();
+            
+            _playerProvider.Initialize();
+            _hudProvider.Initialize();
+            
+            _audioService.Initialize();
             
             _playerDeathObserver.Start();
             _playerGunObserver.Start();
-        
+            
             _scoreCountService.Reset();
         
             _analytics.StartSession();

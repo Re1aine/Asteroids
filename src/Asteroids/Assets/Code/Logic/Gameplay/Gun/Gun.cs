@@ -16,7 +16,8 @@ namespace Code.Logic.Gameplay
     public class Gun : MonoBehaviour
     {
         public event Action BulletShoot;
-        public event Action LaserShoot;
+        public event Action LaserShootStarted;
+        public event Action LaserShootEnded;
         
         [SerializeField] private Transform _shootPoint;
     
@@ -66,7 +67,7 @@ namespace Code.Logic.Gameplay
         private void Awake()
         {
             _shootDirection = (_shootPoint.position - transform.position);
-            
+
             _laserCharges = new ReactiveProperty<int>(_laserChargesCurrent);
             _cooldownLaser = new ReactiveProperty<float>(_laserShootCooldownTimer);
 
@@ -92,12 +93,12 @@ namespace Code.Logic.Gameplay
             HandleLaserShoot();
         }
         
-         private IEnumerator ShootLaserRoutine()
-         {
-             LaserShoot?.Invoke();
-             
-             _isLaserActive = true;
-             _laserShootTimer = _laserShootTime;
+        private IEnumerator ShootLaserRoutine()
+        {
+            LaserShootStarted?.Invoke();
+            
+            _isLaserActive = true;
+            _laserShootTimer = _laserShootTime;
         
              Task<LaserBeam> laserBeam = _gameFactory.CreateLaserBeam(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection)); 
              
@@ -127,14 +128,16 @@ namespace Code.Logic.Gameplay
                  yield return null; 
              }
         
-             _isLaserActive = false;
-             _laserChargesCurrent--;
-        
-             Destroy(_laserBeam.gameObject);
-        
-             StartCoroutine(CountLaserShootCooldownTimer());
-         }
-         
+            _isLaserActive = false;
+            _laserChargesCurrent--;
+            
+            LaserShootEnded?.Invoke();
+            
+            Destroy(_laserBeam.gameObject);
+
+            StartCoroutine(CountLaserShootCooldownTimer());
+        }
+    
         private void HandleShoot()
         {
             _bulletTimer -= Time.deltaTime;
@@ -147,7 +150,7 @@ namespace Code.Logic.Gameplay
         private void HandleLaserShoot()
         {
             if (IsCanLaserShoot()) 
-                StartCoroutine(ShootLaserRoutine()); 
+                StartCoroutine(ShootLaserRoutine());
         
             RefillLaserCharge();
         }

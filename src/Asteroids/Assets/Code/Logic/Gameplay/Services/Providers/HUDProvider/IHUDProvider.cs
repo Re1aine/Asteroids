@@ -6,6 +6,6 @@ namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
     public interface IHUDProvider
     {
         HUDPresenter HUD {get;}   
-        Task Initialize();
+        void Initialize();
     }
 }

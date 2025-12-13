@@ -659,6 +659,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _camera: {fileID: 519420031}
+  _audioConfig: {fileID: 11400000, guid: efa07d065eb7e2d48b072079df6d731d, type: 2}
 --- !u!4 &1958507143
 Transform:
   m_ObjectHideFlags: 0

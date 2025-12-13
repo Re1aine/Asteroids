@@ -18,7 +18,7 @@ namespace Code.Logic.Gameplay.Services.Providers.PlayerProvider
             _boundaries = boundaries;
         }
 
-        public async Task Initialize() => 
+        public async void Initialize() => 
             Player = await _gameFactory.CreatePlayer(_boundaries.Center, Quaternion.identity);
     }
 }

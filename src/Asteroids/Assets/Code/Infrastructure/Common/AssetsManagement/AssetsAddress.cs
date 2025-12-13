@@ -14,6 +14,8 @@ namespace Code.Infrastructure.Common.AssetsManagement
         public static readonly string LoseWindow = "LoseWindow";
         public static readonly string PlayerStatsWindow = "PlayerStatsWindow";
     
+        public static readonly string AudioPlayer = "AudioPlayer";
+        
         public static string GetAddressForAsteroid(AsteroidType type)
         {
             return type switch
