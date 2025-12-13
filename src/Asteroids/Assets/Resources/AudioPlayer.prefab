@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92baf64c313542b3a230a696d1b2c9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AudioChannelType>k__BackingField: 2
+  <SoundCategory>k__BackingField: 2
+  <SoundType>k__BackingField: 2
 --- !u!1 &1291969409219188510
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92baf64c313542b3a230a696d1b2c9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AudioChannelType>k__BackingField: 1
+  <SoundCategory>k__BackingField: 1
+  <SoundType>k__BackingField: 0
 --- !u!1 &2366305552130451627
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +385,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -479,4 +481,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92baf64c313542b3a230a696d1b2c9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AudioChannelType>k__BackingField: 1
+  <SoundCategory>k__BackingField: 1
+  <SoundType>k__BackingField: 1

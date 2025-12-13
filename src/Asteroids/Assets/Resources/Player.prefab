@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootPoint: {fileID: 5728730183341277113}
-  _bulletCooldown: 0.1
+  _bulletCooldown: 1
   _obstacleLayer:
     serializedVersion: 2
     m_Bits: 72
