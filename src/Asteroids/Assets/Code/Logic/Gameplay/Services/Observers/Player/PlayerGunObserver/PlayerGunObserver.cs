@@ -45,11 +45,11 @@ public class PlayerGunObserver : IPlayerGunObserver
     }
 
     private void OnBulletShoot() => 
-        _audioService.PlayShortSound(SFXType.BulletShoot);
+        _audioService.PlaySound(SoundType.BulletShoot);
 
     private void OnLaserShootStarted() => 
-        _audioService.PlayShortSound(SFXType.LaserShoot);
+        _audioService.PlaySound(SoundType.LaserShoot);
 
     private void OnLaserEnded() => 
-        _audioService.StopShortSound(SFXType.LaserShoot);
+        _audioService.StopSound(SoundType.LaserShoot);
 }
