@@ -1,23 +1,24 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "AudioSFX", menuName = "AudioSFX")]
+[CreateAssetMenu(fileName = "AudioConfig", menuName = "Configs/AudioConfig")]
 public class AudioConfig : ScriptableObject
 {
-    public SoundSettingsVo[] SFXs;
-}
+    public SoundSettings[] Sounds;
+    
+    public AudioClip GetRandomClipByType(SoundType type)
+    {
+        foreach (var sound in Sounds)
+        {
+            if (sound.type != type)
+                continue;
 
-public enum SFXType
-{
-    BulletShoot = 0,
-    LaserShoot = 1,
-    Music = 2
-}
-
-
-[Serializable]
-public struct SoundSettingsVo
-{
-    public SFXType type;
-    public AudioClip[] clips; 
+            var clipsLength = sound.clips.Length;
+            var randomIndex = Random.Range(0, clipsLength);
+            return sound.clips[randomIndex];
+        }
+        
+        throw new Exception($"Doesn't exist SoundsSetting with SoundType : {type}");
+    }
 }
