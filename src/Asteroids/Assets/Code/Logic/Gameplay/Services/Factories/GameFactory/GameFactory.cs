@@ -149,8 +149,5 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             
             return new HUDPresenter(model, view);
         }
-
-        public async Task<AudioPlayer> CreateAudioPlayer() => 
-            await _addressablesAssetsProvider.Instantiate<AudioPlayer>(AssetsAddress.AudioPlayer);
     }
 }

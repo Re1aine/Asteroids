@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Configs
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: Configs
   m_GUID: 431dd2e4daf146949b94b792564476eb
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: efa07d065eb7e2d48b072079df6d731d
+    m_Address: AudioConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1da618e165a982245bd7ebec961614f7, type: 2}
   m_SchemaSet:

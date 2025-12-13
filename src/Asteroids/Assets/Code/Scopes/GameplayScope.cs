@@ -36,7 +36,6 @@ namespace Code.Scopes
     public class GameplayScope : LifetimeScope
     {
         [SerializeField] private Camera _camera;
-        [SerializeField] private AudioConfig _audioConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -60,10 +59,8 @@ namespace Code.Scopes
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
             
-            //builder.Register<SoundProvider>(Lifetime.Singleton).As<ISoundProvider>().WithParameter(_audioConfig);
             builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
             
-
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
 
@@ -82,8 +79,9 @@ namespace Code.Scopes
             builder.Register<AsteroidSpawner>(Lifetime.Singleton).As<IAsteroidSpawner>();
 
             builder.RegisterComponentInHierarchy<BackgroundResizer>();
+            builder.RegisterComponentInHierarchy<AudioPlayer>();
             
-            builder.Register<AudioService>(Lifetime.Singleton).As<IAudioService>().WithParameter(_audioConfig);
+            builder.Register<AudioService>(Lifetime.Singleton).As<IAudioService>();
             
             builder.Register<StateFactory>(Lifetime.Singleton);
             builder.Register<GameplayStateMachine>(Lifetime.Singleton);

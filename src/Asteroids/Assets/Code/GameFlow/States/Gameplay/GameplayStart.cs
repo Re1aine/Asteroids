@@ -65,7 +65,7 @@ namespace Code.GameFlow.States.Gameplay
             await _playerProvider.Initialize();
             await _hudProvider.Initialize();
             
-            await _audioService.Initialize();
+            _audioService.Initialize();
             
             _playerDeathObserver.Start();
             _playerGunObserver.Start();
