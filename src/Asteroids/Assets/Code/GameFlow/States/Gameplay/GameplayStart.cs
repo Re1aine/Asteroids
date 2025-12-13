@@ -48,11 +48,11 @@ namespace Code.GameFlow.States.Gameplay
             
             _playerProvider.Initialize();
             _hudProvider.Initialize();
+
+            _audioService.Initialize();
             
             _playerDeathObserver.Start();
             _playerGunObserver.Start();
-        
-            _audioService.Initialize();
             
             _scoreCountService.Reset();
         

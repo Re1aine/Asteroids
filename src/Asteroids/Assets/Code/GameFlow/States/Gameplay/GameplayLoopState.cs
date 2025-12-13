@@ -42,7 +42,7 @@ namespace Code.GameFlow.States.Gameplay
             _asteroidSpawner.Enable();
             _ufoSpawner.Enable();
             
-            _audioService.PlayMusic();
+            _audioService.PlaySound(SoundType.Music);
             
             _hudProvider.HUD.ShowPlayerStatsWindow();
         }

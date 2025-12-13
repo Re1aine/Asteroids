@@ -61,6 +61,8 @@ namespace Code.Scopes
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
             
             builder.Register<SoundProvider>(Lifetime.Singleton).As<ISoundProvider>().WithParameter(_audioConfig);
+            //builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
+            
 
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
