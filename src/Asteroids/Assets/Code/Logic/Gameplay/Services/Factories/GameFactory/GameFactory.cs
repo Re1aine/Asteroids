@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-using Code.Infrastructure.Common.AssetsManagement;
-using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
-using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
+﻿using Code.Infrastructure.Common.AssetsManagement;
+using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Entities.Enemy.UFO;
@@ -36,7 +34,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAnalyticsStore _analyticsStore;
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
         private readonly IAddressablesAssetsLoader _assetsLoader;
-
+        private readonly IVFXHolder _vfxHolder;
+        
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
             IAsteroidsHolder asteroidsHolder,
@@ -45,7 +44,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IObjectResolver resolver,
             IAnalyticsStore analyticsStore,
             IAddressablesAssetsProvider addressablesAssetsProvider,
-            IAddressablesAssetsLoader assetsLoader)
+            IAddressablesAssetsLoader assetsLoader,
+            IVFXHolder vfxHolder)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -56,6 +56,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _analyticsStore = analyticsStore;
             _addressablesAssetsProvider = addressablesAssetsProvider;
             _assetsLoader = assetsLoader;
+            _vfxHolder = vfxHolder;
         }
 
         public async void WarmUp()
@@ -85,7 +86,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             presenter.Init(
                 new AsteroidDamageReceiver(presenter),
                 new AsteroidDestroyer(presenter, this, _scoreCountService),
-                new AsteroidDeathObserver(presenter, _analyticsStore));
+                new AsteroidDeathObserver(presenter, _analyticsStore),
+                this);
 
             _asteroidsHolder.Add(presenter);
         
@@ -101,7 +103,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             presenter.Init(
                 new UfoDamageReceiver(presenter),
                 new UFODestroyer(presenter, _scoreCountService),
-                new UFODeathObserver(presenter, _analyticsStore));
+                new UFODeathObserver(presenter, _analyticsStore),
+                this);
         
             _ufOsHolder.Add(presenter);
         
@@ -149,5 +152,20 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             
             return new HUDPresenter(model, view);
         }
+
+        public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
+        {
+            VFX vfx = _assetsProvider.InstantiateAt<VFX>(AssetPath.GetPathForVFX(type), position, rotation);
+            
+            _vfxHolder.Add(vfx);
+
+            return vfx;
+        }
     }
+}
+
+public enum VFXType
+{
+    AsteroidDestroyVFX = 0,
+    UfoDestroyVFX = 1,
 }

@@ -22,5 +22,6 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         Task<LoseWindowPresenter> CreateLoseWindow();
         Task<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
         void WarmUp();
+        VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation);
     }
 }

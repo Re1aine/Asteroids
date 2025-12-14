@@ -53,5 +53,8 @@ TagManager:
   - name: Bullet
     uniqueID: 1904869281
     locked: 0
+  - name: VFX
+    uniqueID: 102670643
+    locked: 0
   m_RenderingLayers:
   - Default

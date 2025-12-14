@@ -52,15 +52,13 @@ namespace Code.Scopes
             builder.Register<RepositoriesHolder>(Lifetime.Singleton).As<IRepositoriesHolder>();
 
             builder.RegisterComponentInHierarchy<CoroutineRunner>().As<ICoroutineRunner>();
-            
+
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
 
             builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
-            
-            builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
-            
+
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
 
@@ -74,7 +72,8 @@ namespace Code.Scopes
             builder.Register<UFOsHolder>(Lifetime.Singleton).As<IUFOsHolder>();
             builder.Register<AsteroidsHolder>(Lifetime.Singleton).As<IAsteroidsHolder>();
             builder.Register<BulletsHolder>(Lifetime.Singleton).As<IBulletsHolder>();
-
+            builder.Register<VFXHolder>(Lifetime.Singleton).As<IVFXHolder>();
+            
             builder.Register<UFOSpawner>(Lifetime.Singleton).As<IUFOSpawner>();
             builder.Register<AsteroidSpawner>(Lifetime.Singleton).As<IAsteroidSpawner>();
 

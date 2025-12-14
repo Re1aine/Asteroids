@@ -21,6 +21,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IAnalytics _analytics;
         private readonly IAnalyticsStore _analyticsStore;
         private readonly IAudioService _audioService;
+        private readonly IVFXHolder _vfxHolder;
 
         private LoseWindowPresenter _loseWindow;
 
@@ -31,7 +32,8 @@ namespace Code.GameFlow.States.Gameplay
             IRepositoriesHolder repositoriesHolder,
             IAnalytics analytics,
             IAnalyticsStore analyticsStore,
-            IAudioService audioService)
+            IAudioService audioService,
+            IVFXHolder vfxHolder)
         {
             _hudProvider = hudProvider;
             _ufosHolder = ufosHolder;
@@ -41,6 +43,7 @@ namespace Code.GameFlow.States.Gameplay
             _analytics = analytics;
             _analyticsStore = analyticsStore;
             _audioService = audioService;
+            _vfxHolder = vfxHolder;
         }
 
         public void Enter()
@@ -54,6 +57,7 @@ namespace Code.GameFlow.States.Gameplay
             _ufosHolder.DestroyAll();
             _asteroidsHolder.DestroyAll();
             _bulletsHolder.DestroyAll();
+            _vfxHolder.DestroyAll();
             
             _analytics.EndSession(_analyticsStore);
             

@@ -29,6 +29,7 @@ namespace Code.Logic.Gameplay.Services.Holders.AsteroidsHolder
             _asteroids.Clear();
         }
 
-        private void OnDestroyed(AsteroidPresenter asteroid) => Remove(asteroid);
+        private void OnDestroyed(AsteroidPresenter asteroid) =>
+            Remove(asteroid);
     }
 }
