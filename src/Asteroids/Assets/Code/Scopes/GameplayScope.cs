@@ -44,7 +44,7 @@ namespace Code.Scopes
 
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             InitializeAnalytics(builder);
-
+            
             builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
 
             builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
@@ -58,6 +58,8 @@ namespace Code.Scopes
             builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
+            
+            builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
 
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();

@@ -1,5 +1,7 @@
-﻿using Code.Infrastructure.Common.AssetsManagement;
-using Code.Infrastructure.Common.AssetsManagement.AssetsProvider;
+﻿using System.Threading.Tasks;
+using Code.Infrastructure.Common.AssetsManagement;
+using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Entities.Enemy.UFO;
@@ -35,7 +37,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
         private readonly IAddressablesAssetsLoader _assetsLoader;
         private readonly IVFXHolder _vfxHolder;
-        
+        private readonly IConfigsProvider _configsProvider;
+
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
             IAsteroidsHolder asteroidsHolder,
@@ -45,7 +48,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IAnalyticsStore analyticsStore,
             IAddressablesAssetsProvider addressablesAssetsProvider,
             IAddressablesAssetsLoader assetsLoader,
-            IVFXHolder vfxHolder)
+            IVFXHolder vfxHolder,
+            IConfigsProvider configsProvider)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -57,6 +61,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _addressablesAssetsProvider = addressablesAssetsProvider;
             _assetsLoader = assetsLoader;
             _vfxHolder = vfxHolder;
+            _configsProvider = configsProvider;
         }
 
         public async void WarmUp()
@@ -155,17 +160,15 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 
         public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
         {
-            VFX vfx = _assetsProvider.InstantiateAt<VFX>(AssetPath.GetPathForVFX(type), position, rotation);
+            VFX prefab = _configsProvider
+                .GetVFXConfig()
+                .GetVFXByType(type);
+            
+            VFX vfx = Object.Instantiate(prefab, position, rotation);
             
             _vfxHolder.Add(vfx);
-
+            
             return vfx;
         }
     }
-}
-
-public enum VFXType
-{
-    AsteroidDestroyVFX = 0,
-    UfoDestroyVFX = 1,
 }

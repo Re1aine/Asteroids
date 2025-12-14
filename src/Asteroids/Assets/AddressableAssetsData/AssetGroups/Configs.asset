@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Configs
   m_GUID: 431dd2e4daf146949b94b792564476eb
   m_SerializeEntries:
+  - m_GUID: 5298468aedf01234cb16b01d1b48b1bb
+    m_Address: VFXConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: efa07d065eb7e2d48b072079df6d731d
     m_Address: AudioConfig
     m_ReadOnly: 0

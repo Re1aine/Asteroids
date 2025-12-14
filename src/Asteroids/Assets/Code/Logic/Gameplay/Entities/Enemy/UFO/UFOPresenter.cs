@@ -47,7 +47,7 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
 
             _destroyer.Destroy(damageType);
 
-            _gameFactory.CreateVFX(VFXType.UFODestroyVFX, View.transform.position, Quaternion.identity);
+            _gameFactory.CreateVFX(VFXType.UfoDestroyVFX, View.transform.position, Quaternion.identity);
             
             _ufoDeathObserver.Stop();
         }

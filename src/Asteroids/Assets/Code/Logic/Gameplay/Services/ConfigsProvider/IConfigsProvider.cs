@@ -4,4 +4,5 @@ public interface IConfigsProvider
 {
     Task Initialize();
     AudioConfig GetAudioConfig();
+    VFXConfig GetVFXConfig();
 }
