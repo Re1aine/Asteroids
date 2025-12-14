@@ -163,11 +163,11 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             VFX prefab = _configsProvider
                 .GetVFXConfig()
                 .GetVFXByType(type);
-            
+
             VFX vfx = Object.Instantiate(prefab, position, rotation);
             
             _vfxHolder.Add(vfx);
-            
+
             return vfx;
         }
     }
