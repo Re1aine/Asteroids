@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using Code.UI.HUD;
+﻿using Code.UI.HUD;
+using Cysharp.Threading.Tasks;
 
 namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
 {
     public interface IHUDProvider
     {
         HUDPresenter HUD {get;}   
-        Task Initialize();
+        UniTask Initialize();
     }
 }

@@ -20,6 +20,7 @@ using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.UI.HUD;
 using Code.UI.LoseWindow;
 using Code.UI.PlayerStatsWindow;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -69,7 +70,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             await _assetsLoader.LoadAsset<GameObject>(AssetsAddress.Bullet);
         }
         
-        public async Task<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
+        public async UniTask<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
         {
             PlayerView playerView = await _addressablesAssetsProvider.Instantiate<PlayerView>(AssetsAddress.Player);
             
@@ -82,7 +83,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return presenter;
         }
 
-        public async Task<AsteroidPresenter> CreateAsteroid(Vector3 position, Quaternion rotation, AsteroidType type, int scoreReward)
+        public async UniTask<AsteroidPresenter> CreateAsteroid(Vector3 position, Quaternion rotation, AsteroidType type, int scoreReward)
         {
             AsteroidView view = await _addressablesAssetsProvider.InstantiateAt<AsteroidView>(AssetsAddress.GetAddressForAsteroid(type), position, rotation);
             
@@ -99,7 +100,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return presenter;
         }
 
-        public async Task<UFOPresenter> CreateUfo(Vector3 position, Quaternion rotation, int scoreReward)
+        public async UniTask<UFOPresenter> CreateUfo(Vector3 position, Quaternion rotation, int scoreReward)
         {
             UFOView view = await _addressablesAssetsProvider.InstantiateAt<UFOView>(AssetsAddress.UFO, position, rotation);
             
@@ -116,7 +117,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return presenter;
         }
 
-        public async Task<Bullet> CreateBullet(Vector3 position, Quaternion rotation)
+        public async UniTask<Bullet> CreateBullet(Vector3 position, Quaternion rotation)
         {
             Bullet bullet = await _addressablesAssetsProvider.InstantiateAt<Bullet>(AssetsAddress.Bullet, position, rotation);
             
@@ -125,10 +126,10 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return bullet;
         }
 
-        public async Task<LaserBeam> CreateLaserBeam(Vector2 position, Quaternion rotation) => 
+        public async UniTask<LaserBeam> CreateLaserBeam(Vector2 position, Quaternion rotation) => 
             await _addressablesAssetsProvider.InstantiateAt<LaserBeam>(AssetsAddress.LaserBeam,position, rotation);
 
-        public async Task<LoseWindowPresenter> CreateLoseWindow()
+        public async UniTask<LoseWindowPresenter> CreateLoseWindow()
         {
             LoseWindowView view =  await _addressablesAssetsProvider.Instantiate<LoseWindowView>(AssetsAddress.LoseWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
             
@@ -139,7 +140,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
              return new LoseWindowPresenter(model, view);
         }
 
-        public async Task<PlayerStatsWindowPresenter> CreatePlayerStatsWindow()
+        public async UniTask<PlayerStatsWindowPresenter> CreatePlayerStatsWindow()
         {
             PlayerStatsWindowView view = await _addressablesAssetsProvider.Instantiate<PlayerStatsWindowView>(AssetsAddress.PlayerStatsWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
             
@@ -149,7 +150,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
              return new PlayerStatsWindowPresenter(model, view);
         }
 
-        public async Task<HUDPresenter> CreateHUD()
+        public async UniTask<HUDPresenter> CreateHUD()
         {
             HUDView view =  await _addressablesAssetsProvider.Instantiate<HUDView>(AssetsAddress.HUD);
             

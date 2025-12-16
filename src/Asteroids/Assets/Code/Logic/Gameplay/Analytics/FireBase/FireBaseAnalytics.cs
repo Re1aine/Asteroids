@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
 using UnityEngine;
@@ -14,7 +14,7 @@ namespace Code.Logic.Gameplay.Analytics.FireBase
         
         private bool _isInitialized;
         
-        public async Task InitializeAsync()
+        public async UniTask Initialize()
         {
             if (_isInitialized)
                 return;

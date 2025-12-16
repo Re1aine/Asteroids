@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Threading.Tasks;
 using Code.Logic.Gameplay.Entities;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Input;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using VContainer;
@@ -99,18 +99,20 @@ namespace Code.Logic.Gameplay
             
             _isLaserActive = true;
             _laserShootTimer = _laserShootTime;
-        
-             Task<LaserBeam> laserBeam = _gameFactory.CreateLaserBeam(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection)); 
+            
+             UniTask<LaserBeam> laserBeam = _gameFactory.CreateLaserBeam(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection)); 
              
-             yield return new WaitUntil(() => laserBeam.IsCompleted);
+             yield return UniTask.WaitUntil(() => laserBeam.Status == UniTaskStatus.Succeeded).ToCoroutine();
              
-             _laserBeam = laserBeam.Result;
+             _laserBeam = laserBeam.GetAwaiter().GetResult();
              
+             _playerProvider.Player.View.LockForwardMovement();
+            
              while (_inputService.IsLaserShoot && _laserShootTimer > 0)
              {
                  _laserShootTimer -= Time.deltaTime;
              
-                 _playerProvider.Player.View.SetMoveDirection(new Vector3(_inputService.Movement.x, 0, 0));
+                 //_playerProvider.Player.View.SetMoveDirection(new Vector3(_inputService.Movement.x, 0, 0));
         
                  Vector3 direction = (_shootPoint.position - transform.position).normalized;
                  Vector3 endPos = _shootPoint.position + direction * _laserRange;
@@ -130,6 +132,9 @@ namespace Code.Logic.Gameplay
         
             _isLaserActive = false;
             _laserChargesCurrent--;
+            
+            //_playerProvider.Player.View.IsMovementLocked = false;
+            _playerProvider.Player.View.UnLockForwardMovement();
             
             LaserShootEnded?.Invoke();
             

@@ -33,14 +33,13 @@ namespace Code.Logic.Gameplay.Entities.Player
         private Vector2 _currentVelocity;
 
         private float _rotateAngle;
+        
+        private bool _isLockForwardMovement;
 
         [Inject]
         public void Construct(IInputService inputService) => 
             _inputService = inputService;
 
-        public void SetMoveDirection(Vector3 direction) => 
-            _moveDirection = direction;
-        
         private void Awake()
         {
             _position = new ReactiveProperty<Vector3>();
@@ -72,27 +71,38 @@ namespace Code.Logic.Gameplay.Entities.Player
         private void Update()
         {
             _moveDirection = _inputService.Movement;
-        
+
             HandleRotate();
             HandleMove();
         }
+
+        public void LockForwardMovement() => 
+            _isLockForwardMovement = true;
+
+        public void UnLockForwardMovement() => 
+            _isLockForwardMovement = false;
 
         private void HandleRotate()
         {
             _rotateAngle -= (_inputService.Movement.x * _rotateSpeed) * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, 0, _rotateAngle);
         }
-    
+
         private void HandleMove()
         {
-            if (_moveDirection.y != 0)
-                AccelerateMove();
-            else 
+            if (_isLockForwardMovement)
                 DecelerateMove();
-        
+            else
+            {
+                 if (_moveDirection.y != 0)
+                     AccelerateMove();
+                 else 
+                     DecelerateMove();
+            }
+            
             transform.position += new Vector3(_currentVelocity.x, _currentVelocity.y, 0) * Time.deltaTime;
         }
-    
+
         private void AccelerateMove()
         {
             Vector2 targetVelocity = (Vector2)transform.up * (_moveDirection.y * _moveSpeed);

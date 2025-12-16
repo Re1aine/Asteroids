@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 
 public interface IConfigsProvider
 {
-    Task Initialize();
+    UniTask Initialize();
     AudioConfig GetAudioConfig();
     VFXConfig GetVFXConfig();
 }

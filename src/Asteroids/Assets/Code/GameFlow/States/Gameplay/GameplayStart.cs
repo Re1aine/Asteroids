@@ -54,7 +54,7 @@ namespace Code.GameFlow.States.Gameplay
         public async void Enter()
         {
             await _addressablesAssetsLoader.Initialize();
-            await _analytics.InitializeAsync();
+            await _analytics.Initialize();
             
             await _configsProvider.Initialize();
             

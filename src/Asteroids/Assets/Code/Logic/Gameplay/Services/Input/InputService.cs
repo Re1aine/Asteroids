@@ -9,7 +9,6 @@ namespace Code.Logic.Gameplay.Services.Input
         public Vector2 Movement { get; private set; }
         public bool IsBulletShoot { get; private set; }
         public bool IsLaserShoot {get; private set;}
-    
         public void Enable()
         {
             _playerInput.Gameplay.Move.performed += OnMove;
@@ -24,21 +23,15 @@ namespace Code.Logic.Gameplay.Services.Input
             _playerInput.Enable();
         }
 
-        private void OnMove(InputAction.CallbackContext context)
-        {
+        private void OnMove(InputAction.CallbackContext context) => 
             Movement = context.ReadValue<Vector2>();
-        }
 
-        private void OnLaserShoot(InputAction.CallbackContext context)
-        {
+        private void OnLaserShoot(InputAction.CallbackContext context) => 
             IsLaserShoot = context.ReadValueAsButton();
-        }
 
-        private void OnBulletShoot(InputAction.CallbackContext context)
-        {
+        private void OnBulletShoot(InputAction.CallbackContext context) => 
             IsBulletShoot = context.ReadValueAsButton();
-        }
-    
+
         public void Disable()
         {
             Movement = Vector2.zero;

@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using Cysharp.Threading.Tasks;
 
 public class ConfigsProvider : IConfigsProvider
 {
@@ -14,10 +15,15 @@ public class ConfigsProvider : IConfigsProvider
         _assetsLoader = assetsLoader;
     }
 
-    public async Task Initialize()
+    public async UniTask Initialize()
     {
-        await LoadAudioConfig();
-        await LoadVFXConfig();
+        var tasks = new List<UniTask>
+        {
+            LoadVFXConfig(),
+            LoadAudioConfig(),
+        };
+
+        await UniTask.WhenAll(tasks);
     }
 
     public AudioConfig GetAudioConfig() => 
@@ -26,9 +32,9 @@ public class ConfigsProvider : IConfigsProvider
     public VFXConfig GetVFXConfig() => 
         _vfxConfig;
 
-    private async Task LoadAudioConfig() => 
+    private async UniTask LoadAudioConfig() => 
         _audioConfig = await _assetsLoader.LoadAsset<AudioConfig>(AssetsAddress.AudioConfig);
 
-    private async Task LoadVFXConfig() => 
+    private async UniTask LoadVFXConfig() => 
         _vfxConfig = await _assetsLoader.LoadAsset<VFXConfig>(AssetsAddress.VFXConfig);
 }

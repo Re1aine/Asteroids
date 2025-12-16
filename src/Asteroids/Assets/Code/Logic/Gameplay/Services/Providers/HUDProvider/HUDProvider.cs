@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
+﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.UI.HUD;
+using Cysharp.Threading.Tasks;
 
 namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
 {
@@ -13,7 +13,7 @@ namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
         public HUDProvider(IGameFactory gameFactory) => 
             _gameFactory = gameFactory;
 
-        public async Task Initialize() => 
+        public async UniTask Initialize() => 
             HUD = await _gameFactory.CreateHUD();
     }
 }

@@ -39,8 +39,8 @@ namespace Code.GameFlow.States.Gameplay
         public void Enter()
         {
             _inputService.Enable();
-            _asteroidSpawner.Enable();
-            _ufoSpawner.Enable();
+            //_asteroidSpawner.Enable();
+            //_ufoSpawner.Enable();
             
             _audioService.PlaySound(SoundType.Music);
             

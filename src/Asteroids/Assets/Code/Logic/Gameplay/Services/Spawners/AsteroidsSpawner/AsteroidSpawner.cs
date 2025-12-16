@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using System.Threading.Tasks;
 using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
@@ -39,11 +39,14 @@ namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
             {
                 Vector3 randomPos = RandomHelper.GetRandomPointOnCircle(_boundaries.Center, MinRadiusSpawn, MaxRadiusSpawn);
             
-                Task<AsteroidPresenter> asteroidTask = _gameFactory.CreateAsteroid(randomPos, Quaternion.identity, AsteroidType.Asteroid);
-                
-                yield return new WaitUntil(() => asteroidTask.IsCompleted);
+                UniTask<AsteroidPresenter> asteroidTask = _gameFactory.CreateAsteroid(randomPos, Quaternion.identity, AsteroidType.Asteroid);
 
-                var asteroid = asteroidTask.Result;
+                yield return UniTask.WaitUntil(() => asteroidTask.Status == UniTaskStatus.Succeeded).ToCoroutine();
+                
+                var asteroid = asteroidTask
+                    .GetAwaiter()
+                    .GetResult();
+                
                 asteroid.View.LaunchInRandomDirection();            
                 
                 yield return new WaitForSeconds(SpawnCooldown);
