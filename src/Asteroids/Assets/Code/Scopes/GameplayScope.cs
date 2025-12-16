@@ -45,6 +45,8 @@ namespace Code.Scopes
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             InitializeAnalytics(builder);
             
+            builder.Register<UnityAdsService>(Lifetime.Singleton).As<IAdsService>();
+            
             builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
 
             builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
