@@ -21,6 +21,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         Task<HUDPresenter> CreateHUD();
         Task<LoseWindowPresenter> CreateLoseWindow();
         Task<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
+        Task<ReviveWindowPresenter> CreateRevivedWindow();
         void WarmUp();
         VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation);
     }
