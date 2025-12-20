@@ -16,7 +16,6 @@ using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
 using Code.Logic.Gameplay.Services.PointWrapper;
 using Code.Logic.Gameplay.Services.Providers.CameraProvider;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
@@ -45,8 +44,6 @@ namespace Code.Scopes
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             InitializeAnalytics(builder);
             
-            builder.Register<UnityAdsService>(Lifetime.Singleton).As<IAdsService>();
-            
             builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
 
             builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
@@ -57,21 +54,27 @@ namespace Code.Scopes
 
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
 
+            builder.Register<UnityAdsService>(Lifetime.Singleton).As<IAdsService>();
+            
             builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
-            
-            builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
 
+            builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
+            
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
 
             builder.Register<ScoreCountService>(Lifetime.Singleton).As<IScoreCountService>();
 
             builder.Register<GameFactory>(Lifetime.Singleton).As<IGameFactory>();
-
-            builder.Register<PlayerDeathObserver>(Lifetime.Singleton).As<IPlayerDeathObserver>();
+            
+            builder.Register<ReviveService>(Lifetime.Singleton).As<IReviveService>();
+            builder.Register<PlayerDeathProcessor>(Lifetime.Singleton).As<IPlayerDeathProcessor>();
+            
             builder.Register<PlayerGunObserver>(Lifetime.Singleton).As<IPlayerGunObserver>();
+            
+            builder.Register<PlayerDeathService>(Lifetime.Singleton).As<IPlayerDeathService>();
 
             builder.Register<UFOsHolder>(Lifetime.Singleton).As<IUFOsHolder>();
             builder.Register<AsteroidsHolder>(Lifetime.Singleton).As<IAsteroidsHolder>();
@@ -81,6 +84,8 @@ namespace Code.Scopes
             builder.Register<UFOSpawner>(Lifetime.Singleton).As<IUFOSpawner>();
             builder.Register<AsteroidSpawner>(Lifetime.Singleton).As<IAsteroidSpawner>();
 
+            builder.Register<PauseService>(Lifetime.Singleton).As<IPauseService>();
+            
             builder.RegisterComponentInHierarchy<BackgroundResizer>();
             builder.RegisterComponentInHierarchy<AudioPlayer>();
             

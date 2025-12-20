@@ -2,10 +2,8 @@
 using Code.Logic.Gameplay.Analytics;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Gameplay.Services.ScoreCounter;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -14,9 +12,6 @@ namespace Code.GameFlow.States.Gameplay
         private readonly GameplayStateMachine _gameplayStateMachine;
         private readonly IHUDProvider _hudProvider;
         private readonly IPlayerProvider _playerProvider;
-        private readonly IPlayerDeathObserver _playerDeathObserver;
-        private readonly IPlayerGunObserver _playerGunObserver;
-        private readonly IScoreCountService _scoreCountService;
         private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IAnalytics _analytics;
         private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
@@ -24,27 +19,22 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IAudioService _audioService;
         private readonly IConfigsProvider _configsProvider;
         private readonly IAdsService _adsService;
+        private readonly IPlayerDeathService _playerDeathService;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
             IPlayerProvider playerProvider,
-            IPlayerDeathObserver playerDeathObserver,
-            IPlayerGunObserver playerGunObserver,
-            IScoreCountService scoreCountService,
             IRepositoriesHolder repositoriesHolder,
             IAnalytics analytics,
             IAddressablesAssetsLoader addressablesAssetsLoader,
             IGameFactory gameFactory,
             IAudioService audioService,
             IConfigsProvider configsProvider,
-            IAdsService adsService)
+            IAdsService adsService, IPlayerDeathService playerDeathService)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
             _playerProvider = playerProvider;
-            _playerDeathObserver = playerDeathObserver;
-            _playerGunObserver = playerGunObserver;
-            _scoreCountService = scoreCountService;
             _repositoriesHolder = repositoriesHolder;
             _analytics = analytics;
             _addressablesAssetsLoader = addressablesAssetsLoader;
@@ -52,6 +42,7 @@ namespace Code.GameFlow.States.Gameplay
             _audioService = audioService;
             _configsProvider = configsProvider;
             _adsService = adsService;
+            _playerDeathService = playerDeathService;
         }
         
         public async void Enter()
@@ -64,21 +55,18 @@ namespace Code.GameFlow.States.Gameplay
             _repositoriesHolder.LoadAll();
 
             _gameFactory.WarmUp();
-
+            
+            _adsService.Initialize();
+            
             await _playerProvider.Initialize();
             await _hudProvider.Initialize();
 
             _audioService.Initialize();
-
-            _adsService.Initialize();
             
-            _playerDeathObserver.Start();
-            _playerGunObserver.Start();
+            _playerDeathService.Initialize();
             
-            _scoreCountService.Reset();
-        
             _analytics.StartSession();
-            
+
             _gameplayStateMachine.Enter<GameplayLoopState>();
         }
 

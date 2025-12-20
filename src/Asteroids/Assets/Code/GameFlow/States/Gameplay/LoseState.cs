@@ -6,7 +6,6 @@ using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.UI.LoseWindow;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -22,8 +21,8 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IAnalyticsStore _analyticsStore;
         private readonly IAudioService _audioService;
         private readonly IVFXHolder _vfxHolder;
-
-        private LoseWindowPresenter _loseWindow;
+        private readonly IReviveService _reviveService;
+        
 
         public LoseState(IHUDProvider hudProvider,
             IUFOsHolder ufosHolder,
@@ -33,7 +32,8 @@ namespace Code.GameFlow.States.Gameplay
             IAnalytics analytics,
             IAnalyticsStore analyticsStore,
             IAudioService audioService,
-            IVFXHolder vfxHolder)
+            IVFXHolder vfxHolder,
+            IReviveService reviveService)
         {
             _hudProvider = hudProvider;
             _ufosHolder = ufosHolder;
@@ -44,11 +44,12 @@ namespace Code.GameFlow.States.Gameplay
             _analyticsStore = analyticsStore;
             _audioService = audioService;
             _vfxHolder = vfxHolder;
+            _reviveService = reviveService;
         }
 
         public void Enter()
         {
-            _audioService.StopAllSounds();
+            _audioService.Reset();            
             
             _repositoriesHolder.SaveAll();
 
@@ -62,6 +63,8 @@ namespace Code.GameFlow.States.Gameplay
             _analytics.EndSession(_analyticsStore);
             
             _analyticsStore.Flush();
+            
+            _reviveService.Reset();
         }
 
         public void Exit()

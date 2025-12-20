@@ -1,6 +1,7 @@
-﻿using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.Observers.PlayerDeathObserver;
+﻿using Code.Logic.Gameplay.Analytics;
+using Code.Logic.Gameplay.Services.Input;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
+using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
 using Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
 using Code.UI.PlayerStatsWindow;
@@ -13,9 +14,10 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IAsteroidSpawner _asteroidSpawner;
         private readonly IUFOSpawner _ufoSpawner;
         private readonly IHUDProvider _hudProvider;
-        private readonly IPlayerDeathObserver _playerDeathObserver;
         private readonly IPlayerGunObserver _playerGunObserver;
         private readonly IAudioService _audioService;
+        private readonly IScoreCountService _scoreCountService;
+        private readonly IPlayerDeathService _playerDeathService;
 
         private PlayerStatsWindowPresenter _playerStatsWindow;
 
@@ -23,21 +25,25 @@ namespace Code.GameFlow.States.Gameplay
             IAsteroidSpawner asteroidSpawner,
             IUFOSpawner ufoSpawner, 
             IHUDProvider hudProvider,
-            IPlayerDeathObserver playerDeathObserver,
             IPlayerGunObserver playerGunObserver,
-            IAudioService audioService)
+            IAudioService audioService,
+            IScoreCountService scoreCountService)
         {
             _inputService = inputService;
             _asteroidSpawner = asteroidSpawner;
             _ufoSpawner = ufoSpawner;
             _hudProvider = hudProvider;
-            _playerDeathObserver = playerDeathObserver;
             _playerGunObserver = playerGunObserver;
             _audioService = audioService;
+            _scoreCountService = scoreCountService;
         }
 
         public void Enter()
         {
+            _scoreCountService.Reset();
+            
+            _playerGunObserver.Start();
+            
             _inputService.Enable();
             _asteroidSpawner.Enable();
             _ufoSpawner.Enable();
@@ -52,10 +58,9 @@ namespace Code.GameFlow.States.Gameplay
             _inputService.Disable();
             _asteroidSpawner.Disable();
             _ufoSpawner.Disable();
-        
-            _playerDeathObserver.Stop();
+
             _playerGunObserver.Stop();
-        
+            
             _hudProvider.HUD.HidePlayerStatsWindow();
         }
     }
