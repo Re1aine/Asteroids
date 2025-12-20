@@ -32,6 +32,22 @@ public class AudioPlayer : MonoBehaviour
             .ForEach(x => x.Stop());
     }
 
+    public void PauseSoundCategory(SoundCategory category)
+    {
+        _audioChannels
+            .Where(x  => x.SoundCategory == category)
+            .ToList()
+            .ForEach(x => x.Pause());
+    }
+
+    public void UnPauseSoundCategory(SoundCategory category)
+    {
+        _audioChannels
+            .Where(x => x.SoundCategory == category)
+            .ToList()
+            .ForEach(x => x.UnPause());
+    }
+    
     public void StopSound(SoundType type)
     {
         var channel = GetChannel(type);    
@@ -51,5 +67,11 @@ public class AudioPlayer : MonoBehaviour
         _audioChannels
             .ToList()
             .ForEach(x => x.Stop());
+    }
+
+    public void Reset()
+    {
+        foreach (var channel in _audioChannels) 
+            channel.Reset();
     }
 }

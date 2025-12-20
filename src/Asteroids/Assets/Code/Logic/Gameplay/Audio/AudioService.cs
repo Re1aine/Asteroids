@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using VContainer;
+﻿using VContainer;
 
 public class AudioService : IAudioService
 {
@@ -34,7 +32,19 @@ public class AudioService : IAudioService
 
     public void StopSoundCategory(SoundCategory category) => 
         _audioPlayer.StopSoundCategory(category);
-    
+
+    public void PauseSoundCategory(SoundCategory category) => 
+        _audioPlayer.PauseSoundCategory(category);
+
+    public void UnPauseSoundCategory(SoundCategory category) => 
+        _audioPlayer.UnPauseSoundCategory(category);
+
     public void StopAllSounds() => 
         _audioPlayer.StopAllSounds();
+
+    public void Reset()
+    {
+        StopAllSounds();
+        _audioPlayer.Reset();
+    }
 }

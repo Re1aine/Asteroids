@@ -25,7 +25,7 @@ public class ConfigsProvider : IConfigsProvider
 
     public VFXConfig GetVFXConfig() => 
         _vfxConfig;
-
+    
     private async Task LoadAudioConfig() => 
         _audioConfig = await _assetsLoader.LoadAsset<AudioConfig>(AssetsAddress.AudioConfig);
 
