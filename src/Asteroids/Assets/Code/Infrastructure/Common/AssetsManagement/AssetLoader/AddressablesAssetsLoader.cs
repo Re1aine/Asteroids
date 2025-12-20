@@ -25,17 +25,14 @@ namespace Code.Infrastructure.Common.AssetsManagement.AssetLoader
         
             return await handle.Task;
         }
-    
-        public async Task<T> LoadAsset<T>(AssetReference reference) where T : class => 
-            await LoadAsset<T>(reference.AssetGUID);
-
+        
         public async Task<TAsset[]> LoadAll<TAsset>(List<string> keys) where TAsset : class => 
             await Task.WhenAll(keys.Select(LoadAsset<TAsset>).ToList());
 
         public async Task<List<string>> GetAssetsListByLabel<T>(string label) =>
             await GetAssetsListByLabel(label, typeof(T));
         
-        public async Task<List<string>> GetAssetsListByLabel(string label, Type type)
+        private async Task<List<string>> GetAssetsListByLabel(string label, Type type)
         {
             AsyncOperationHandle<IList<IResourceLocation>> handle = 
                 Addressables.LoadResourceLocationsAsync(label, type);
@@ -47,14 +44,6 @@ namespace Code.Infrastructure.Common.AssetsManagement.AssetLoader
             Addressables.Release(handle);
         
             return assetKeys;
-        }
-    
-        public void Release()
-        {
-            foreach (AsyncOperationHandle handle in _handles.Values) 
-                Addressables.Release(handle);
-            
-            _handles.Clear();
         }
     }
 }
