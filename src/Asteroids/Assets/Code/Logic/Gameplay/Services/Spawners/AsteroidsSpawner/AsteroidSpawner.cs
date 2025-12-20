@@ -17,14 +17,16 @@ namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
         private readonly IGameFactory _gameFactory;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IBoundaries _boundaries;
+        private readonly IPauseService _pauseService;
 
         private Coroutine _coroutine;
     
-        public AsteroidSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries)
+        public AsteroidSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries, IPauseService pauseService)
         {
             _gameFactory = gameFactory;
             _coroutineRunner = coroutineRunner;
             _boundaries = boundaries;
+            _pauseService = pauseService;
         }
 
         public void Enable() => 
@@ -37,6 +39,8 @@ namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
         {
             while (true)
             {
+                yield return new WaitForSecondsUnPaused(_pauseService, SpawnCooldown);
+                
                 Vector3 randomPos = RandomHelper.GetRandomPointOnCircle(_boundaries.Center, MinRadiusSpawn, MaxRadiusSpawn);
             
                 Task<AsteroidPresenter> asteroidTask = _gameFactory.CreateAsteroid(randomPos, Quaternion.identity, AsteroidType.Asteroid);
@@ -44,9 +48,7 @@ namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
                 yield return new WaitUntil(() => asteroidTask.IsCompleted);
 
                 var asteroid = asteroidTask.Result;
-                asteroid.View.LaunchInRandomDirection();            
-                
-                yield return new WaitForSeconds(SpawnCooldown);
+                asteroid.View.SetRandomDirection();
             }
         }
     }

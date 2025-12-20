@@ -17,14 +17,16 @@ namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IBoundaries _boundaries;
         private readonly IUFOsHolder _ufOsHolder;
+        private readonly IPauseService _pauseService;
 
         private Coroutine _coroutine;
     
-        public UFOSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries)
+        public UFOSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries, IPauseService pauseService)
         {
             _gameFactory = gameFactory;
             _coroutineRunner = coroutineRunner;
             _boundaries = boundaries;
+            _pauseService = pauseService;
         }
 
         public void Enable() => 
@@ -37,10 +39,10 @@ namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
         {
             while (true)
             {
+                yield return new WaitForSecondsUnPaused(_pauseService, SpawnCooldown);
+                
                 Vector3 randomPos = RandomHelper.GetRandomPointOnCircle(_boundaries.Center, MinRadiusSpawn, MaxRadiusSpawn);
                 _gameFactory.CreateUfo(randomPos, Quaternion.identity);
-            
-                yield return new WaitForSeconds(SpawnCooldown);
             }
         }
     }
