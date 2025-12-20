@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
 using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
@@ -69,15 +69,16 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 
         public async void WarmUp()
         {
-            var gameplayKeys =  _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.Gameplay); ;
-            var uiKeys =  _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.UI);
-
-            await Task.WhenAll(gameplayKeys, uiKeys);
+            var (gameplayKeys, uiKeys) = await UniTask.WhenAll(
+                _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.Gameplay),
+                _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.UI)
+            );
             
-            var loadGameplayContent = _assetsLoader.LoadAll<GameObject>(gameplayKeys.Result);
-            var loadUIContent = _assetsLoader.LoadAll<GameObject>(uiKeys.Result);
             
-            await Task.WhenAll(loadGameplayContent, loadUIContent);
+            await UniTask.WhenAll(
+                _assetsLoader.LoadAll<GameObject>(gameplayKeys),
+                _assetsLoader.LoadAll<GameObject>(uiKeys)
+            );
         }
         
         public async UniTask<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
@@ -169,7 +170,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             return new HUDPresenter(model, view);
         }
 
-        public async Task<ReviveWindowPresenter> CreateRevivedWindow()
+        public async UniTask<ReviveWindowPresenter> CreateRevivedWindow()
         {
             ReviveWindowView view = await _addressablesAssetsProvider.Instantiate<ReviveWindowView>(AssetsAddress.ReviveWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
 

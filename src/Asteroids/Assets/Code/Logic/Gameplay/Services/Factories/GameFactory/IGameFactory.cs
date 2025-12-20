@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+﻿using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Entities.Enemy.UFO;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;

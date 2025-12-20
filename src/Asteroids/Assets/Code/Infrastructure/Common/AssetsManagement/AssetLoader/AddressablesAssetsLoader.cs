@@ -26,7 +26,7 @@ namespace Code.Infrastructure.Common.AssetsManagement.AssetLoader
             return await handle.Task;
         }
         
-        public async UniTask LoadAll<TAsset>(List<string> keys) where TAsset : class => 
+        public async UniTask<TAsset[]> LoadAll<TAsset>(List<string> keys) where TAsset : class => 
             await UniTask.WhenAll(keys.Select(LoadAsset<TAsset>).ToList());
 
         public async UniTask<List<string>> GetAssetsListByLabel<T>(string label) =>

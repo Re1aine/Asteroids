@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6320232807822437503}
   - component: {fileID: 4679723963759687126}
-  - component: {fileID: 5703329197659586798}
   - component: {fileID: 1307580357120117746}
   - component: {fileID: -2686497908243346313}
   - component: {fileID: -3745277403848702933}
@@ -49,33 +48,6 @@ SortingGroup:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_SortAtRoot: 0
---- !u!50 &5703329197659586798
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299079316654129495}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!58 &1307580357120117746
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,9 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c753aee4e4a443baa12e1068ba0edfc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody2D: {fileID: 5703329197659586798}
+  <AsteroidType>k__BackingField: 0
   _speed: 2
-  AsteroidType: 0
 --- !u!1 &7122719013175088708
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using Code.Logic.Gameplay.Analytics;
-using Code.Logic.Gameplay.Services.Input;
+﻿using Code.Logic.Gameplay.Services.Input;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
@@ -45,8 +44,8 @@ namespace Code.GameFlow.States.Gameplay
             _playerGunObserver.Start();
             
             _inputService.Enable();
-            //_asteroidSpawner.Enable();
-            //_ufoSpawner.Enable();
+            _asteroidSpawner.Enable();
+            _ufoSpawner.Enable();
             
             _audioService.PlaySound(SoundType.Music);
             
