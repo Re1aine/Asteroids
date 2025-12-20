@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+﻿using System.Threading.Tasks;
+using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Entities.Enemy.UFO;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
@@ -21,6 +22,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         UniTask<HUDPresenter> CreateHUD();
         UniTask<LoseWindowPresenter> CreateLoseWindow();
         UniTask<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
+        UniTask<ReviveWindowPresenter> CreateRevivedWindow();
         void WarmUp();
         VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation);
     }

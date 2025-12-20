@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace Code.Infrastructure.Common.AssetsManagement.AssetLoader
 {
@@ -21,6 +24,26 @@ namespace Code.Infrastructure.Common.AssetsManagement.AssetLoader
             handle.Completed += h => _handles[key] = h;
         
             return await handle.Task;
+        }
+        
+        public async UniTask LoadAll<TAsset>(List<string> keys) where TAsset : class => 
+            await UniTask.WhenAll(keys.Select(LoadAsset<TAsset>).ToList());
+
+        public async UniTask<List<string>> GetAssetsListByLabel<T>(string label) =>
+            await GetAssetsListByLabel(label, typeof(T));
+        
+        private async UniTask<List<string>> GetAssetsListByLabel(string label, Type type)
+        {
+            AsyncOperationHandle<IList<IResourceLocation>> handle = 
+                Addressables.LoadResourceLocationsAsync(label, type);
+
+            IList<IResourceLocation> locations = await handle.Task;
+            
+            List<string> assetKeys = locations.Select(location => location.PrimaryKey).ToList();
+
+            Addressables.Release(handle);
+        
+            return assetKeys;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
+﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.UI.LoseWindow;
 using Code.UI.PlayerStatsWindow;
 
@@ -9,7 +8,8 @@ public class HUDService
     
     private LoseWindowPresenter _loseWindow;
     private PlayerStatsWindowPresenter _playerStatsWindow;
-
+    private ReviveWindowPresenter _reviveWindow;
+    
     public HUDService(IGameFactory gameFactory)
     {
         _gameFactory = gameFactory;
@@ -21,10 +21,15 @@ public class HUDService
     public async void ShowPlayerStatsWindow() => 
         _playerStatsWindow = await _gameFactory.CreatePlayerStatsWindow();
 
+    public async void ShowRewardWindow() => 
+        _reviveWindow = await _gameFactory.CreateRevivedWindow();
+
     public void HideLoseWindow() => 
         _loseWindow.Destroy();
 
     public void HidePlayerStatsWindow() =>
         _playerStatsWindow.Destroy();
-    
+
+    public void HideRewardWindow() => 
+        _reviveWindow.Destroy();
 }

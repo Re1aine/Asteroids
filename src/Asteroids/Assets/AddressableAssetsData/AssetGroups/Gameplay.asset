@@ -18,32 +18,38 @@ MonoBehaviour:
   - m_GUID: 029027a678394ac4ab3253145ebed281
     m_Address: Asteroid
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2821ad00215eab348a8c50102d7f65a2
     m_Address: UFO
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3c61bda6d30d40a4285d08811ee04a1c
     m_Address: Player
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aec19c2e608bcbb46b329f0398a87d03
     m_Address: Bullet
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d2e4b0ab2a1eed74aa90474630031b0f
     m_Address: AsteroidPart
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e52b250c3144fe648866fd9b1cc55f2b
     m_Address: LaserBeam
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1da618e165a982245bd7ebec961614f7, type: 2}

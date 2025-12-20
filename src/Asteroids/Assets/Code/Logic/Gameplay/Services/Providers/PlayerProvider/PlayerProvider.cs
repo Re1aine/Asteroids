@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Entities.Player;
+using System;
+using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Cysharp.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace Code.Logic.Gameplay.Services.Providers.PlayerProvider
 {
     public class PlayerProvider : IPlayerProvider
     {
+        public event Action<PlayerPresenter> PlayerChanged;
+        
         private readonly IGameFactory _gameFactory;
         private readonly IBoundaries _boundaries;
         public PlayerPresenter Player { get; set; }
@@ -17,8 +20,11 @@ namespace Code.Logic.Gameplay.Services.Providers.PlayerProvider
             _gameFactory = gameFactory;
             _boundaries = boundaries;
         }
-
-        public async UniTask Initialize() => 
+        
+        public async UniTask Initialize()
+        {
             Player = await _gameFactory.CreatePlayer(_boundaries.Center, Quaternion.identity);
+            PlayerChanged?.Invoke(Player);
+        }
     }
 }

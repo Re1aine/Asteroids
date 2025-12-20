@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
@@ -23,6 +24,7 @@ using Code.UI.PlayerStatsWindow;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
+using Object = UnityEngine.Object;
 
 namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 {
@@ -67,14 +69,22 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 
         public async void WarmUp()
         {
-            await _assetsLoader.LoadAsset<GameObject>(AssetsAddress.Bullet);
+            var gameplayKeys =  _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.Gameplay); ;
+            var uiKeys =  _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.UI);
+
+            await Task.WhenAll(gameplayKeys, uiKeys);
+            
+            var loadGameplayContent = _assetsLoader.LoadAll<GameObject>(gameplayKeys.Result);
+            var loadUIContent = _assetsLoader.LoadAll<GameObject>(uiKeys.Result);
+            
+            await Task.WhenAll(loadGameplayContent, loadUIContent);
         }
         
         public async UniTask<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
         {
             PlayerView playerView = await _addressablesAssetsProvider.Instantiate<PlayerView>(AssetsAddress.Player);
             
-            PlayerPresenter presenter = new PlayerPresenter(new PlayerModel(1),  playerView);
+            PlayerPresenter presenter = new PlayerPresenter(new PlayerModel(),  playerView);
 
             presenter.Init(
                 new PlayerDamageReceiver(presenter),
@@ -157,6 +167,15 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             HUDModel model = new HUDModel(new HUDService(this));
             
             return new HUDPresenter(model, view);
+        }
+
+        public async Task<ReviveWindowPresenter> CreateRevivedWindow()
+        {
+            ReviveWindowView view = await _addressablesAssetsProvider.Instantiate<ReviveWindowView>(AssetsAddress.ReviveWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+
+            ReviveWindowModel model = new ReviveWindowModel(_resolver.Resolve<IAdsService>());
+            
+            return new ReviveWindowPresenter(model, view);
         }
 
         public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)

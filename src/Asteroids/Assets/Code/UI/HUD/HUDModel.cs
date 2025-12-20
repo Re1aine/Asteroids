@@ -9,7 +9,8 @@ namespace Code.UI.HUD
         
         private readonly ReactiveProperty<bool> _isLoseWindowVisible = new();
         private readonly ReactiveProperty<bool> _isPlayerStatsWindowVisible = new();
-
+        private readonly ReactiveProperty<bool> _isRewardWindowVisible = new();
+        
         private readonly CompositeDisposable _disposables = new();
         
         public HUDModel(HUDService hudService)
@@ -24,6 +25,11 @@ namespace Code.UI.HUD
             _isPlayerStatsWindowVisible
                 .Skip(1)
                 .Subscribe(OnPlayerStatsWindowVisibilityChanged)
+                .AddTo(_disposables);
+            
+            _isRewardWindowVisible
+                .Skip(1)
+                .Subscribe(OnRewardWindowVisibilityChanged)
                 .AddTo(_disposables);
         }
         
@@ -42,23 +48,38 @@ namespace Code.UI.HUD
             else
                 _hudService.HidePlayerStatsWindow();
         }
+        private void OnRewardWindowVisibilityChanged(bool isVisible)
+        {
+            if (isVisible)
+                _hudService.ShowRewardWindow();
+            else
+                _hudService.HideRewardWindow();
+        }
         
         public void ShowLoseWindow() => 
             _isLoseWindowVisible.Value = true;
-
+        
         public void ShowPlayerStatsWindow() => 
             _isPlayerStatsWindowVisible.Value = true;
+        
+        public void ShowRewardWindow() => 
+            _isRewardWindowVisible.Value = true;
+
+        public void HideLoseWindow() => 
+            _isLoseWindowVisible.Value = false;
 
         public void HidePlayerStatsWindow() => 
             _isPlayerStatsWindowVisible.Value = false;
 
-        public void HideLoseWindow() => 
-            _isLoseWindowVisible.Value = false;
+        public void HideRewardWindow() => 
+            _isRewardWindowVisible.Value = false;
 
         public void Dispose()
         {
             HideLoseWindow();
             HidePlayerStatsWindow();
+            
+            _disposables.Dispose();
         }
     }
 }

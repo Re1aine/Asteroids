@@ -18,17 +18,26 @@ MonoBehaviour:
   - m_GUID: 236281cc072d05143a6cc05a3aa6f9a0
     m_Address: HUD
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - UI
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 79668e26ff827bd459074f96a1d76efe
     m_Address: LoseWindow
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1081f28dfe6479459dde5c9441bc5c6
+    m_Address: ReviveWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4ae212142e6a5a478d1da5c7135b918
     m_Address: PlayerStatsWindow
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - UI
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1da618e165a982245bd7ebec961614f7, type: 2}

@@ -16,12 +16,18 @@
 
         public void ShowPlayerStatsWindow() => 
             Model.ShowPlayerStatsWindow();
+        
+        public void ShowRewardWindow() =>
+            Model.ShowRewardWindow();
 
         public void HidePlayerStatsWindow() => 
             Model.HidePlayerStatsWindow();
 
         public void HideLoseWindow() => 
             Model.HideLoseWindow();
+        
+        public void HideRewardWindow() =>
+            Model.HideRewardWindow();
 
         public void Destroy()
         {
