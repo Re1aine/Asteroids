@@ -18,33 +18,42 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
         [SerializeField] private float _speed;
 
         private IBoundaries _boundaries;
-        
-        private Rigidbody2D _rigidbody2D;
+        private IPauseService _pauseService;
         
         Vector3 _direction;
-    
+
         [Inject]
-        public void Construct(IBoundaries boundaries) => 
+        public void Construct(IBoundaries boundaries, IPauseService pauseService)
+        {
             _boundaries = boundaries;
-
-        private void Awake() => 
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-
+            _pauseService = pauseService;
+        }
+        
         public void Init(IDamageReceiver damageReceiver) => 
             DamageReceiver = damageReceiver;
-
-        public void LaunchInDirection(Vector3 direction) => 
-            _rigidbody2D.AddForce(direction * _speed, ForceMode2D.Impulse);
-
+        
+        private void Update()
+        {
+            if(_pauseService.IsPaused)
+                return;
+            
+            Move();
+        }
+        
         public void SetSpeed(float speed) => 
             _speed = speed;
+        
+        public void SetDirection(Vector3 direction) => 
+            _direction = direction;
 
-        public void LaunchInRandomDirection()
+        public void SetRandomDirection()
         {
             Vector3 randomPos = RandomHelper.GetRandomPositionInsideBounds(_boundaries.Min, _boundaries.Max);
             _direction = (randomPos - transform.position).normalized;
-            _rigidbody2D.AddForce(_direction * _speed, ForceMode2D.Impulse);        
         }
+        
+        private void Move() => 
+            transform.position += _direction * _speed * Time.deltaTime;
 
         private void OnCollisionEnter2D(Collision2D other)
         {

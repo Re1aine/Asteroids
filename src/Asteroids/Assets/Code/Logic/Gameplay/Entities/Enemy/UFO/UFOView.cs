@@ -18,19 +18,28 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
         [SerializeField] private float _speed;
 
         private IPlayerProvider _playerProvider;
-    
+        private IPauseService _pauseService;
+
         Vector3 _direction;
-    
+
         [Inject]
-        public void Construct(IPlayerProvider playerProvider) => 
+        public void Construct(IPlayerProvider playerProvider, IPauseService pauseService)
+        {
             _playerProvider = playerProvider;
+            _pauseService = pauseService;
+        }
 
         public void Init(IDamageReceiver damageReceiver) => 
             DamageReceiver = damageReceiver;
 
-        private void Update() => 
+        private void Update()
+        {
+            if(_pauseService.IsPaused)
+                return;
+            
             MoveToPlayer();
-
+        }
+        
         private void MoveToPlayer()
         {
             if (_playerProvider.Player?.View == null)

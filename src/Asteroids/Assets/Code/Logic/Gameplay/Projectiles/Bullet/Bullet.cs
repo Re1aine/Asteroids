@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Logic.Gameplay.Projectiles.Bullet
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CapsuleCollider2D))]
     public class Bullet : MonoBehaviour
     { 
@@ -11,13 +11,27 @@ namespace Code.Logic.Gameplay.Projectiles.Bullet
 
         [SerializeField] private float _speed;
         
-        private Rigidbody2D _rigidbody2D;
+        private IPauseService _pauseService;
+        
+        private Vector3 _direction;
+        
+        [Inject]
+        public void Construct(IPauseService pauseService) => 
+            _pauseService = pauseService;
+        
+        private void Update()
+        {
+            if(_pauseService.IsPaused)
+                return;
+            
+            Move();
+        }
 
-        private void Awake() => 
-            _rigidbody2D = GetComponent<Rigidbody2D>();
+        private void Move() =>
+            transform.position += _direction * _speed * Time.deltaTime;
 
-        public void MoveToDirection(Vector2 direction) => 
-            _rigidbody2D.AddForce(direction * _speed, ForceMode2D.Impulse);
+        public void SetDirection(Vector3 direction) => 
+            _direction = direction;
 
         public void Destroy()
         {

@@ -25,7 +25,7 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
                 DestroyWithSplit();
             else
                 Object.Destroy(_asteroidPresenter.View.gameObject);
-        
+            
             _scoreCountService.Add(_asteroidPresenter.Model.ScoreReward);
         }
 
@@ -47,7 +47,7 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             Vector2 spawnPos = (Vector2)_asteroidPresenter.View.transform.position + direction * 0.5f;
             AsteroidPresenter asteroid = await _gameFactory.CreateAsteroid(spawnPos, RandomHelper.GetRandomRotation(true), AsteroidType.AsteroidPart);
             asteroid.View.SetSpeed(3);
-            asteroid.View.LaunchInDirection(direction);
+            asteroid.View.SetDirection(direction);
         }
     }
 }

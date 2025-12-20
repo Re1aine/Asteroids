@@ -188,7 +188,7 @@ namespace Code.Logic.Gameplay
         private async void Shoot()
         {
             Bullet bullet = await _gameFactory.CreateBullet(_shootPoint.position, RotateHelper.GetRotation2D(_shootDirection));
-            bullet.MoveToDirection(transform.up);
+            bullet.SetDirection(transform.up);
             
             BulletShoot?.Invoke();
         }
