@@ -1,21 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Advertisements;
-using VContainer;
 
 public class InterstitialAd : IUnityAdsLoadListener, IUnityAdsShowListener
 {
     private const string AndroidAdUnitId = "Interstitial_Android";
     private const string IOSAdUnitId = "Interstitial_iOS";
+    public event Action<AdContext> ShowsCompleted;
     
     private string _adUnitId;
-    
-    private IAdsService _adsService;
 
-    [Inject]
-    public void Construct(IAdsService adsService)
+    private AdContext _adContext;
+    
+    public void Initialize()
     {
-        _adsService =  adsService;
-        
         _adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer)
             ? IOSAdUnitId
             : AndroidAdUnitId;
@@ -27,28 +25,23 @@ public class InterstitialAd : IUnityAdsLoadListener, IUnityAdsShowListener
         Advertisement.Load(_adUnitId, this);
     }
 
-    private void ShowAd()
+    public void ShowAd(AdContext context)
     {
         Debug.Log("Showing Ad: " + _adUnitId);
+        
+        _adContext = context;
+        
         Advertisement.Show(_adUnitId, this);
     }
 
-    public void OnUnityAdsAdLoaded(string adUnitId)
-    {
-        ShowAd();
-    }
+    public void OnUnityAdsAdLoaded(string adUnitId) => 
+        Debug.Log("Ad Loaded: " + adUnitId);
 
-    public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message)
-    {
+    public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message) => 
         Debug.Log($"Error loading Ad Unit: {_adUnitId} - {error.ToString()} - {message}");
-        
-    }
 
-    public void OnUnityAdsShowFailure(string _adUnitId, UnityAdsShowError error, string message)
-    {
+    public void OnUnityAdsShowFailure(string _adUnitId, UnityAdsShowError error, string message) => 
         Debug.Log($"Error showing Ad Unit {_adUnitId}: {error.ToString()} - {message}");
-        
-    }
 
     public void OnUnityAdsShowStart(string _adUnitId)
     {
@@ -60,8 +53,6 @@ public class InterstitialAd : IUnityAdsLoadListener, IUnityAdsShowListener
         
     }
 
-    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState)
-    {
-        
-    }
+    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) => 
+        ShowsCompleted?.Invoke(_adContext);
 }
