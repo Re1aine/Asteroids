@@ -1,15 +1,10 @@
-﻿using System;
-using Code.Logic.Gameplay.Services;
-
-namespace Code.Logic.Gameplay.Entities.Player
+﻿namespace Code.Logic.Gameplay.Entities.Player
 {
     public class PlayerPresenter
     {
-        public event Action Destroyed;
-    
-        private IDamageReceiver _damageReceiver;
+        public IDamageReceiver DamageReceiver { get; private set; }
         private IDestroyer _destroyer;
-    
+
         public PlayerModel Model {get ; private set; }
         public PlayerView View  {get; private set; }
     
@@ -21,24 +16,19 @@ namespace Code.Logic.Gameplay.Entities.Player
 
         public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer)
         {
-            _damageReceiver = damageReceiver;
+            DamageReceiver = damageReceiver;
             _destroyer = destroyer;
-
+            
             View.OnDamageReceived += ReceiveDamage;
         }
 
-        public void ReceiveDamage(DamageType damageType) => 
-            _damageReceiver.ReceiverDamage(damageType);
-
-        public void DecrementHealth() => 
-            Model.DecrementHealth();
-
+        private void ReceiveDamage(DamageType damageType) => 
+            DamageReceiver.ReceiverDamage(damageType);
+        
         public void Destroy(DamageType  damageType)
         {
-            Destroyed?.Invoke();
-        
             View.OnDamageReceived -= ReceiveDamage;
-        
+            
             _destroyer.Destroy(damageType);
         }
     }

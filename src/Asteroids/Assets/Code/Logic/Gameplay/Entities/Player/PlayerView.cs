@@ -18,25 +18,29 @@ namespace Code.Logic.Gameplay.Entities.Player
         [SerializeField] private float _rotateSpeed;
 
         private IInputService _inputService;
-        
+        private IPauseService _pauseService;
+
         public ReadOnlyReactiveProperty<Vector3> Position => _position;
         public ReadOnlyReactiveProperty<Quaternion> Rotation => _rotation;
         public ReadOnlyReactiveProperty<float> Velocity => _velocity;
-        
+
         private ReactiveProperty<Vector3> _position;
         private ReactiveProperty<Quaternion> _rotation;
         private ReactiveProperty<float> _velocity;
-        
+
         private readonly CompositeDisposable _disposables = new();
-        
+
         private Vector2 _moveDirection;
         private Vector2 _currentVelocity;
 
         private float _rotateAngle;
 
         [Inject]
-        public void Construct(IInputService inputService) => 
+        public void Construct(IInputService inputService, IPauseService pauseService)
+        {
             _inputService = inputService;
+            _pauseService = pauseService;
+        }
 
         public void SetMoveDirection(Vector3 direction) => 
             _moveDirection = direction;
@@ -71,6 +75,12 @@ namespace Code.Logic.Gameplay.Entities.Player
 
         private void Update()
         {
+            if (_pauseService.IsPaused)
+            {
+                StopMovement();
+                return;
+            }
+            
             _moveDirection = _inputService.Movement;
         
             HandleRotate();
@@ -98,7 +108,10 @@ namespace Code.Logic.Gameplay.Entities.Player
             Vector2 targetVelocity = (Vector2)transform.up * (_moveDirection.y * _moveSpeed);
             _currentVelocity = Vector2.Lerp(_currentVelocity, targetVelocity, _accelerationMove * Time.deltaTime); ;
         }
-    
+
+        private void StopMovement() => 
+            _currentVelocity = Vector2.zero;
+
         private void DecelerateMove() => 
             _currentVelocity = Vector2.Lerp(_currentVelocity, Vector2.zero, _decelerationMove  * Time.deltaTime);
     
