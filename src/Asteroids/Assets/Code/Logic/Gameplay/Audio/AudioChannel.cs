@@ -13,6 +13,9 @@ public class AudioChannel : MonoBehaviour
     private void Awake() => 
         _source = GetComponent<AudioSource>();
 
+    private void Start() => 
+        gameObject.name = $"[{gameObject.name}] : [{SoundType}]";
+
     public void Play(AudioClip clip)
     {
         if (_isPaused && _source.clip != null)

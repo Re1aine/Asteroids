@@ -1,23 +1,27 @@
 ﻿using Code.GameFlow.States.Gameplay;
 using Code.Logic.Gameplay.Entities;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using Cysharp.Threading.Tasks;
 
 public class PlayerDeathProcessor : IPlayerDeathProcessor
 {
     private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly IReviveService _reviveService;
     private readonly IPlayerProvider _playerProvider;
+    private readonly ShockWaveEffector _shockWaveEffector;
 
     private DamageType _damageType;
 
     public PlayerDeathProcessor(
         GameplayStateMachine gameplayStateMachine,
         IReviveService reviveService,
-        IPlayerProvider playerProvider)
+        IPlayerProvider playerProvider,
+        ShockWaveEffector shockWaveEffector)
     {
         _gameplayStateMachine = gameplayStateMachine;
         _reviveService = reviveService;
         _playerProvider = playerProvider;
+        _shockWaveEffector = shockWaveEffector;
     }
 
     public void StartProcess(DamageType damageType)
@@ -35,6 +39,7 @@ public class PlayerDeathProcessor : IPlayerDeathProcessor
     public void CancelProcess()
     {
         _reviveService.Revive();
+        _shockWaveEffector.CreateShockWave().Forget();
         _gameplayStateMachine.Enter<GameplayLoopState>();
     }
 

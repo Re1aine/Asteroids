@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 996895148482983933}
   - component: {fileID: 2800548920135104851}
   m_Layer: 0
-  m_Name: AudioChannel (2)
+  m_Name: AudioChannel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 5349989884705214706}
   - component: {fileID: 8925349650701287307}
   m_Layer: 0
-  m_Name: AudioChannel (1)
+  m_Name: AudioChannel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

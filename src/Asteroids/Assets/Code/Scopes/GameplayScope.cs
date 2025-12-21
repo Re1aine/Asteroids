@@ -1,3 +1,4 @@
+using System;
 using Code.EntryPoints;
 using Code.GameFlow;
 using Code.GameFlow.States.Gameplay;
@@ -88,6 +89,7 @@ namespace Code.Scopes
             
             builder.RegisterComponentInHierarchy<BackgroundResizer>();
             builder.RegisterComponentInHierarchy<AudioPlayer>();
+            builder.RegisterComponentInHierarchy<ShockWaveEffector>();
             
             builder.Register<AudioService>(Lifetime.Singleton).As<IAudioService>();
             

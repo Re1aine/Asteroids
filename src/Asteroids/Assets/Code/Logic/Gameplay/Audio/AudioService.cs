@@ -7,17 +7,12 @@ public class AudioService : IAudioService
     private AudioPlayer _audioPlayer;
     private AudioConfig _audioConfig;
 
-    public AudioService(IConfigsProvider configsProvider)
+    public AudioService(IConfigsProvider configsProvider, AudioPlayer audioPlayer)
     {
         _configsProvider = configsProvider;
+        _audioPlayer = audioPlayer;
     }
-
-    [Inject]
-    public void Construct(IObjectResolver resolver)
-    {
-        _audioPlayer = resolver.Resolve<AudioPlayer>();
-    }
-
+    
     public void Initialize() => 
         _audioConfig = _configsProvider.GetAudioConfig();
 

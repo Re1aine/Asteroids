@@ -38,8 +38,8 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: Background
+    uniqueID: 3484195859
     locked: 0
   - name: Asteroid
     uniqueID: 1082586375
@@ -55,6 +55,12 @@ TagManager:
     locked: 0
   - name: VFX
     uniqueID: 102670643
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 2874229307
     locked: 0
   m_RenderingLayers:
   - Default
