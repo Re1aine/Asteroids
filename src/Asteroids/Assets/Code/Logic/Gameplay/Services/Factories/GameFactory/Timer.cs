@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +41,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 
             AnimatePulse(0.2f);
 
-            while (elapsedTime <= _duration || _tokenSource.IsCancellationRequested)
+            while (elapsedTime < _duration && !_tokenSource.IsCancellationRequested)
             {
                 var progress = elapsedTime / _duration;
                 float remainingTime = _duration - elapsedTime;
@@ -52,10 +52,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
                 
                 elapsedTime += Time.deltaTime;
 
-                await Task.Yield();
-
-                if (_tokenSource.IsCancellationRequested)
-                    return;;
+                await UniTask.Yield();
             }
         
             if(!_isDecisionPicked)
@@ -82,39 +79,37 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             await AnimateSizeDown(duration);
         }
     
-        private async Task AnimateSizeUp(float duration)
+        private async UniTask AnimateSizeUp(float duration)
         {
             var bigSize = transform.localScale * 1.5f; 
         
             float elapsedTime = 0;
-            while (elapsedTime <= duration || _tokenSource.IsCancellationRequested)
+            while (elapsedTime <= duration && !_tokenSource.IsCancellationRequested)
             {
                 var progress = elapsedTime / duration;    
                 transform.localScale = Vector3.Lerp(transform.localScale, bigSize, progress);
                 elapsedTime += Time.deltaTime;
             
-                await Task.Yield();
-                if (_tokenSource.IsCancellationRequested)
-                    break;
+                await UniTask.Yield();
             }
+            
             transform.localScale = bigSize;
         }
 
-        private async Task AnimateSizeDown(float duration)
+        private async UniTask AnimateSizeDown(float duration)
         {
             var normalSize = transform.localScale / 1.5f;
         
             float elapsedTime = 0;
-            while (elapsedTime <= duration || _tokenSource.IsCancellationRequested)
+            while (elapsedTime <= duration && !_tokenSource.IsCancellationRequested)
             {
-                var progress = elapsedTime / duration;    
+                var progress = elapsedTime / duration;
                 transform.localScale = Vector3.Lerp(transform.localScale, normalSize, progress);
                 elapsedTime += Time.deltaTime;
-            
-                await Task.Yield();
-                if (_tokenSource.IsCancellationRequested)
-                    break;
+
+                await UniTask.Yield();
             }
+            
             transform.localScale = normalSize;
         }
 
@@ -124,7 +119,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         public void Stop()
         {
             _isDecisionPicked = true;
-            _tokenSource.Cancel();
+            _tokenSource?.Cancel();
         }
     }
 }
