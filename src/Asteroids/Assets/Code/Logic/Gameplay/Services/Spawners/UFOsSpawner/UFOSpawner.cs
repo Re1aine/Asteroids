@@ -3,6 +3,7 @@ using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using Code.Logic.Gameplay.Services.PauseService;
 using UnityEngine;
 
 namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner

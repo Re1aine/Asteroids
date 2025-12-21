@@ -1,9 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
-public struct SoundSettings
+namespace Code.Logic.Gameplay.Audio
 {
-    public SoundType type;
-    public AudioClip[] clips; 
+    [Serializable]
+    public struct SoundSettings
+    {
+        public SoundType type;
+        public AudioClip[] clips; 
+    }
 }

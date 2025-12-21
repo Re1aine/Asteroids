@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
+using Code.Logic.Gameplay.Services.PauseService;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using UnityEngine;
 using VContainer;

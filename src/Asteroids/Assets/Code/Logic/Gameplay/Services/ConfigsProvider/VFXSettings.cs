@@ -1,8 +1,11 @@
 ﻿using System;
 
-[Serializable]
-public struct VFXSettings
+namespace Code.Logic.Gameplay.Services.ConfigsProvider
 {
-    public VFXType Type;
-    public VFX Prefab;
+    [Serializable]
+    public struct VFXSettings
+    {
+        public VFXType Type;
+        public VFX Prefab;
+    }
 }

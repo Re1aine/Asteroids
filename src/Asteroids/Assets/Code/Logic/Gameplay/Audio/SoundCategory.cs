@@ -1,5 +1,8 @@
-﻿public enum SoundCategory
+﻿namespace Code.Logic.Gameplay.Audio
 {
-    ShortSounds = 1,
-    Music = 2  
+    public enum SoundCategory
+    {
+        ShortSounds = 1,
+        Music = 2  
+    }
 }

@@ -1,45 +1,48 @@
-﻿using VContainer;
+﻿using Code.Logic.Gameplay.Services.ConfigsProvider;
 
-public class AudioService : IAudioService
+namespace Code.Logic.Gameplay.Audio
 {
-    private readonly IConfigsProvider _configsProvider;
-    
-    private AudioPlayer _audioPlayer;
-    private AudioConfig _audioConfig;
-
-    public AudioService(IConfigsProvider configsProvider, AudioPlayer audioPlayer)
+    public class AudioService : IAudioService
     {
-        _configsProvider = configsProvider;
-        _audioPlayer = audioPlayer;
-    }
+        private readonly IConfigsProvider _configsProvider;
     
-    public void Initialize() => 
-        _audioConfig = _configsProvider.GetAudioConfig();
+        private AudioPlayer _audioPlayer;
+        private AudioConfig _audioConfig;
 
-    public void PlaySound(SoundType type)
-    {
-        var clip = _audioConfig.GetRandomClipByType(type);
-        _audioPlayer.PlaySound(type, clip);
-    }
+        public AudioService(IConfigsProvider configsProvider, AudioPlayer audioPlayer)
+        {
+            _configsProvider = configsProvider;
+            _audioPlayer = audioPlayer;
+        }
     
-    public void StopSound(SoundType type) => 
-        _audioPlayer.StopSound(type);
+        public void Initialize() => 
+            _audioConfig = _configsProvider.GetAudioConfig();
 
-    public void StopSoundCategory(SoundCategory category) => 
-        _audioPlayer.StopSoundCategory(category);
+        public void PlaySound(SoundType type)
+        {
+            var clip = _audioConfig.GetRandomClipByType(type);
+            _audioPlayer.PlaySound(type, clip);
+        }
+    
+        public void StopSound(SoundType type) => 
+            _audioPlayer.StopSound(type);
 
-    public void PauseSoundCategory(SoundCategory category) => 
-        _audioPlayer.PauseSoundCategory(category);
+        public void StopSoundCategory(SoundCategory category) => 
+            _audioPlayer.StopSoundCategory(category);
 
-    public void UnPauseSoundCategory(SoundCategory category) => 
-        _audioPlayer.UnPauseSoundCategory(category);
+        public void PauseSoundCategory(SoundCategory category) => 
+            _audioPlayer.PauseSoundCategory(category);
 
-    public void StopAllSounds() => 
-        _audioPlayer.StopAllSounds();
+        public void UnPauseSoundCategory(SoundCategory category) => 
+            _audioPlayer.UnPauseSoundCategory(category);
 
-    public void Reset()
-    {
-        StopAllSounds();
-        _audioPlayer.Reset();
+        public void StopAllSounds() => 
+            _audioPlayer.StopAllSounds();
+
+        public void Reset()
+        {
+            StopAllSounds();
+            _audioPlayer.Reset();
+        }
     }
 }

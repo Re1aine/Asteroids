@@ -1,4 +1,7 @@
-﻿public interface IPlayerDeathService
+﻿namespace Code.Logic.Gameplay.Services.PlayerDeathService
 {
-    void Initialize();
+    public interface IPlayerDeathService
+    {
+        void Initialize();
+    }
 }

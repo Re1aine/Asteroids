@@ -1,51 +1,55 @@
 ﻿using Code.GameFlow.States.Gameplay;
 using Code.Logic.Gameplay.Entities;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using Code.Logic.Gameplay.Services.ReviveService;
 using Cysharp.Threading.Tasks;
 
-public class PlayerDeathProcessor : IPlayerDeathProcessor
+namespace Code.Logic.Gameplay.Services.DeathProcessor
 {
-    private readonly GameplayStateMachine _gameplayStateMachine;
-    private readonly IReviveService _reviveService;
-    private readonly IPlayerProvider _playerProvider;
-    private readonly ShockWaveEffector _shockWaveEffector;
-
-    private DamageType _damageType;
-
-    public PlayerDeathProcessor(
-        GameplayStateMachine gameplayStateMachine,
-        IReviveService reviveService,
-        IPlayerProvider playerProvider,
-        ShockWaveEffector shockWaveEffector)
+    public class PlayerDeathProcessor : IPlayerDeathProcessor
     {
-        _gameplayStateMachine = gameplayStateMachine;
-        _reviveService = reviveService;
-        _playerProvider = playerProvider;
-        _shockWaveEffector = shockWaveEffector;
-    }
+        private readonly GameplayStateMachine _gameplayStateMachine;
+        private readonly IReviveService _reviveService;
+        private readonly IPlayerProvider _playerProvider;
+        private readonly ShockWaveEffector _shockWaveEffector;
 
-    public void StartProcess(DamageType damageType)
-    {
-        if (_reviveService.IsRevived)
+        private DamageType _damageType;
+
+        public PlayerDeathProcessor(
+            GameplayStateMachine gameplayStateMachine,
+            IReviveService reviveService,
+            IPlayerProvider playerProvider,
+            ShockWaveEffector shockWaveEffector)
         {
-            CompleteProcess();
-            return;
+            _gameplayStateMachine = gameplayStateMachine;
+            _reviveService = reviveService;
+            _playerProvider = playerProvider;
+            _shockWaveEffector = shockWaveEffector;
         }
 
-        _damageType = damageType;
-        _gameplayStateMachine.Enter<ReviveState>();
-    }
+        public void StartProcess(DamageType damageType)
+        {
+            if (_reviveService.IsRevived)
+            {
+                CompleteProcess();
+                return;
+            }
 
-    public void CancelProcess()
-    {
-        _reviveService.Revive();
-        _shockWaveEffector.CreateShockWave().Forget();
-        _gameplayStateMachine.Enter<GameplayLoopState>();
-    }
+            _damageType = damageType;
+            _gameplayStateMachine.Enter<ReviveState>();
+        }
 
-    public void CompleteProcess()
-    {
-        _playerProvider.Player.Destroy(_damageType);
-        _gameplayStateMachine.Enter<LoseState>();
+        public void CancelProcess()
+        {
+            _reviveService.Revive();
+            _shockWaveEffector.CreateShockWave().Forget();
+            _gameplayStateMachine.Enter<GameplayLoopState>();
+        }
+
+        public void CompleteProcess()
+        {
+            _playerProvider.Player.Destroy(_damageType);
+            _gameplayStateMachine.Enter<LoseState>();
+        }
     }
 }

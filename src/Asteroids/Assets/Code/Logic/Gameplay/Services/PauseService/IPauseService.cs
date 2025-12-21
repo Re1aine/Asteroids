@@ -1,6 +1,9 @@
-﻿public interface IPauseService
+﻿namespace Code.Logic.Gameplay.Services.PauseService
 {
-    bool IsPaused { get; }
-    void Pause();
-    void UnPause();
+    public interface IPauseService
+    {
+        bool IsPaused { get; }
+        void Pause();
+        void UnPause();
+    }
 }

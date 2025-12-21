@@ -1,5 +1,8 @@
-﻿public enum AdContext
+﻿namespace Code.Logic.Gameplay.Services.AdService.Ad
 {
-    DeathRevive,      
-    DeathInterstitial,
+    public enum AdContext
+    {
+        DeathRevive,      
+        DeathInterstitial,
+    }
 }

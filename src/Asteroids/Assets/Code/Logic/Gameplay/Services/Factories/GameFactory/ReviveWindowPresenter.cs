@@ -1,39 +1,42 @@
 ﻿using R3;
 
-public class ReviveWindowPresenter
+namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 {
-    public ReviveWindowModel Model {get; }
-    public ReviveWindowView View {get; }
-    
-    private readonly CompositeDisposable _disposables = new();
-    
-    public ReviveWindowPresenter(ReviveWindowModel model, ReviveWindowView view)
+    public class ReviveWindowPresenter
     {
-        Model = model;
-        View = view;
-        
-        Model.TimerDuration
-            .Subscribe(duration => View.SetTimerDuration(duration))
-            .AddTo(_disposables);
-
-        Model.IsTimerActive
-            .Subscribe(isActive => View.SetActiveTimer(isActive))
-            .AddTo(_disposables);
-
-        View.Accepted
-            .Subscribe(_ => Model.Accept())
-            .AddTo(_disposables);
-        
-        View.Declined
-            .Subscribe(_ => Model.Decline())
-            .AddTo(_disposables);
-    }
+        public ReviveWindowModel Model {get; }
+        public ReviveWindowView View {get; }
     
-    public void Destroy()
-    {
-        _disposables.Dispose();
+        private readonly CompositeDisposable _disposables = new();
+    
+        public ReviveWindowPresenter(ReviveWindowModel model, ReviveWindowView view)
+        {
+            Model = model;
+            View = view;
         
-        Model.Dispose();
-        View.Destroy();
+            Model.TimerDuration
+                .Subscribe(duration => View.SetTimerDuration(duration))
+                .AddTo(_disposables);
+
+            Model.IsTimerActive
+                .Subscribe(isActive => View.SetActiveTimer(isActive))
+                .AddTo(_disposables);
+
+            View.Accepted
+                .Subscribe(_ => Model.Accept())
+                .AddTo(_disposables);
+        
+            View.Declined
+                .Subscribe(_ => Model.Decline())
+                .AddTo(_disposables);
+        }
+    
+        public void Destroy()
+        {
+            _disposables.Dispose();
+        
+            Model.Dispose();
+            View.Destroy();
+        }
     }
 }

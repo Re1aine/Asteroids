@@ -1,7 +1,11 @@
 ﻿using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Logic.Gameplay.Analytics;
+using Code.Logic.Gameplay.Audio;
+using Code.Logic.Gameplay.Services.AdService;
+using Code.Logic.Gameplay.Services.ConfigsProvider;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using Code.Logic.Gameplay.Services.PlayerDeathService;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 

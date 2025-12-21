@@ -1,8 +1,11 @@
 ﻿using Code.Logic.Gameplay.Entities;
 
-public interface IPlayerDeathProcessor
+namespace Code.Logic.Gameplay.Services.DeathProcessor
 {
-    void StartProcess(DamageType damageType);
-    void CancelProcess();
-    void CompleteProcess();
+    public interface IPlayerDeathProcessor
+    {
+        void StartProcess(DamageType damageType);
+        void CancelProcess();
+        void CompleteProcess();
+    }
 }

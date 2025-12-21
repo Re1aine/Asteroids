@@ -1,6 +1,9 @@
-﻿public interface IReviveService
+﻿namespace Code.Logic.Gameplay.Services.ReviveService
 {
-    bool IsRevived { get; }
-    void Revive();
-    void Reset();
+    public interface IReviveService
+    {
+        bool IsRevived { get; }
+        void Revive();
+        void Reset();
+    }
 }

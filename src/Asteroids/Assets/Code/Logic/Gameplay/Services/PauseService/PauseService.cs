@@ -1,13 +1,16 @@
 ﻿
-public class PauseService : IPauseService
+namespace Code.Logic.Gameplay.Services.PauseService
 {
-    public bool IsPaused => _isPaused;
+    public class PauseService : IPauseService
+    {
+        public bool IsPaused => _isPaused;
 
-    private bool _isPaused;
+        private bool _isPaused;
 
-    public void Pause() => 
-        _isPaused = true;
+        public void Pause() => 
+            _isPaused = true;
 
-    public void UnPause() => 
-        _isPaused = false;
+        public void UnPause() => 
+            _isPaused = false;
+    }
 }

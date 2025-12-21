@@ -1,9 +1,13 @@
 ﻿using System;
+using Code.Logic.Gameplay.Services.AdService.Ad;
 
-public interface IAdsService
+namespace Code.Logic.Gameplay.Services.AdService
 {
-    event Action<AdContext> AdCompleted; 
-    void ShowRewardedAd(AdContext adContext);
-    void ShowInterstitialAd(AdContext adContext);
-    void Initialize();
+    public interface IAdsService
+    {
+        event Action<AdContext> AdCompleted; 
+        void ShowRewardedAd(AdContext adContext);
+        void ShowInterstitialAd(AdContext adContext);
+        void Initialize();
+    }
 }

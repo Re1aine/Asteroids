@@ -11,7 +11,7 @@ using R3;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay
+namespace Code.Logic.Gameplay.Gun
 {
     public class Gun : MonoBehaviour
     {

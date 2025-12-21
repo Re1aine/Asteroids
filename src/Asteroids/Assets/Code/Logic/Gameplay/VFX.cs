@@ -1,21 +1,24 @@
 ﻿using System;
 using UnityEngine;
 
-public class VFX : MonoBehaviour
+namespace Code.Logic.Gameplay
 {
-    public event Action<VFX> Destroyed;
+    public class VFX : MonoBehaviour
+    {
+        public event Action<VFX> Destroyed;
     
-    private ParticleSystem _particleSystem;
+        private ParticleSystem _particleSystem;
 
-    private void Awake() =>
-        _particleSystem = GetComponent<ParticleSystem>();
+        private void Awake() =>
+            _particleSystem = GetComponent<ParticleSystem>();
 
-    public void Pause() =>
-        _particleSystem.Pause();
+        public void Pause() =>
+            _particleSystem.Pause();
 
-    private void OnDestroy() => 
-        Destroyed?.Invoke(this);
+        private void OnDestroy() => 
+            Destroyed?.Invoke(this);
 
-    public void Destroy() => 
-        Destroy(gameObject);
+        public void Destroy() => 
+            Destroy(gameObject);
+    }
 }

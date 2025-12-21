@@ -2,23 +2,26 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "AudioConfig", menuName = "Configs/AudioConfig")]
-public class AudioConfig : ScriptableObject
+namespace Code.Logic.Gameplay.Audio
 {
-    public SoundSettings[] Sounds;
-    
-    public AudioClip GetRandomClipByType(SoundType type)
+    [CreateAssetMenu(fileName = "AudioConfig", menuName = "Configs/AudioConfig")]
+    public class AudioConfig : ScriptableObject
     {
-        foreach (var sound in Sounds)
+        public SoundSettings[] Sounds;
+    
+        public AudioClip GetRandomClipByType(SoundType type)
         {
-            if (sound.type != type)
-                continue;
+            foreach (var sound in Sounds)
+            {
+                if (sound.type != type)
+                    continue;
 
-            var clipsLength = sound.clips.Length;
-            var randomIndex = Random.Range(0, clipsLength);
-            return sound.clips[randomIndex];
-        }
+                var clipsLength = sound.clips.Length;
+                var randomIndex = Random.Range(0, clipsLength);
+                return sound.clips[randomIndex];
+            }
         
-        throw new Exception($"Doesn't exist SoundsSetting with SoundType : {type}");
+            throw new Exception($"Doesn't exist SoundsSetting with SoundType : {type}");
+        }
     }
 }

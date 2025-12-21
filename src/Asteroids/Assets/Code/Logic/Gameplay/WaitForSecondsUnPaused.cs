@@ -1,25 +1,29 @@
-﻿using UnityEngine;
+﻿using Code.Logic.Gameplay.Services.PauseService;
+using UnityEngine;
 
-public class WaitForSecondsUnPaused : CustomYieldInstruction
+namespace Code.Logic.Gameplay
 {
-    private readonly IPauseService _pauseService;
-    private float _seconds;
+    public class WaitForSecondsUnPaused : CustomYieldInstruction
+    {
+        private readonly IPauseService _pauseService;
+        private float _seconds;
 
-    public WaitForSecondsUnPaused(IPauseService pauseService, float seconds)
-    {
-        _pauseService = pauseService;
-        _seconds = seconds;
-    }
-    
-    public override bool keepWaiting
-    {
-        get
+        public WaitForSecondsUnPaused(IPauseService pauseService, float seconds)
         {
-            if (_pauseService.IsPaused)
-                return true;
+            _pauseService = pauseService;
+            _seconds = seconds;
+        }
+    
+        public override bool keepWaiting
+        {
+            get
+            {
+                if (_pauseService.IsPaused)
+                    return true;
             
-            _seconds -= Time.deltaTime;
-            return _seconds > 0f;
+                _seconds -= Time.deltaTime;
+                return _seconds > 0f;
+            }
         }
     }
 }

@@ -1,19 +1,22 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "VFXConfig", menuName = "Configs/VFXConfig")]
-public class VFXConfig : ScriptableObject
+namespace Code.Logic.Gameplay.Services.ConfigsProvider
 {
-    public VFXSettings[] VFXS;
-
-    public VFX GetVFXByType(VFXType type)
+    [CreateAssetMenu(fileName = "VFXConfig", menuName = "Configs/VFXConfig")]
+    public class VFXConfig : ScriptableObject
     {
-        foreach (var vfx in VFXS)
+        public VFXSettings[] VFXS;
+
+        public VFX GetVFXByType(VFXType type)
         {
-            if (vfx.Type == type)
-                return vfx.Prefab;
-        }
+            foreach (var vfx in VFXS)
+            {
+                if (vfx.Type == type)
+                    return vfx.Prefab;
+            }
         
-        throw new Exception($"Doesn't exist VFXSettings with VFXType : {type}");
+            throw new Exception($"Doesn't exist VFXSettings with VFXType : {type}");
+        }
     }
 }

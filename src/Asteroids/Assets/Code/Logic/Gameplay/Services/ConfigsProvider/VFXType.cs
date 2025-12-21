@@ -1,5 +1,8 @@
-﻿public enum VFXType
+﻿namespace Code.Logic.Gameplay.Services.ConfigsProvider
 {
-    AsteroidDestroyVFX = 0,
-    UfoDestroyVFX = 1,
+    public enum VFXType
+    {
+        AsteroidDestroyVFX = 0,
+        UfoDestroyVFX = 1,
+    }
 }

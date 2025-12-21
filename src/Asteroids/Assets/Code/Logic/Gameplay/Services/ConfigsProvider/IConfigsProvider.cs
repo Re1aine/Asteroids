@@ -1,8 +1,12 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Code.Logic.Gameplay.Audio;
+using Cysharp.Threading.Tasks;
 
-public interface IConfigsProvider
+namespace Code.Logic.Gameplay.Services.ConfigsProvider
 {
-    UniTask Initialize();
-    AudioConfig GetAudioConfig();
-    VFXConfig GetVFXConfig();
+    public interface IConfigsProvider
+    {
+        UniTask Initialize();
+        AudioConfig GetAudioConfig();
+        VFXConfig GetVFXConfig();
+    }
 }

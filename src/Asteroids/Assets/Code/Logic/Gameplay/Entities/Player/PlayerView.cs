@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services.Input;
+using Code.Logic.Gameplay.Services.PauseService;
 using R3;
 using UnityEngine;
 using VContainer;
@@ -10,7 +11,7 @@ namespace Code.Logic.Gameplay.Entities.Player
     {
         public event Action<DamageType>  OnDamageReceived;
         
-        [field: SerializeField] public Gun Gun {get; private set; }
+        [field: SerializeField] public Gun.Gun Gun {get; private set; }
 
         [SerializeField] private float _decelerationMove;
         [SerializeField] private float _accelerationMove;

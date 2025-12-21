@@ -1,6 +1,9 @@
-﻿public enum SoundType
+﻿namespace Code.Logic.Gameplay.Audio
 {
-    BulletShoot = 0,
-    LaserShoot = 1,
-    Music = 2
+    public enum SoundType
+    {
+        BulletShoot = 0,
+        LaserShoot = 1,
+        Music = 2
+    }
 }

@@ -1,5 +1,8 @@
-﻿public interface IPlayerGunObserver
+﻿namespace Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver
 {
-    void Start();
-    void Stop();
+    public interface IPlayerGunObserver
+    {
+        void Start();
+        void Stop();
+    }
 }
