@@ -2,7 +2,8 @@
 {
     public enum AdContext
     {
-        DeathRevive,      
-        DeathInterstitial,
+        None = 0,
+        DeathRevive = 1,
+        DeathInterstitial = 2,
     }
 }

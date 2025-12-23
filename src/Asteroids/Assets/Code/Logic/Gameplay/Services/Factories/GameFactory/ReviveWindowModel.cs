@@ -25,13 +25,21 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         public void Accept()
         {
             SetActiveTimer(false);
-            _adsService.ShowRewardedAd(AdContext.DeathRevive);
+            
+            if(_adsService.IsAvailable)
+                _adsService.ShowRewardedAd(AdContext.DeathRevive);
+            else
+                _adsService.SkipAd(AdContext.DeathRevive);
         }
 
         public void Decline()
         {
             SetActiveTimer(false);
-            _adsService.ShowInterstitialAd(AdContext.DeathInterstitial);
+            
+            if(_adsService.IsAvailable)
+                _adsService.ShowInterstitialAd(AdContext.DeathInterstitial);
+            else
+                _adsService.SkipAd(AdContext.DeathInterstitial);
         }
 
         private void RunTimer()
