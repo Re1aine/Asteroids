@@ -1,7 +1,5 @@
-﻿using System;
-using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
+﻿using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Cysharp.Threading.Tasks;
 using GamePush;
 using UnityEngine;
 
@@ -9,23 +7,29 @@ namespace Code.Logic.Gameplay.Analytics.GamePush
 {
     public class GamePushAnalytics : IAnalytics
     {
+        private readonly ISDKInitializer _sdkInitializer;
+        
         private bool _isInitialized;
-    
-        public async UniTask Initialize()
+
+        public GamePushAnalytics(ISDKInitializer sdkInitializer)
+        {
+            _sdkInitializer = sdkInitializer;
+        }
+        
+        public void Initialize()
         {
             if (_isInitialized)
                 return;
             
-            try
+            if (_sdkInitializer.IsGamePushInitialized)
             {
-                await GP_Init.Ready;
                 _isInitialized = true;
-                Debug.Log("<b><color=green> GamePush initialized successfully! </color></b>");
+                Debug.Log("<b><color=green> [Analytics initialized successfully] </color></b>");
             }
-            catch (Exception e)
+            else
             {
                 _isInitialized = false;
-                Debug.LogException(e);
+                Debug.Log("<b><color=red> [Analytics is not initialized] </color></b>");
             }
         }
 

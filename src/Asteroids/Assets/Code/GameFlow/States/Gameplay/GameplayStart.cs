@@ -24,6 +24,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IConfigsProvider _configsProvider;
         private readonly IAdsService _adsService;
         private readonly IPlayerDeathService _playerDeathService;
+        private readonly ISDKInitializer _sdkInitializer;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
@@ -34,7 +35,8 @@ namespace Code.GameFlow.States.Gameplay
             IGameFactory gameFactory,
             IAudioService audioService,
             IConfigsProvider configsProvider,
-            IAdsService adsService, IPlayerDeathService playerDeathService)
+            IAdsService adsService,
+            IPlayerDeathService playerDeathService, ISDKInitializer sdkInitializer)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -47,12 +49,15 @@ namespace Code.GameFlow.States.Gameplay
             _configsProvider = configsProvider;
             _adsService = adsService;
             _playerDeathService = playerDeathService;
+            _sdkInitializer = sdkInitializer;
         }
         
         public async void Enter()
         {
             await _addressablesAssetsLoader.Initialize();
-            await _analytics.Initialize();
+            await _sdkInitializer.Initialize();
+            
+            _analytics.Initialize();
             
             await _configsProvider.Initialize();
             

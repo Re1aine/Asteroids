@@ -51,6 +51,8 @@ namespace Code.Scopes
             builder.Register<AddressablesAssetsLoader>(Lifetime.Singleton).As<IAddressablesAssetsLoader>();
             builder.Register<AddressablesAssetsProvider>(Lifetime.Singleton).As<IAddressablesAssetsProvider>();
 
+            builder.Register<SDKInitializer>(Lifetime.Singleton).As<ISDKInitializer>();
+            
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             InitializeAnalytics(builder);
             
@@ -63,8 +65,8 @@ namespace Code.Scopes
             builder.RegisterComponentInHierarchy<CoroutineRunner>().As<ICoroutineRunner>();
 
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
-
-            builder.Register<UnityAdsService>(Lifetime.Singleton).As<IAdsService>();
+            
+            builder.Register<GamePushAdsService>(Lifetime.Singleton).As<IAdsService>();
             
             builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
@@ -109,7 +111,7 @@ namespace Code.Scopes
         }
 
         private void InitializeAnalytics(IContainerBuilder builder)
-        {
+        { 
             if (Application.platform == RuntimePlatform.WebGLPlayer)
                 builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();
             else
