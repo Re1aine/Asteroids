@@ -33,6 +33,11 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
         public void Init(IDamageReceiver damageReceiver) => 
             DamageReceiver = damageReceiver;
 
+        public void Configure(float speed)
+        {
+            _speed = speed;
+        }
+        
         private void Update()
         {
             if(_pauseService.IsPaused)

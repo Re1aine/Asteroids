@@ -1,5 +1,4 @@
-﻿using Code.Logic.Gameplay.Services;
-using Code.Logic.Gameplay.Services.ScoreCounter;
+﻿using Code.Logic.Gameplay.Services.ScoreCounter;
 using UnityEngine;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.UFO
@@ -17,7 +16,7 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
 
         public void Destroy(DamageType damageType)
         {
-            _scoreCountService.Add(_ufoPresenter.Model.ScoreReward);
+            _scoreCountService.Add(_ufoPresenter.Model.Config.CurrentValue.ScoreReward);
             Object.Destroy(_ufoPresenter.View.gameObject);
         }
     }

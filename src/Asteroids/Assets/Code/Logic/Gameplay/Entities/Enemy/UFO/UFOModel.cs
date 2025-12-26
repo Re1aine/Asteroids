@@ -1,12 +1,16 @@
-﻿namespace Code.Logic.Gameplay.Entities.Enemy.UFO
+﻿using R3;
+
+namespace Code.Logic.Gameplay.Entities.Enemy.UFO
 {
     public class UFOModel
     {
-        public int ScoreReward { get; }
-
-        public UFOModel(int scoreReward)
+        public ReadOnlyReactiveProperty<UfoConfig> Config => _config;
+        
+        private readonly ReactiveProperty<UfoConfig> _config = new();
+        
+        public UFOModel(UfoConfig config)
         {
-            ScoreReward = scoreReward;
+            _config.Value = config;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Code.Logic.Gameplay.Services.ConfigsProvider;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Observers.UFO;
+using R3;
 using UnityEngine;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.UFO
@@ -16,11 +17,19 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
         private IDestroyer _destroyer;
         private IUFODeathObserver _ufoDeathObserver;
         private IGameFactory _gameFactory;
-
+        
+        private readonly CompositeDisposable _disposables = new();
+        
         public UFOPresenter(UFOModel model, UFOView view)
         {
             Model = model;
             View = view;
+
+            Model.Config
+                .Subscribe(config =>
+                    View.Configure(
+                        config.Speed))
+                .AddTo(_disposables);
         }
 
         public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer, IUFODeathObserver ufoDeathObserver, IGameFactory gameFactory)
@@ -46,6 +55,8 @@ namespace Code.Logic.Gameplay.Entities.Enemy.UFO
 
             View.OnDamageReceived -= ReceiveDamage;
 
+            _disposables.Dispose();
+            
             _destroyer.Destroy(damageType);
 
             _gameFactory.CreateVFX(VFXType.UfoDestroyVFX, View.transform.position, Quaternion.identity);
