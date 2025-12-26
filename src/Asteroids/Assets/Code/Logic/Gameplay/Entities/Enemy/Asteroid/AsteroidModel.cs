@@ -15,6 +15,5 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             AsteroidType = asteroidType;
             _config.Value = config;
         }
-        
     }
 }

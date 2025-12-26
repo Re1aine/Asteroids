@@ -2,6 +2,7 @@
 using Code.Logic.Gameplay.Services.ConfigsProvider;
 using Code.Logic.Gameplay.Services.Observers.Asteroid;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
+using R3;
 using UnityEngine;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
@@ -17,10 +18,16 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
         private IAsteroidDeathObserver _asteroidDeathObserver;
         private IGameFactory _gameFactory;
 
+        private readonly CompositeDisposable _disposables = new();
+        
         public AsteroidPresenter(AsteroidModel model, AsteroidView view)
         {
             View = view;
             Model = model;
+            
+            Model.Config
+                .Subscribe(config => View.Configure(config.Speed))
+                .AddTo(_disposables);
         }
 
         public void Init(IDamageReceiver damageReceiver, IDestroyer destroyer, IAsteroidDeathObserver asteroidDeathObserver, IGameFactory gameFactory)
@@ -45,6 +52,8 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             Destroyed?.Invoke(this);
 
             View.OnDamageReceived -= ReceiveDamage;
+            
+            _disposables.Dispose();
             
             _destroyer.Destroy(damageType);
 

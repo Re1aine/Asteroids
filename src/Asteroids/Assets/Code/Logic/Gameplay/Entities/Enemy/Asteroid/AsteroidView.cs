@@ -30,13 +30,13 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             _pauseService = pauseService;
         }
         
-        public void Init(IDamageReceiver damageReceiver) =>
-            DamageReceiver = damageReceiver;
-
         public void Configure(float speed)
         {
             _speed = speed;
         }
+        
+        public void Init(IDamageReceiver damageReceiver) => 
+            DamageReceiver = damageReceiver;
         
         private void Update()
         {
