@@ -10,24 +10,41 @@ namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
 {
     public class UFOSpawner : IUFOSpawner
     {
-        private const float SpawnCooldown = 3f;
-        private const float MinRadiusSpawn = 10f;
-        private const float MaxRadiusSpawn = 11f;
+        private float _spawnCooldown = 3f;
+        private float _minRadiusSpawn = 10f;
+        private float _maxRadiusSpawn = 11f;
     
         private readonly IGameFactory _gameFactory;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IBoundaries _boundaries;
         private readonly IUFOsHolder _ufOsHolder;
         private readonly IPauseService _pauseService;
+        private readonly IGameConfigsProvider _gameConfigsProvider;
 
         private Coroutine _coroutine;
-    
-        public UFOSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries, IPauseService pauseService)
+        
+        private UfoSpawnerConfig _config;
+
+        public UFOSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries,
+            IPauseService pauseService,
+            IGameConfigsProvider gameConfigsProvider)
         {
             _gameFactory = gameFactory;
             _coroutineRunner = coroutineRunner;
             _boundaries = boundaries;
             _pauseService = pauseService;
+            _gameConfigsProvider = gameConfigsProvider;
+
+            Configure();
+        }
+
+        private void Configure()
+        {
+            _config = _gameConfigsProvider.UfoSpawnerConfig;
+
+            _spawnCooldown = _config.SpawnCooldown;
+            _minRadiusSpawn = _config.MinRadiusSpawn;
+            _maxRadiusSpawn = _config.MaxRadiusSpawn;
         }
 
         public void Enable() => 
@@ -40,9 +57,9 @@ namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
         {
             while (true)
             {
-                yield return new WaitForSecondsUnPaused(_pauseService, SpawnCooldown);
+                yield return new WaitForSecondsUnPaused(_pauseService, _spawnCooldown);
                 
-                Vector3 randomPos = RandomHelper.GetRandomPointOnCircle(_boundaries.Center, MinRadiusSpawn, MaxRadiusSpawn);
+                Vector3 randomPos = RandomHelper.GetRandomPointOnCircle(_boundaries.Center, _minRadiusSpawn, _maxRadiusSpawn);
                 _gameFactory.CreateUfo(randomPos, Quaternion.identity);
             }
         }
