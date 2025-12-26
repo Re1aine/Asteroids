@@ -1,29 +1,20 @@
-﻿using System;
+﻿using R3;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
     public class AsteroidModel
     {
-        public event Action<AsteroidType> AsteroidTypeChanged;
+        public AsteroidType AsteroidType { get; }
 
-        public int ScoreReward { get; }
-
-        public AsteroidType AsteroidType
+        public ReadOnlyReactiveProperty<AsteroidConfig> Config => _config;
+        
+        private readonly ReactiveProperty<AsteroidConfig> _config = new();
+        
+        public AsteroidModel(AsteroidType asteroidType, AsteroidConfig config)
         {
-            get => _asteroidType;
-            private set
-            {
-                _asteroidType = value;
-                AsteroidTypeChanged?.Invoke(value);
-            }
+            AsteroidType = asteroidType;
+            _config.Value = config;
         }
-
-        private AsteroidType _asteroidType;
-
-        public AsteroidModel(AsteroidType asteroidType, int scoreReward)
-        {
-            _asteroidType = asteroidType;
-            ScoreReward = scoreReward;
-        }
+        
     }
 }

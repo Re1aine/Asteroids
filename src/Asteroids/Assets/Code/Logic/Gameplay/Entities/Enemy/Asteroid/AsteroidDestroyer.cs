@@ -26,7 +26,7 @@ namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
             else
                 Object.Destroy(_asteroidPresenter.View.gameObject);
             
-            _scoreCountService.Add(_asteroidPresenter.Model.ScoreReward);
+            _scoreCountService.Add(_asteroidPresenter.Model.Config.CurrentValue.ScoreReward);
         }
 
         private void DestroyWithSplit()
