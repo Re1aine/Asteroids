@@ -3,10 +3,10 @@ using Cysharp.Threading.Tasks;
 
 namespace Code.Logic.Gameplay.Services.ConfigsProvider
 {
-    public interface IConfigsProvider
+    public interface IGameAssetsConfigsProvider
     {
         UniTask Initialize();
-        AudioConfig GetAudioConfig();
-        VFXConfig GetVFXConfig();
+        AudioConfig AudioConfig { get; }
+        VFXConfig VFXConfig { get; }
     }
 }
