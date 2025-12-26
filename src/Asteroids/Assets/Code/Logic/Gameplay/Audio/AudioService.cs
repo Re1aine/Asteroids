@@ -1,22 +1,21 @@
-﻿using Code.Logic.Gameplay.Services.ConfigsProvider;
-
+﻿
 namespace Code.Logic.Gameplay.Audio
 {
     public class AudioService : IAudioService
     {
-        private readonly IConfigsProvider _configsProvider;
+        private readonly IGameConfigsProvider _gameConfigsProvider;
     
-        private AudioPlayer _audioPlayer;
+        private readonly AudioPlayer _audioPlayer;
         private AudioConfig _audioConfig;
 
-        public AudioService(IConfigsProvider configsProvider, AudioPlayer audioPlayer)
+        public AudioService(IGameConfigsProvider gameConfigsProvider, AudioPlayer audioPlayer)
         {
-            _configsProvider = configsProvider;
+            _gameConfigsProvider = gameConfigsProvider;
             _audioPlayer = audioPlayer;
         }
     
         public void Initialize() => 
-            _audioConfig = _configsProvider.GetAudioConfig();
+            _audioConfig = _gameConfigsProvider.AudioConfig;
 
         public void PlaySound(SoundType type)
         {

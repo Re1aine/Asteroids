@@ -53,6 +53,10 @@ namespace Code.Scopes
 
             builder.Register<SDKInitializer>(Lifetime.Singleton).As<ISDKInitializer>();
             
+            builder.Register<GameAssetsConfigsProvider>(Lifetime.Singleton).As<IGameAssetsConfigsProvider>();
+            builder.Register<FirebaseRemoteConfigsProvider>(Lifetime.Singleton).As<IGameBalanceConfigsProvider>();
+            builder.Register<GameConfigsProviderFacade>(Lifetime.Singleton).As<IGameConfigsProvider>();
+            
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             InitializeAnalytics(builder);
             
@@ -71,8 +75,6 @@ namespace Code.Scopes
             builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
-
-            builder.Register<ConfigsProvider>(Lifetime.Singleton).As<IConfigsProvider>();
             
             builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();

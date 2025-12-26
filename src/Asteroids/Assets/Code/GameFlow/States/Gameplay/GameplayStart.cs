@@ -21,10 +21,10 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IAudioService _audioService;
-        private readonly IConfigsProvider _configsProvider;
         private readonly IAdsService _adsService;
         private readonly IPlayerDeathService _playerDeathService;
         private readonly ISDKInitializer _sdkInitializer;
+        private readonly IGameConfigsProvider _gameConfigsProvider;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
@@ -34,9 +34,10 @@ namespace Code.GameFlow.States.Gameplay
             IAddressablesAssetsLoader addressablesAssetsLoader,
             IGameFactory gameFactory,
             IAudioService audioService,
-            IConfigsProvider configsProvider,
             IAdsService adsService,
-            IPlayerDeathService playerDeathService, ISDKInitializer sdkInitializer)
+            IPlayerDeathService playerDeathService,
+            ISDKInitializer sdkInitializer,
+            IGameConfigsProvider gameConfigsProvider)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -46,20 +47,21 @@ namespace Code.GameFlow.States.Gameplay
             _addressablesAssetsLoader = addressablesAssetsLoader;
             _gameFactory = gameFactory;
             _audioService = audioService;
-            _configsProvider = configsProvider;
             _adsService = adsService;
             _playerDeathService = playerDeathService;
             _sdkInitializer = sdkInitializer;
+            _gameConfigsProvider = gameConfigsProvider;
         }
         
         public async void Enter()
         {
             await _addressablesAssetsLoader.Initialize();
+            
             await _sdkInitializer.Initialize();
             
-            _analytics.Initialize();
+            await _gameConfigsProvider.Initialize();
             
-            await _configsProvider.Initialize();
+            _analytics.Initialize();
             
             _repositoriesHolder.LoadAll();
 

@@ -43,7 +43,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
         private readonly IAddressablesAssetsLoader _assetsLoader;
         private readonly IVFXHolder _vfxHolder;
-        private readonly IConfigsProvider _configsProvider;
+        private readonly IGameConfigsProvider _gameConfigsProvider;
 
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
@@ -55,7 +55,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IAddressablesAssetsProvider addressablesAssetsProvider,
             IAddressablesAssetsLoader assetsLoader,
             IVFXHolder vfxHolder,
-            IConfigsProvider configsProvider)
+            IGameConfigsProvider gameConfigsProvider)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -67,7 +67,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _addressablesAssetsProvider = addressablesAssetsProvider;
             _assetsLoader = assetsLoader;
             _vfxHolder = vfxHolder;
-            _configsProvider = configsProvider;
+            _gameConfigsProvider = gameConfigsProvider;
         }
 
         public async void WarmUp()
@@ -76,7 +76,6 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
                 _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.Gameplay),
                 _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.UI)
             );
-            
             
             await UniTask.WhenAll(
                 _assetsLoader.LoadAll<GameObject>(gameplayKeys),
@@ -88,7 +87,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         {
             PlayerView playerView = await _addressablesAssetsProvider.Instantiate<PlayerView>(AssetsAddress.Player);
             
-            PlayerPresenter presenter = new PlayerPresenter(new PlayerModel(),  playerView);
+            PlayerPresenter presenter = new PlayerPresenter(
+                new PlayerModel(_gameConfigsProvider.PlayerConfig, _gameConfigsProvider.GunConfig),
+                playerView);
 
             presenter.Init(
                 new PlayerDamageReceiver(presenter),
@@ -101,7 +102,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         {
             AsteroidView view = await _addressablesAssetsProvider.InstantiateAt<AsteroidView>(AssetsAddress.GetAddressForAsteroid(type), position, rotation);
             
-            AsteroidPresenter presenter = new AsteroidPresenter(new AsteroidModel(type, scoreReward), view);
+            AsteroidPresenter presenter = new AsteroidPresenter(
+                new AsteroidModel(type, _gameConfigsProvider.AsteroidConfig),
+                view);
 
             presenter.Init(
                 new AsteroidDamageReceiver(presenter),
@@ -118,7 +121,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         {
             UFOView view = await _addressablesAssetsProvider.InstantiateAt<UFOView>(AssetsAddress.UFO, position, rotation);
             
-            UFOPresenter presenter = new UFOPresenter(new UFOModel(scoreReward), view);
+            UFOPresenter presenter = new UFOPresenter(
+                new UFOModel(_gameConfigsProvider.UfoConfig),
+                view);
 
             presenter.Init(
                 new UfoDamageReceiver(presenter),
@@ -175,7 +180,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 
         public async UniTask<ReviveWindowPresenter> CreateRevivedWindow()
         {
-            ReviveWindowView view = await _addressablesAssetsProvider.Instantiate<ReviveWindowView>(AssetsAddress.ReviveWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+            ReviveWindowView view = await _addressablesAssetsProvider.Instantiate<ReviveWindowView>(AssetsAddress.ReviveWindow,
+                _resolver.Resolve<IHUDProvider>().HUD.View.transform);
 
             ReviveWindowModel model = new ReviveWindowModel(_resolver.Resolve<IAdsService>());
             
@@ -184,8 +190,8 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 
         public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
         {
-            VFX prefab = _configsProvider
-                .GetVFXConfig()
+            VFX prefab = _gameConfigsProvider
+                .VFXConfig
                 .GetVFXByType(type);
 
             VFX vfx = Object.Instantiate(prefab, position, rotation);
