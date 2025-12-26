@@ -4,6 +4,7 @@ using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
 using Code.Logic.Gameplay.Services.ConfigsProvider;
+using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
 using Code.UI.HUD;
 using Code.UI.LoseWindow;
 using Code.UI.PlayerStatsWindow;

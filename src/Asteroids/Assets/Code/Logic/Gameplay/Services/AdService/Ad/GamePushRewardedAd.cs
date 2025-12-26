@@ -1,29 +1,31 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.AdService.Ad;
 using GamePush;
 
-public class GamePushRewardedAd
+namespace Code.Logic.Gameplay.Services.AdService.Ad
 {
-    public event Action<AdContext> ShowsCompleted;
-
-    private AdContext _adContext;
-    public void ShowRewarded(AdContext adContext)
+    public class GamePushRewardedAd
     {
-        _adContext = adContext;
+        public event Action<AdContext> ShowsCompleted;
+
+        private AdContext _adContext;
+        public void ShowRewarded(AdContext adContext)
+        {
+            _adContext = adContext;
         
-        GP_Ads.ShowRewarded("", OnGetReward, OnRewardedStart, OnRewardedClose);
-    }
+            GP_Ads.ShowRewarded("", OnGetReward, OnRewardedStart, OnRewardedClose);
+        }
 
-    private void OnRewardedStart()
-    {
+        private void OnRewardedStart()
+        {
         
-    }
+        }
 
-    private void OnGetReward(string value) => 
-        ShowsCompleted?.Invoke(_adContext);
+        private void OnGetReward(string value) => 
+            ShowsCompleted?.Invoke(_adContext);
 
-    private void OnRewardedClose(bool success)
-    {
+        private void OnRewardedClose(bool success)
+        {
        
+        }
     }
 }

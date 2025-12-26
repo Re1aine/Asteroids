@@ -1,25 +1,27 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.AdService.Ad;
 using GamePush;
 
-public class GamePushInterstitialAd
+namespace Code.Logic.Gameplay.Services.AdService.Ad
 {
-    public event Action<AdContext> ShowsCompleted;
+    public class GamePushInterstitialAd
+    {
+        public event Action<AdContext> ShowsCompleted;
     
-    private AdContext _adContext;
+        private AdContext _adContext;
 
-    public void ShowFullscreen(AdContext adContext)
-    {
-        _adContext = adContext;
+        public void ShowFullscreen(AdContext adContext)
+        {
+            _adContext = adContext;
         
-        GP_Ads.ShowFullscreen(OnFullscreenStart, OnFullscreenClose);
-    }
+            GP_Ads.ShowFullscreen(OnFullscreenStart, OnFullscreenClose);
+        }
 
-    private void OnFullscreenStart()
-    {
+        private void OnFullscreenStart()
+        {
         
-    }
+        }
 
-    private void OnFullscreenClose(bool success) => 
-        ShowsCompleted?.Invoke(_adContext);
+        private void OnFullscreenClose(bool success) => 
+            ShowsCompleted?.Invoke(_adContext);
+    }
 }

@@ -1,13 +1,16 @@
-﻿public class UfoSpawnerConfig
+﻿namespace Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance
 {
-    public float SpawnCooldown;
-    public float MinRadiusSpawn;
-    public float MaxRadiusSpawn;
-
-    public UfoSpawnerConfig()
+    public class UfoSpawnerConfig
     {
-        SpawnCooldown = 5;
-        MinRadiusSpawn = 10;
-        MaxRadiusSpawn = 12;
+        public float SpawnCooldown;
+        public float MinRadiusSpawn;
+        public float MaxRadiusSpawn;
+
+        public UfoSpawnerConfig()
+        {
+            SpawnCooldown = 5;
+            MinRadiusSpawn = 10;
+            MaxRadiusSpawn = 12;
+        }
     }
 }

@@ -2,9 +2,10 @@
 using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Logic.Gameplay.Audio;
+using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Gameplay.Services.ConfigsProvider
+namespace Code.Logic.Gameplay.Services.ConfigsProvider.GameAssetsConfigProvider
 {
     public class GameAssetsConfigsProvider : IGameAssetsConfigsProvider
     {

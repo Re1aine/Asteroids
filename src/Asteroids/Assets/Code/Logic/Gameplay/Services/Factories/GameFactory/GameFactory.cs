@@ -11,6 +11,7 @@ using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
 using Code.Logic.Gameplay.Services.AdService;
 using Code.Logic.Gameplay.Services.ConfigsProvider;
+using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;

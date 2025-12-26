@@ -1,4 +1,6 @@
 ﻿
+using Code.Logic.Gameplay.Services.ConfigsProvider;
+
 namespace Code.Logic.Gameplay.Audio
 {
     public class AudioService : IAudioService

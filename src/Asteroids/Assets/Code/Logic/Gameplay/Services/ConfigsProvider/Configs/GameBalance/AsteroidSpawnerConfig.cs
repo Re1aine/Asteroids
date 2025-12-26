@@ -1,13 +1,16 @@
-﻿public class AsteroidSpawnerConfig
+﻿namespace Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance
 {
-    public float SpawnCooldown;
-    public float MinRadiusSpawn;
-    public float MaxRadiusSpawn;
+    public class AsteroidSpawnerConfig
+    {
+        public float SpawnCooldown;
+        public float MinRadiusSpawn;
+        public float MaxRadiusSpawn;
 
-    public AsteroidSpawnerConfig()
-    { 
-        SpawnCooldown = 5;
-        MinRadiusSpawn = 10;
-        MaxRadiusSpawn = 12;
+        public AsteroidSpawnerConfig()
+        { 
+            SpawnCooldown = 5;
+            MinRadiusSpawn = 10;
+            MaxRadiusSpawn = 12;
+        }
     }
 }

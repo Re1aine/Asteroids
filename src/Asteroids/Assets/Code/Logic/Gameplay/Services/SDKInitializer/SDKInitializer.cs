@@ -4,50 +4,53 @@ using Firebase;
 using GamePush;
 using UnityEngine;
 
-public class SDKInitializer : ISDKInitializer
+namespace Code.Logic.Gameplay.Services.SDKInitializer
 {
-    public bool IsGamePushInitialized {get; private set;}
-    public bool IsFireBaseInitialized {get; private set;}
-    
-    public async UniTask Initialize()
+    public class SDKInitializer : ISDKInitializer
     {
-        //await InitializeGamePushSDK();
-        await InitializerFireBaseSDK();
-    }
+        public bool IsGamePushInitialized {get; private set;}
+        public bool IsFireBaseInitialized {get; private set;}
     
-    private async UniTask InitializeGamePushSDK()
-    {
-        try
+        public async UniTask Initialize()
         {
-            await GP_Init.Ready;
-            Debug.Log("<b><color=green> [GamePush initialized successfully] </color></b>");
-            IsGamePushInitialized = true;
+            //await InitializeGamePushSDK();
+            await InitializerFireBaseSDK();
         }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-            IsGamePushInitialized = false;
-        }          
-    }
     
-    private async UniTask InitializerFireBaseSDK()
-    {
-        try
+        private async UniTask InitializeGamePushSDK()
         {
-            var dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
-            if (dependencyStatus != DependencyStatus.Available)
+            try
             {
-                Debug.LogError($"Failed to initialize Firebase: {dependencyStatus}");
-                IsFireBaseInitialized = false;;
+                await GP_Init.Ready;
+                Debug.Log("<b><color=green> [GamePush initialized successfully] </color></b>");
+                IsGamePushInitialized = true;
             }
-            
-            Debug.Log("<b><color=green> Firebase initialized successfully! </color></b>");
-            IsFireBaseInitialized = true;;
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                IsGamePushInitialized = false;
+            }          
         }
-        catch (Exception e)
+    
+        private async UniTask InitializerFireBaseSDK()
         {
-            Debug.LogException(e);
-            IsFireBaseInitialized = false;
+            try
+            {
+                var dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
+                if (dependencyStatus != DependencyStatus.Available)
+                {
+                    Debug.LogError($"Failed to initialize Firebase: {dependencyStatus}");
+                    IsFireBaseInitialized = false;;
+                }
+            
+                Debug.Log("<b><color=green> Firebase initialized successfully! </color></b>");
+                IsFireBaseInitialized = true;;
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                IsFireBaseInitialized = false;
+            }
         }
     }
 }

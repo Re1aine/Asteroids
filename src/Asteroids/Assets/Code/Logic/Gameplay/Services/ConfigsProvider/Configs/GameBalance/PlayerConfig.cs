@@ -1,15 +1,18 @@
-﻿public class PlayerConfig
+﻿namespace Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance
 {
-    public float DecelerationMove;
-    public float AccelerationMove;
-    public float MoveSpeed;
-    public float RotateSpeed;
-
-    public PlayerConfig()
+    public class PlayerConfig
     {
-        DecelerationMove = 1;
-        AccelerationMove = 5;
-        MoveSpeed = 7;
-        RotateSpeed = 200;
+        public float DecelerationMove;
+        public float AccelerationMove;
+        public float MoveSpeed;
+        public float RotateSpeed;
+
+        public PlayerConfig()
+        {
+            DecelerationMove = 1;
+            AccelerationMove = 5;
+            MoveSpeed = 7;
+            RotateSpeed = 200;
+        }
     }
 }

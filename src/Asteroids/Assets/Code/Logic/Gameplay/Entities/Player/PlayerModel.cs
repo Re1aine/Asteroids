@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance;
+using R3;
 
 namespace Code.Logic.Gameplay.Entities.Player
 {

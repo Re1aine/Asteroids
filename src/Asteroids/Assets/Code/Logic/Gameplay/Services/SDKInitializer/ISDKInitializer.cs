@@ -1,8 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
 
-public interface ISDKInitializer
+namespace Code.Logic.Gameplay.Services.SDKInitializer
 {
-    UniTask Initialize();
-    bool IsGamePushInitialized { get; }
-    bool IsFireBaseInitialized { get; }
+    public interface ISDKInitializer
+    {
+        UniTask Initialize();
+        bool IsGamePushInitialized { get; }
+        bool IsFireBaseInitialized { get; }
+    }
 }

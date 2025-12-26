@@ -1,11 +1,14 @@
-﻿public class AsteroidConfig
+﻿namespace Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance
 {
-    public int ScoreReward;
-    public float Speed;
-
-    public AsteroidConfig()
+    public class AsteroidConfig
     {
-        ScoreReward = 2;
-        Speed = 2;
+        public int ScoreReward;
+        public float Speed;
+
+        public AsteroidConfig()
+        {
+            ScoreReward = 2;
+            Speed = 2;
+        }
     }
 }

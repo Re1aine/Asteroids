@@ -1,11 +1,14 @@
-﻿public class UfoConfig
+﻿namespace Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance
 {
-    public int ScoreReward;
-    public float Speed;
-
-    public UfoConfig()
+    public class UfoConfig
     {
-        ScoreReward = 4;
-        Speed = 1;
+        public int ScoreReward;
+        public float Speed;
+
+        public UfoConfig()
+        {
+            ScoreReward = 4;
+            Speed = 1;
+        }
     }
 }

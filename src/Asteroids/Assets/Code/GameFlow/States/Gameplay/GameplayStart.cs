@@ -8,6 +8,7 @@ using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.PlayerDeathService;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using Code.Logic.Gameplay.Services.SDKInitializer;
 
 namespace Code.GameFlow.States.Gameplay
 {
