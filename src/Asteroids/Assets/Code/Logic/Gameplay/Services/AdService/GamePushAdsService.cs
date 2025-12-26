@@ -14,8 +14,7 @@ public class GamePushAdsService : IAdsService, IDisposable
     private readonly ISDKInitializer _sdkInitializer;
     
     private bool _isInitialized;
-    public bool IsAvailable { get; private set; }
-
+    
     public GamePushAdsService(ISDKInitializer sdkInitializer)
     {
         _sdkInitializer = sdkInitializer;
@@ -29,21 +28,19 @@ public class GamePushAdsService : IAdsService, IDisposable
         if (_sdkInitializer.IsGamePushInitialized)
         {
             _isInitialized = true;
-            IsAvailable = true;
             Debug.Log("<b><color=green> [AdsService initialized successfully] </color></b>");
             LoadAds();
         }
         else
         {
             _isInitialized = false;
-            IsAvailable = false;
             Debug.Log("<b><color=red> [AdsService is not initialized] </color></b>");
         }
     }
 
     public void ShowRewardedAd(AdContext adContext)
     {
-        if(!IsCanShow())
+        if (!IsCanShow(adContext))
             return;
         
         if(GP_Ads.IsRewardedAvailable())
@@ -52,23 +49,25 @@ public class GamePushAdsService : IAdsService, IDisposable
 
     public void ShowInterstitialAd(AdContext adContext)
     {
-        if (!IsCanShow())
+        if (!IsCanShow(adContext))
             return;
         
         if(GP_Ads.IsFullscreenAvailable())
             _interstitialAd.ShowFullscreen(adContext);
     }
 
-    private bool IsCanShow()
+    private bool IsCanShow(AdContext adContext)
     {
         if (_isInitialized)
             return true;
             
-        Debug.LogWarning("GamePush is not initialized. Ads show skipped.");
+        Debug.LogWarning("GamePush is not initialized. Ads skipped.");
+        SkipAd(adContext);
+        
         return false;
     }
 
-    public void SkipAd(AdContext adContext) => 
+    private void SkipAd(AdContext adContext) => 
         AdCompleted?.Invoke(adContext);
 
     private void LoadAds()
