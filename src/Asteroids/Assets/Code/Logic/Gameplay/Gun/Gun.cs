@@ -64,6 +64,20 @@ namespace Code.Logic.Gameplay.Gun
             _playerProvider = playerProvider;
         }
 
+        public void Configure(float bulletCooldown, float laserShootCooldown, float laserShootTime, float laserRange,
+            int laserChargesMax,
+            int laserChargesCurrent,
+            int laserChargeRefillCooldown)
+        {
+            _bulletCooldown = bulletCooldown;
+            _laserShootCooldown = laserShootCooldown;
+            _laserShootTime = laserShootTime;
+            _laserRange = laserRange;
+            _laserChargesMax = laserChargesMax;
+            _laserChargesCurrent  = laserChargesCurrent;
+            _laserChargeRefillCooldown = laserChargeRefillCooldown;
+        }
+
         private void Awake()
         {
             _shootDirection = (_shootPoint.position - transform.position);
@@ -111,9 +125,7 @@ namespace Code.Logic.Gameplay.Gun
              while (_inputService.IsLaserShoot && _laserShootTimer > 0)
              {
                  _laserShootTimer -= Time.deltaTime;
-             
-                 //_playerProvider.Player.View.SetMoveDirection(new Vector3(_inputService.Movement.x, 0, 0));
-        
+                 
                  Vector3 direction = (_shootPoint.position - transform.position).normalized;
                  Vector3 endPos = _shootPoint.position + direction * _laserRange;
         
@@ -133,7 +145,6 @@ namespace Code.Logic.Gameplay.Gun
             _isLaserActive = false;
             _laserChargesCurrent--;
             
-            //_playerProvider.Player.View.IsMovementLocked = false;
             _playerProvider.Player.View.UnLockForwardMovement();
             
             LaserShootEnded?.Invoke();

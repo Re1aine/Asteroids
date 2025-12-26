@@ -37,7 +37,7 @@ namespace Code.Logic.Gameplay.Entities.Player
         private float _rotateAngle;
         
         private bool _isLockForwardMovement;
-
+        
         [Inject]
         public void Construct(IInputService inputService, IPauseService pauseService)
         {
@@ -67,6 +67,14 @@ namespace Code.Logic.Gameplay.Entities.Player
                 .AddTo(_disposables);
         }
 
+        public void Configure(float decelerationMove, float accelerationMove, float moveSpeed, float rotateSpeed)
+        { 
+            _decelerationMove = decelerationMove;
+            _accelerationMove = accelerationMove;
+            _moveSpeed =  moveSpeed;
+            _rotateSpeed =  rotateSpeed;
+        }
+        
         private void Start()
         {
             _currentVelocity = Vector2.zero;
@@ -86,7 +94,7 @@ namespace Code.Logic.Gameplay.Entities.Player
             HandleRotate();
             HandleMove();
         }
-
+        
         public void LockForwardMovement() => 
             _isLockForwardMovement = true;
 
