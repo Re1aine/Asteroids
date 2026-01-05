@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using Code.Logic.Gameplay.Services.SaveLoad;
-using Code.Logic.Gameplay.Services.ScoreCounter;
 using R3;
 
 namespace Code.Logic.Gameplay.Services.Repository.Player
@@ -8,45 +8,72 @@ namespace Code.Logic.Gameplay.Services.Repository.Player
     public class PlayerRepository : IRepository, IDisposable
     {
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IScoreCountService _scoreCountService;
-    
+        
         private readonly PlayerSaveData _playerSaveData = new();
 
         public ReadOnlyReactiveProperty<int> HighScore => _highScore;
         private readonly ReactiveProperty<int> _highScore = new();
+
+        public ReadOnlyReactiveProperty<bool> IsAdsRemoved => _isAdsRemoved;
+        private readonly ReactiveProperty<bool> _isAdsRemoved = new();
+
+        public ReadOnlyReactiveProperty<List<PurchaseProduct>> PurchaseProduct => _purchasedProducts;
+        private readonly ReactiveProperty<List<PurchaseProduct>> _purchasedProducts = new();
         
         private readonly CompositeDisposable _disposables = new();
         
-        public PlayerRepository(ISaveLoadService saveLoadService, IScoreCountService scoreCountService)
+        public PlayerRepository(ISaveLoadService saveLoadService)
         {
             _saveLoadService = saveLoadService;
-            _scoreCountService = scoreCountService;
             
             HighScore
                 .Subscribe(highScore => _playerSaveData.HighScore = highScore)
                 .AddTo(_disposables);
+            
+            IsAdsRemoved
+                .Subscribe(isAdsRemoved => _playerSaveData.IsAdsRemoved = isAdsRemoved)
+                .AddTo(_disposables);
+
+            PurchaseProduct
+                .Subscribe(products => _playerSaveData.PurchasedProducts = products)
+                .AddTo(_disposables);
         }
         
-        public void Load() => 
+        public void Load()
+        {
             _highScore.Value = _saveLoadService.GetPlayerData().HighScore;
+            _isAdsRemoved.Value = _saveLoadService.GetPlayerData().IsAdsRemoved;
+            _purchasedProducts.Value = _saveLoadService.GetPlayerData().PurchasedProducts;
+        }
 
         public void Delete()
         {
             _saveLoadService.SetPlayerData(_playerSaveData);
             
             _highScore.Value = 0;
+            _isAdsRemoved.Value = false;
+            _purchasedProducts.Value.Clear();
         }
 
         public void Update()
         {
-            if(_scoreCountService.Score.CurrentValue <= _playerSaveData.HighScore)
-                return;
             
-            _highScore.Value = _scoreCountService.Score.CurrentValue;
         }
 
         public void Save() => 
             _saveLoadService.SetPlayerData(_playerSaveData);
+
+        public void SetHighScore(int value) => 
+            _highScore.Value = value;
+
+        public void SetAdsRemoved() => 
+            _isAdsRemoved.Value = true;
+
+        public void AddPurchasedProduct(PurchaseProduct product) => 
+            _purchasedProducts.Value.Add(product);
+
+        public bool HasProduct(ProductId productId) => 
+            _purchasedProducts.Value.Exists(p => p.Id == productId);
 
         public void Dispose() => 
             _disposables.Dispose();
