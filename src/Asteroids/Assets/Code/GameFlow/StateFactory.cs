@@ -1,4 +1,5 @@
 ﻿using Code.GameFlow.States;
+using Cysharp.Threading.Tasks;
 using VContainer;
 
 namespace Code.GameFlow
@@ -10,7 +11,7 @@ namespace Code.GameFlow
         public StateFactory(IObjectResolver resolver) => 
             _resolver = resolver;
     
-        public TState Create<TState>() where TState : IExitableState => 
-            _resolver.ResolveInstance<TState>();
+        public UniTask<TState> Create<TState>() where TState : IExitableState => 
+            new(_resolver.ResolveInstance<TState>());
     }
 }

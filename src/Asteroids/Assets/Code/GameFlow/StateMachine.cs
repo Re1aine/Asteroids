@@ -1,4 +1,6 @@
 ﻿using Code.GameFlow.States;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Code.GameFlow
 {
@@ -12,28 +14,36 @@ namespace Code.GameFlow
             _stateFactory = stateFactory;
         }
     
-        public void Enter<TState>() where TState : IState
+        public async UniTask Enter<TState>() where TState : IState
         {
-            IState state = ChangeState<TState>();
-            state?.Enter();
+            IState state = await ChangeState<TState>();
+            await state.Enter();
         }
 
-        public void Enter<TState, TArg>(TArg arg) where TState : IStateWithArg<TArg>
+        public async UniTask Enter<TState, TArg>(TArg arg) where TState : IStateWithArg<TArg>
         {
-            TState state = ChangeState<TState>();
-            state.Enter(arg);
+            TState state = await ChangeState<TState>();
+            await state.Enter(arg);
         }
 
-        private TState GetState<TState>() where TState : IExitableState => 
-            _stateFactory.Create<TState>();
+        private async UniTask<TState> GetState<TState>() where TState : IExitableState => 
+            await _stateFactory.Create<TState>();
 
-        private TState ChangeState<TState>() where TState : IExitableState
+        private async UniTask<TState> ChangeState<TState>() where TState : IExitableState
         {
-            TState state = GetState<TState>();
-        
-            _currentState?.Exit();
+            if (_currentState != null) 
+                await _currentState.Exit();
+            
+            Debug.Log("Changing in " +
+                      $"<color=white><b>{GetType().Name}</color><b> " + 
+                      "state from "  +
+                      $"<color=white><b>{_currentState?.GetType().Name ?? "Start"}" +
+                      $" -> {typeof(TState).Name}</color><b>");
+            
+            TState state = await GetState<TState>();
+            
             _currentState = state;
-
+            
             return state;
         }
     }
