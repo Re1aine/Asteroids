@@ -1,14 +1,14 @@
-﻿using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+﻿using Code.Logic.Gameplay;
 using Code.Logic.Gameplay.Analytics;
 using Code.Logic.Gameplay.Audio;
 using Code.Logic.Gameplay.Services.AdService;
+using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.ConfigsProvider;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.PlayerDeathService;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Gameplay.Services.SDKInitializer;
+using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -17,56 +17,50 @@ namespace Code.GameFlow.States.Gameplay
         private readonly GameplayStateMachine _gameplayStateMachine;
         private readonly IHUDProvider _hudProvider;
         private readonly IPlayerProvider _playerProvider;
-        private readonly IRepositoriesHolder _repositoriesHolder;
         private readonly IAnalytics _analytics;
-        private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
         private readonly IGameFactory _gameFactory;
-        private readonly IAudioService _audioService;
         private readonly IAdsService _adsService;
         private readonly IPlayerDeathService _playerDeathService;
-        private readonly ISDKInitializer _sdkInitializer;
         private readonly IGameConfigsProvider _gameConfigsProvider;
+        private readonly IAudioService _audioService;
+        private readonly IBoundaries _boundaries;
+        private readonly BackgroundResizer _backgroundResizer;
 
         public GameplayStart(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
             IPlayerProvider playerProvider,
-            IRepositoriesHolder repositoriesHolder,
             IAnalytics analytics,
-            IAddressablesAssetsLoader addressablesAssetsLoader,
             IGameFactory gameFactory,
-            IAudioService audioService,
             IAdsService adsService,
             IPlayerDeathService playerDeathService,
-            ISDKInitializer sdkInitializer,
-            IGameConfigsProvider gameConfigsProvider)
+            IGameConfigsProvider gameConfigsProvider,
+            IAudioService audioService,
+            IBoundaries boundaries,
+            BackgroundResizer backgroundResizer)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
             _playerProvider = playerProvider;
-            _repositoriesHolder = repositoriesHolder;
             _analytics = analytics;
-            _addressablesAssetsLoader = addressablesAssetsLoader;
             _gameFactory = gameFactory;
-            _audioService = audioService;
             _adsService = adsService;
             _playerDeathService = playerDeathService;
-            _sdkInitializer = sdkInitializer;
             _gameConfigsProvider = gameConfigsProvider;
+            _audioService = audioService;
+            _boundaries = boundaries;
+            _backgroundResizer = backgroundResizer;
         }
-        
-        public async void Enter()
+
+        public async UniTask Enter()
         {
-            await _addressablesAssetsLoader.Initialize();
-            
-            await _sdkInitializer.Initialize();
+            _boundaries.Initialize();
+            _backgroundResizer.Initialize();
             
             await _gameConfigsProvider.Initialize();
             
             _analytics.Initialize();
             
-            _repositoriesHolder.LoadAll();
-
-            _gameFactory.WarmUp();
+            await _gameFactory.WarmUp();
             
             _adsService.Initialize();
             
@@ -79,12 +73,9 @@ namespace Code.GameFlow.States.Gameplay
             
             _analytics.StartSession();
 
-            _gameplayStateMachine.Enter<GameplayLoopState>();
+            _gameplayStateMachine.Enter<GameplayLoopState>().Forget();
         }
 
-        public void Exit()
-        {
-        
-        }
+        public UniTask Exit() => default;
     }
 }

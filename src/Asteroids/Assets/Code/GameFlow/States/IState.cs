@@ -1,16 +1,18 @@
-﻿namespace Code.GameFlow.States
+﻿using Cysharp.Threading.Tasks;
+
+namespace Code.GameFlow.States
 {
     public interface IState : IExitableState
     {
-        void Enter();
+        UniTask Enter();
     }
     public interface IStateWithArg<TArg> : IExitableState
     {
-        void Enter(TArg arg);
+        UniTask Enter(TArg arg);
     }
 
     public interface IExitableState
     {
-        void Exit();
+        UniTask Exit();
     }
 }

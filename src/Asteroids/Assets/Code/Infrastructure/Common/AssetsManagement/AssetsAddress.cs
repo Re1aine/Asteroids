@@ -20,6 +20,8 @@ namespace Code.Infrastructure.Common.AssetsManagement
         public static readonly string PlayerStatsWindow = "PlayerStatsWindow";
         public static readonly string ReviveWindow = "ReviveWindow";
         
+        public static readonly string MenuWindow = "MenuWindow";
+        
         public static readonly string AudioConfig = "AudioConfig";
         public static readonly string VFXConfig = "VFXConfig";
         

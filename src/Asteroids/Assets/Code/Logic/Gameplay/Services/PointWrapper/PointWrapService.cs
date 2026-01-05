@@ -1,14 +1,12 @@
 ﻿using Code.Logic.Gameplay.Services.Boundries;
 using UnityEngine;
-using VContainer;
 
 namespace Code.Logic.Gameplay.Services.PointWrapper
 {
     public class PointWrapService : IPointWrapService
     {
         private readonly IBoundaries _boundaries;
-    
-        [Inject]
+        
         public PointWrapService(IBoundaries boundaries)
         {
             _boundaries = boundaries;
