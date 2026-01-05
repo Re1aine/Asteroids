@@ -15,14 +15,20 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 1df778b125bd4ba4a845ad785688b72f
   m_SerializeEntries:
-  - m_GUID: 236281cc072d05143a6cc05a3aa6f9a0
-    m_Address: HUD
+  - m_GUID: 4408ef9ad90c77e409aefdcd4a441f57
+    m_Address: MenuWindow
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 79668e26ff827bd459074f96a1d76efe
     m_Address: LoseWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b38fbda3d71c96b43ad2a4b965d5b77c
+    m_Address: GameplayHUD
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
@@ -35,6 +41,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4ae212142e6a5a478d1da5c7135b918
     m_Address: PlayerStatsWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec712648561962843940143c93fbd339
+    m_Address: MenuHUD
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI

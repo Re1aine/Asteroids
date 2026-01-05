@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: f17325ba151959d42b1992c74aaf9696
   m_currentHash:
     serializedVersion: 2
-    Hash: 6509c341c240000010d3326faaeb7c86
+    Hash: ae3ded6651831d8bfb8939c8f19b5b8c
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: faf060827c75a654ab5b7ef2496f57db, type: 2}
   - {fileID: 11400000, guid: edaac480b3069424fa55f4a854e2dd58, type: 2}
+  - {fileID: 11400000, guid: e17a5b6d23de8204684722a9a64b35c6, type: 2}
   - {fileID: 11400000, guid: 83efa976d16eca04fbf24a13ec30788f, type: 2}
   - {fileID: 11400000, guid: 7d69519604d8c4e48b17e50d1a43cfea, type: 2}
   m_BuildSettings:
@@ -103,6 +104,7 @@ MonoBehaviour:
     m_LabelNames:
     - Gameplay
     - UI
+    - Scene
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 06ddd3d92e9708d40a2f1c4b3763f0b4, type: 2}
