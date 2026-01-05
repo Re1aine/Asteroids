@@ -59,7 +59,7 @@ namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
         {
             while (true)
             {
-                yield return new WaitForSecondsUnPaused(_pauseService, _spawnCooldown);
+                yield return new WaitForSecondsUnPaused(_pauseService.IsPaused, _spawnCooldown);
                 
                 Vector3 randomPos = RandomHelper.GetRandomPointOnCircle(_boundaries.Center, _minRadiusSpawn, _maxRadiusSpawn);
             

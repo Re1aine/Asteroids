@@ -1,16 +1,15 @@
-﻿using Code.Logic.Gameplay.Services.PauseService;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.Logic.Gameplay
 {
     public class WaitForSecondsUnPaused : CustomYieldInstruction
     {
-        private readonly IPauseService _pauseService;
         private float _seconds;
+        private readonly bool _isPaused;
 
-        public WaitForSecondsUnPaused(IPauseService pauseService, float seconds)
+        public WaitForSecondsUnPaused(bool isPaused, float seconds)
         {
-            _pauseService = pauseService;
+            _isPaused = isPaused;
             _seconds = seconds;
         }
     
@@ -18,7 +17,7 @@ namespace Code.Logic.Gameplay
         {
             get
             {
-                if (_pauseService.IsPaused)
+                if (_isPaused)
                     return true;
             
                 _seconds -= Time.deltaTime;
