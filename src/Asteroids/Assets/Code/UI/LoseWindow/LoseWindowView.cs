@@ -1,4 +1,5 @@
 ﻿using Code.GameFlow.States.Gameplay;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ namespace Code.UI.LoseWindow
         }
 
         private void Start() => 
-            _restart.onClick.AddListener(() => _gameplayStateMachine.Enter<GameplayStart>());
+            _restart.onClick.AddListener(() => _gameplayStateMachine.Enter<GameplayStart>().Forget());
 
         public void SetScore(int value) =>
             _currentScore.text = value.ToString();
