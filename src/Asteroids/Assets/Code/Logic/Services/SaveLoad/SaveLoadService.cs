@@ -1,7 +1,7 @@
-﻿using Code.Logic.Gameplay.Services.Repository.Player;
+﻿using Code.Logic.Services.Repository.Player;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.SaveLoad
+namespace Code.Logic.Services.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService
     {

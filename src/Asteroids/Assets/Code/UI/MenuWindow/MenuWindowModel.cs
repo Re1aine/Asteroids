@@ -1,9 +1,12 @@
 ﻿using System;
 
-public class MenuWindowModel : IDisposable
+namespace Code.UI.MenuWindow
 {
-    public void Dispose()
+    public class MenuWindowModel : IDisposable
     {
+        public void Dispose()
+        {
         
+        }
     }
 }

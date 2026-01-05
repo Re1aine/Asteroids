@@ -1,11 +1,11 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance;
-using Code.Logic.Gameplay.Services.SDKInitializer;
+using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+using Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 using Firebase.RemoteConfig;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.ConfigsProvider.GameBalanceConfigsProvider
+namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
 {
     public class FirebaseRemoteConfigsProvider : IGameBalanceConfigsProvider
     {

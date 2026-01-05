@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Logic.Gameplay
+namespace Code.Tools
 {
     public class WaitForSecondsUnPaused : CustomYieldInstruction
     {

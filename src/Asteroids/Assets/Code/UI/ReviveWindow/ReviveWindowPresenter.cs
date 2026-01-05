@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace Code.UI.ReviveWindow
 {
     public class ReviveWindowPresenter
     {

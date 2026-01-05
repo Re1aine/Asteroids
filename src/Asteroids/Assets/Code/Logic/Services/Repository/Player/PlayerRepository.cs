@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Logic.Gameplay.Services.SaveLoad;
+using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Services.SaveLoad;
 using R3;
 
-namespace Code.Logic.Gameplay.Services.Repository.Player
+namespace Code.Logic.Services.Repository.Player
 {
     public class PlayerRepository : IRepository, IDisposable
     {

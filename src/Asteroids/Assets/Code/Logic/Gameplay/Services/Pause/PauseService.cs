@@ -1,5 +1,5 @@
 ﻿
-namespace Code.Logic.Gameplay.Services.PauseService
+namespace Code.Logic.Gameplay.Services.Pause
 {
     public class PauseService : IPauseService
     {

@@ -1,10 +1,13 @@
-﻿public enum WindowType
+﻿namespace Code.UI
 {
-    //Gameplay UI
-    LoseWindow = 0,
-    PlayerStatsWindow = 1,
-    ReviveWindow = 2,
+    public enum WindowType
+    {
+        //Gameplay UI
+        LoseWindow = 0,
+        PlayerStatsWindow = 1,
+        ReviveWindow = 2,
     
-    //Menu UI
-    MenuWindow = 10,
+        //Menu UI
+        MenuWindow = 10,
+    }
 }

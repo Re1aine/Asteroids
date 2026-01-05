@@ -1,33 +1,39 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Code.GameFlow.States.Core;
+using Code.GameFlow.States.Menu;
+using Code.Infrastructure.Common.SceneLoader;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-public class MenuWindowView : MonoBehaviour
+namespace Code.UI.MenuWindow
 {
-    [SerializeField] private Button _playButton;
-    [SerializeField] private Button _exitButton;
-    
-    private MenuStateMachine _menuStateMachine;
-
-    [Inject]
-    public void Construct(MenuStateMachine menuStateMachine)
+    public class MenuWindowView : MonoBehaviour
     {
-        _menuStateMachine =  menuStateMachine;
-    }
+        [SerializeField] private Button _playButton;
+        [SerializeField] private Button _exitButton;
     
-    private void Start()
-    {
-        _playButton.OnClickAsObservable()
-            .Subscribe(_ => _menuStateMachine.Enter<LoadSceneState, GameScenes>(GameScenes.Gameplay).Forget())
-            .AddTo(this);;
+        private MenuStateMachine _menuStateMachine;
 
-        _exitButton.OnClickAsObservable()
-            .Subscribe(_ => Debug.Log("Exit"))
-            .AddTo(this);;
+        [Inject]
+        public void Construct(MenuStateMachine menuStateMachine)
+        {
+            _menuStateMachine =  menuStateMachine;
+        }
+    
+        private void Start()
+        {
+            _playButton.OnClickAsObservable()
+                .Subscribe(_ => _menuStateMachine.Enter<LoadSceneState, GameScenes>(GameScenes.Gameplay).Forget())
+                .AddTo(this);;
+
+            _exitButton.OnClickAsObservable()
+                .Subscribe(_ => Debug.Log("Exit"))
+                .AddTo(this);;
+        }
+
+        public void Destroy() => 
+            Destroy(gameObject);
     }
-
-    public void Destroy() => 
-        Destroy(gameObject);
 }

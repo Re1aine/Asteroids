@@ -1,6 +1,5 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.ConfigsProvider;
-using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
+using Code.Logic.Gameplay.Services.Configs.Configs.GameAssets;
 using Code.Logic.Gameplay.Services.Observers.Asteroid;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using R3;

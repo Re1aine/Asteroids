@@ -6,9 +6,10 @@ using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Holders.VFXHolder;
-using Code.Logic.Gameplay.Services.Providers.HUDProvider;
-using Code.Logic.Gameplay.Services.ReviveService;
+using Code.Logic.Gameplay.Services.Revive;
 using Code.Logic.Gameplay.Services.ScoreCounter;
+using Code.Logic.Services.HUDProvider;
+using Code.UI;
 using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay

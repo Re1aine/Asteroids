@@ -1,5 +1,10 @@
-﻿public interface IPurchaseCatalog
+﻿using Code.Logic.Menu.Services.Purchase.Produict;
+
+namespace Code.Logic.Menu.Services.Purchase.Catalog
 {
-    void Initialize();
-    PurchaseProduct GetProduct(ProductId id);
+    public interface IPurchaseCatalog
+    {
+        void Initialize();
+        PurchaseProduct GetProduct(ProductId id);
+    }
 }

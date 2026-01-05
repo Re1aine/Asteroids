@@ -3,11 +3,11 @@ using Code.Logic.Gameplay.Analytics;
 using Code.Logic.Gameplay.Audio;
 using Code.Logic.Gameplay.Services.AdService;
 using Code.Logic.Gameplay.Services.Boundries;
-using Code.Logic.Gameplay.Services.ConfigsProvider;
+using Code.Logic.Gameplay.Services.Configs;
+using Code.Logic.Gameplay.Services.Death.PlayerDeathService;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.PlayerDeathService;
-using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using Code.Logic.Services.HUDProvider;
 using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay

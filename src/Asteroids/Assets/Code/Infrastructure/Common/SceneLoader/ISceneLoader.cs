@@ -1,8 +1,11 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 
-public interface ISceneLoader
+namespace Code.Infrastructure.Common.SceneLoader
 {
-    UniTask LoadScene(GameScenes scene);
-    void LoadAnyScene(GameScenes scene, Action onLoaded = null);
+    public interface ISceneLoader
+    {
+        UniTask LoadScene(GameScenes scene);
+        void LoadAnyScene(GameScenes scene, Action onLoaded = null);
+    }
 }

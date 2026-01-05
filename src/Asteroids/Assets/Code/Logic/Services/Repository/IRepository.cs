@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Repository
+﻿namespace Code.Logic.Services.Repository
 {
     public interface IRepository
     {

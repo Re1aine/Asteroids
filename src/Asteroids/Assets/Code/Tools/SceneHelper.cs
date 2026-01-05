@@ -1,15 +1,20 @@
-﻿using UnityEngine;
+﻿using Code.Infrastructure.Common.SceneLoader;
+using Code.Scopes;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public sealed class SceneHelper : MonoBehaviour
+namespace Code.Tools
 {
-    private const GameScenes InitProjectScene = GameScenes.Project;
-    
-    private void Awake()
+    public sealed class SceneHelper : MonoBehaviour
     {
-        if (FindFirstObjectByType<ProjectScope>() != null)
-            return;
+        private const GameScenes InitProjectScene = GameScenes.Project;
+    
+        private void Awake()
+        {
+            if (FindFirstObjectByType<ProjectScope>() != null)
+                return;
         
-        SceneManager.LoadScene(InitProjectScene.ToString());
+            SceneManager.LoadScene(InitProjectScene.ToString());
+        }
     }
 }

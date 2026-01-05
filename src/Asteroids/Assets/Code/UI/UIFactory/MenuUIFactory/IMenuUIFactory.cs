@@ -1,6 +1,10 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Code.UI.MenuWindow;
+using Cysharp.Threading.Tasks;
 
-public interface IMenuUIFactory : IUIFactory
+namespace Code.UI.UIFactory.MenuUIFactory
 {
-    UniTask<MenuWindowPresenter> CreateMenuWindow();
+    public interface IMenuUIFactory : IUIFactory
+    {
+        UniTask<MenuWindowPresenter> CreateMenuWindow();
+    }
 }

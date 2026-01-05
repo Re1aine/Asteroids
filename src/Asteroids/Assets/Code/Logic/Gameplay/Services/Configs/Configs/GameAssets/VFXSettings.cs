@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets
+namespace Code.Logic.Gameplay.Services.Configs.Configs.GameAssets
 {
     [Serializable]
     public struct VFXSettings

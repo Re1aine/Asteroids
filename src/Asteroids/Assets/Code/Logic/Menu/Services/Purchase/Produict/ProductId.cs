@@ -1,5 +1,8 @@
-﻿public enum ProductId
+﻿namespace Code.Logic.Menu.Services.Purchase.Produict
 {
-    AdsRemoval = 0,
-    Currency = 1,
+    public enum ProductId
+    {
+        AdsRemoval = 0,
+        Currency = 1,
+    }
 }

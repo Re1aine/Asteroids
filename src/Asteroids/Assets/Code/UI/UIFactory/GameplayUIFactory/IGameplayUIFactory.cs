@@ -1,13 +1,16 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.UI.LoseWindow;
+﻿using Code.UI.LoseWindow;
 using Code.UI.PlayerStatsWindow;
+using Code.UI.ReviveWindow;
 using Cysharp.Threading.Tasks;
 
-public interface IGameplayUIFactory : IUIFactory
+namespace Code.UI.UIFactory.GameplayUIFactory
 {
-    UniTask<LoseWindowPresenter> CreateLoseWindow();
+    public interface IGameplayUIFactory : IUIFactory
+    {
+        UniTask<LoseWindowPresenter> CreateLoseWindow();
 
-    UniTask<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
+        UniTask<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
 
-    UniTask<ReviveWindowPresenter> CreateReviveWindow();
+        UniTask<ReviveWindowPresenter> CreateReviveWindow();
+    }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.PauseService;
+using Code.Logic.Gameplay.Services.Pause;
 using UnityEngine;
 using VContainer;
 

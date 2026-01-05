@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.PlayerDeathService
+﻿namespace Code.Logic.Gameplay.Services.Death.PlayerDeathService
 {
     public interface IPlayerDeathService
     {

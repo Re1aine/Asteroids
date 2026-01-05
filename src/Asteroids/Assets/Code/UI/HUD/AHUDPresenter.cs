@@ -1,23 +1,26 @@
-﻿public abstract class AHUDPresenter
+﻿namespace Code.UI.HUD
 {
-    public AHUDModel Model { get; }
-    public AHUDView View { get; }
-
-    protected AHUDPresenter(AHUDModel model, AHUDView view)
+    public abstract class AHUDPresenter
     {
-        Model = model;
-        View = view;
-    }
-    
-    public void ShowWindow(WindowType windowType) => 
-        Model.ShowWindow(windowType);
+        public AHUDModel Model { get; }
+        public AHUDView View { get; }
 
-    public void HideWindow(WindowType windowType) => 
-        Model.HideWindow(windowType);
+        protected AHUDPresenter(AHUDModel model, AHUDView view)
+        {
+            Model = model;
+            View = view;
+        }
     
-    public void Destroy()
-    {
-        Model.Dispose();
-        View.Destroy();
+        public void ShowWindow(WindowType windowType) => 
+            Model.ShowWindow(windowType);
+
+        public void HideWindow(WindowType windowType) => 
+            Model.HideWindow(windowType);
+    
+        public void Destroy()
+        {
+            Model.Dispose();
+            View.Destroy();
+        }
     }
 }

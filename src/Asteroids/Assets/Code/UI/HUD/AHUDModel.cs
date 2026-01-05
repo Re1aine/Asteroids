@@ -1,21 +1,24 @@
 ﻿using System;
 
-public abstract class AHUDModel : IDisposable
+namespace Code.UI.HUD
 {
-    protected AHUDService _hudService;
-    
-    public abstract void ShowWindow(WindowType windowType);
-
-    public abstract void HideWindow(WindowType windowType);
-    
-    protected void OnWindowVisibilityChanged(WindowType windowType, bool isVisible)
+    public abstract class AHUDModel : IDisposable
     {
-        if (isVisible)
-            _hudService.ShowWindow(windowType);
-        else
-            _hudService.HideWindow(windowType);
-         
-    }
+        protected AHUDService _hudService;
     
-    public abstract void Dispose();
+        public abstract void ShowWindow(WindowType windowType);
+
+        public abstract void HideWindow(WindowType windowType);
+    
+        protected void OnWindowVisibilityChanged(WindowType windowType, bool isVisible)
+        {
+            if (isVisible)
+                _hudService.ShowWindow(windowType);
+            else
+                _hudService.HideWindow(windowType);
+         
+        }
+    
+        public abstract void Dispose();
+    }
 }

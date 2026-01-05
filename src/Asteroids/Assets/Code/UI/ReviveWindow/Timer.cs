@@ -4,7 +4,7 @@ using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace Code.UI.ReviveWindow
 {
     public class Timer : MonoBehaviour
     {

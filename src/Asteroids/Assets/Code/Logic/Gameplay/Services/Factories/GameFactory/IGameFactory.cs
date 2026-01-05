@@ -3,7 +3,7 @@ using Code.Logic.Gameplay.Entities.Enemy.UFO;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
-using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
+using Code.Logic.Gameplay.Services.Configs.Configs.GameAssets;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

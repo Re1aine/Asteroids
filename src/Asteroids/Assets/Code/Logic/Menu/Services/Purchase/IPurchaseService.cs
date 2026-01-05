@@ -1,8 +1,12 @@
 ﻿using System;
+using Code.Logic.Menu.Services.Purchase.Produict;
 
-public interface IPurchaseService
+namespace Code.Logic.Menu.Services.Purchase
 {
-    event Action<ProductId> Purchased; 
-    void Initialize();
-    void Purchase(ProductId id);
+    public interface IPurchaseService
+    {
+        event Action<ProductId> Purchased; 
+        void Initialize();
+        void Purchase(ProductId id);
+    }
 }

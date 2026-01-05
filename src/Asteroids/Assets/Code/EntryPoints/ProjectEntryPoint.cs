@@ -2,19 +2,22 @@
 using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 
-public class ProjectEntryPoint : IStartable
+namespace Code.EntryPoints
 {
-    private readonly GameStateMachine _gameStateMachine;
+    public class ProjectEntryPoint : IStartable
+    {
+        private readonly GameStateMachine _gameStateMachine;
 
-    public ProjectEntryPoint(GameStateMachine gameStateMachine)
-    {
-        _gameStateMachine = gameStateMachine;
-    }
+        public ProjectEntryPoint(GameStateMachine gameStateMachine)
+        {
+            _gameStateMachine = gameStateMachine;
+        }
     
-    public void Start()
-    {
-        _gameStateMachine
-            .Enter<ProjectInitState>()
-            .Forget();
+        public void Start()
+        {
+            _gameStateMachine
+                .Enter<ProjectInitState>()
+                .Forget();
+        }
     }
 }

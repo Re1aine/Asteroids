@@ -1,6 +1,10 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Code.UI.HUD;
+using Cysharp.Threading.Tasks;
 
-public interface IUIFactory
+namespace Code.UI.UIFactory
 {
-    UniTask<AHUDPresenter> CreateHUD();
+    public interface IUIFactory
+    {
+        UniTask<AHUDPresenter> CreateHUD();
+    }
 }

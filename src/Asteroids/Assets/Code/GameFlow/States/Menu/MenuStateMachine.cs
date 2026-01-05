@@ -1,8 +1,9 @@
-﻿using Code.GameFlow;
-
-public sealed class MenuStateMachine : StateMachine
+﻿namespace Code.GameFlow.States.Menu
 {
-    public MenuStateMachine(StateFactory stateFactory) : base(stateFactory)
+    public sealed class MenuStateMachine : StateMachine
     {
+        public MenuStateMachine(StateFactory stateFactory) : base(stateFactory)
+        {
+        }
     }
 }

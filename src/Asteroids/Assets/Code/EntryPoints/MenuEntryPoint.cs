@@ -1,18 +1,23 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Code.GameFlow.States.Menu;
+using Cysharp.Threading.Tasks;
 using VContainer.Unity;
-public class MenuEntryPoint : IStartable
-{
-    private readonly MenuStateMachine _menuStateMachine;
 
-    public MenuEntryPoint(MenuStateMachine menuStateMachine)
+namespace Code.EntryPoints
+{
+    public class MenuEntryPoint : IStartable
     {
-        _menuStateMachine = menuStateMachine;
-    }
+        private readonly MenuStateMachine _menuStateMachine;
+
+        public MenuEntryPoint(MenuStateMachine menuStateMachine)
+        {
+            _menuStateMachine = menuStateMachine;
+        }
     
-    public void Start()
-    {
-        _menuStateMachine
-            .Enter<MenuInitState>()
-            .Forget();
+        public void Start()
+        {
+            _menuStateMachine
+                .Enter<MenuInitState>()
+                .Forget();
+        }
     }
 }

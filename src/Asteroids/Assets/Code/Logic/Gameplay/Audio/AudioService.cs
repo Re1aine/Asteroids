@@ -1,5 +1,5 @@
 ﻿
-using Code.Logic.Gameplay.Services.ConfigsProvider;
+using Code.Logic.Gameplay.Services.Configs;
 
 namespace Code.Logic.Gameplay.Audio
 {

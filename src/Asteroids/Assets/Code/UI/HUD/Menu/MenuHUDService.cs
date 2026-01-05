@@ -1,31 +1,37 @@
-﻿public class MenuHUDService :  AHUDService
+﻿using Code.UI.MenuWindow;
+using Code.UI.UIFactory.MenuUIFactory;
+
+namespace Code.UI.HUD.Menu
 {
-    private readonly IMenuUIFactory _menuUIFactory;
+    public class MenuHUDService :  AHUDService
+    {
+        private readonly IMenuUIFactory _menuUIFactory;
 
-    private MenuWindowPresenter _menuWindow;
+        private MenuWindowPresenter _menuWindow;
     
-    public MenuHUDService(IMenuUIFactory menuUIFactory)
-    {
-        _menuUIFactory = menuUIFactory;
-    }
-
-    public override async void ShowWindow(WindowType windowType)
-    {
-        switch (windowType)
+        public MenuHUDService(IMenuUIFactory menuUIFactory)
         {
-            case WindowType.MenuWindow:
-                _menuWindow = await _menuUIFactory.CreateMenuWindow();
-                break;
+            _menuUIFactory = menuUIFactory;
         }
-    }
 
-    public override void HideWindow(WindowType windowType)
-    {
-        switch (windowType)
+        public override async void ShowWindow(WindowType windowType)
         {
-            case WindowType.MenuWindow:
-                _menuWindow.Destroy();
-                break;
+            switch (windowType)
+            {
+                case WindowType.MenuWindow:
+                    _menuWindow = await _menuUIFactory.CreateMenuWindow();
+                    break;
+            }
+        }
+
+        public override void HideWindow(WindowType windowType)
+        {
+            switch (windowType)
+            {
+                case WindowType.MenuWindow:
+                    _menuWindow.Destroy();
+                    break;
+            }
         }
     }
 }

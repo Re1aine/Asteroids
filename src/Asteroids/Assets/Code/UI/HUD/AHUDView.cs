@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public abstract class AHUDView : MonoBehaviour
+namespace Code.UI.HUD
 {
-    public void Destroy() =>
-        Destroy(gameObject);
+    public abstract class AHUDView : MonoBehaviour
+    {
+        public void Destroy() =>
+            Destroy(gameObject);
+    }
 }

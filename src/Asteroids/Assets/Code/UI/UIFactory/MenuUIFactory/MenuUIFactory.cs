@@ -1,37 +1,43 @@
 ﻿using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
-using Code.Logic.Gameplay.Services.Providers.HUDProvider;
+using Code.Logic.Services.HUDProvider;
+using Code.UI.HUD;
+using Code.UI.HUD.Menu;
+using Code.UI.MenuWindow;
 using Cysharp.Threading.Tasks;
 using VContainer;
 
-public class MenuUIFactory : IMenuUIFactory
+namespace Code.UI.UIFactory.MenuUIFactory
 {
-    private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
-    private readonly IObjectResolver _resolver;
-
-    public MenuUIFactory(IAddressablesAssetsProvider addressablesAssetsProvider, IObjectResolver resolver)
+    public class MenuUIFactory : IMenuUIFactory
     {
-        _addressablesAssetsProvider = addressablesAssetsProvider;
-        _resolver = resolver;
-    }
+        private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
+        private readonly IObjectResolver _resolver;
+
+        public MenuUIFactory(IAddressablesAssetsProvider addressablesAssetsProvider, IObjectResolver resolver)
+        {
+            _addressablesAssetsProvider = addressablesAssetsProvider;
+            _resolver = resolver;
+        }
     
-    public async UniTask<AHUDPresenter> CreateHUD()
-    {
-        MenuHUDView view =  await _addressablesAssetsProvider.Instantiate<MenuHUDView>(AssetsAddress.MenuHUD);
+        public async UniTask<AHUDPresenter> CreateHUD()
+        {
+            MenuHUDView view =  await _addressablesAssetsProvider.Instantiate<MenuHUDView>(AssetsAddress.MenuHUD);
             
-        MenuHUDModel model = new MenuHUDModel(new MenuHUDService(this));
+            MenuHUDModel model = new MenuHUDModel(new MenuHUDService(this));
             
-        return new MenuHUDPresenter(model, view);
-    }
+            return new MenuHUDPresenter(model, view);
+        }
 
-    public async UniTask<MenuWindowPresenter> CreateMenuWindow()
-    {
-        MenuWindowView view = await _addressablesAssetsProvider.Instantiate<MenuWindowView>(
-            AssetsAddress.MenuWindow,
-            _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+        public async UniTask<MenuWindowPresenter> CreateMenuWindow()
+        {
+            MenuWindowView view = await _addressablesAssetsProvider.Instantiate<MenuWindowView>(
+                AssetsAddress.MenuWindow,
+                _resolver.Resolve<IHUDProvider>().HUD.View.transform);
 
-        MenuWindowModel model = new MenuWindowModel();
+            MenuWindowModel model = new MenuWindowModel();
         
-        return new MenuWindowPresenter(model, view);
+            return new MenuWindowPresenter(model, view);
+        }
     }
 }

@@ -4,7 +4,7 @@ using Firebase;
 using GamePush;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.SDKInitializer
+namespace Code.Logic.Services.SDKInitializer
 {
     public class SDKInitializer : ISDKInitializer
     {

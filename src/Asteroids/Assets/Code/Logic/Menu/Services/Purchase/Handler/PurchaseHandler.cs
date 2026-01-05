@@ -1,59 +1,64 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Gameplay.Services.Repository.Player;
+using Code.Logic.Menu.Services.Purchase.Catalog;
+using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Services.Repository.Player;
 using UnityEngine;
 using VContainer.Unity;
 
-public class PurchaseHandler : IInitializable, IDisposable
+namespace Code.Logic.Menu.Services.Purchase.Handler
 {
-    private readonly IPurchaseService _purchaseService;
-    private readonly IPurchaseCatalog _purchaseCatalog;
+    public class PurchaseHandler : IInitializable, IDisposable
+    {
+        private readonly IPurchaseService _purchaseService;
+        private readonly IPurchaseCatalog _purchaseCatalog;
     
-    private readonly PlayerRepository _playerRepository;
+        private readonly PlayerRepository _playerRepository;
 
-    public PurchaseHandler(IPurchaseService purchaseService, IPurchaseCatalog purchaseCatalog, IRepositoriesHolder  repositoriesHolder)
-    {
-        _purchaseService = purchaseService;
-        _purchaseCatalog = purchaseCatalog;
-        _playerRepository = repositoriesHolder.GetRepository<PlayerRepository>();
-    }
-
-    public void Initialize()
-    {
-        _purchaseService.Purchased += OnPurchase;
-    }
-
-    private void OnPurchase(ProductId id)
-    {
-        PurchaseProduct product = _purchaseCatalog.GetProduct(id);
-
-        if (!product.IsOneTime && _playerRepository.HasProduct(product.Id))
+        public PurchaseHandler(IPurchaseService purchaseService, IPurchaseCatalog purchaseCatalog, IRepositoriesHolder  repositoriesHolder)
         {
-            Debug.LogWarning($"Product {product.Id.ToString()} already purchased");
-            return;
+            _purchaseService = purchaseService;
+            _purchaseCatalog = purchaseCatalog;
+            _playerRepository = repositoriesHolder.GetRepository<PlayerRepository>();
         }
-        
-        if(!product.IsOneTime)
-            _playerRepository.AddPurchasedProduct(product);
-        
-        ApplyPurchase(id);
 
-        Debug.Log($"Product purchased: {id.ToString()}");
-        
-        _playerRepository.Save();
-    }
-
-    private void ApplyPurchase(ProductId id)
-    {
-        switch (id)
+        public void Initialize()
         {
-            case ProductId.AdsRemoval: _playerRepository.SetAdsRemoved();
-                break;
+            _purchaseService.Purchased += OnPurchase;
         }
-    }
 
-    public void Dispose()
-    {
-        _purchaseService.Purchased -= OnPurchase;
+        private void OnPurchase(ProductId id)
+        {
+            PurchaseProduct product = _purchaseCatalog.GetProduct(id);
+
+            if (!product.IsOneTime && _playerRepository.HasProduct(product.Id))
+            {
+                Debug.LogWarning($"Product {product.Id.ToString()} already purchased");
+                return;
+            }
+        
+            if(!product.IsOneTime)
+                _playerRepository.AddPurchasedProduct(product);
+        
+            ApplyPurchase(id);
+
+            Debug.Log($"Product purchased: {id.ToString()}");
+        
+            _playerRepository.Save();
+        }
+
+        private void ApplyPurchase(ProductId id)
+        {
+            switch (id)
+            {
+                case ProductId.AdsRemoval: _playerRepository.SetAdsRemoved();
+                    break;
+            }
+        }
+
+        public void Dispose()
+        {
+            _purchaseService.Purchased -= OnPurchase;
+        }
     }
 }

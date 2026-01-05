@@ -1,8 +1,9 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.UI.LoseWindow;
+﻿using Code.UI.LoseWindow;
 using Code.UI.PlayerStatsWindow;
+using Code.UI.ReviveWindow;
+using Code.UI.UIFactory.GameplayUIFactory;
 
-namespace Code.UI.HUD
+namespace Code.UI.HUD.Gameplay
 {
     public class GameplayHUDService : AHUDService
     {

@@ -3,7 +3,7 @@ using Code.Logic.Gameplay.Services.AdService;
 using Code.Logic.Gameplay.Services.AdService.Ad;
 using R3;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace Code.UI.ReviveWindow
 {
     public class ReviveWindowModel : IDisposable
     {

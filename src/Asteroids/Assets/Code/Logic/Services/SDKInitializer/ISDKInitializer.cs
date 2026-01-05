@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Gameplay.Services.SDKInitializer
+namespace Code.Logic.Services.SDKInitializer
 {
     public interface ISDKInitializer
     {

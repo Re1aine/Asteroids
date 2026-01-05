@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Logic.Gameplay.Services.Repository;
+using Code.Logic.Services.Repository;
 
 namespace Code.Logic.Gameplay.Services.Holders.RepositoriesHolder
 {

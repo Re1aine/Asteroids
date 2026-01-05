@@ -2,10 +2,11 @@
 using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using Code.Logic.Gameplay.Services.Boundries;
-using Code.Logic.Gameplay.Services.ConfigsProvider;
-using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance;
+using Code.Logic.Gameplay.Services.Configs;
+using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.PauseService;
+using Code.Logic.Gameplay.Services.Pause;
+using Code.Tools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

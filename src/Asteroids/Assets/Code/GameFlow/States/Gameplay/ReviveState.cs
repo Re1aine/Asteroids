@@ -1,7 +1,8 @@
 ﻿using Code.Logic.Gameplay.Audio;
 using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.PauseService;
-using Code.Logic.Gameplay.Services.Providers.HUDProvider;
+using Code.Logic.Gameplay.Services.Pause;
+using Code.Logic.Services.HUDProvider;
+using Code.UI;
 using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay

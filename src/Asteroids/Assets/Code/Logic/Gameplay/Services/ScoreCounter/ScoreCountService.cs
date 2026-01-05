@@ -1,6 +1,6 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Gameplay.Services.Repository.Player;
+using Code.Logic.Services.Repository.Player;
 using R3;
 
 namespace Code.Logic.Gameplay.Services.ScoreCounter

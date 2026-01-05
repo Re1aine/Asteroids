@@ -1,18 +1,21 @@
-﻿public class MenuWindowPresenter
+﻿namespace Code.UI.MenuWindow
 {
-    public MenuWindowModel Model { get; }
-    public MenuWindowView View { get; }
-
-    public MenuWindowPresenter(MenuWindowModel model, MenuWindowView view)
+    public class MenuWindowPresenter
     {
-        Model = model;
-        View = view;
-    }
+        public MenuWindowModel Model { get; }
+        public MenuWindowView View { get; }
 
-    public void Destroy()
-    {
-        Model.Dispose();
-        View.Destroy();
-    }
+        public MenuWindowPresenter(MenuWindowModel model, MenuWindowView view)
+        {
+            Model = model;
+            View = view;
+        }
+
+        public void Destroy()
+        {
+            Model.Dispose();
+            View.Destroy();
+        }
     
+    }
 }

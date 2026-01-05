@@ -1,78 +1,82 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.SDKInitializer;
+using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Services.SDKInitializer;
 using GamePush;
 using UnityEngine;
 
-public class GamePushPurchaseService : IPurchaseService
+namespace Code.Logic.Menu.Services.Purchase
 {
-    public event Action<ProductId> Purchased;
-    
-    private readonly ISDKInitializer _sdkInitializer;
-    
-    private bool _isInitialized;
-
-    public GamePushPurchaseService(ISDKInitializer sdkInitializer)
+    public class GamePushPurchaseService : IPurchaseService
     {
-        _sdkInitializer = sdkInitializer;
-    }
+        public event Action<ProductId> Purchased;
+    
+        private readonly ISDKInitializer _sdkInitializer;
+    
+        private bool _isInitialized;
 
-    public void Initialize()
-    {
-        if (_isInitialized)
-            return;
+        public GamePushPurchaseService(ISDKInitializer sdkInitializer)
+        {
+            _sdkInitializer = sdkInitializer;
+        }
+
+        public void Initialize()
+        {
+            if (_isInitialized)
+                return;
             
-        if (_sdkInitializer.IsGamePushInitialized)
-        {
-            _isInitialized = true;
-            Debug.Log("<b><color=green> [Purchase initialized successfully] </color></b>");
+            if (_sdkInitializer.IsGamePushInitialized)
+            {
+                _isInitialized = true;
+                Debug.Log("<b><color=green> [Purchase initialized successfully] </color></b>");
+            }
+            else
+            {
+                _isInitialized = false;
+                Debug.Log("<b><color=red> [Purchase is not initialized] </color></b>");
+            }
         }
-        else
+
+        private bool IsCanPurchase()
         {
-            _isInitialized = false;
-            Debug.Log("<b><color=red> [Purchase is not initialized] </color></b>");
+            if (_isInitialized)
+                return true;
+        
+            //if (_isInitialized && GP_Payments.IsPaymentsAvailable())
+            //    return true;
+        
+            Debug.LogWarning("GamePush is not initialized or not available. Purchase can't proceed.");
+            return false;
         }
-    }
-
-    private bool IsCanPurchase()
-    {
-        if (_isInitialized)
-            return true;
-        
-        //if (_isInitialized && GP_Payments.IsPaymentsAvailable())
-        //    return true;
-        
-        Debug.LogWarning("GamePush is not initialized or not available. Purchase can't proceed.");
-        return false;
-    }
     
-    public void Purchase(ProductId product)
-    {
-        if (!IsCanPurchase())
-            return;
-        
-        switch (product)
+        public void Purchase(ProductId product)
         {
-            case ProductId.AdsRemoval: PurchasePermanent(product);
-                break;
-        }
-    }
-    
-    private void PurchaseOneTime(ProductId product)
-    {
-        GP_Payments.Purchase(product.ToString());
-        Purchased?.Invoke(product);
-    }
-
-    private void PurchasePermanent(ProductId product) => 
-        GP_Payments.Purchase(product.ToString(), OnPurchaseSuccess, OnPurchaseFailure);
-
-    private void OnPurchaseSuccess(string productId)
-    { 
-        ProductId id = Enum.Parse<ProductId>(productId);
+            if (!IsCanPurchase())
+                return;
         
-        Purchased?.Invoke(id);
-    }
+            switch (product)
+            {
+                case ProductId.AdsRemoval: PurchasePermanent(product);
+                    break;
+            }
+        }
     
-    private void OnPurchaseFailure() => 
-        Debug.Log("Purchase operation: FAILURE");
+        private void PurchaseOneTime(ProductId product)
+        {
+            GP_Payments.Purchase(product.ToString());
+            Purchased?.Invoke(product);
+        }
+
+        private void PurchasePermanent(ProductId product) => 
+            GP_Payments.Purchase(product.ToString(), OnPurchaseSuccess, OnPurchaseFailure);
+
+        private void OnPurchaseSuccess(string productId)
+        { 
+            ProductId id = Enum.Parse<ProductId>(productId);
+        
+            Purchased?.Invoke(id);
+        }
+    
+        private void OnPurchaseFailure() => 
+            Debug.Log("Purchase operation: FAILURE");
+    }
 }

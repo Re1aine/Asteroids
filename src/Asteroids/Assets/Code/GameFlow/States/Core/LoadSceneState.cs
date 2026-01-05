@@ -1,15 +1,18 @@
-﻿using Code.GameFlow.States;
+﻿using Code.Infrastructure.Common.SceneLoader;
 using Cysharp.Threading.Tasks;
 
-public class LoadSceneState : IStateWithArg<GameScenes>
+namespace Code.GameFlow.States.Core
 {
-    private readonly ISceneLoader _sceneLoader;
+    public class LoadSceneState : IStateWithArg<GameScenes>
+    {
+        private readonly ISceneLoader _sceneLoader;
     
-    public LoadSceneState(ISceneLoader sceneLoader) => 
-        _sceneLoader = sceneLoader;
+        public LoadSceneState(ISceneLoader sceneLoader) => 
+            _sceneLoader = sceneLoader;
 
-    public async UniTask Enter(GameScenes scene) => 
-        await _sceneLoader.LoadScene(scene);
+        public async UniTask Enter(GameScenes scene) => 
+            await _sceneLoader.LoadScene(scene);
 
-    public UniTask Exit() => default;
+        public UniTask Exit() => default;
+    }
 }

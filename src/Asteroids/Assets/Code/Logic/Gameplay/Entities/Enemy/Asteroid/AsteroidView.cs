@@ -2,7 +2,7 @@
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Services.Boundries;
-using Code.Logic.Gameplay.Services.PauseService;
+using Code.Logic.Gameplay.Services.Pause;
 using UnityEngine;
 using VContainer;
 

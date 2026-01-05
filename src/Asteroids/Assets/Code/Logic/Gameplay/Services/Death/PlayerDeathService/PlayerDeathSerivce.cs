@@ -3,11 +3,11 @@ using Code.Logic.Gameplay.Entities;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Services.AdService;
 using Code.Logic.Gameplay.Services.AdService.Ad;
-using Code.Logic.Gameplay.Services.DeathProcessor;
+using Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using VContainer.Unity;
 
-namespace Code.Logic.Gameplay.Services.PlayerDeathService
+namespace Code.Logic.Gameplay.Services.Death.PlayerDeathService
 {
     public class PlayerDeathService : IPlayerDeathService, IInitializable, IDisposable
     {

@@ -1,9 +1,9 @@
 ﻿using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
-using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameBalance;
+using Code.Logic.Gameplay.Services.Configs.Configs.GameAssets;
+using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Gameplay.Services.ConfigsProvider
+namespace Code.Logic.Gameplay.Services.Configs
 {
     public interface IGameConfigsProvider
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.PauseService;
+using Code.Logic.Gameplay.Services.Pause;
 using R3;
 using UnityEngine;
 using VContainer;

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.Logic.Menu.Services.Purchase.Produict;
 
-namespace Code.Logic.Gameplay.Services.Repository.Player
+namespace Code.Logic.Services.Repository.Player
 {
     [Serializable]
     public class PlayerSaveData

@@ -1,13 +1,16 @@
 ﻿using System;
 
-[Serializable]
-public class PurchaseProduct
+namespace Code.Logic.Menu.Services.Purchase.Produict
 {
-    public ProductId Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public decimal Price { get; set; }
-    public bool IsOneTime { get; set; }
-    public bool IsSubscription { get; set; }
-    public int RewardGold { get; set; }
+    [Serializable]
+    public class PurchaseProduct
+    {
+        public ProductId Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public bool IsOneTime { get; set; }
+        public bool IsSubscription { get; set; }
+        public int RewardGold { get; set; }
+    }
 }

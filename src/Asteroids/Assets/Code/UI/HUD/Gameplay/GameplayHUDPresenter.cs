@@ -1,11 +1,14 @@
-﻿public class GameplayHUDPresenter :  AHUDPresenter
+﻿namespace Code.UI.HUD.Gameplay
 {
-    public new GameplayHUDModel Model { get; }
-    public new GameplayHUDView View { get; }
-    
-    public GameplayHUDPresenter(GameplayHUDModel model, GameplayHUDView view) : base(model, view)
+    public class GameplayHUDPresenter :  AHUDPresenter
     {
-        Model = model;
-        View = view;
+        public new GameplayHUDModel Model { get; }
+        public new GameplayHUDView View { get; }
+    
+        public GameplayHUDPresenter(GameplayHUDModel model, GameplayHUDView view) : base(model, view)
+        {
+            Model = model;
+            View = view;
+        }
     }
 }

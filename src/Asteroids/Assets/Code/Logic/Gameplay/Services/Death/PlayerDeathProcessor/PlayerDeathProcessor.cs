@@ -2,12 +2,13 @@
 using Code.Logic.Gameplay.Entities;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Gameplay.Services.Repository.Player;
-using Code.Logic.Gameplay.Services.ReviveService;
+using Code.Logic.Gameplay.Services.Revive;
+using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Services.Repository.Player;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.DeathProcessor
+namespace Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor
 {
     public class PlayerDeathProcessor : IPlayerDeathProcessor
     {

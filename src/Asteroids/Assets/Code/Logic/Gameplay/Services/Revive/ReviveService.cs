@@ -1,5 +1,5 @@
 ﻿
-namespace Code.Logic.Gameplay.Services.ReviveService
+namespace Code.Logic.Gameplay.Services.Revive
 {
     public class ReviveService : IReviveService
     {

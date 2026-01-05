@@ -1,43 +1,46 @@
 ﻿using R3;
 
-public class MenuHUDModel : AHUDModel
+namespace Code.UI.HUD.Menu
 {
-    private readonly ReactiveProperty<bool> _isMenuWindowVisible = new();
-    
-    private readonly CompositeDisposable _disposables = new();
-    
-    public MenuHUDModel(MenuHUDService hudService)
+    public class MenuHUDModel : AHUDModel
     {
-        _hudService = hudService;
+        private readonly ReactiveProperty<bool> _isMenuWindowVisible = new();
+    
+        private readonly CompositeDisposable _disposables = new();
+    
+        public MenuHUDModel(MenuHUDService hudService)
+        {
+            _hudService = hudService;
         
-        _isMenuWindowVisible
-            .Skip(1)
-            .Subscribe(isVisible => OnWindowVisibilityChanged(WindowType.MenuWindow, isVisible))
-            .AddTo(_disposables);
-    }
+            _isMenuWindowVisible
+                .Skip(1)
+                .Subscribe(isVisible => OnWindowVisibilityChanged(WindowType.MenuWindow, isVisible))
+                .AddTo(_disposables);
+        }
 
-    public override void ShowWindow(WindowType windowType)
-    {
-        switch (windowType)
+        public override void ShowWindow(WindowType windowType)
         {
-            case WindowType.MenuWindow:
-                _isMenuWindowVisible.Value = true;
-                break;                
-        }   
-    }
+            switch (windowType)
+            {
+                case WindowType.MenuWindow:
+                    _isMenuWindowVisible.Value = true;
+                    break;                
+            }   
+        }
 
-    public override void HideWindow(WindowType windowType)
-    {
-        switch (windowType)
+        public override void HideWindow(WindowType windowType)
         {
-            case WindowType.MenuWindow:
-                _isMenuWindowVisible.Value = false;
-                break;
-        }   
-    }
+            switch (windowType)
+            {
+                case WindowType.MenuWindow:
+                    _isMenuWindowVisible.Value = false;
+                    break;
+            }   
+        }
 
-    public override void Dispose()
-    {
-        _disposables.Dispose();
+        public override void Dispose()
+        {
+            _disposables.Dispose();
+        }
     }
 }

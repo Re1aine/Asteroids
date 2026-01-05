@@ -1,11 +1,14 @@
-﻿public class MenuHUDPresenter : AHUDPresenter
+﻿namespace Code.UI.HUD.Menu
 {
-    public new MenuHUDModel Model { get; }
-    public new MenuHUDView View { get; }
-
-    public MenuHUDPresenter(MenuHUDModel model, MenuHUDView view) : base(model, view)
+    public class MenuHUDPresenter : AHUDPresenter
     {
-        Model = model;
-        View = view;
+        public new MenuHUDModel Model { get; }
+        public new MenuHUDView View { get; }
+
+        public MenuHUDPresenter(MenuHUDModel model, MenuHUDView view) : base(model, view)
+        {
+            Model = model;
+            View = view;
+        }
     }
 }

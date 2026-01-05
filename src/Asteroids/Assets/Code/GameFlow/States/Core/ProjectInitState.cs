@@ -1,39 +1,41 @@
-﻿using Code.GameFlow.States;
-using Code.GameFlow.States.Core;
-using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+﻿using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using Code.Infrastructure.Common.SceneLoader;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Gameplay.Services.SDKInitializer;
+using Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 
-public class ProjectInitState : IState
+namespace Code.GameFlow.States.Core
 {
-    private readonly GameStateMachine _gameStateMachine;
-    private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
-    private readonly ISDKInitializer _sdkInitializer;
-    private readonly IRepositoriesHolder _repositoriesHolder;
-
-    public ProjectInitState(GameStateMachine gameStateMachine,
-        IAddressablesAssetsLoader addressablesAssetsLoader,
-        ISDKInitializer sdkInitializer,
-        IRepositoriesHolder repositoriesHolder)
+    public class ProjectInitState : IState
     {
-        _gameStateMachine = gameStateMachine;
-        _addressablesAssetsLoader = addressablesAssetsLoader;
-        _sdkInitializer = sdkInitializer;
-        _repositoriesHolder = repositoriesHolder;
-    }
+        private readonly GameStateMachine _gameStateMachine;
+        private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
+        private readonly ISDKInitializer _sdkInitializer;
+        private readonly IRepositoriesHolder _repositoriesHolder;
 
-    public async UniTask Enter()
-    {
-        await _addressablesAssetsLoader.Initialize();
-        await _sdkInitializer.Initialize();
-        
-        _repositoriesHolder.LoadAll();
-        
-        _gameStateMachine
-            .Enter<LoadSceneState, GameScenes>(GameScenes.Menu)
-            .Forget();
-    }
+        public ProjectInitState(GameStateMachine gameStateMachine,
+            IAddressablesAssetsLoader addressablesAssetsLoader,
+            ISDKInitializer sdkInitializer,
+            IRepositoriesHolder repositoriesHolder)
+        {
+            _gameStateMachine = gameStateMachine;
+            _addressablesAssetsLoader = addressablesAssetsLoader;
+            _sdkInitializer = sdkInitializer;
+            _repositoriesHolder = repositoriesHolder;
+        }
 
-    public UniTask Exit() => default;
+        public async UniTask Enter()
+        {
+            await _addressablesAssetsLoader.Initialize();
+            await _sdkInitializer.Initialize();
+        
+            _repositoriesHolder.LoadAll();
+        
+            _gameStateMachine
+                .Enter<LoadSceneState, GameScenes>(GameScenes.Menu)
+                .Forget();
+        }
+
+        public UniTask Exit() => default;
+    }
 }

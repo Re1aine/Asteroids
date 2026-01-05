@@ -1,6 +1,6 @@
 ﻿using Code.Logic.Gameplay.Entities;
 
-namespace Code.Logic.Gameplay.Services.DeathProcessor
+namespace Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor
 {
     public interface IPlayerDeathProcessor
     {
