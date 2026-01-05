@@ -13,7 +13,9 @@ namespace Code.Infrastructure.Common.AssetsManagement
         public static readonly string Bullet = "Bullet";
         public static readonly string LaserBeam = "LaserBeam";
         
-        public static readonly string HUD = "HUD";
+        public static readonly string GameplayHUD = "GameplayHUD";
+        public static readonly string MenuHUD = "MenuHUD";
+        
         public static readonly string LoseWindow = "LoseWindow";
         public static readonly string PlayerStatsWindow = "PlayerStatsWindow";
         public static readonly string ReviveWindow = "ReviveWindow";
