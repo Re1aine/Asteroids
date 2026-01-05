@@ -1,5 +1,7 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services.AdService.Ad;
+using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using Code.Logic.Gameplay.Services.Repository.Player;
 using Code.Logic.Gameplay.Services.SDKInitializer;
 using GamePush;
 using UnityEngine;
@@ -14,12 +16,15 @@ namespace Code.Logic.Gameplay.Services.AdService
         private GamePushRewardedAd _rewardedAd;
 
         private readonly ISDKInitializer _sdkInitializer;
-    
+        
+        private readonly PlayerRepository _playerRepository;
+
         private bool _isInitialized;
     
-        public GamePushAdsService(ISDKInitializer sdkInitializer)
+        public GamePushAdsService(ISDKInitializer sdkInitializer, IRepositoriesHolder repositoriesHolder)
         {
             _sdkInitializer = sdkInitializer;
+            _playerRepository = repositoriesHolder.GetRepository<PlayerRepository>();
         }
 
         public void Initialize()
@@ -44,7 +49,7 @@ namespace Code.Logic.Gameplay.Services.AdService
         {
             if (!IsCanShow(adContext))
                 return;
-        
+            
             if(GP_Ads.IsRewardedAvailable())
                 _rewardedAd.ShowRewarded(adContext);
         }
@@ -60,8 +65,15 @@ namespace Code.Logic.Gameplay.Services.AdService
 
         private bool IsCanShow(AdContext adContext)
         {
-            if (_isInitialized)
+            if (_isInitialized && !_playerRepository.IsAdsRemoved.CurrentValue)
                 return true;
+
+            if (_playerRepository.IsAdsRemoved.CurrentValue)
+            {
+                Debug.Log($"<color=yellow><b>Player has [{nameof(ProductId.AdsRemoval)}] purchase. Ads skipped.");
+                SkipAd(adContext);
+                return false;
+            }
             
             Debug.LogWarning("GamePush is not initialized. Ads skipped.");
             SkipAd(adContext);
