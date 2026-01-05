@@ -1,19 +1,18 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.UI.HUD;
+﻿using Code.UI.HUD;
 using Cysharp.Threading.Tasks;
 
 namespace Code.Logic.Gameplay.Services.Providers.HUDProvider
 {
     public class HUDProvider : IHUDProvider
     {
-        public HUDPresenter HUD { get; private set; }
+        public AHUDPresenter HUD { get; private set; }
     
-        private readonly IGameFactory _gameFactory;
+        private readonly IUIFactory _uiFactory;
 
-        public HUDProvider(IGameFactory gameFactory) => 
-            _gameFactory = gameFactory;
+        public HUDProvider(IUIFactory gameplayUIFactory) => 
+            _uiFactory = gameplayUIFactory;
 
         public async UniTask Initialize() => 
-            HUD = await _gameFactory.CreateHUD();
+            HUD = await _uiFactory.CreateHUD();
     }
 }
