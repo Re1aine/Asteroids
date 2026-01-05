@@ -14,7 +14,7 @@ namespace Code.EntryPoints
         public void Start()
         {
             _gameplayStateMachine
-                .Enter<GameplayStart>()
+                .Enter<GameplayInitState>()
                 .Forget();
         }
     }

@@ -12,7 +12,7 @@ using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay
 {
-    public class GameplayStart : IState
+    public class GameplayInitState : IState
     {
         private readonly GameplayStateMachine _gameplayStateMachine;
         private readonly IHUDProvider _hudProvider;
@@ -26,7 +26,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IBoundaries _boundaries;
         private readonly BackgroundResizer _backgroundResizer;
 
-        public GameplayStart(GameplayStateMachine gameplayStateMachine, 
+        public GameplayInitState(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
             IPlayerProvider playerProvider,
             IAnalytics analytics,

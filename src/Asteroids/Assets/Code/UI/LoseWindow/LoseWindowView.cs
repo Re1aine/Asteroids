@@ -22,7 +22,7 @@ namespace Code.UI.LoseWindow
         }
 
         private void Start() => 
-            _restart.onClick.AddListener(() => _gameplayStateMachine.Enter<GameplayStart>().Forget());
+            _restart.onClick.AddListener(() => _gameplayStateMachine.Enter<GameplayInitState>().Forget());
 
         public void SetScore(int value) =>
             _currentScore.text = value.ToString();
