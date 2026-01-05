@@ -1,17 +1,21 @@
 using Code.GameFlow.States.Gameplay;
+using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 
 namespace Code.EntryPoints
 {
-    public class GameplayEntryPoint : IInitializable
+    public class GameplayEntryPoint : IStartable
     {
-        private readonly GameplayStateMachine _gameStateMachine;
+        private readonly GameplayStateMachine _gameplayStateMachine;
 
-        public GameplayEntryPoint(GameplayStateMachine gameStateMachine)
+        public GameplayEntryPoint(GameplayStateMachine gameplayStateMachine) => 
+            _gameplayStateMachine = gameplayStateMachine;
+
+        public void Start()
         {
-            _gameStateMachine = gameStateMachine;
+            _gameplayStateMachine
+                .Enter<GameplayStart>()
+                .Forget();
         }
-
-        public void Initialize() => _gameStateMachine.Enter<GameplayStart>();
     }
 }

@@ -1,10 +1,7 @@
-using System;
 using Code.EntryPoints;
 using Code.GameFlow;
 using Code.GameFlow.States.Gameplay;
-using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
-using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay;
 using Code.Logic.Gameplay.Analytics;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
@@ -20,7 +17,6 @@ using Code.Logic.Gameplay.Services.DeathProcessor;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Holders.VFXHolder;
 using Code.Logic.Gameplay.Services.Input;
@@ -31,12 +27,8 @@ using Code.Logic.Gameplay.Services.PointWrapper;
 using Code.Logic.Gameplay.Services.Providers.CameraProvider;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Gameplay.Services.Repository;
-using Code.Logic.Gameplay.Services.Repository.Player;
 using Code.Logic.Gameplay.Services.ReviveService;
-using Code.Logic.Gameplay.Services.SaveLoad;
 using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.Logic.Gameplay.Services.SDKInitializer;
 using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
 using Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
 using UnityEngine;
@@ -51,10 +43,7 @@ namespace Code.Scopes
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<AddressablesAssetsLoader>(Lifetime.Singleton).As<IAddressablesAssetsLoader>();
             builder.Register<AddressablesAssetsProvider>(Lifetime.Singleton).As<IAddressablesAssetsProvider>();
-
-            builder.Register<SDKInitializer>(Lifetime.Singleton).As<ISDKInitializer>();
             
             builder.Register<GameAssetsConfigsProvider>(Lifetime.Singleton).As<IGameAssetsConfigsProvider>();
             builder.Register<FirebaseRemoteConfigsProvider>(Lifetime.Singleton).As<IGameBalanceConfigsProvider>();
@@ -63,14 +52,6 @@ namespace Code.Scopes
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             InitializeAnalytics(builder);
             
-            builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
-
-            builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
-
-            builder.Register<RepositoriesHolder>(Lifetime.Singleton).As<IRepositoriesHolder>();
-
-            builder.RegisterComponentInHierarchy<CoroutineRunner>().As<ICoroutineRunner>();
-
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
             
             builder.Register<GamePushAdsService>(Lifetime.Singleton).As<IAdsService>();
@@ -85,6 +66,9 @@ namespace Code.Scopes
             builder.Register<ScoreCountService>(Lifetime.Singleton).As<IScoreCountService>();
 
             builder.Register<GameFactory>(Lifetime.Singleton).As<IGameFactory>();
+            builder.Register<GameplayUIFactory>(Lifetime.Singleton)
+                .As<IGameplayUIFactory>()
+                .As<IUIFactory>();
             
             builder.Register<ReviveService>(Lifetime.Singleton).As<IReviveService>();
             builder.Register<PlayerDeathProcessor>(Lifetime.Singleton).As<IPlayerDeathProcessor>();
