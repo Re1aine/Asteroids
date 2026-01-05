@@ -9,19 +9,17 @@ namespace Code.GameFlow.States.Menu
 {
     public class MenuInitState : IState
     {
-        private readonly MenuStateMachine _menuStateMachine;
         private readonly IPurchaseService _purchaseService;
         private readonly IPurchaseCatalog _purchaseCatalog;
         private readonly PurchaseHandler _purchaseHandler;
         private readonly IHUDProvider _hudProvider;
-
-        public MenuInitState(MenuStateMachine menuStateMachine,
+        
+        public MenuInitState(
             IPurchaseService purchaseService,
             IPurchaseCatalog purchaseCatalog,
             PurchaseHandler purchaseHandler,
             IHUDProvider hudProvider)
         {
-            _menuStateMachine = menuStateMachine;
             _purchaseService = purchaseService;
             _purchaseCatalog = purchaseCatalog;
             _purchaseHandler = purchaseHandler;
