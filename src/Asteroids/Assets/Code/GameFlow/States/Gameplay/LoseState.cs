@@ -9,6 +9,7 @@ using Code.Logic.Gameplay.Services.Holders.VFXHolder;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
 using Code.Logic.Gameplay.Services.ReviveService;
 using Code.Logic.Gameplay.Services.ScoreCounter;
+using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -50,13 +51,13 @@ namespace Code.GameFlow.States.Gameplay
             _reviveService = reviveService;
         }
 
-        public void Enter()
+        public UniTask Enter()
         {
             _audioService.Reset();            
             
             _repositoriesHolder.SaveAll();
 
-            _hudProvider.HUD.ShowLoseWindow();
+            _hudProvider.HUD.ShowWindow(WindowType.LoseWindow);
 
             _ufosHolder.DestroyAll();
             _asteroidsHolder.DestroyAll();
@@ -68,11 +69,14 @@ namespace Code.GameFlow.States.Gameplay
             _analyticsStore.Flush();
             
             _reviveService.Reset();
+            
+            return default;
         }
 
-        public void Exit()
+        public UniTask Exit()
         {
             _hudProvider.HUD.Destroy();
+            return default;
         }
     }
 }

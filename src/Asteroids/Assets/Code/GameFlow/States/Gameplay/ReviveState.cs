@@ -2,6 +2,7 @@
 using Code.Logic.Gameplay.Services.Input;
 using Code.Logic.Gameplay.Services.PauseService;
 using Code.Logic.Gameplay.Services.Providers.HUDProvider;
+using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -24,7 +25,7 @@ namespace Code.GameFlow.States.Gameplay
             _audioService = audioService;
         }
 
-        public void Enter()
+        public UniTask Enter()
         {
             _inputService.Disable();
         
@@ -33,13 +34,16 @@ namespace Code.GameFlow.States.Gameplay
             _audioService.StopSoundCategory(SoundCategory.ShortSounds);
             _audioService.PauseSoundCategory(SoundCategory.Music);
         
-            _hudProvider.HUD.ShowRewardWindow();
+            _hudProvider.HUD.ShowWindow(WindowType.ReviveWindow);
+            
+            return default;
         }
 
-        public void Exit()
+        public UniTask Exit()
         {
             _pauseService.UnPause();
-            _hudProvider.HUD.HideRewardWindow();
+            _hudProvider.HUD.HideWindow(WindowType.ReviveWindow);
+            return default;
         }
     }
 }

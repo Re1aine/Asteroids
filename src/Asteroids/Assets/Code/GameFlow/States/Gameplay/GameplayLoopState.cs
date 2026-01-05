@@ -7,6 +7,7 @@ using Code.Logic.Gameplay.Services.ScoreCounter;
 using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
 using Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
 using Code.UI.PlayerStatsWindow;
+using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Gameplay
 {
@@ -40,7 +41,7 @@ namespace Code.GameFlow.States.Gameplay
             _scoreCountService = scoreCountService;
         }
 
-        public void Enter()
+        public UniTask Enter()
         {
             _scoreCountService.Reset();
             
@@ -52,10 +53,12 @@ namespace Code.GameFlow.States.Gameplay
             
             _audioService.PlaySound(SoundType.Music);
             
-            _hudProvider.HUD.ShowPlayerStatsWindow();
+            _hudProvider.HUD.ShowWindow(WindowType.PlayerStatsWindow);
+            
+            return default;
         }
 
-        public void Exit()
+        public UniTask Exit()
         {
             _inputService.Disable();
             _asteroidSpawner.Disable();
@@ -63,7 +66,9 @@ namespace Code.GameFlow.States.Gameplay
 
             _playerGunObserver.Stop();
             
-            _hudProvider.HUD.HidePlayerStatsWindow();
+            _hudProvider.HUD.HideWindow(WindowType.PlayerStatsWindow);
+            
+            return default;
         }
     }
 }
