@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+﻿using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -17,21 +17,21 @@ namespace Code.Infrastructure.Common.AssetsManagement.AssetProvider
             _assetsLoader = assetsLoader;
         }
 
-        public async Task<T> Instantiate<T>(string assetPath) where T : class
+        public async UniTask<T> Instantiate<T>(string assetPath) where T : class
         {
             GameObject prefab = await _assetsLoader.LoadAsset<GameObject>(assetPath);
             return _objectResolver.Instantiate(prefab)
                 .GetComponent<T>();
         }
 
-        public async Task<T> InstantiateAt<T>(string assetPath, Vector3 position, Quaternion rotation) where T : class
+        public async UniTask<T> InstantiateAt<T>(string assetPath, Vector3 position, Quaternion rotation) where T : class
         {
             GameObject prefab = await _assetsLoader.LoadAsset<GameObject>(assetPath);
             return _objectResolver.Instantiate(prefab, position, rotation)
                 .GetComponent<T>();
         }
 
-        public async Task<T> Instantiate<T>(string assetPath, Transform parent) where T : class
+        public async UniTask<T> Instantiate<T>(string assetPath, Transform parent) where T : class
         {
             GameObject prefab = await _assetsLoader.LoadAsset<GameObject>(assetPath);
             return _objectResolver.Instantiate(prefab, parent)
