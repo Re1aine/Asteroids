@@ -3,11 +3,7 @@ using Code.Logic.Gameplay.Entities.Enemy.UFO;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
-using Code.Logic.Gameplay.Services.ConfigsProvider;
 using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
-using Code.UI.HUD;
-using Code.UI.LoseWindow;
-using Code.UI.PlayerStatsWindow;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -20,11 +16,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         UniTask<UFOPresenter> CreateUfo(Vector3 position, Quaternion rotation, int scoreReward = 4);
         UniTask<Bullet> CreateBullet(Vector3 position, Quaternion rotation);
         UniTask<LaserBeam> CreateLaserBeam(Vector2 position, Quaternion rotation);
-        UniTask<HUDPresenter> CreateHUD();
-        UniTask<LoseWindowPresenter> CreateLoseWindow();
-        UniTask<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
-        UniTask<ReviveWindowPresenter> CreateRevivedWindow();
-        void WarmUp();
+        UniTask WarmUp();
         VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation);
     }
 }

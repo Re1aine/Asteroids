@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Code.Infrastructure.Common.AssetsManagement;
+﻿using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
@@ -9,25 +7,17 @@ using Code.Logic.Gameplay.Entities.Enemy.UFO;
 using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
-using Code.Logic.Gameplay.Services.AdService;
 using Code.Logic.Gameplay.Services.ConfigsProvider;
 using Code.Logic.Gameplay.Services.ConfigsProvider.Configs.GameAssets;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Holders.VFXHolder;
 using Code.Logic.Gameplay.Services.Observers.Asteroid;
 using Code.Logic.Gameplay.Services.Observers.UFO;
-using Code.Logic.Gameplay.Services.Providers.HUDProvider;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.UI.HUD;
-using Code.UI.LoseWindow;
-using Code.UI.PlayerStatsWindow;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using VContainer;
 using Object = UnityEngine.Object;
 
 namespace Code.Logic.Gameplay.Services.Factories.GameFactory
@@ -38,11 +28,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IUFOsHolder _ufOsHolder;
         private readonly IAsteroidsHolder _asteroidsHolder;
         private readonly IBulletsHolder _bulletsHolder;
-        private readonly IRepositoriesHolder _repositoriesHolder;
-        private readonly IObjectResolver _resolver;
         private readonly IAnalyticsStore _analyticsStore;
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
-        private readonly IAddressablesAssetsLoader _assetsLoader;
+        private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
         private readonly IVFXHolder _vfxHolder;
         private readonly IGameConfigsProvider _gameConfigsProvider;
 
@@ -50,11 +38,9 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IUFOsHolder ufOsHolder,
             IAsteroidsHolder asteroidsHolder,
             IBulletsHolder bulletsHolder,
-            IRepositoriesHolder repositoriesHolder,
-            IObjectResolver resolver,
             IAnalyticsStore analyticsStore,
             IAddressablesAssetsProvider addressablesAssetsProvider,
-            IAddressablesAssetsLoader assetsLoader,
+            IAddressablesAssetsLoader addressablesAssetsLoader,
             IVFXHolder vfxHolder,
             IGameConfigsProvider gameConfigsProvider)
         {
@@ -62,25 +48,23 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _ufOsHolder = ufOsHolder;
             _asteroidsHolder = asteroidsHolder;
             _bulletsHolder = bulletsHolder;
-            _repositoriesHolder = repositoriesHolder;
-            _resolver = resolver;
             _analyticsStore = analyticsStore;
             _addressablesAssetsProvider = addressablesAssetsProvider;
-            _assetsLoader = assetsLoader;
+            _addressablesAssetsLoader = addressablesAssetsLoader;
             _vfxHolder = vfxHolder;
             _gameConfigsProvider = gameConfigsProvider;
         }
 
-        public async void WarmUp()
+        public async UniTask WarmUp()
         {
             var (gameplayKeys, uiKeys) = await UniTask.WhenAll(
-                _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.Gameplay),
-                _assetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.UI)
+                _addressablesAssetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.Gameplay),
+                _addressablesAssetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.UI)
             );
             
             await UniTask.WhenAll(
-                _assetsLoader.LoadAll<GameObject>(gameplayKeys),
-                _assetsLoader.LoadAll<GameObject>(uiKeys)
+                _addressablesAssetsLoader.LoadAll<GameObject>(gameplayKeys),
+                _addressablesAssetsLoader.LoadAll<GameObject>(uiKeys)
             );
         }
         
@@ -148,47 +132,6 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
 
         public async UniTask<LaserBeam> CreateLaserBeam(Vector2 position, Quaternion rotation) => 
             await _addressablesAssetsProvider.InstantiateAt<LaserBeam>(AssetsAddress.LaserBeam,position, rotation);
-
-        public async UniTask<LoseWindowPresenter> CreateLoseWindow()
-        {
-            LoseWindowView view =  await _addressablesAssetsProvider.Instantiate<LoseWindowView>(AssetsAddress.LoseWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
-            
-            LoseWindowModel model = new LoseWindowModel(
-                _scoreCountService,
-                _repositoriesHolder);
-            
-             return new LoseWindowPresenter(model, view);
-        }
-
-        public async UniTask<PlayerStatsWindowPresenter> CreatePlayerStatsWindow()
-        {
-            PlayerStatsWindowView view = await _addressablesAssetsProvider.Instantiate<PlayerStatsWindowView>(AssetsAddress.PlayerStatsWindow, _resolver.Resolve<IHUDProvider>().HUD.View.transform);
-            
-            PlayerStatsWindowModel model = new PlayerStatsWindowModel(
-                _resolver.Resolve<IPlayerProvider>());
-            
-             return new PlayerStatsWindowPresenter(model, view);
-        }
-
-        public async UniTask<HUDPresenter> CreateHUD()
-        {
-            HUDView view =  await _addressablesAssetsProvider.Instantiate<HUDView>(AssetsAddress.HUD);
-            
-            HUDModel model = new HUDModel(new HUDService(this));
-            
-            return new HUDPresenter(model, view);
-        }
-
-        public async UniTask<ReviveWindowPresenter> CreateRevivedWindow()
-        {
-            ReviveWindowView view = await _addressablesAssetsProvider.Instantiate<ReviveWindowView>(AssetsAddress.ReviveWindow,
-                _resolver.Resolve<IHUDProvider>().HUD.View.transform);
-
-            ReviveWindowModel model = new ReviveWindowModel(_resolver.Resolve<IAdsService>());
-            
-            return new ReviveWindowPresenter(model, view);
-        }
-
         public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
         {
             VFX prefab = _gameConfigsProvider
