@@ -17,7 +17,7 @@ namespace Code.Logic.Gameplay
         private void Awake() => 
             _background = GetComponent<SpriteRenderer>();
         
-        private void Start() =>
+        public void Initialize() => 
             ResizeBackground();
 
         private void ResizeBackground()
