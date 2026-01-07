@@ -53,8 +53,7 @@ namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
     
         private bool IsCanFetch() => 
             _isInitialized;
-
-
+        
         private void LoadConfigs()
         {
             PlayerConfig = GetConfig<PlayerConfig>(PlayerConfigKey);
@@ -67,7 +66,7 @@ namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
 
         private T GetConfig<T>(string key) where T : new()
         {
-            return IsCanFetch() ? 
+            return IsCanFetch() && GP_Variables.Has(key) ? 
                 JsonUtility.FromJson<T>(GP_Variables.GetString(key))
                 : new T();
         }
