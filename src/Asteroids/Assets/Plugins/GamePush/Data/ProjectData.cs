@@ -7,7 +7,7 @@ namespace GamePush.Data
         public static string TOKEN = "mXjsjq1x2NVecZWjaYaxKGR9GntyPWud";
         public static bool GAMEREADY_AUTOCALL = false;
         public static bool SHOW_STICKY_ON_START = false;
-        public static bool WAIT_PLAGIN_READY = false;
+        public static bool WAIT_PLAGIN_READY = true;
         public static bool AUTO_PAUSE_ON_ADS = false;
     }
 }
