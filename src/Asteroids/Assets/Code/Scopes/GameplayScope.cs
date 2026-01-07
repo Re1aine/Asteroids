@@ -5,7 +5,6 @@ using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
 using Code.Logic.Gameplay;
 using Code.Logic.Gameplay.Analytics;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Gameplay.Analytics.FireBase;
 using Code.Logic.Gameplay.Analytics.GamePush;
 using Code.Logic.Gameplay.Audio;
 using Code.Logic.Gameplay.Services.AdService;
@@ -48,11 +47,11 @@ namespace Code.Scopes
             builder.Register<AddressablesAssetsProvider>(Lifetime.Singleton).As<IAddressablesAssetsProvider>();
             
             builder.Register<GameAssetsConfigsProvider>(Lifetime.Singleton).As<IGameAssetsConfigsProvider>();
-            builder.Register<FirebaseRemoteConfigsProvider>(Lifetime.Singleton).As<IGameBalanceConfigsProvider>();
+            builder.Register<GamePushRemoteConfigsProvider>(Lifetime.Singleton).As<IGameBalanceConfigsProvider>();
             builder.Register<GameConfigsProviderFacade>(Lifetime.Singleton).As<IGameConfigsProvider>();
             
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
-            InitializeAnalytics(builder);
+            builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();
             
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
             
@@ -99,14 +98,6 @@ namespace Code.Scopes
             builder.Register<GameplayStateMachine>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<GameplayEntryPoint>();
-        }
-
-        private void InitializeAnalytics(IContainerBuilder builder)
-        { 
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
-                builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();
-            else
-                builder.Register<FireBaseAnalytics>(Lifetime.Singleton).As<IAnalytics>();
         }
     } 
 }
