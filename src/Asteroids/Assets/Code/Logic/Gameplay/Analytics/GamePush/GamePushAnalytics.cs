@@ -57,8 +57,14 @@ namespace Code.Logic.Gameplay.Analytics.GamePush
 
         public void EndSession(IAnalyticsStore analyticsStore)
         {
-            if(IsCanLogEvent())
-                GP_Analytics.Goal(AnalyticsEventsName.EndSession, 0);
+            if (!IsCanLogEvent())
+                return;
+            
+            GP_Analytics.Goal(AnalyticsEventsName.EndSession, 0);
+            GP_Analytics.Goal(AnalyticsEventParameters.BulletReleaseCount, analyticsStore.BulletReleaseCount);
+            GP_Analytics.Goal(AnalyticsEventParameters.LaserReleaseCount, analyticsStore.LaserReleaseCount);
+            GP_Analytics.Goal(AnalyticsEventParameters.AsteroidKills, analyticsStore.AsteroidKills);
+            GP_Analytics.Goal(AnalyticsEventParameters.UfoKills, analyticsStore.UfoKills);
         }
     }
 }
