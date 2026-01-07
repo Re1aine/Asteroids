@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
 using Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
@@ -98,3 +99,4 @@ namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
         }
     }
 }
+#endif

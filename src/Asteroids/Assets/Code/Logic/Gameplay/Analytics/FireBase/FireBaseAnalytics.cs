@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
+﻿#if UNITY_EDITOR
+using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
 using Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using Code.Logic.Services.SDKInitializer;
 using Firebase.Analytics;
@@ -66,3 +67,4 @@ namespace Code.Logic.Gameplay.Analytics.FireBase
         }
     }
 }
+#endif

@@ -1,8 +1,10 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Firebase;
 using GamePush;
 using UnityEngine;
+#if UNITY_EDITOR
+using Firebase;
+#endif
 
 namespace Code.Logic.Services.SDKInitializer
 {
@@ -13,8 +15,8 @@ namespace Code.Logic.Services.SDKInitializer
     
         public async UniTask Initialize()
         {
-            //await InitializeGamePushSDK();
-            await InitializerFireBaseSDK();
+            await InitializeGamePushSDK();
+            //await InitializerFireBaseSDK();
         }
     
         private async UniTask InitializeGamePushSDK()
@@ -31,7 +33,8 @@ namespace Code.Logic.Services.SDKInitializer
                 IsGamePushInitialized = false;
             }          
         }
-    
+        
+#if UNITY_EDITOR        
         private async UniTask InitializerFireBaseSDK()
         {
             try
@@ -52,5 +55,6 @@ namespace Code.Logic.Services.SDKInitializer
                 IsFireBaseInitialized = false;
             }
         }
+#endif
     }
 }
