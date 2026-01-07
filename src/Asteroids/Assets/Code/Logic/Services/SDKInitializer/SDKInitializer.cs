@@ -19,19 +19,23 @@ namespace Code.Logic.Services.SDKInitializer
             //await InitializerFireBaseSDK();
         }
     
-        private async UniTask InitializeGamePushSDK()
+        private UniTask InitializeGamePushSDK()
         {
             try
             {
-                await GP_Init.Ready;
+                //await GP_Init.Ready;
+                GP_Game.GameReady();
                 Debug.Log("<b><color=green> [GamePush initialized successfully] </color></b>");
                 IsGamePushInitialized = true;
+                return default;
             }
             catch (Exception e)
             {
                 Debug.LogException(e);
                 IsGamePushInitialized = false;
             }          
+            
+            return default;
         }
         
 #if UNITY_EDITOR        
