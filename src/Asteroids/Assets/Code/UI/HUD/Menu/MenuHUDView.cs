@@ -1,6 +1,6 @@
 ﻿using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Menu.Services.Purchase;
-using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Menu.Services.Purchase.Product;
 using Code.Logic.Services.Repository.Player;
 using R3;
 using UnityEngine;
