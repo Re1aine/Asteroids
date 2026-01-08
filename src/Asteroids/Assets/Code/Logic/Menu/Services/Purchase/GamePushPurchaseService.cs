@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Infrastructure.Common.LogService;
 using Code.Logic.Menu.Services.Purchase.Product;
 using Code.Logic.Services.SDKInitializer;
 using GamePush;
@@ -12,12 +13,14 @@ namespace Code.Logic.Menu.Services.Purchase
         public event Action<string> PermanentPurchased;
         
         private readonly ISDKInitializer _sdkInitializer;
-    
+        private readonly ILogService _logService;
+
         private bool _isInitialized;
 
-        public GamePushPurchaseService(ISDKInitializer sdkInitializer)
+        public GamePushPurchaseService(ISDKInitializer sdkInitializer, ILogService logService)
         {
             _sdkInitializer = sdkInitializer;
+            _logService = logService;
         }
 
         public void Initialize()
@@ -28,12 +31,12 @@ namespace Code.Logic.Menu.Services.Purchase
             if (_sdkInitializer.IsGamePushInitialized)
             {
                 _isInitialized = true;
-                Debug.Log("<b><color=green> [Purchase initialized successfully] </color></b>");
+                _logService.Log("[Purchase initialized successfully]", Color.green, true);
             }
             else
             {
                 _isInitialized = false;
-                Debug.Log("<b><color=red> [Purchase is not initialized] </color></b>");
+                _logService.Log("[Purchase is not initialized]", Color.red, true);
             }
         }
 

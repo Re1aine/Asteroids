@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+﻿using Code.Infrastructure.Common.LogService;
+using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
 using Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -26,12 +27,14 @@ namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
         public AsteroidSpawnerConfig AsteroidSpawnerConfig { get; private set; }
 
         private readonly ISDKInitializer _sdkInitializer;
+        private readonly ILogService _logService;
 
         private bool _isInitialized;
 
-        public GamePushRemoteConfigsProvider(ISDKInitializer sdkInitializer)
+        public GamePushRemoteConfigsProvider(ISDKInitializer sdkInitializer, ILogService logService)
         {
             _sdkInitializer = sdkInitializer;
+            _logService = logService;
         }
 
         public UniTask Initialize()
@@ -42,12 +45,13 @@ namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
             if (_sdkInitializer.IsGamePushInitialized)
             {
                 _isInitialized = true;
-                Debug.Log("<b><color=green> [Remote Config initialized successfully] </color></b>");
+                _logService.Log("[Remote Config initialized successfully]", Color.green, true);
+
             }
             else
             {
                 _isInitialized = false;
-                Debug.Log("<b><color=red> [Remote Config is not initialized, using defaults] </color></b>");
+                _logService.Log("[Remote Config is not initialized, using defaults]", Color.red, true);
             }
 
             LoadConfigs();

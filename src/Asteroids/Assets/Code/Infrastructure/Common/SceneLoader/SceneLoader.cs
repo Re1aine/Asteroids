@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Code.Infrastructure.Common.CoroutineService;
+using Code.Infrastructure.Common.LogService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -13,9 +14,13 @@ namespace Code.Infrastructure.Common.SceneLoader
     public class SceneLoader : ISceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly ILogService _logService;
 
-        public SceneLoader(ICoroutineRunner coroutineRunner) => 
+        public SceneLoader(ICoroutineRunner coroutineRunner, ILogService logService)
+        {
             _coroutineRunner = coroutineRunner;
+            _logService = logService;
+        }
 
         public async UniTask LoadScene(GameScenes scene)
         {
@@ -23,10 +28,10 @@ namespace Code.Infrastructure.Common.SceneLoader
                 Addressables.LoadSceneAsync(scene.ToString(), LoadSceneMode.Single, false);
 
             await handle.ToUniTask();
-            Debug.Log($"Scene {scene} loaded.");
+            _logService.LogInfo($"Scene {scene} loaded");
         
             await handle.Result.ActivateAsync().ToUniTask();
-            Debug.Log($"Scene {scene} activated.");
+            _logService.LogInfo($"Scene {scene} activated");
         }
 
         public void LoadAnyScene(GameScenes scene, Action onLoaded) => 
@@ -38,10 +43,10 @@ namespace Code.Infrastructure.Common.SceneLoader
             asyncSceneLoading!.allowSceneActivation= false;
         
             yield return new WaitUntil(() => asyncSceneLoading!.isDone);
-            Debug.Log($"Scene {scene} loaded.");
+            _logService.LogInfo($"Scene {scene} loaded");
         
             asyncSceneLoading.allowSceneActivation = true;
-            Debug.Log($"Scene {scene} activated.");
+            _logService.LogInfo($"Scene {scene} activated");
         
             yield return null;
             onLoaded?.Invoke();

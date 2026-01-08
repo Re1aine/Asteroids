@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Infrastructure.Common.LogService;
 using Cysharp.Threading.Tasks;
 using GamePush;
 using UnityEngine;
@@ -10,28 +11,35 @@ namespace Code.Logic.Services.SDKInitializer
 {
     public class SDKInitializer : ISDKInitializer
     {
+        private readonly ILogService _logService;
         public bool IsGamePushInitialized {get; private set;}
+
         public bool IsFireBaseInitialized {get; private set;}
-    
+
+        public SDKInitializer(ILogService logService)
+        {
+            _logService = logService;
+        }
+
         public async UniTask Initialize()
         {
             await InitializeGamePushSDK();
             //await InitializerFireBaseSDK();
         }
-    
+
         private UniTask InitializeGamePushSDK()
         {
             try
             {
                 //await GP_Init.Ready;
                 GP_Game.GameReady();
-                Debug.Log("<b><color=green> [GamePush initialized successfully] </color></b>");
+                _logService.Log("[GamePush initialized successfully]", Color.green, true);
                 IsGamePushInitialized = true;
                 return default;
             }
             catch (Exception e)
             {
-                Debug.LogException(e);
+                _logService.LogException(e);
                 IsGamePushInitialized = false;
             }          
             
@@ -46,16 +54,16 @@ namespace Code.Logic.Services.SDKInitializer
                 var dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
                 if (dependencyStatus != DependencyStatus.Available)
                 {
-                    Debug.LogError($"Failed to initialize Firebase: {dependencyStatus}");
+                    _logService.LogError($"Failed to initialize Firebase: {dependencyStatus}");
                     IsFireBaseInitialized = false;;
                 }
-            
-                Debug.Log("<b><color=green> Firebase initialized successfully! </color></b>");
+
+                _logService.Log("Firebase initialized successfully!", Color.green, true);
                 IsFireBaseInitialized = true;;
             }
             catch (Exception e)
             {
-                Debug.LogException(e);
+                _logService.LogException(e);
                 IsFireBaseInitialized = false;
             }
         }

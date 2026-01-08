@@ -1,4 +1,5 @@
 ﻿using Code.GameFlow.States;
+using Code.Infrastructure.Common.LogService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -7,11 +8,13 @@ namespace Code.GameFlow
     public abstract class StateMachine 
     {
         private readonly StateFactory _stateFactory;
+        private readonly ILogService _logService;
         private IExitableState _currentState;
 
-        protected StateMachine(StateFactory stateFactory)
+        protected StateMachine(StateFactory stateFactory, ILogService logService)
         {
             _stateFactory = stateFactory;
+            _logService = logService;
         }
     
         public async UniTask Enter<TState>() where TState : IState
@@ -33,12 +36,13 @@ namespace Code.GameFlow
         {
             if (_currentState != null) 
                 await _currentState.Exit();
-            
-            Debug.Log("Changing in " +
-                      $"<color=white><b>{GetType().Name}</color><b> " + 
-                      "state from "  +
-                      $"<color=white><b>{_currentState?.GetType().Name ?? "Start"}" +
-                      $" -> {typeof(TState).Name}</color><b>");
+
+            _logService.LogWithHighlight("[Changing in] " +
+                                         $"[{GetType().Name}] " + 
+                                         "state from "  +
+                                         $"[{_currentState?.GetType().Name ?? "Start"}] -> " +
+                                         $"[{typeof(TState).Name}]", 
+                Color.white);
             
             TState state = await GetState<TState>();
             

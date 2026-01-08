@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Infrastructure.Common.LogService;
 using Code.Logic.Gameplay.Services.AdService.Ad;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Menu.Services.Purchase.Product;
@@ -17,14 +18,16 @@ namespace Code.Logic.Gameplay.Services.AdService
         private GamePushRewardedAd _rewardedAd;
 
         private readonly ISDKInitializer _sdkInitializer;
-        
+        private readonly ILogService _logService;
+
         private readonly PlayerRepository _playerRepository;
 
         private bool _isInitialized;
     
-        public GamePushAdsService(ISDKInitializer sdkInitializer, IRepositoriesHolder repositoriesHolder)
+        public GamePushAdsService(ISDKInitializer sdkInitializer, IRepositoriesHolder repositoriesHolder, ILogService logService)
         {
             _sdkInitializer = sdkInitializer;
+            _logService = logService;
             _playerRepository = repositoriesHolder.GetRepository<PlayerRepository>();
         }
 
@@ -36,13 +39,13 @@ namespace Code.Logic.Gameplay.Services.AdService
             if (_sdkInitializer.IsGamePushInitialized)
             {
                 _isInitialized = true;
-                Debug.Log("<b><color=green> [AdsService initialized successfully] </color></b>");
+                _logService.Log("[AdsService initialized successfully]", Color.green, true);
                 LoadAds();
             }
             else
             {
                 _isInitialized = false;
-                Debug.Log("<b><color=red> [AdsService is not initialized] </color></b>");
+                _logService.Log("[AdsService is not initialized]", Color.red, true);                
             }
         }
 
