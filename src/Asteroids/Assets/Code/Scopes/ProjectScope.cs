@@ -3,6 +3,7 @@ using Code.GameFlow;
 using Code.GameFlow.States.Core;
 using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Infrastructure.Common.CoroutineService;
+using Code.Infrastructure.Common.LogService;
 using Code.Infrastructure.Common.SceneLoader;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Services.Repository;
@@ -27,6 +28,8 @@ namespace Code.Scopes
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<LogService>(Lifetime.Singleton).As<ILogService>();
+            
             builder.RegisterComponentInNewPrefab(_coroutineRunner, Lifetime.Singleton).As<ICoroutineRunner>();
 
             builder.Register<AddressablesAssetsLoader>(Lifetime.Singleton).As<IAddressablesAssetsLoader>();
