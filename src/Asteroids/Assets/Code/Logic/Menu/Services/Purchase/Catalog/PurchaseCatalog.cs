@@ -1,42 +1,50 @@
-﻿using System.Collections.Generic;
-using Code.Logic.Menu.Services.Purchase.Produict;
+﻿using System;
+using System.Collections.Generic;
+using Code.Logic.Menu.Services.Purchase.Product;
+using GamePush;
+using UnityEngine;
 
 namespace Code.Logic.Menu.Services.Purchase.Catalog
 {
     public class PurchaseCatalog : IPurchaseCatalog
     {
-        private readonly Dictionary<ProductId, PurchaseProduct> _products = new();
+        private Dictionary<ProductId, FetchProducts> _products = new();
 
-        public void Initialize()
-        {
+        public void Initialize() => 
             InitializeCatalog();
-        }
 
-        public PurchaseProduct GetProduct(ProductId id) => 
+        public FetchProducts GetProduct(ProductId id) => 
             _products[id];
 
         private void InitializeCatalog()
         {
-            _products[ProductId.AdsRemoval] = new PurchaseProduct()
+#if UNITY_EDITOR
+            _products = new Dictionary<ProductId, FetchProducts>()
             {
-                Id = ProductId.AdsRemoval,
-                Name = "AdsRemoval",
-                Description = "Remove all ads permanently",
-                Price = 5,
-                IsSubscription = false,
-                IsOneTime = false
+                [ProductId.AdsRemoval] =  new FetchProducts()
+                {
+                    tag = "AdsRemoval",
+                    name = "AdsRemoval",
+                    description = "Remove all ads permanently",
+                }
             };
-        
-            _products[ProductId.Currency] = new PurchaseProduct()
-            {
-                Id = ProductId.Currency,
-                Name = "100 Gold",
-                Description = "Get 100 gold coins",
-                Price = 5,
-                IsOneTime = true,
-                IsSubscription = false,
-                RewardGold = 100
-            };
+#else
+            GP_Payments.Fetch(OnFetchProductsSuccess, OnFetchProductsFailed);
+#endif
+
+        }
+
+        private void OnFetchProductsSuccess(List<FetchProducts> products)
+        {
+            foreach (var product in products) 
+                _products.Add(Enum.Parse<ProductId>(product.tag), product);
+            
+            Debug.Log("Fetch products success");
+        }
+
+        private void OnFetchProductsFailed()
+        {
+            Debug.Log("Failed to fetch products");
         }
     }
 }

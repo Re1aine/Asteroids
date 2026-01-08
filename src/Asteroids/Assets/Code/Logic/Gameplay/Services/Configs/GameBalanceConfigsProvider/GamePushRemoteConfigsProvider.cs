@@ -3,6 +3,10 @@ using Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+#if !UNITY_EDITOR
+using GamePush;
+#endif
+
 namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
 {
     public class GamePushRemoteConfigsProvider : IGameBalanceConfigsProvider

@@ -1,7 +1,7 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services.AdService.Ad;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Menu.Services.Purchase.Product;
 using Code.Logic.Services.Repository.Player;
 using Code.Logic.Services.SDKInitializer;
 using GamePush;

@@ -1,5 +1,5 @@
 ﻿using System;
-using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Menu.Services.Purchase.Product;
 using Code.Logic.Services.SDKInitializer;
 using GamePush;
 using UnityEngine;
@@ -8,8 +8,9 @@ namespace Code.Logic.Menu.Services.Purchase
 {
     public class GamePushPurchaseService : IPurchaseService
     {
-        public event Action<ProductId> Purchased;
-    
+        public event Action<string> OneTimePurchased;
+        public event Action<string> PermanentPurchased;
+        
         private readonly ISDKInitializer _sdkInitializer;
     
         private bool _isInitialized;
@@ -38,12 +39,14 @@ namespace Code.Logic.Menu.Services.Purchase
 
         private bool IsCanPurchase()
         {
+#if UNITY_EDITOR            
             if (_isInitialized)
                 return true;
-        
-            //if (_isInitialized && GP_Payments.IsPaymentsAvailable())
-            //    return true;
-        
+#else            
+            if (_isInitialized && GP_Payments.IsPaymentsAvailable())
+                return true;
+#endif
+
             Debug.LogWarning("GamePush is not initialized or not available. Purchase can't proceed.");
             return false;
         }
@@ -55,27 +58,23 @@ namespace Code.Logic.Menu.Services.Purchase
         
             switch (product)
             {
-                case ProductId.AdsRemoval: PurchasePermanent(product);
+                case ProductId.AdsRemoval: PurchasePermanent(nameof(ProductId.AdsRemoval));
                     break;
             }
         }
-    
-        private void PurchaseOneTime(ProductId product)
+
+        private void PurchaseOneTime(string id)
         {
-            GP_Payments.Purchase(product.ToString());
-            Purchased?.Invoke(product);
+            GP_Payments.Purchase(id);
+            OneTimePurchased?.Invoke(id);
         }
 
-        private void PurchasePermanent(ProductId product) => 
-            GP_Payments.Purchase(product.ToString(), OnPurchaseSuccess, OnPurchaseFailure);
+        private void PurchasePermanent(string id) => 
+            GP_Payments.Purchase(id, OnPurchaseSuccess, OnPurchaseFailure);
 
-        private void OnPurchaseSuccess(string productId)
-        { 
-            ProductId id = Enum.Parse<ProductId>(productId);
-        
-            Purchased?.Invoke(id);
-        }
-    
+        private void OnPurchaseSuccess(string id) => 
+            PermanentPurchased?.Invoke(id);
+
         private void OnPurchaseFailure() => 
             Debug.Log("Purchase operation: FAILURE");
     }

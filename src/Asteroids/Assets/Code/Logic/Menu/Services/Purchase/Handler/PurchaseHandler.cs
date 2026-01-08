@@ -1,8 +1,9 @@
 ﻿using System;
 using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using Code.Logic.Menu.Services.Purchase.Catalog;
-using Code.Logic.Menu.Services.Purchase.Produict;
+using Code.Logic.Menu.Services.Purchase.Product;
 using Code.Logic.Services.Repository.Player;
+using GamePush;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -24,41 +25,57 @@ namespace Code.Logic.Menu.Services.Purchase.Handler
 
         public void Initialize()
         {
-            _purchaseService.Purchased += OnPurchase;
+            _purchaseService.OneTimePurchased += OnOneTimePurchase;
+            _purchaseService.PermanentPurchased += OnPermanentPurchase;
         }
 
-        private void OnPurchase(ProductId id)
+        private void OnOneTimePurchase(string productId)
         {
-            PurchaseProduct product = _purchaseCatalog.GetProduct(id);
+            ProductId id = Enum.Parse<ProductId>(productId);
+            
+            FetchProducts product = _purchaseCatalog.GetProduct(id);
+            
+            ApplyPurchase(product);
 
-            if (!product.IsOneTime && _playerRepository.HasProduct(product.Id))
-            {
-                Debug.LogWarning($"Product {product.Id.ToString()} already purchased");
-                return;
-            }
-        
-            if(!product.IsOneTime)
-                _playerRepository.AddPurchasedProduct(product);
-        
-            ApplyPurchase(id);
-
-            Debug.Log($"Product purchased: {id.ToString()}");
-        
+            Debug.Log($"Product purchased: {product.tag}");
+            
             _playerRepository.Save();
         }
 
-        private void ApplyPurchase(ProductId id)
+        private void OnPermanentPurchase(string productId)
         {
-            switch (id)
+            ProductId id = Enum.Parse<ProductId>(productId);
+            
+            FetchProducts product = _purchaseCatalog.GetProduct(id);
+
+            if (_playerRepository.HasProduct(product))
             {
-                case ProductId.AdsRemoval: _playerRepository.SetAdsRemoved();
+                Debug.LogWarning($"Product {product.tag} already purchased");
+                return;
+            }
+
+            _playerRepository.AddPurchasedProduct(product);
+
+            ApplyPurchase(product);
+
+            Debug.Log($"Product purchased: {product.tag}");
+            
+            _playerRepository.Save();
+        }
+
+        private void ApplyPurchase(FetchProducts product)
+        {
+            switch (product.tag)
+            {
+                case nameof(ProductId.AdsRemoval): _playerRepository.SetAdsRemoved();
                     break;
             }
         }
 
         public void Dispose()
         {
-            _purchaseService.Purchased -= OnPurchase;
+            _purchaseService.OneTimePurchased -= OnOneTimePurchase;
+            _purchaseService.PermanentPurchased -= OnPermanentPurchase;
         }
     }
 }

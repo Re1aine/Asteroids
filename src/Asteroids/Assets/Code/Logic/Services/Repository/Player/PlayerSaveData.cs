@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Logic.Menu.Services.Purchase.Produict;
+using GamePush;
 
 namespace Code.Logic.Services.Repository.Player
 {
@@ -9,6 +9,6 @@ namespace Code.Logic.Services.Repository.Player
     {
         public int HighScore;
         public bool IsAdsRemoved;
-        public List<PurchaseProduct> PurchasedProducts = new();
+        public List<FetchPlayerPurchases> PurchasedProducts = new();
     }
 }

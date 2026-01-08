@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Logic.Menu.Services.Purchase.Produict;
+using System.Runtime.Serialization;
+using Code.Logic.Menu.Services.Purchase.Product;
 using Code.Logic.Services.SaveLoad;
+using GamePush;
 using R3;
+using UnityEngine;
 
 namespace Code.Logic.Services.Repository.Player
 {
@@ -18,8 +21,8 @@ namespace Code.Logic.Services.Repository.Player
         public ReadOnlyReactiveProperty<bool> IsAdsRemoved => _isAdsRemoved;
         private readonly ReactiveProperty<bool> _isAdsRemoved = new();
 
-        public ReadOnlyReactiveProperty<List<PurchaseProduct>> PurchaseProduct => _purchasedProducts;
-        private readonly ReactiveProperty<List<PurchaseProduct>> _purchasedProducts = new();
+        public ReadOnlyReactiveProperty<List<FetchPlayerPurchases>> PurchaseProduct => _purchasedProducts;
+        private readonly ReactiveProperty<List<FetchPlayerPurchases>> _purchasedProducts = new();
         
         private readonly CompositeDisposable _disposables = new();
         
@@ -70,11 +73,15 @@ namespace Code.Logic.Services.Repository.Player
         public void SetAdsRemoved() => 
             _isAdsRemoved.Value = true;
 
-        public void AddPurchasedProduct(PurchaseProduct product) => 
-            _purchasedProducts.Value.Add(product);
+        public void AddPurchasedProduct(FetchProducts product)
+        {
+            _purchasedProducts.Value.Add(
+                new PlayerPurchaseProductWrapper(product)
+                    .Wrap());
+        }
 
-        public bool HasProduct(ProductId productId) => 
-            _purchasedProducts.Value.Exists(p => p.Id == productId);
+        public bool HasProduct(FetchProducts product) => 
+            _purchasedProducts.Value.Exists(p => p.productId == product.id);
 
         public void Dispose() => 
             _disposables.Dispose();

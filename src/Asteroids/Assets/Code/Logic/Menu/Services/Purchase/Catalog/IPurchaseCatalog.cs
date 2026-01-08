@@ -1,10 +1,11 @@
-﻿using Code.Logic.Menu.Services.Purchase.Produict;
+﻿using Code.Logic.Menu.Services.Purchase.Product;
+using GamePush;
 
 namespace Code.Logic.Menu.Services.Purchase.Catalog
 {
     public interface IPurchaseCatalog
     {
         void Initialize();
-        PurchaseProduct GetProduct(ProductId id);
+        FetchProducts GetProduct(ProductId id);
     }
 }
