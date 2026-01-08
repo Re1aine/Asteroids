@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Configs.Configs.GameBalance
+﻿namespace Code.Logic.Gameplay.Services.Configs.Configs.Balance
 {
     public class UfoSpawnerConfig
     {

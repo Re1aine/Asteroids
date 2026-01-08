@@ -2,19 +2,19 @@
 using Code.Infrastructure.Common.AssetsManagement;
 using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameAssets;
+using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Gameplay.Services.Configs.GameAssetsConfigProvider
+namespace Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider
 {
-    public class GameAssetsConfigsProvider : IGameAssetsConfigsProvider
+    public class AssetsConfigsProvider : IAssetsConfigsProvider
     {
         private readonly IAddressablesAssetsLoader _assetsLoader;
         
         public AudioConfig AudioConfig { get; private set; }
         public VFXConfig VFXConfig { get; private set; }
 
-        public GameAssetsConfigsProvider(IAddressablesAssetsLoader assetsLoader) => 
+        public AssetsConfigsProvider(IAddressablesAssetsLoader assetsLoader) => 
             _assetsLoader = assetsLoader;
 
         public async UniTask Initialize()

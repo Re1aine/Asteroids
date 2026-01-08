@@ -1,9 +1,9 @@
-﻿using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+﻿using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
+namespace Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
 {
-    public interface IGameBalanceConfigsProvider  
+    public interface IBalanceConfigsProvider  
     {
         UniTask Initialize();
         PlayerConfig PlayerConfig { get; }

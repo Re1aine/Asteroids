@@ -8,7 +8,7 @@ using Code.Logic.Gameplay.Entities.Player;
 using Code.Logic.Gameplay.Projectiles.Bullet;
 using Code.Logic.Gameplay.Projectiles.LaserBeam;
 using Code.Logic.Gameplay.Services.Configs;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameAssets;
+using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
 using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
@@ -32,7 +32,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
         private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
         private readonly IVFXHolder _vfxHolder;
-        private readonly IGameConfigsProvider _gameConfigsProvider;
+        private readonly IConfigsProvider _configsProvider;
 
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
@@ -42,7 +42,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             IAddressablesAssetsProvider addressablesAssetsProvider,
             IAddressablesAssetsLoader addressablesAssetsLoader,
             IVFXHolder vfxHolder,
-            IGameConfigsProvider gameConfigsProvider)
+            IConfigsProvider configsProvider)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -52,7 +52,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             _addressablesAssetsProvider = addressablesAssetsProvider;
             _addressablesAssetsLoader = addressablesAssetsLoader;
             _vfxHolder = vfxHolder;
-            _gameConfigsProvider = gameConfigsProvider;
+            _configsProvider = configsProvider;
         }
 
         public async UniTask WarmUp()
@@ -73,7 +73,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             PlayerView playerView = await _addressablesAssetsProvider.Instantiate<PlayerView>(AssetsAddress.Player);
             
             PlayerPresenter presenter = new PlayerPresenter(
-                new PlayerModel(_gameConfigsProvider.PlayerConfig, _gameConfigsProvider.GunConfig),
+                new PlayerModel(_configsProvider.PlayerConfig, _configsProvider.GunConfig),
                 playerView);
 
             presenter.Init(
@@ -88,7 +88,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             AsteroidView view = await _addressablesAssetsProvider.InstantiateAt<AsteroidView>(AssetsAddress.GetAddressForAsteroid(type), position, rotation);
             
             AsteroidPresenter presenter = new AsteroidPresenter(
-                new AsteroidModel(type, _gameConfigsProvider.AsteroidConfig),
+                new AsteroidModel(type, _configsProvider.AsteroidConfig),
                 view);
 
             presenter.Init(
@@ -107,7 +107,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             UFOView view = await _addressablesAssetsProvider.InstantiateAt<UFOView>(AssetsAddress.UFO, position, rotation);
             
             UFOPresenter presenter = new UFOPresenter(
-                new UFOModel(_gameConfigsProvider.UfoConfig),
+                new UFOModel(_configsProvider.UfoConfig),
                 view);
 
             presenter.Init(
@@ -134,7 +134,7 @@ namespace Code.Logic.Gameplay.Services.Factories.GameFactory
             await _addressablesAssetsProvider.InstantiateAt<LaserBeam>(AssetsAddress.LaserBeam,position, rotation);
         public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
         {
-            VFX prefab = _gameConfigsProvider
+            VFX prefab = _configsProvider
                 .VFXConfig
                 .GetVFXByType(type);
 

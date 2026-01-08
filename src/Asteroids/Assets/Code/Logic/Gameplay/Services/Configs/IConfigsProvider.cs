@@ -1,11 +1,11 @@
 ﻿using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameAssets;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
+using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Cysharp.Threading.Tasks;
 
 namespace Code.Logic.Gameplay.Services.Configs
 {
-    public interface IGameConfigsProvider
+    public interface IConfigsProvider
     {
         UniTask Initialize();
         AudioConfig AudioConfig { get; }

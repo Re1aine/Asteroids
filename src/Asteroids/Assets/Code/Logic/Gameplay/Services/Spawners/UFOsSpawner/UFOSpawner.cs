@@ -2,7 +2,7 @@
 using Code.Infrastructure.Common.CoroutineService;
 using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Configs;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
 using Code.Logic.Gameplay.Services.Pause;
@@ -22,7 +22,7 @@ namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
         private readonly IBoundaries _boundaries;
         private readonly IUFOsHolder _ufOsHolder;
         private readonly IPauseService _pauseService;
-        private readonly IGameConfigsProvider _gameConfigsProvider;
+        private readonly IConfigsProvider _configsProvider;
 
         private Coroutine _coroutine;
         
@@ -30,20 +30,20 @@ namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
 
         public UFOSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries,
             IPauseService pauseService,
-            IGameConfigsProvider gameConfigsProvider)
+            IConfigsProvider configsProvider)
         {
             _gameFactory = gameFactory;
             _coroutineRunner = coroutineRunner;
             _boundaries = boundaries;
             _pauseService = pauseService;
-            _gameConfigsProvider = gameConfigsProvider;
+            _configsProvider = configsProvider;
 
             Configure();
         }
 
         private void Configure()
         {
-            _config = _gameConfigsProvider.UfoSpawnerConfig;
+            _config = _configsProvider.UfoSpawnerConfig;
 
             _spawnCooldown = _config.SpawnCooldown;
             _minRadiusSpawn = _config.MinRadiusSpawn;

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Configs.Configs.GameAssets
+namespace Code.Logic.Gameplay.Services.Configs.Configs.Assets
 {
     [CreateAssetMenu(fileName = "VFXConfig", menuName = "Configs/VFXConfig")]
     public class VFXConfig : ScriptableObject

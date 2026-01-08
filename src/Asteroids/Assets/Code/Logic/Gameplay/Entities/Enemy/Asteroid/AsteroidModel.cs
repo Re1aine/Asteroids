@@ -1,4 +1,4 @@
-﻿using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+﻿using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using R3;
 
 namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid

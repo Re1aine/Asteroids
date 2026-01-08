@@ -21,7 +21,7 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IGameFactory _gameFactory;
         private readonly IAdsService _adsService;
         private readonly IPlayerDeathService _playerDeathService;
-        private readonly IGameConfigsProvider _gameConfigsProvider;
+        private readonly IConfigsProvider _configsProvider;
         private readonly IAudioService _audioService;
         private readonly IBoundaries _boundaries;
         private readonly BackgroundResizer _backgroundResizer;
@@ -33,7 +33,7 @@ namespace Code.GameFlow.States.Gameplay
             IGameFactory gameFactory,
             IAdsService adsService,
             IPlayerDeathService playerDeathService,
-            IGameConfigsProvider gameConfigsProvider,
+            IConfigsProvider configsProvider,
             IAudioService audioService,
             IBoundaries boundaries,
             BackgroundResizer backgroundResizer)
@@ -45,7 +45,7 @@ namespace Code.GameFlow.States.Gameplay
             _gameFactory = gameFactory;
             _adsService = adsService;
             _playerDeathService = playerDeathService;
-            _gameConfigsProvider = gameConfigsProvider;
+            _configsProvider = configsProvider;
             _audioService = audioService;
             _boundaries = boundaries;
             _backgroundResizer = backgroundResizer;
@@ -56,7 +56,7 @@ namespace Code.GameFlow.States.Gameplay
             _boundaries.Initialize();
             _backgroundResizer.Initialize();
             
-            await _gameConfigsProvider.Initialize();
+            await _configsProvider.Initialize();
             
             _analytics.Initialize();
             

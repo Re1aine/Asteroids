@@ -5,19 +5,19 @@ namespace Code.Logic.Gameplay.Audio
 {
     public class AudioService : IAudioService
     {
-        private readonly IGameConfigsProvider _gameConfigsProvider;
+        private readonly IConfigsProvider _configsProvider;
     
         private readonly AudioPlayer _audioPlayer;
         private AudioConfig _audioConfig;
 
-        public AudioService(IGameConfigsProvider gameConfigsProvider, AudioPlayer audioPlayer)
+        public AudioService(IConfigsProvider configsProvider, AudioPlayer audioPlayer)
         {
-            _gameConfigsProvider = gameConfigsProvider;
+            _configsProvider = configsProvider;
             _audioPlayer = audioPlayer;
         }
     
         public void Initialize() => 
-            _audioConfig = _gameConfigsProvider.AudioConfig;
+            _audioConfig = _configsProvider.AudioConfig;
 
         public void PlaySound(SoundType type)
         {

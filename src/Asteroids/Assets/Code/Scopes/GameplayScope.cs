@@ -10,8 +10,8 @@ using Code.Logic.Gameplay.Audio;
 using Code.Logic.Gameplay.Services.AdService;
 using Code.Logic.Gameplay.Services.Boundries;
 using Code.Logic.Gameplay.Services.Configs;
-using Code.Logic.Gameplay.Services.Configs.GameAssetsConfigProvider;
-using Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider;
+using Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
+using Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
 using Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor;
 using Code.Logic.Gameplay.Services.Death.PlayerDeathService;
 using Code.Logic.Gameplay.Services.Factories.GameFactory;
@@ -46,9 +46,9 @@ namespace Code.Scopes
         {
             builder.Register<AddressablesAssetsProvider>(Lifetime.Singleton).As<IAddressablesAssetsProvider>();
             
-            builder.Register<GameAssetsConfigsProvider>(Lifetime.Singleton).As<IGameAssetsConfigsProvider>();
-            builder.Register<GamePushRemoteConfigsProvider>(Lifetime.Singleton).As<IGameBalanceConfigsProvider>();
-            builder.Register<GameConfigsProviderFacade>(Lifetime.Singleton).As<IGameConfigsProvider>();
+            builder.Register<AssetsConfigsProvider>(Lifetime.Singleton).As<IAssetsConfigsProvider>();
+            builder.Register<GamePushRemoteConfigsProvider>(Lifetime.Singleton).As<IBalanceConfigsProvider>();
+            builder.Register<ConfigsProviderFacade>(Lifetime.Singleton).As<IConfigsProvider>();
             
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();

@@ -1,16 +1,15 @@
 ﻿using Code.Infrastructure.Common.LogService;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-
 #if !UNITY_EDITOR
 using GamePush;
 #endif
 
-namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
+namespace Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
 {
-    public class GamePushRemoteConfigsProvider : IGameBalanceConfigsProvider
+    public class GamePushRemoteConfigsProvider : IBalanceConfigsProvider
     {
         private const string PlayerConfigKey = "PlayerConfig";
         private const string AsteroidConfigKey = "AsteroidConfig";

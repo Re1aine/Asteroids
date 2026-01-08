@@ -1,16 +1,16 @@
 ﻿using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameAssets;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
-using Code.Logic.Gameplay.Services.Configs.GameAssetsConfigProvider;
-using Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider;
+using Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
+using Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
+using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
+using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Cysharp.Threading.Tasks;
 
 namespace Code.Logic.Gameplay.Services.Configs
 {
-    public class GameConfigsProviderFacade : IGameConfigsProvider
+    public class ConfigsProviderFacade : IConfigsProvider
     {
-        private readonly IGameAssetsConfigsProvider _assetsConfigsProvider;
-        private readonly IGameBalanceConfigsProvider _balanceConfigsProvider;
+        private readonly IAssetsConfigsProvider _assetsConfigsProvider;
+        private readonly IBalanceConfigsProvider _balanceConfigsProvider;
     
         public AudioConfig AudioConfig => _assetsConfigsProvider.AudioConfig;
         public VFXConfig VFXConfig => _assetsConfigsProvider.VFXConfig;
@@ -21,7 +21,7 @@ namespace Code.Logic.Gameplay.Services.Configs
         public UfoSpawnerConfig UfoSpawnerConfig => _balanceConfigsProvider.UfoSpawnerConfig;
         public AsteroidSpawnerConfig AsteroidSpawnerConfig => _balanceConfigsProvider.AsteroidSpawnerConfig;
     
-        public GameConfigsProviderFacade(IGameAssetsConfigsProvider assetsConfigsProvider, IGameBalanceConfigsProvider balanceConfigsProvider)
+        public ConfigsProviderFacade(IAssetsConfigsProvider assetsConfigsProvider, IBalanceConfigsProvider balanceConfigsProvider)
         {
             _assetsConfigsProvider = assetsConfigsProvider;
             _balanceConfigsProvider = balanceConfigsProvider;

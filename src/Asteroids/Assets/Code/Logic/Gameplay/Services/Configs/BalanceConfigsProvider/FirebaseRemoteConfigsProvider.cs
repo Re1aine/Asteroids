@@ -1,14 +1,14 @@
 ﻿#if UNITY_EDITOR
 using System;
-using Code.Logic.Gameplay.Services.Configs.Configs.GameBalance;
+using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 using Firebase.RemoteConfig;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Configs.GameBalanceConfigsProvider
+namespace Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
 {
-    public class FirebaseRemoteConfigsProvider : IGameBalanceConfigsProvider
+    public class FirebaseRemoteConfigsProvider : IBalanceConfigsProvider
     {
         private const string PlayerConfigKey = "PlayerConfig";
         private const string AsteroidConfigKey = "AsteroidConfig";
