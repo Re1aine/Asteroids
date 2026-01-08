@@ -8,7 +8,7 @@ A classic arcade-style Asteroids game built in Unity.
 | **Shoot Laser** | `SHIFT` (Hold) |
 
 ## 📥 Setup
-1. Install `Unity 6000.0.34f1`  
+1. Install `Unity 6000.0.64f1`  
 2. Open `Gameplay` scene
 3. Play
 
