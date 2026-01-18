@@ -7,6 +7,5 @@ namespace Code.Logic.Services.SaveLoad.CloudStrategy
     public interface ICloudSaveLoadStrategy : ISaveLoadStrategy
     {
         Observable<PlayerSaveData> SyncFallBack { get; }
-        UniTask<bool> IsAvailable();
     }
 }

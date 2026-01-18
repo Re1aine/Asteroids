@@ -81,14 +81,7 @@ namespace Code.Logic.Services.Repository.Player
         public void Save()
         {
             SetLastSavedTime(DateTime.UtcNow.ToString("o"));            
-            
-            _saveLoadService.SetPlayerData(new PlayerSaveData
-            {
-                HighScore = _playerSaveData.HighScore,
-                IsAdsRemoved = _playerSaveData.IsAdsRemoved,
-                PurchasedProducts = new List<FetchPlayerPurchases>(_playerSaveData.PurchasedProducts),
-                LastSavedTime = DateTime.UtcNow.ToString("o")
-            });
+            _saveLoadService.SetPlayerData(_playerSaveData);
         }
 
         public void SetHighScore(int value) => 

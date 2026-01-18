@@ -8,15 +8,15 @@ namespace Code.Logic.Services.SaveLoad
     {
         Observable<Unit> StrategyChanged { get; }
         bool HasConflict { get; }
-        ISaveLoadStrategy Current { get; }
+        ISaveLoadStrategy CurrentStrategy { get; }
         ReadOnlyReactiveProperty<bool> IsAutoMode { get; }
         UniTask Preload();
         void SetPlayerData(PlayerSaveData data);
         UniTask<PlayerSaveData> GetPlayerData();
         UniTask ResolveWithCloud();
         UniTask ResolveWithLocal();
-        void UseLocal();
-        void UseCloud();
+        void UseLocalStrategy();
+        void UseCloudStrategy();
         void ResolveAutomatically();
         void SetAutoMode(bool isActive);
     }

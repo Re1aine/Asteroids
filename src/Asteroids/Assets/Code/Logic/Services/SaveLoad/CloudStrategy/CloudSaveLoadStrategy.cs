@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using GamePush;
 using R3;
 using UnityEngine;
+using Code.Tools;
 
 namespace Code.Logic.Services.SaveLoad.CloudStrategy
 {
@@ -42,20 +43,23 @@ namespace Code.Logic.Services.SaveLoad.CloudStrategy
 
         public async UniTask<PlayerSaveData> GetPlayerData()
         {
-            if(!await IsAvailable())
-                return null;
-        
-            return await UniTask.FromResult(
-                JsonUtility.FromJson<PlayerSaveData>(GP_Player.GetString(PlayerSaveDataKey)));
+            bool isAvailable = await IsAvailable();
+#if !UNITY_EDITOR && UNITY_WEBGL
+           if(isAvailable)
+               return await UniTask.FromResult(JsonUtility.FromJson<PlayerSaveData>(GP_Player.GetString(PlayerSaveDataKey)));
+           
+           return new PlayerSaveData();
+#else
+            return await UniTask.FromResult(new PlayerSaveData());
+#endif
         }
     
-        public async UniTask<bool> IsAvailable()
+        private async UniTask<bool> IsAvailable()
         {
-#if UNITY_EDITOR
-            return await UniTask.FromResult(false);
-#else
-        return await UniTask.FromResult(InternetHelper.HasInternet());
-#endif
+            if (!_sdkInitializer.IsGamePushInitialized)
+                return false;
+            
+            return await UniTask.FromResult(InternetHelper.HasInternet());
         }
     
         private void OnSyncComplete() => 

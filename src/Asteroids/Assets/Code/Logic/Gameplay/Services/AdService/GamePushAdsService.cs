@@ -54,17 +54,25 @@ namespace Code.Logic.Gameplay.Services.AdService
             if (!IsCanShow(adContext))
                 return;
             
+#if !UNITY_EDITOR && UNITY_WEBGL
             if(GP_Ads.IsRewardedAvailable())
                 _rewardedAd.ShowRewarded(adContext);
+#else
+            SkipAd(adContext);            
+#endif
         }
 
         public void ShowInterstitialAd(AdContext adContext)
         {
             if (!IsCanShow(adContext))
                 return;
-        
-            if(GP_Ads.IsFullscreenAvailable())
+            
+#if !UNITY_EDITOR && UNITY_WEBGL
+             if(GP_Ads.IsFullscreenAvailable())
                 _interstitialAd.ShowFullscreen(adContext);
+#else
+            SkipAd(adContext);
+#endif
         }
 
         private bool IsCanShow(AdContext adContext)

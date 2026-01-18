@@ -65,14 +65,14 @@ namespace Code.UI
         {
             _saveLoadService.SetAutoMode(false);
 
-            if (_saveLoadService.Current is LocalSaveLoadStrategy)
+            if (_saveLoadService.CurrentStrategy is LocalSaveLoadStrategy)
             {
-                _saveLoadService.UseCloud();
+                _saveLoadService.UseCloudStrategy();
                 _manualSelectStrategyText.text = "Cloud";
             }
             else
             {
-                _saveLoadService.UseLocal();
+                _saveLoadService.UseLocalStrategy();
                 _manualSelectStrategyText.text = "Local";
             }
         }

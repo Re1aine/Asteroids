@@ -1,9 +1,6 @@
 ﻿using Code.Logic.Menu;
 using Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
-#if !UNITY_EDITOR && UNITY_WEBGL
-using UnityEngine;
-#endif
 
 namespace Code.GameFlow.States.Menu
 {
