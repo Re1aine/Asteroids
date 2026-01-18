@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Code.Logic.Menu.Services.Purchase.Product;
 using Code.Logic.Services.SaveLoad;
+using Cysharp.Threading.Tasks;
 using GamePush;
 using R3;
-using UnityEngine;
 
 namespace Code.Logic.Services.Repository.Player
 {
     public class PlayerRepository : IRepository, IDisposable
     {
         private readonly ISaveLoadService _saveLoadService;
-        
-        private readonly PlayerSaveData _playerSaveData = new();
 
         public ReadOnlyReactiveProperty<int> HighScore => _highScore;
         private readonly ReactiveProperty<int> _highScore = new();
@@ -21,15 +18,20 @@ namespace Code.Logic.Services.Repository.Player
         public ReadOnlyReactiveProperty<bool> IsAdsRemoved => _isAdsRemoved;
         private readonly ReactiveProperty<bool> _isAdsRemoved = new();
 
-        public ReadOnlyReactiveProperty<List<FetchPlayerPurchases>> PurchaseProduct => _purchasedProducts;
+        public ReadOnlyReactiveProperty<string> LastSaveTime => _lastSaveTime;
+        private readonly ReactiveProperty<string> _lastSaveTime = new();
+
+        public ReadOnlyReactiveProperty<List<FetchPlayerPurchases>> PurchasedProducts => _purchasedProducts;
         private readonly ReactiveProperty<List<FetchPlayerPurchases>> _purchasedProducts = new();
+
+        private readonly PlayerSaveData _playerSaveData = new();
         
         private readonly CompositeDisposable _disposables = new();
         
         public PlayerRepository(ISaveLoadService saveLoadService)
         {
             _saveLoadService = saveLoadService;
-            
+
             HighScore
                 .Subscribe(highScore => _playerSaveData.HighScore = highScore)
                 .AddTo(_disposables);
@@ -38,25 +40,37 @@ namespace Code.Logic.Services.Repository.Player
                 .Subscribe(isAdsRemoved => _playerSaveData.IsAdsRemoved = isAdsRemoved)
                 .AddTo(_disposables);
 
-            PurchaseProduct
+            PurchasedProducts
                 .Subscribe(products => _playerSaveData.PurchasedProducts = products)
+                .AddTo(_disposables);
+            
+            LastSaveTime
+                .Subscribe(lastSaveTime => _playerSaveData.LastSavedTime = lastSaveTime)
+                .AddTo(_disposables);
+            
+            _saveLoadService.StrategyChanged
+                .Subscribe(x => _ = Load())
                 .AddTo(_disposables);
         }
         
-        public void Load()
+        public async UniTask Load()
         {
-            _highScore.Value = _saveLoadService.GetPlayerData().HighScore;
-            _isAdsRemoved.Value = _saveLoadService.GetPlayerData().IsAdsRemoved;
-            _purchasedProducts.Value = _saveLoadService.GetPlayerData().PurchasedProducts;
+            PlayerSaveData data = await _saveLoadService.GetPlayerData();
+            
+            _highScore.Value = data.HighScore;
+            _isAdsRemoved.Value = data.IsAdsRemoved;
+            _purchasedProducts.Value = data.PurchasedProducts;
+            _lastSaveTime.Value = data.LastSavedTime;
         }
 
         public void Delete()
         {
-            _saveLoadService.SetPlayerData(_playerSaveData);
-            
             _highScore.Value = 0;
             _isAdsRemoved.Value = false;
             _purchasedProducts.Value.Clear();
+            _lastSaveTime.Value = "1970-01-01T00:00:00Z";
+            
+            _saveLoadService.SetPlayerData(_playerSaveData);
         }
 
         public void Update()
@@ -64,14 +78,20 @@ namespace Code.Logic.Services.Repository.Player
             
         }
 
-        public void Save() => 
+        public void Save()
+        {
+            SetLastSavedTime(DateTime.UtcNow.ToString("o"));            
             _saveLoadService.SetPlayerData(_playerSaveData);
+        }
 
         public void SetHighScore(int value) => 
             _highScore.Value = value;
 
         public void SetAdsRemoved() => 
             _isAdsRemoved.Value = true;
+
+        private void SetLastSavedTime(string value) => 
+            _lastSaveTime.Value = value;
 
         public void AddPurchasedProduct(FetchProducts product)
         {

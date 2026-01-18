@@ -10,5 +10,6 @@ namespace Code.Logic.Services.Repository.Player
         public int HighScore;
         public bool IsAdsRemoved;
         public List<FetchPlayerPurchases> PurchasedProducts = new();
+        public string LastSavedTime = "1970-01-01T00:00:00Z";
     }
 }

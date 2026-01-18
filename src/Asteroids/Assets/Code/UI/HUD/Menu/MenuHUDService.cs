@@ -1,4 +1,5 @@
 ﻿using Code.UI.MenuWindow;
+using Code.UI.SelectSavesWindow;
 using Code.UI.UIFactory.MenuUIFactory;
 
 namespace Code.UI.HUD.Menu
@@ -8,7 +9,8 @@ namespace Code.UI.HUD.Menu
         private readonly IMenuUIFactory _menuUIFactory;
 
         private MenuWindowPresenter _menuWindow;
-    
+        private SelectSavesWindowPresenter _selectSavesWindow;
+
         public MenuHUDService(IMenuUIFactory menuUIFactory)
         {
             _menuUIFactory = menuUIFactory;
@@ -21,6 +23,9 @@ namespace Code.UI.HUD.Menu
                 case WindowType.MenuWindow:
                     _menuWindow = await _menuUIFactory.CreateMenuWindow();
                     break;
+                case WindowType.SelectSavesWindow:
+                    _selectSavesWindow = await _menuUIFactory.CreateSelectSavesWindow();
+                    break;
             }
         }
 
@@ -30,6 +35,9 @@ namespace Code.UI.HUD.Menu
             {
                 case WindowType.MenuWindow:
                     _menuWindow.Destroy();
+                    break;
+                case WindowType.SelectSavesWindow:
+                    _selectSavesWindow.Destroy();
                     break;
             }
         }

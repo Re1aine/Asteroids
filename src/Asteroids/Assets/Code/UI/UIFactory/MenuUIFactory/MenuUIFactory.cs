@@ -4,6 +4,7 @@ using Code.Logic.Services.HUDProvider;
 using Code.UI.HUD;
 using Code.UI.HUD.Menu;
 using Code.UI.MenuWindow;
+using Code.UI.SelectSavesWindow;
 using Cysharp.Threading.Tasks;
 using VContainer;
 
@@ -38,6 +39,17 @@ namespace Code.UI.UIFactory.MenuUIFactory
             MenuWindowModel model = new MenuWindowModel();
         
             return new MenuWindowPresenter(model, view);
+        }
+
+        public async UniTask<SelectSavesWindowPresenter> CreateSelectSavesWindow()
+        {
+            SelectSavesWindowView view = await _addressablesAssetsProvider.Instantiate<SelectSavesWindowView>(
+                AssetsAddress.SelectSavesWindow,
+                _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+            
+            SelectSavesWindowModel model = new SelectSavesWindowModel();
+            
+            return new SelectSavesWindowPresenter(model, view);
         }
     }
 }

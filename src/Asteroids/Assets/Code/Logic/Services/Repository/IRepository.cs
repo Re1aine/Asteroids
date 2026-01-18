@@ -1,10 +1,12 @@
-﻿namespace Code.Logic.Services.Repository
+﻿using Cysharp.Threading.Tasks;
+
+namespace Code.Logic.Services.Repository
 {
     public interface IRepository
     {
         void Save();
         void Update();
-        void Load();
+        UniTask Load();
         void Delete();
     }
 }

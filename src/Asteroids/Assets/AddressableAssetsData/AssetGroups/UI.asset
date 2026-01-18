@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ca78b8cfec5a124e91a4c9c395079ce
+    m_Address: SelectSavesWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b38fbda3d71c96b43ad2a4b965d5b77c
     m_Address: GameplayHUD
     m_ReadOnly: 0

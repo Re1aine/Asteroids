@@ -1,6 +1,7 @@
 ﻿using Code.GameFlow.States.Core;
 using Code.GameFlow.States.Menu;
 using Code.Infrastructure.Common.SceneLoader;
+using Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Code.UI.MenuWindow
         [SerializeField] private Button _exitButton;
     
         private MenuStateMachine _menuStateMachine;
+        private IAuthentification _authentification;
 
         [Inject]
         public void Construct(MenuStateMachine menuStateMachine)
@@ -29,7 +31,7 @@ namespace Code.UI.MenuWindow
                 .AddTo(this);;
 
             _exitButton.OnClickAsObservable()
-                .Subscribe(_ => Debug.Log("Exit"))
+                .Subscribe(_ => _menuStateMachine.Enter<ExitGameState>().Forget())
                 .AddTo(this);;
         }
 
