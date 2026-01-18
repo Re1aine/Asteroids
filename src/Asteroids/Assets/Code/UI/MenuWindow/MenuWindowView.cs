@@ -15,6 +15,7 @@ namespace Code.UI.MenuWindow
         [SerializeField] private Button _exitButton;
     
         private MenuStateMachine _menuStateMachine;
+        private IAuthentification _authentification;
 
         [Inject]
         public void Construct(MenuStateMachine menuStateMachine)
@@ -29,7 +30,7 @@ namespace Code.UI.MenuWindow
                 .AddTo(this);;
 
             _exitButton.OnClickAsObservable()
-                .Subscribe(_ => Debug.Log("Exit"))
+                .Subscribe(_ => _menuStateMachine.Enter<ExitGameState>().Forget())
                 .AddTo(this);;
         }
 
