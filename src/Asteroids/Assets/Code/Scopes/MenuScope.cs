@@ -2,6 +2,7 @@
 using Code.GameFlow;
 using Code.GameFlow.States.Menu;
 using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
+using Code.Logic.Menu;
 using Code.Logic.Menu.Services.Purchase;
 using Code.Logic.Menu.Services.Purchase.Catalog;
 using Code.Logic.Menu.Services.Purchase.Handler;

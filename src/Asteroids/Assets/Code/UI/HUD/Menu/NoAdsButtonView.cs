@@ -7,30 +7,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-public class NoAdsButtonView : MonoBehaviour
+namespace Code.UI.HUD.Menu
 {
-    [SerializeField] private Button _button;
+    public class NoAdsButtonView : MonoBehaviour
+    {
+        [SerializeField] private Button _button;
     
-    private IPurchaseService _purchaseService;
-    private IRepositoriesHolder _repositoriesHolder;
+        private IPurchaseService _purchaseService;
+        private IRepositoriesHolder _repositoriesHolder;
 
-    [Inject]
-    public void Construct(IPurchaseService purchaseService, IRepositoriesHolder repositoriesHolder)
-    {
-        _purchaseService = purchaseService;
-        _repositoriesHolder = repositoriesHolder;
-    }
+        [Inject]
+        public void Construct(IPurchaseService purchaseService, IRepositoriesHolder repositoriesHolder)
+        {
+            _purchaseService = purchaseService;
+            _repositoriesHolder = repositoriesHolder;
+        }
     
-    private void OnEnable()
-    {
-        _button.onClick.AddListener(() => _purchaseService.Purchase(ProductId.AdsRemoval));
+        private void OnEnable()
+        {
+            _button.onClick.AddListener(() => _purchaseService.Purchase(ProductId.AdsRemoval));
             
-        _repositoriesHolder
-            .GetRepository<PlayerRepository>().IsAdsRemoved
-            .Subscribe(SetActiveRemoveAdsButton)
-            .AddTo(this);   
-    }
+            _repositoriesHolder
+                .GetRepository<PlayerRepository>().IsAdsRemoved
+                .Subscribe(SetActiveRemoveAdsButton)
+                .AddTo(this);   
+        }
     
-    private void SetActiveRemoveAdsButton(bool isActive) => 
-        _button.gameObject.SetActive(!isActive);
+        private void SetActiveRemoveAdsButton(bool isActive) => 
+            _button.gameObject.SetActive(!isActive);
+    }
 }

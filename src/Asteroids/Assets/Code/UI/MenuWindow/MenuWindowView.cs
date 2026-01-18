@@ -1,6 +1,7 @@
 ﻿using Code.GameFlow.States.Core;
 using Code.GameFlow.States.Menu;
 using Code.Infrastructure.Common.SceneLoader;
+using Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;

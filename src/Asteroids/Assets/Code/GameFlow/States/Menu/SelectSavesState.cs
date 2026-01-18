@@ -1,26 +1,28 @@
-﻿using Code.GameFlow.States;
-using Code.Logic.Services.HUDProvider;
+﻿using Code.Logic.Services.HUDProvider;
 using Code.UI;
 using Cysharp.Threading.Tasks;
 
-public class SelectSavesState : IState
+namespace Code.GameFlow.States.Menu
 {
-    private readonly IHUDProvider _hudProvider;
-
-    public SelectSavesState(IHUDProvider hudProvider)
+    public class SelectSavesState : IState
     {
-        _hudProvider = hudProvider;
-    }
+        private readonly IHUDProvider _hudProvider;
 
-    public UniTask Enter()
-    { 
-        _hudProvider.HUD.ShowWindow(WindowType.SelectSavesWindow);
-        return default;
-    }
+        public SelectSavesState(IHUDProvider hudProvider)
+        {
+            _hudProvider = hudProvider;
+        }
 
-    public UniTask Exit()
-    {
-        _hudProvider.HUD.HideWindow(WindowType.SelectSavesWindow);
-        return default;
+        public UniTask Enter()
+        { 
+            _hudProvider.HUD.ShowWindow(WindowType.SelectSavesWindow);
+            return default;
+        }
+
+        public UniTask Exit()
+        {
+            _hudProvider.HUD.HideWindow(WindowType.SelectSavesWindow);
+            return default;
+        }
     }
 }

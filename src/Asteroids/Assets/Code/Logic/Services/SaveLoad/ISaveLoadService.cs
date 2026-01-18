@@ -2,19 +2,22 @@
 using Cysharp.Threading.Tasks;
 using R3;
 
-public interface ISaveLoadService
+namespace Code.Logic.Services.SaveLoad
 {
-    Observable<Unit> StrategyChanged { get; }
-    bool HasConflict { get; }
-    ISaveLoadStrategy Current { get; }
-    ReadOnlyReactiveProperty<bool> IsAutoMode { get; }
-    UniTask Preload();
-    void SetPlayerData(PlayerSaveData data);
-    UniTask<PlayerSaveData> GetPlayerData();
-    UniTask ResolveWithCloud();
-    UniTask ResolveWithLocal();
-    void UseLocal();
-    void UseCloud();
-    void ResolveAutomatically();
-    void SetAutoMode(bool isActive);
+    public interface ISaveLoadService
+    {
+        Observable<Unit> StrategyChanged { get; }
+        bool HasConflict { get; }
+        ISaveLoadStrategy Current { get; }
+        ReadOnlyReactiveProperty<bool> IsAutoMode { get; }
+        UniTask Preload();
+        void SetPlayerData(PlayerSaveData data);
+        UniTask<PlayerSaveData> GetPlayerData();
+        UniTask ResolveWithCloud();
+        UniTask ResolveWithLocal();
+        void UseLocal();
+        void UseCloud();
+        void ResolveAutomatically();
+        void SetAutoMode(bool isActive);
+    }
 }

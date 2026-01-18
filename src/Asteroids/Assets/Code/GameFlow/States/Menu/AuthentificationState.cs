@@ -1,31 +1,34 @@
-﻿using Code.GameFlow.States;
+﻿using Code.Logic.Menu;
+using Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
-
 #if !UNITY_EDITOR && UNITY_WEBGL
 using UnityEngine;
 #endif
 
-public class AuthentificationState : IState
+namespace Code.GameFlow.States.Menu
 {
-    private readonly IAuthentification _authentification;
-    private readonly AuthHandler _authHandler;
-
-    public AuthentificationState(IAuthentification authentification, AuthHandler authHandler)
+    public class AuthentificationState : IState
     {
-        _authentification = authentification;
-        _authHandler = authHandler;
-    }
+        private readonly IAuthentification _authentification;
+        private readonly AuthHandler _authHandler;
 
-    public UniTask Enter()
-    {
-        _authentification.Initialize();
-        _authHandler.Initialize();
-        
-        _authentification.Login();
-        
-        return default;
-    }
+        public AuthentificationState(IAuthentification authentification, AuthHandler authHandler)
+        {
+            _authentification = authentification;
+            _authHandler = authHandler;
+        }
 
-    public UniTask Exit() => 
-        default;
+        public UniTask Enter()
+        {
+            _authentification.Initialize();
+            _authHandler.Initialize();
+        
+            _authentification.Login();
+        
+            return default;
+        }
+
+        public UniTask Exit() => 
+            default;
+    }
 }

@@ -1,21 +1,24 @@
-﻿using Code.GameFlow.States;
+﻿using Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
 
-public class ExitGameState : IState
+namespace Code.GameFlow.States.Menu
 {
-    private readonly IAuthentification _authentification;
-
-    public ExitGameState(IAuthentification authentification)
+    public class ExitGameState : IState
     {
-        _authentification = authentification;
-    }
+        private readonly IAuthentification _authentification;
 
-    public UniTask Enter()
-    {
-        _authentification.Logout();
-        return default;
-    }
+        public ExitGameState(IAuthentification authentification)
+        {
+            _authentification = authentification;
+        }
 
-    public UniTask Exit() => 
-        default;
+        public UniTask Enter()
+        {
+            _authentification.Logout();
+            return default;
+        }
+
+        public UniTask Exit() => 
+            default;
+    }
 }
