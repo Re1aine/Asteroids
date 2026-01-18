@@ -622,15 +622,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3978526254076062139, guid: 794d7173f69126e4686564a2821c40d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.528084
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3978526254076062139, guid: 794d7173f69126e4686564a2821c40d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.35821
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3978526254076062139, guid: 794d7173f69126e4686564a2821c40d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.09779235
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3978526254076062139, guid: 794d7173f69126e4686564a2821c40d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -664,6 +664,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuEntryPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8322796461658487780, guid: 794d7173f69126e4686564a2821c40d3, type: 3}
+      propertyPath: _codeDeliverer
+      value: 
+      objectReference: {fileID: 4603765747372172115, guid: d5c7b67e22b5abf4297427b2579a7c9a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
