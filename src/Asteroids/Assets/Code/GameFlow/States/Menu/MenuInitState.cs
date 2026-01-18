@@ -2,39 +2,52 @@
 using Code.Logic.Menu.Services.Purchase.Catalog;
 using Code.Logic.Menu.Services.Purchase.Handler;
 using Code.Logic.Services.HUDProvider;
-using Code.UI;
 using Cysharp.Threading.Tasks;
 
 namespace Code.GameFlow.States.Menu
 {
     public class MenuInitState : IState
     {
+        private readonly MenuStateMachine _menuStateMachine;
         private readonly IPurchaseService _purchaseService;
         private readonly IPurchaseCatalog _purchaseCatalog;
         private readonly PurchaseHandler _purchaseHandler;
         private readonly IHUDProvider _hudProvider;
-        
+        private readonly ISaveLoadService _saveLoadService;
+
         public MenuInitState(
+            MenuStateMachine menuStateMachine,
             IPurchaseService purchaseService,
             IPurchaseCatalog purchaseCatalog,
             PurchaseHandler purchaseHandler,
-            IHUDProvider hudProvider)
+            IHUDProvider hudProvider,
+            ISaveLoadService saveLoadService)
         {
+            _menuStateMachine = menuStateMachine;
             _purchaseService = purchaseService;
             _purchaseCatalog = purchaseCatalog;
             _purchaseHandler = purchaseHandler;
             _hudProvider = hudProvider;
+            _saveLoadService = saveLoadService;
         }
 
         public async UniTask Enter()
         {
+            await _saveLoadService.Preload();
+
             _purchaseCatalog.Initialize();
             _purchaseService.Initialize();
             _purchaseHandler.Initialize();
-        
+            
             await _hudProvider.Initialize();
-        
-            _hudProvider.HUD.ShowWindow(WindowType.MenuWindow);
+
+            if (_saveLoadService.HasConflict) 
+                _menuStateMachine.Enter<SelectSavesState>().Forget();
+            else
+            {
+                _saveLoadService.ResolveAutomatically();
+                _menuStateMachine.Enter<MenuStartState>().Forget();
+            }
         }
 
         public UniTask Exit() => default;

@@ -16,7 +16,7 @@ namespace Code.EntryPoints
         public void Start()
         {
             _menuStateMachine
-                .Enter<MenuInitState>()
+                .Enter<AuthentificationState>()
                 .Forget();
         }
     }
