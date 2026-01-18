@@ -1,4 +1,6 @@
-﻿using Code.GameFlow.States.Gameplay;
+﻿using Code.GameFlow.States.Core;
+using Code.GameFlow.States.Gameplay;
+using Code.Infrastructure.Common.SceneLoader;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -12,6 +14,7 @@ namespace Code.UI.LoseWindow
         [SerializeField] private TextMeshProUGUI _currentScore;
         [SerializeField] private TextMeshProUGUI _highScore;
         [SerializeField] private Button _restart; 
+        [SerializeField] private Button _menu;
         
         private GameplayStateMachine _gameplayStateMachine;
 
@@ -21,8 +24,11 @@ namespace Code.UI.LoseWindow
             _gameplayStateMachine = gameplayStateMachine;
         }
 
-        private void Start() => 
+        private void Start()
+        {
             _restart.onClick.AddListener(() => _gameplayStateMachine.Enter<GameplayInitState>().Forget());
+            _menu.onClick.AddListener(() => _gameplayStateMachine.Enter<LoadSceneState, GameScenes>(GameScenes.Menu).Forget());
+        }
 
         public void SetScore(int value) =>
             _currentScore.text = value.ToString();
