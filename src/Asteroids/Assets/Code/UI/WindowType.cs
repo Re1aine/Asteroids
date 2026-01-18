@@ -9,5 +9,6 @@
     
         //Menu UI
         MenuWindow = 10,
+        SelectSavesWindow = 11
     }
 }
