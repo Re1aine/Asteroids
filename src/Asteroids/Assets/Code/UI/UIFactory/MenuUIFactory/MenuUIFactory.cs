@@ -39,5 +39,16 @@ namespace Code.UI.UIFactory.MenuUIFactory
         
             return new MenuWindowPresenter(model, view);
         }
+
+        public async UniTask<SelectSavesWindowPresenter> CreateSelectSavesWindow()
+        {
+            SelectSavesWindowView view = await _addressablesAssetsProvider.Instantiate<SelectSavesWindowView>(
+                AssetsAddress.SelectSavesWindow,
+                _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+            
+            SelectSavesWindowModel model = new SelectSavesWindowModel();
+            
+            return new SelectSavesWindowPresenter(model, view);
+        }
     }
 }

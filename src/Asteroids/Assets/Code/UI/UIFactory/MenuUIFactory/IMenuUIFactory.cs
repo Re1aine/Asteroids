@@ -6,5 +6,6 @@ namespace Code.UI.UIFactory.MenuUIFactory
     public interface IMenuUIFactory : IUIFactory
     {
         UniTask<MenuWindowPresenter> CreateMenuWindow();
+        UniTask<SelectSavesWindowPresenter> CreateSelectSavesWindow();
     }
 }
