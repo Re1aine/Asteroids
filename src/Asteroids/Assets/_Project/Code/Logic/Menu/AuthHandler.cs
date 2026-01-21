@@ -4,6 +4,7 @@ using Code.Infrastructure.Common.LogService;
 using Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
 using GamePush;
+using R3;
 using VContainer.Unity;
 
 namespace Code.Logic.Menu
@@ -16,6 +17,8 @@ namespace Code.Logic.Menu
         private readonly SecretCodeDeliverer _secretCodeDeliverer;
         private readonly MenuStateMachine _menuStateMachine;
         private readonly ILogService _logService;
+        
+        private readonly CompositeDisposable _disposables = new();
 
         public AuthHandler(IAuthentification authentification,
             SecretCodeDeliverer secretCodeDeliverer,
@@ -30,17 +33,28 @@ namespace Code.Logic.Menu
     
         public void Initialize()
         {
-            _authentification.AuthStarted += OnAuthStarted;
-            _authentification.AuthCompleted += OnAuthCompleted;
+            _authentification.LoginStarted
+                .Subscribe(_ => OnLoginStarted())
+                .AddTo(_disposables);
         
-            GP_Player.OnLoginComplete += OnLoginComplete;
-            GP_Player.OnLoginError += OnLoginError;
-        
-            GP_Player.OnLogoutComplete += OnLogoutComplete;
-            GP_Player.OnLogoutError += OnLogoutError;
+            _authentification.LoginCompleted
+                .Subscribe(_ => OnLoginCompleted())
+                .AddTo(_disposables);
+
+            _authentification.LoginFailed
+                .Subscribe(_ => OnLoginFailed())
+                .AddTo(_disposables);
+            
+            _authentification.LogoutCompleted
+                .Subscribe(_ => OnLogoutComplete())
+                .AddTo(_disposables);
+            
+            _authentification.LogoutFailed
+                .Subscribe(_ => OnLogoutFailed())
+                .AddTo(_disposables);
         }
 
-        private void OnAuthStarted()
+        private void OnLoginStarted()
         {
             if (!GP_Platform.IsSecretCodeAuthAvailable())
                 return;
@@ -49,41 +63,22 @@ namespace Code.Logic.Menu
             _secretCodeDeliverer.gameObject.SetActive(true);
         }
 
-        private void OnAuthCompleted()
+        private void OnLoginCompleted()
         {
             _secretCodeDeliverer.gameObject.SetActive(false);
             _menuStateMachine.Enter<MenuInitState>().Forget();
         }
-    
-        private void OnLoginComplete()
-        {
-            _logService.LogInfo("Login complete");
-            OnAuthCompleted();
-        }
-    
-        private void OnLoginError() => 
-            _logService.LogError("Login error");
+        
+        private void OnLoginFailed() => 
+            _logService.LogError("Login failed");
 
-        private void OnLogoutComplete()
-        {
-        
-        }
+        private void OnLogoutComplete() => 
+            _logService.LogInfo("Logout complete");
 
-        private void OnLogoutError()
-        {
-        
-        }
+        private void OnLogoutFailed() => 
+            _logService.LogError("Logout failed");
 
-        public void Dispose()
-        {
-            _authentification.AuthStarted -= OnAuthStarted;
-            _authentification.AuthCompleted -= OnAuthCompleted;
-        
-            GP_Player.OnLoginComplete -= OnLoginComplete;
-            GP_Player.OnLoginError -= OnLoginError;
-        
-            GP_Player.OnLogoutComplete -= OnLogoutComplete;
-            GP_Player.OnLogoutError -= OnLogoutError;
-        }
+        public void Dispose() => 
+            _disposables?.Dispose();
     }
 }

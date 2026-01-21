@@ -1,11 +1,14 @@
-﻿using System;
+﻿using R3;
 
 namespace Code.Logic.Services.Authentification
 {
     public interface IAuthentification
     {
-        event Action AuthStarted;
-        event Action AuthCompleted;
+        Observable<Unit> LoginStarted { get; }
+        Observable<Unit> LoginCompleted { get; }
+        Observable<Unit> LoginFailed { get; }
+        Observable<Unit> LogoutCompleted { get; }
+        Observable<Unit> LogoutFailed { get; }
         void Initialize();
         void Login();
         void Logout();
