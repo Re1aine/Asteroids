@@ -31,7 +31,10 @@ namespace Code.Logic.Menu
             _logService = logService;
         }
     
-        public void Initialize()
+        public void Initialize() => 
+            SetupSubscribes();
+
+        private void SetupSubscribes()
         {
             _authentification.LoginStarted
                 .Subscribe(_ => OnLoginStarted())

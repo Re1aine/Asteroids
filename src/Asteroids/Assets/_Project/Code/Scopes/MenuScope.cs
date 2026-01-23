@@ -25,9 +25,10 @@ namespace Code.Scopes
             
             builder.RegisterComponentInNewPrefab(_codeDeliverer, Lifetime.Singleton);
             
-            builder.Register<AuthHandler>(Lifetime.Singleton).AsSelf();
+            builder.Register<AuthHandler>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             
             builder.Register<PurchaseCatalog>(Lifetime.Singleton).As<IPurchaseCatalog>();
+            
             builder.Register<GamePushPurchaseService>(Lifetime.Singleton).As<IPurchaseService>();
             builder.Register<PurchaseHandler>(Lifetime.Singleton).AsSelf();
         
