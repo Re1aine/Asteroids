@@ -7,14 +7,9 @@ namespace Code.Logic.Services.SaveLoad.LocalStrategy.Storage
     {
         private const string AllPlayersSavesDataKey = "PlayersSavesData";
 
-        private PlayersSavesData _players;
-    
-        public void Initialize()
-        {
-            _players = PlayerPrefs.HasKey(AllPlayersSavesDataKey)
-                ? JsonUtility.FromJson<PlayersSavesData>(PlayerPrefs.GetString(AllPlayersSavesDataKey))
-                : new PlayersSavesData();
-        }
+        private readonly PlayersSavesData _players = PlayerPrefs.HasKey(AllPlayersSavesDataKey)
+            ? JsonUtility.FromJson<PlayersSavesData>(PlayerPrefs.GetString(AllPlayersSavesDataKey))
+            : new PlayersSavesData();
 
         public void SetPlayerData(PlayerSaveData data, string key)
         {

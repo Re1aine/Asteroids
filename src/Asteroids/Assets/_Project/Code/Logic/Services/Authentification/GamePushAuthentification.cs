@@ -40,7 +40,7 @@ namespace Code.Logic.Services.Authentification
             {
                 _isInitialized = true;
                 _logService.Log("[AuthService initialized successfully]", Color.green, true);
-                SubscribeToGamePushEvents();
+                SetupSubscribes();
             }
             else
             {
@@ -90,7 +90,7 @@ namespace Code.Logic.Services.Authentification
             GP_Player.Logout();
         }
 
-        private void SubscribeToGamePushEvents()
+        private void SetupSubscribes()
         {
             Observable.FromEvent(
                     h => new UnityAction(h),

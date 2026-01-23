@@ -1,8 +1,7 @@
-﻿
-namespace Code.Logic.Services.SaveLoad.LocalStrategy
+﻿namespace Code.Logic.Services.SaveLoad.LocalStrategy
 {
     public interface ILocalSaveLoadStrategy : ISaveLoadStrategy
     {
-        void Initialize();
+        void InitializeKey();
     }
 }

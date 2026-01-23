@@ -22,12 +22,7 @@ namespace Code.Logic.Services.SaveLoad.LocalStrategy
         {
             _localSaveLoadStorage = localSaveLoadStorage;
             _authentification = authentification;
-
-            _localSaveLoadStorage.Initialize();
         }
-
-        public void Initialize() => 
-            InitializeKey();
         
         public UniTask SetPlayerData(PlayerSaveData data)
         {
@@ -38,7 +33,7 @@ namespace Code.Logic.Services.SaveLoad.LocalStrategy
         public UniTask<PlayerSaveData> GetPlayerData() => 
             UniTask.FromResult(_localSaveLoadStorage.GetPlayerData(_playerSaveKey));
 
-        private void InitializeKey()
+        public void InitializeKey()
         {
 #if UNITY_EDITOR
             _playerSaveKey = $"{PlayerSaveDataKeyPrefix}EDITOR";

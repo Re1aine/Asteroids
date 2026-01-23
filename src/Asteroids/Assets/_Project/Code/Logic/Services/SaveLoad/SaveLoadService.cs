@@ -4,10 +4,11 @@ using Code.Logic.Services.SaveLoad.CloudStrategy;
 using Code.Logic.Services.SaveLoad.LocalStrategy;
 using Cysharp.Threading.Tasks;
 using R3;
+using VContainer.Unity;
 
 namespace Code.Logic.Services.SaveLoad
 {
-    public class SaveLoadService : ISaveLoadService, IDisposable
+    public class SaveLoadService : ISaveLoadService, IInitializable, IDisposable
     {
         public Observable<Unit> StrategyChanged => _strategyChanged;
         private readonly Subject<Unit> _strategyChanged = new();
@@ -28,15 +29,16 @@ namespace Code.Logic.Services.SaveLoad
         {
             _localStrategy = localStrategy;
             _cloudStrategy = cloudStrategy;
+        }
 
-            _cloudStrategy.SyncFallBack
-                .Subscribe(OnCloudFallBack)
-                .AddTo(_disposables);
+        public void Initialize()
+        {
+            SetupSubscribes();
         }
 
         public async UniTask Preload()
         {
-            _localStrategy.Initialize();
+            _localStrategy.InitializeKey();
         
             _localData = await _localStrategy.GetPlayerData();
             _cloudData = await _cloudStrategy.GetPlayerData();
@@ -104,7 +106,14 @@ namespace Code.Logic.Services.SaveLoad
 
         public void SetAutoMode(bool isActive) => 
             _isAutoMode.Value =  isActive;
-    
+
+        private void SetupSubscribes()
+        { 
+            _cloudStrategy.SyncFailed
+                .Subscribe(OnCloudFallBack)
+                .AddTo(_disposables);
+        }
+
         private void OnCloudFallBack(PlayerSaveData data)
         {
             _localStrategy.SetPlayerData(data);
