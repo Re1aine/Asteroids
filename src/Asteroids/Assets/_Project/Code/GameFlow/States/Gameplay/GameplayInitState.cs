@@ -23,8 +23,6 @@ namespace Code.GameFlow.States.Gameplay
         private readonly IPlayerDeathService _playerDeathService;
         private readonly IConfigsProvider _configsProvider;
         private readonly IAudioService _audioService;
-        private readonly IBoundaries _boundaries;
-        private readonly BackgroundResizer _backgroundResizer;
 
         public GameplayInitState(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
@@ -34,9 +32,7 @@ namespace Code.GameFlow.States.Gameplay
             IAdsService adsService,
             IPlayerDeathService playerDeathService,
             IConfigsProvider configsProvider,
-            IAudioService audioService,
-            IBoundaries boundaries,
-            BackgroundResizer backgroundResizer)
+            IAudioService audioService)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -47,15 +43,10 @@ namespace Code.GameFlow.States.Gameplay
             _playerDeathService = playerDeathService;
             _configsProvider = configsProvider;
             _audioService = audioService;
-            _boundaries = boundaries;
-            _backgroundResizer = backgroundResizer;
         }
 
         public async UniTask Enter()
         {
-            _boundaries.Initialize();
-            _backgroundResizer.Initialize();
-            
             await _configsProvider.Initialize();
             
             _analytics.Initialize();

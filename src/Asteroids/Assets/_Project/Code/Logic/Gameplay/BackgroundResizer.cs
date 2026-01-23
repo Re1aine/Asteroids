@@ -1,4 +1,5 @@
-﻿using Code.Logic.Gameplay.Services.Boundries;
+﻿using System;
+using Code.Logic.Gameplay.Services.Boundries;
 using UnityEngine;
 using VContainer;
 
@@ -17,8 +18,7 @@ namespace Code.Logic.Gameplay
         private void Awake() => 
             _background = GetComponent<SpriteRenderer>();
         
-        public void Initialize() => 
-            ResizeBackground();
+        public void Start() => ResizeBackground();
 
         private void ResizeBackground()
         {

@@ -1,9 +1,10 @@
 ﻿using Code.Logic.Gameplay.Services.Providers.CameraProvider;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace Code.Logic.Gameplay.Services.Boundries
 {
-    public sealed class ScreenBoundaries : IBoundaries
+    public sealed class ScreenBoundaries : IBoundaries, IInitializable
     {
         private readonly ICameraProvider _cameraProvider;
         public Vector2 Min { get; private set; }

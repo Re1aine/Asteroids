@@ -61,7 +61,7 @@ namespace Code.Scopes
             builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
             builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
             
-            builder.Register<ScreenBoundaries>(Lifetime.Singleton).As<IBoundaries>();
+            builder.Register<ScreenBoundaries>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
 
             builder.Register<ScoreCountService>(Lifetime.Singleton).As<IScoreCountService>();
