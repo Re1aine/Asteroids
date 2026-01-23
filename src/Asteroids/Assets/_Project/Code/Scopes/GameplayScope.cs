@@ -53,7 +53,7 @@ namespace Code.Scopes
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();
             
-            builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
+            builder.Register<InputService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             
             builder.Register<GamePushAdsService>(Lifetime.Singleton).As<IAdsService>();
             

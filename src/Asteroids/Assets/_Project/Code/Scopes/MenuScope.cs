@@ -28,7 +28,6 @@ namespace Code.Scopes
             builder.Register<AuthHandler>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             
             builder.Register<PurchaseCatalog>(Lifetime.Singleton).As<IPurchaseCatalog>();
-            
             builder.Register<GamePushPurchaseService>(Lifetime.Singleton).As<IPurchaseService>();
             builder.Register<PurchaseHandler>(Lifetime.Singleton).AsSelf();
         
