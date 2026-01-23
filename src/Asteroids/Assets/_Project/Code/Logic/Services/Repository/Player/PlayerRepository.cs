@@ -5,10 +5,11 @@ using Code.Logic.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using GamePush;
 using R3;
+using VContainer.Unity;
 
 namespace Code.Logic.Services.Repository.Player
 {
-    public class PlayerRepository : IRepository, IDisposable
+    public class PlayerRepository : IRepository, IInitializable, IDisposable
     {
         private readonly ISaveLoadService _saveLoadService;
 
@@ -31,28 +32,11 @@ namespace Code.Logic.Services.Repository.Player
         public PlayerRepository(ISaveLoadService saveLoadService)
         {
             _saveLoadService = saveLoadService;
-
-            HighScore
-                .Subscribe(highScore => _playerSaveData.HighScore = highScore)
-                .AddTo(_disposables);
-            
-            IsAdsRemoved
-                .Subscribe(isAdsRemoved => _playerSaveData.IsAdsRemoved = isAdsRemoved)
-                .AddTo(_disposables);
-
-            PurchasedProducts
-                .Subscribe(products => _playerSaveData.PurchasedProducts = products)
-                .AddTo(_disposables);
-            
-            LastSaveTime
-                .Subscribe(lastSaveTime => _playerSaveData.LastSavedTime = lastSaveTime)
-                .AddTo(_disposables);
-            
-            _saveLoadService.StrategyChanged
-                .Subscribe(x => _ = Load())
-                .AddTo(_disposables);
         }
-        
+
+        public void Initialize() => 
+            SetupSubscribes();
+
         public async UniTask Load()
         {
             PlayerSaveData data = await _saveLoadService.GetPlayerData();
@@ -102,6 +86,29 @@ namespace Code.Logic.Services.Repository.Player
 
         public bool HasProduct(FetchProducts product) => 
             _purchasedProducts.Value.Exists(p => p.productId == product.id);
+
+        private void SetupSubscribes()
+        {
+            HighScore
+                .Subscribe(highScore => _playerSaveData.HighScore = highScore)
+                .AddTo(_disposables);
+            
+            IsAdsRemoved
+                .Subscribe(isAdsRemoved => _playerSaveData.IsAdsRemoved = isAdsRemoved)
+                .AddTo(_disposables);
+
+            PurchasedProducts
+                .Subscribe(products => _playerSaveData.PurchasedProducts = products)
+                .AddTo(_disposables);
+            
+            LastSaveTime
+                .Subscribe(lastSaveTime => _playerSaveData.LastSavedTime = lastSaveTime)
+                .AddTo(_disposables);
+            
+            _saveLoadService.StrategyChanged
+                .Subscribe(x => _ = Load())
+                .AddTo(_disposables);
+        }
 
         public void Dispose() => 
             _disposables.Dispose();

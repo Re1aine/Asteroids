@@ -48,7 +48,7 @@ namespace Code.Scopes
             builder.Register<CloudSaveLoadStrategy>(Lifetime.Singleton).As<ICloudSaveLoadStrategy>();
             builder.Register<SaveLoadService>(Lifetime.Singleton).As<ISaveLoadService>();
             
-            builder.Register<PlayerRepository>(Lifetime.Singleton).As<IRepository>();
+            builder.Register<PlayerRepository>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<RepositoriesHolder>(Lifetime.Singleton).As<IRepositoriesHolder>();
             
             builder.Register<SceneLoader>(Lifetime.Singleton).As<ISceneLoader>();
