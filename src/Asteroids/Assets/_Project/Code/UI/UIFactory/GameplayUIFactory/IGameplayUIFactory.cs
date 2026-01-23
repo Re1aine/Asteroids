@@ -1,9 +1,9 @@
-﻿using Code.UI.LoseWindow;
-using Code.UI.PlayerStatsWindow;
-using Code.UI.ReviveWindow;
+﻿using _Project.Code.UI.LoseWindow;
+using _Project.Code.UI.PlayerStatsWindow;
+using _Project.Code.UI.ReviveWindow;
 using Cysharp.Threading.Tasks;
 
-namespace Code.UI.UIFactory.GameplayUIFactory
+namespace _Project.Code.UI.UIFactory.GameplayUIFactory
 {
     public interface IGameplayUIFactory : IUIFactory
     {

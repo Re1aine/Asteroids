@@ -1,9 +1,9 @@
-﻿using Code.Logic.Gameplay.Analytics;
-using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+﻿using _Project.Code.Logic.Gameplay.Analytics;
+using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 
-namespace Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver
+namespace _Project.Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver
 {
     public class PlayerGunObserver : IPlayerGunObserver
     {

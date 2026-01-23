@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Configs.Configs.Assets
+﻿namespace _Project.Code.Logic.Gameplay.Services.Configs.Configs.Assets
 {
     public enum VFXType
     {

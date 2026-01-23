@@ -1,7 +1,7 @@
-﻿using Code.UI.HUD;
+﻿using _Project.Code.UI.HUD;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Services.HUDProvider
+namespace _Project.Code.Logic.Services.HUDProvider
 {
     public interface IHUDProvider
     {

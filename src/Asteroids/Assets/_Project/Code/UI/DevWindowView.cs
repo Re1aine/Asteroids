@@ -1,15 +1,15 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Services.Repository.Player;
-using Code.Logic.Services.SaveLoad;
-using Code.Logic.Services.SaveLoad.LocalStrategy;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Services.SaveLoad;
+using _Project.Code.Logic.Services.SaveLoad.LocalStrategy;
 using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace Code.UI
+namespace _Project.Code.UI
 {
     public class DevWindowView : MonoBehaviour
     {

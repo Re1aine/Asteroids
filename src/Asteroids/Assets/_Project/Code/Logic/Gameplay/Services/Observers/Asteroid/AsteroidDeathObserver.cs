@@ -1,7 +1,7 @@
-﻿using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+﻿using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 
-namespace Code.Logic.Gameplay.Services.Observers.Asteroid
+namespace _Project.Code.Logic.Gameplay.Services.Observers.Asteroid
 {
     public class AsteroidDeathObserver : IAsteroidDeathObserver
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.UI.HUD
+namespace _Project.Code.UI.HUD
 {
     public abstract class AHUDView : MonoBehaviour
     {

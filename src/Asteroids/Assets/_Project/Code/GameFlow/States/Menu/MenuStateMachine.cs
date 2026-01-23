@@ -1,6 +1,6 @@
-﻿using Code.Infrastructure.Common.LogService;
+﻿using _Project.Code.Infrastructure.Common.LogService;
 
-namespace Code.GameFlow.States.Menu
+namespace _Project.Code.GameFlow.States.Menu
 {
     public sealed class MenuStateMachine : StateMachine
     {

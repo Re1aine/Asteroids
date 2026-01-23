@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Audio
+namespace _Project.Code.Logic.Gameplay.Audio
 {
     [Serializable]
     public struct SoundSettings

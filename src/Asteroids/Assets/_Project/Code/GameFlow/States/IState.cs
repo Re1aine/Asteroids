@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States
+namespace _Project.Code.GameFlow.States
 {
     public interface IState : IExitableState
     {

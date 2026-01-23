@@ -1,9 +1,9 @@
-﻿using Code.GameFlow.States;
-using Code.Infrastructure.Common.LogService;
+﻿using _Project.Code.GameFlow.States;
+using _Project.Code.Infrastructure.Common.LogService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.GameFlow
+namespace _Project.Code.GameFlow
 {
     public abstract class StateMachine 
     {

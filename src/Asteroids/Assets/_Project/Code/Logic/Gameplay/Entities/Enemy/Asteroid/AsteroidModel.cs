@@ -1,7 +1,7 @@
-﻿using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
+﻿using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using R3;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
     public class AsteroidModel
     {

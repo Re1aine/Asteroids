@@ -2,7 +2,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.Logic.Gameplay.Audio
+namespace _Project.Code.Logic.Gameplay.Audio
 {
     [CreateAssetMenu(fileName = "AudioConfig", menuName = "Configs/AudioConfig")]
     public class AudioConfig : ScriptableObject

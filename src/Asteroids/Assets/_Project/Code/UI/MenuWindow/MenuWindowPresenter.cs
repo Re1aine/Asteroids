@@ -1,4 +1,4 @@
-﻿namespace Code.UI.MenuWindow
+﻿namespace _Project.Code.UI.MenuWindow
 {
     public class MenuWindowPresenter
     {

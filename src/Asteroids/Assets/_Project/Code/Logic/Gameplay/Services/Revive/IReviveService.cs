@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Revive
+﻿namespace _Project.Code.Logic.Gameplay.Services.Revive
 {
     public interface IReviveService
     {

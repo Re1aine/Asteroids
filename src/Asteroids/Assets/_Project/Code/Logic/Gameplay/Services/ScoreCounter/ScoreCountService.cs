@@ -1,9 +1,9 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Services.Repository.Player;
 using R3;
 
-namespace Code.Logic.Gameplay.Services.ScoreCounter
+namespace _Project.Code.Logic.Gameplay.Services.ScoreCounter
 {
     public class ScoreCountService : IScoreCountService, IDisposable
     {

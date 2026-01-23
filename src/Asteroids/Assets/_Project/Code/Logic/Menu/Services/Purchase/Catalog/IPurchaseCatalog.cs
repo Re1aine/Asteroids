@@ -1,7 +1,7 @@
-﻿using Code.Logic.Menu.Services.Purchase.Product;
+﻿using _Project.Code.Logic.Menu.Services.Purchase.Product;
 using GamePush;
 
-namespace Code.Logic.Menu.Services.Purchase.Catalog
+namespace _Project.Code.Logic.Menu.Services.Purchase.Catalog
 {
     public interface IPurchaseCatalog
     {

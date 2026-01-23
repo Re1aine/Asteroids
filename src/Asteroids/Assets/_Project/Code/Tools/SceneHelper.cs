@@ -1,9 +1,9 @@
-﻿using Code.Infrastructure.Common.SceneLoader;
-using Code.Scopes;
+﻿using _Project.Code.Infrastructure.Common.SceneLoader;
+using _Project.Code.Scopes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Code.Tools
+namespace _Project.Code.Tools
 {
     public sealed class SceneHelper : MonoBehaviour
     {

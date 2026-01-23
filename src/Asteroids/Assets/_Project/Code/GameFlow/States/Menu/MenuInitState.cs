@@ -1,11 +1,11 @@
-﻿using Code.Logic.Menu.Services.Purchase;
-using Code.Logic.Menu.Services.Purchase.Catalog;
-using Code.Logic.Menu.Services.Purchase.Handler;
-using Code.Logic.Services.HUDProvider;
-using Code.Logic.Services.SaveLoad;
+﻿using _Project.Code.Logic.Menu.Services.Purchase;
+using _Project.Code.Logic.Menu.Services.Purchase.Catalog;
+using _Project.Code.Logic.Menu.Services.Purchase.Handler;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.Logic.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Menu
+namespace _Project.Code.GameFlow.States.Menu
 {
     public class MenuInitState : IState
     {

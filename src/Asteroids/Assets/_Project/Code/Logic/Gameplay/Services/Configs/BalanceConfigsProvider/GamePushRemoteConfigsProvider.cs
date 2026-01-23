@@ -1,13 +1,13 @@
-﻿using Code.Infrastructure.Common.LogService;
-using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
-using Code.Logic.Services.SDKInitializer;
+﻿using _Project.Code.Infrastructure.Common.LogService;
+using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Balance;
+using _Project.Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 #if !UNITY_EDITOR
 using GamePush;
 #endif
 
-namespace Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
+namespace _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
 {
     public class GamePushRemoteConfigsProvider : IBalanceConfigsProvider
     {

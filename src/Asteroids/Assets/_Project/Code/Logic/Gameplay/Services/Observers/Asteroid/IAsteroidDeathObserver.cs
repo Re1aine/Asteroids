@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Observers.Asteroid
+﻿namespace _Project.Code.Logic.Gameplay.Services.Observers.Asteroid
 {
     public interface IAsteroidDeathObserver
     {

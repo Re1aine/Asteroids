@@ -1,4 +1,4 @@
-﻿namespace Code.UI.HUD.Menu
+﻿namespace _Project.Code.UI.HUD.Menu
 {
     public class MenuHUDPresenter : AHUDPresenter
     {

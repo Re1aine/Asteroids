@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
+﻿namespace _Project.Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
 {
     public interface IAsteroidSpawner
     {

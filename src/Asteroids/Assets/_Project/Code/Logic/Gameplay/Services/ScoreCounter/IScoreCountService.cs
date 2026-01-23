@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.Logic.Gameplay.Services.ScoreCounter
+namespace _Project.Code.Logic.Gameplay.Services.ScoreCounter
 {
     public interface IScoreCountService
     {

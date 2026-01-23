@@ -1,7 +1,7 @@
-﻿using Code.Infrastructure.Common.SceneLoader;
+﻿using _Project.Code.Infrastructure.Common.SceneLoader;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Core
+namespace _Project.Code.GameFlow.States.Core
 {
     public class LoadSceneState : IStateWithArg<GameScenes>
     {

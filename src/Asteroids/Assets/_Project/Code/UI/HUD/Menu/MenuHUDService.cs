@@ -1,8 +1,8 @@
-﻿using Code.UI.MenuWindow;
-using Code.UI.SelectSavesWindow;
-using Code.UI.UIFactory.MenuUIFactory;
+﻿using _Project.Code.UI.MenuWindow;
+using _Project.Code.UI.SelectSavesWindow;
+using _Project.Code.UI.UIFactory.MenuUIFactory;
 
-namespace Code.UI.HUD.Menu
+namespace _Project.Code.UI.HUD.Menu
 {
     public class MenuHUDService :  AHUDService
     {

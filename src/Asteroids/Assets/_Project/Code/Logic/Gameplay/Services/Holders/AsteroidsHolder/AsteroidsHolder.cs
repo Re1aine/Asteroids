@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Holders.AsteroidsHolder
+namespace _Project.Code.Logic.Gameplay.Services.Holders.AsteroidsHolder
 {
     public class AsteroidsHolder : IAsteroidsHolder
     {

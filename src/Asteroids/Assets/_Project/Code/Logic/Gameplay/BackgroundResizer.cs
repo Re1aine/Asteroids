@@ -1,9 +1,8 @@
-﻿using System;
-using Code.Logic.Gameplay.Services.Boundries;
+﻿using _Project.Code.Logic.Gameplay.Services.Boundries;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay
+namespace _Project.Code.Logic.Gameplay
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public sealed class BackgroundResizer : MonoBehaviour

@@ -1,9 +1,9 @@
-﻿using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
-using Code.Infrastructure.Common.SceneLoader;
-using Code.Logic.Services.SDKInitializer;
+﻿using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using _Project.Code.Infrastructure.Common.SceneLoader;
+using _Project.Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Core
+namespace _Project.Code.GameFlow.States.Core
 {
     public class ProjectInitState : IState
     {

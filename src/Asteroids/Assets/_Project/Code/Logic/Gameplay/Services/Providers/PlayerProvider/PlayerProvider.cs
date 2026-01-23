@@ -1,11 +1,11 @@
 using System;
-using Code.Logic.Gameplay.Entities.Player;
-using Code.Logic.Gameplay.Services.Boundries;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
+using _Project.Code.Logic.Gameplay.Entities.Player;
+using _Project.Code.Logic.Gameplay.Services.Boundries;
+using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Providers.PlayerProvider
+namespace _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider
 {
     public class PlayerProvider : IPlayerProvider
     {

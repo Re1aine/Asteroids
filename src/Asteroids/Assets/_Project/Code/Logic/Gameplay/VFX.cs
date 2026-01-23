@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay
+namespace _Project.Code.Logic.Gameplay
 {
     public class VFX : MonoBehaviour
     {

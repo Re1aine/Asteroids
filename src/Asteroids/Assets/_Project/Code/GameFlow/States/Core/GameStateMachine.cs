@@ -1,6 +1,6 @@
-﻿using Code.Infrastructure.Common.LogService;
+﻿using _Project.Code.Infrastructure.Common.LogService;
 
-namespace Code.GameFlow.States.Core
+namespace _Project.Code.GameFlow.States.Core
 {
     public sealed class GameStateMachine : StateMachine
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Logic.Gameplay.Projectiles.LaserBeam
+namespace _Project.Code.Logic.Gameplay.Projectiles.LaserBeam
 {
     public class LaserBeam : MonoBehaviour
     {

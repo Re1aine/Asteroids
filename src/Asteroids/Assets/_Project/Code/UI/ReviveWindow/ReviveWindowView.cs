@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.UI.ReviveWindow
+namespace _Project.Code.UI.ReviveWindow
 {
     public class ReviveWindowView : MonoBehaviour
     {

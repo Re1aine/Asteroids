@@ -1,10 +1,10 @@
-﻿using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.ScoreCounter;
+﻿using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
+using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
     public class AsteroidDestroyer : IDestroyer
     {

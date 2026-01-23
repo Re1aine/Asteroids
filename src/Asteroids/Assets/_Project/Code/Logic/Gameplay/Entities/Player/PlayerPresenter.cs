@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.Logic.Gameplay.Entities.Player
+namespace _Project.Code.Logic.Gameplay.Entities.Player
 {
     public class PlayerPresenter
     {

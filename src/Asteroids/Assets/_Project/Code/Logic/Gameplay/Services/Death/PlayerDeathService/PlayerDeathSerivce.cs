@@ -1,13 +1,13 @@
 ﻿using System;
-using Code.Logic.Gameplay.Entities;
-using Code.Logic.Gameplay.Entities.Player;
-using Code.Logic.Gameplay.Services.AdService;
-using Code.Logic.Gameplay.Services.AdService.Ad;
-using Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Entities;
+using _Project.Code.Logic.Gameplay.Entities.Player;
+using _Project.Code.Logic.Gameplay.Services.AdService;
+using _Project.Code.Logic.Gameplay.Services.AdService.Ad;
+using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using VContainer.Unity;
 
-namespace Code.Logic.Gameplay.Services.Death.PlayerDeathService
+namespace _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathService
 {
     public class PlayerDeathService : IPlayerDeathService, IInitializable, IDisposable
     {

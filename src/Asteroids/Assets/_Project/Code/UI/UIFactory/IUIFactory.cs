@@ -1,7 +1,7 @@
-﻿using Code.UI.HUD;
+﻿using _Project.Code.UI.HUD;
 using Cysharp.Threading.Tasks;
 
-namespace Code.UI.UIFactory
+namespace _Project.Code.UI.UIFactory
 {
     public interface IUIFactory
     {

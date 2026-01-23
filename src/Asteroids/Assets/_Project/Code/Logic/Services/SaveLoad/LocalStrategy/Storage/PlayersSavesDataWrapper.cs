@@ -1,7 +1,7 @@
 ﻿using System;
-using Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Services.Repository.Player;
 
-namespace Code.Logic.Services.SaveLoad.LocalStrategy.Storage
+namespace _Project.Code.Logic.Services.SaveLoad.LocalStrategy.Storage
 {
     [Serializable]
     public class PlayersSavesDataWrapper

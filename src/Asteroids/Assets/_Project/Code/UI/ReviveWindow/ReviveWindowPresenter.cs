@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.UI.ReviveWindow
+namespace _Project.Code.UI.ReviveWindow
 {
     public class ReviveWindowPresenter
     {

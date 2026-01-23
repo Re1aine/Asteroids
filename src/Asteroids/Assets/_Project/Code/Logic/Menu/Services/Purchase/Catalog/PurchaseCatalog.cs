@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
 using GamePush;
 using UnityEngine;
 
-namespace Code.Logic.Menu.Services.Purchase.Catalog
+namespace _Project.Code.Logic.Menu.Services.Purchase.Catalog
 {
     public class PurchaseCatalog : IPurchaseCatalog
     {

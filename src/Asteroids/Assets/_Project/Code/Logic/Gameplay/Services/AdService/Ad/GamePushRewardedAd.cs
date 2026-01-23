@@ -1,7 +1,7 @@
 ﻿using System;
 using GamePush;
 
-namespace Code.Logic.Gameplay.Services.AdService.Ad
+namespace _Project.Code.Logic.Gameplay.Services.AdService.Ad
 {
     public class GamePushRewardedAd
     {

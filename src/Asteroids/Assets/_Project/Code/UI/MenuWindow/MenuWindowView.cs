@@ -1,14 +1,14 @@
-﻿using Code.GameFlow.States.Core;
-using Code.GameFlow.States.Menu;
-using Code.Infrastructure.Common.SceneLoader;
-using Code.Logic.Services.Authentification;
+﻿using _Project.Code.GameFlow.States.Core;
+using _Project.Code.GameFlow.States.Menu;
+using _Project.Code.Infrastructure.Common.SceneLoader;
+using _Project.Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace Code.UI.MenuWindow
+namespace _Project.Code.UI.MenuWindow
 {
     public class MenuWindowView : MonoBehaviour
     {

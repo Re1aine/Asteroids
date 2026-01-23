@@ -1,6 +1,6 @@
-﻿using Code.Logic.Gameplay.Analytics.AnalyticsStore;
+﻿using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
 
-namespace Code.Logic.Gameplay.Analytics
+namespace _Project.Code.Logic.Gameplay.Analytics
 {
     public interface IAnalytics
     {

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections;
-using Code.Logic.Gameplay.Entities;
-using Code.Logic.Gameplay.Projectiles.Bullet;
-using Code.Logic.Gameplay.Projectiles.LaserBeam;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Entities;
+using _Project.Code.Logic.Gameplay.Projectiles.Bullet;
+using _Project.Code.Logic.Gameplay.Projectiles.LaserBeam;
+using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
+using _Project.Code.Logic.Gameplay.Services.Input;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay.Gun
+namespace _Project.Code.Logic.Gameplay.Gun
 {
     public class Gun : MonoBehaviour
     {

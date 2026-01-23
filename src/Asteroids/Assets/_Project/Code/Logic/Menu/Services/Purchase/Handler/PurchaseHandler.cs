@@ -1,13 +1,13 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Menu.Services.Purchase.Catalog;
-using Code.Logic.Menu.Services.Purchase.Product;
-using Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Menu.Services.Purchase.Catalog;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Services.Repository.Player;
 using GamePush;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Code.Logic.Menu.Services.Purchase.Handler
+namespace _Project.Code.Logic.Menu.Services.Purchase.Handler
 {
     public class PurchaseHandler : IInitializable, IDisposable
     {

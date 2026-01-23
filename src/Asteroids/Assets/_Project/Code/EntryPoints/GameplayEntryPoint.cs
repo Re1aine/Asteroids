@@ -1,8 +1,8 @@
-using Code.GameFlow.States.Gameplay;
+using _Project.Code.GameFlow.States.Gameplay;
 using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 
-namespace Code.EntryPoints
+namespace _Project.Code.EntryPoints
 {
     public class GameplayEntryPoint : IStartable
     {

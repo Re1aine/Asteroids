@@ -1,13 +1,13 @@
-﻿using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Menu.Services.Purchase;
-using Code.Logic.Menu.Services.Purchase.Product;
-using Code.Logic.Services.Repository.Player;
+﻿using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Menu.Services.Purchase;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Services.Repository.Player;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace Code.UI.HUD.Menu
+namespace _Project.Code.UI.HUD.Menu
 {
     public class NoAdsButtonView : MonoBehaviour
     {

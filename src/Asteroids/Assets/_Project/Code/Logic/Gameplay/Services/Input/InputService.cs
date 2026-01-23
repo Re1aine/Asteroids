@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-namespace Code.Logic.Gameplay.Services.Input
+namespace _Project.Code.Logic.Gameplay.Services.Input
 {
     public sealed class InputService : IInputService, IInitializable, IDisposable
     {

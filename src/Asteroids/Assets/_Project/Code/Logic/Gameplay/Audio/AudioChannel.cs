@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Logic.Gameplay.Audio
+namespace _Project.Code.Logic.Gameplay.Audio
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioChannel : MonoBehaviour

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Logic.Gameplay.Entities.Player
+namespace _Project.Code.Logic.Gameplay.Entities.Player
 {
     public class PlayerDestroyer : IDestroyer
     {

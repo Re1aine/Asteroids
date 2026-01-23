@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
-using Code.Infrastructure.Common.CoroutineService;
-using Code.Infrastructure.Common.LogService;
+using _Project.Code.Infrastructure.Common.CoroutineService;
+using _Project.Code.Infrastructure.Common.LogService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -9,7 +9,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
-namespace Code.Infrastructure.Common.SceneLoader
+namespace _Project.Code.Infrastructure.Common.SceneLoader
 {
     public class SceneLoader : ISceneLoader
     {

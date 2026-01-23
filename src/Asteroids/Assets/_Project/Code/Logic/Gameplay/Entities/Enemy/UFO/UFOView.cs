@@ -1,12 +1,12 @@
 ﻿using System;
-using Code.Logic.Gameplay.Entities.Player;
-using Code.Logic.Gameplay.Projectiles.Bullet;
-using Code.Logic.Gameplay.Services.Pause;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Entities.Player;
+using _Project.Code.Logic.Gameplay.Projectiles.Bullet;
+using _Project.Code.Logic.Gameplay.Services.Pause;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.UFO
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.UFO
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Boundries
+namespace _Project.Code.Logic.Gameplay.Services.Boundries
 {
     public interface IBoundaries
     {

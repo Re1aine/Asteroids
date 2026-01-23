@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Code.Logic.Menu
+namespace _Project.Code.Logic.Menu
 {
     public class SecretCodeDeliverer : MonoBehaviour
     {

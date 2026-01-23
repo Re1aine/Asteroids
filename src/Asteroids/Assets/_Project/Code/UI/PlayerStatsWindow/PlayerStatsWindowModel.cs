@@ -1,9 +1,9 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using R3;
 using UnityEngine;
 
-namespace Code.UI.PlayerStatsWindow
+namespace _Project.Code.UI.PlayerStatsWindow
 {
     public class PlayerStatsWindowModel : IDisposable
     {

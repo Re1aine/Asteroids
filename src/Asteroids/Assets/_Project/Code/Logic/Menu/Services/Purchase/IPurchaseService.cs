@@ -1,7 +1,7 @@
 ﻿using System;
-using Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
 
-namespace Code.Logic.Menu.Services.Purchase
+namespace _Project.Code.Logic.Menu.Services.Purchase
 {
     public interface IPurchaseService
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.Logic.Gameplay.Entities
+namespace _Project.Code.Logic.Gameplay.Entities
 {
     public interface IDamageReceiver
     {

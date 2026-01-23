@@ -1,9 +1,9 @@
-﻿using Code.UI.LoseWindow;
-using Code.UI.PlayerStatsWindow;
-using Code.UI.ReviveWindow;
-using Code.UI.UIFactory.GameplayUIFactory;
+﻿using _Project.Code.UI.LoseWindow;
+using _Project.Code.UI.PlayerStatsWindow;
+using _Project.Code.UI.ReviveWindow;
+using _Project.Code.UI.UIFactory.GameplayUIFactory;
 
-namespace Code.UI.HUD.Gameplay
+namespace _Project.Code.UI.HUD.Gameplay
 {
     public class GameplayHUDService : AHUDService
     {

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Code.UI.PlayerStatsWindow
+namespace _Project.Code.UI.PlayerStatsWindow
 {
     public class PlayerStatsWindowView : MonoBehaviour
     {

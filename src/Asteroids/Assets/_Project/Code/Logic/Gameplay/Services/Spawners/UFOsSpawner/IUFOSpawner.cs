@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
+﻿namespace _Project.Code.Logic.Gameplay.Services.Spawners.UFOsSpawner
 {
     public interface IUFOSpawner
     {

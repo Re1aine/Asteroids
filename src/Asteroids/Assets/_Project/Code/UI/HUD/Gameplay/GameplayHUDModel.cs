@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.UI.HUD.Gameplay
+namespace _Project.Code.UI.HUD.Gameplay
 {
     public class GameplayHUDModel : AHUDModel
     {

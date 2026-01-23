@@ -1,8 +1,8 @@
-﻿using Code.UI.MenuWindow;
-using Code.UI.SelectSavesWindow;
+﻿using _Project.Code.UI.MenuWindow;
+using _Project.Code.UI.SelectSavesWindow;
 using Cysharp.Threading.Tasks;
 
-namespace Code.UI.UIFactory.MenuUIFactory
+namespace _Project.Code.UI.UIFactory.MenuUIFactory
 {
     public interface IMenuUIFactory : IUIFactory
     {

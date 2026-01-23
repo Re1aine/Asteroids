@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.UFO
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.UFO
 {
     public class UfoDamageReceiver : IDamageReceiver
     {

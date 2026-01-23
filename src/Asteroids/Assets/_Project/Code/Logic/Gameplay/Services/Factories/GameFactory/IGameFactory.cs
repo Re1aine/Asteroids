@@ -1,13 +1,13 @@
-﻿using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
-using Code.Logic.Gameplay.Entities.Enemy.UFO;
-using Code.Logic.Gameplay.Entities.Player;
-using Code.Logic.Gameplay.Projectiles.Bullet;
-using Code.Logic.Gameplay.Projectiles.LaserBeam;
-using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
+﻿using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+using _Project.Code.Logic.Gameplay.Entities.Enemy.UFO;
+using _Project.Code.Logic.Gameplay.Entities.Player;
+using _Project.Code.Logic.Gameplay.Projectiles.Bullet;
+using _Project.Code.Logic.Gameplay.Projectiles.LaserBeam;
+using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Assets;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
 {
     public interface IGameFactory
     {

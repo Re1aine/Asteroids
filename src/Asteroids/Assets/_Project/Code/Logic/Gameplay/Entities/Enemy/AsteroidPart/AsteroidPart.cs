@@ -1,6 +1,6 @@
-﻿using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+﻿using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.AsteroidPart
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.AsteroidPart
 {
     public class AsteroidPart : AsteroidView
     {

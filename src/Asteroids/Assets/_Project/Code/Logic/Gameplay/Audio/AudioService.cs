@@ -1,7 +1,7 @@
 ﻿
-using Code.Logic.Gameplay.Services.Configs;
+using _Project.Code.Logic.Gameplay.Services.Configs;
 
-namespace Code.Logic.Gameplay.Audio
+namespace _Project.Code.Logic.Gameplay.Audio
 {
     public class AudioService : IAudioService
     {

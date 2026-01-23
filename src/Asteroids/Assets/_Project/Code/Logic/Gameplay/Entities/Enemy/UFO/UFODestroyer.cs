@@ -1,7 +1,7 @@
-﻿using Code.Logic.Gameplay.Services.ScoreCounter;
+﻿using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.UFO
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.UFO
 {
     public class UFODestroyer : IDestroyer
     {

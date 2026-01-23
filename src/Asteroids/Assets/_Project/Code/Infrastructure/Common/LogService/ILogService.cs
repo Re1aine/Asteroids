@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Code.Infrastructure.Common.LogService
+namespace _Project.Code.Infrastructure.Common.LogService
 {
     public interface ILogService
     {

@@ -1,14 +1,14 @@
-﻿using Code.Infrastructure.Common.AssetsManagement;
-using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
-using Code.Logic.Services.HUDProvider;
-using Code.UI.HUD;
-using Code.UI.HUD.Menu;
-using Code.UI.MenuWindow;
-using Code.UI.SelectSavesWindow;
+﻿using _Project.Code.Infrastructure.Common.AssetsManagement;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetProvider;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.UI.HUD;
+using _Project.Code.UI.HUD.Menu;
+using _Project.Code.UI.MenuWindow;
+using _Project.Code.UI.SelectSavesWindow;
 using Cysharp.Threading.Tasks;
 using VContainer;
 
-namespace Code.UI.UIFactory.MenuUIFactory
+namespace _Project.Code.UI.UIFactory.MenuUIFactory
 {
     public class MenuUIFactory : IMenuUIFactory
     {

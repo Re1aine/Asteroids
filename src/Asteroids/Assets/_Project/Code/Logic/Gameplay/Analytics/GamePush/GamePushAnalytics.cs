@@ -1,10 +1,10 @@
-﻿using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
-using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Services.SDKInitializer;
+﻿using _Project.Code.Logic.Gameplay.Analytics.AnalyticsKeys;
+using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Services.SDKInitializer;
 using GamePush;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Analytics.GamePush
+namespace _Project.Code.Logic.Gameplay.Analytics.GamePush
 {
     public class GamePushAnalytics : IAnalytics
     {

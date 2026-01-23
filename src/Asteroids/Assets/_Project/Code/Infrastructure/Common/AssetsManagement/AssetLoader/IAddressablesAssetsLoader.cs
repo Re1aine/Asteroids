@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Infrastructure.Common.AssetsManagement.AssetLoader
+namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader
 {
     public interface IAddressablesAssetsLoader
     {

@@ -1,11 +1,11 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.Pause;
+using _Project.Code.Logic.Gameplay.Services.Input;
+using _Project.Code.Logic.Gameplay.Services.Pause;
 using R3;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay.Entities.Player
+namespace _Project.Code.Logic.Gameplay.Entities.Player
 {
     public class PlayerView : MonoBehaviour
     {

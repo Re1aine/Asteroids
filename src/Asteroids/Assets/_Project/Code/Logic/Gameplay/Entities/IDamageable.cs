@@ -1,6 +1,4 @@
-﻿using Code.Logic.Gameplay.Services;
-
-namespace Code.Logic.Gameplay.Entities
+﻿namespace _Project.Code.Logic.Gameplay.Entities
 {
     public interface IDamageable
     {

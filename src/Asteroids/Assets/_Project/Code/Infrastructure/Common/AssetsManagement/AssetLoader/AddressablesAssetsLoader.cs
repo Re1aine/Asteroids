@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-namespace Code.Infrastructure.Common.AssetsManagement.AssetLoader
+namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader
 {
     public sealed class AddressablesAssetsLoader : IAddressablesAssetsLoader
     {

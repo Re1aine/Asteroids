@@ -1,12 +1,12 @@
 ﻿using System;
-using Code.Logic.Services.Repository.Player;
-using Code.Logic.Services.SaveLoad.CloudStrategy;
-using Code.Logic.Services.SaveLoad.LocalStrategy;
+using _Project.Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Services.SaveLoad.CloudStrategy;
+using _Project.Code.Logic.Services.SaveLoad.LocalStrategy;
 using Cysharp.Threading.Tasks;
 using R3;
 using VContainer.Unity;
 
-namespace Code.Logic.Services.SaveLoad
+namespace _Project.Code.Logic.Services.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService, IInitializable, IDisposable
     {

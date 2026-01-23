@@ -1,11 +1,11 @@
-﻿using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
-using Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
-using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
-using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
+﻿using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
+using _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
+using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Assets;
+using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Gameplay.Services.Configs
+namespace _Project.Code.Logic.Gameplay.Services.Configs
 {
     public class ConfigsProviderFacade : IConfigsProvider
     {

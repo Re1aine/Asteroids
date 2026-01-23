@@ -1,12 +1,12 @@
 ﻿#if UNITY_EDITOR
 using System;
-using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
-using Code.Logic.Services.SDKInitializer;
+using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Balance;
+using _Project.Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
 using Firebase.RemoteConfig;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
+namespace _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
 {
     public class FirebaseRemoteConfigsProvider : IBalanceConfigsProvider
     {

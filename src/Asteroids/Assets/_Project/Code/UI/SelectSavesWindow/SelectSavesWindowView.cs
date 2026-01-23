@@ -1,13 +1,13 @@
-﻿using Code.GameFlow.States.Menu;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Services.SaveLoad;
+﻿using _Project.Code.GameFlow.States.Menu;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace Code.UI.SelectSavesWindow
+namespace _Project.Code.UI.SelectSavesWindow
 {
     public class SelectSavesWindowView : MonoBehaviour
     {

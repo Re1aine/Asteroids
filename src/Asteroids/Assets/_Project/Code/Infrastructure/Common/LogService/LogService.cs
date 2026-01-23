@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Code.Infrastructure.Common.LogService
+namespace _Project.Code.Infrastructure.Common.LogService
 {
     public class LogService : ILogService
     {

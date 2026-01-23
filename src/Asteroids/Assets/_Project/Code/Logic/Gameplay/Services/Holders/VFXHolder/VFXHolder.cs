@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Holders.VFXHolder
+namespace _Project.Code.Logic.Gameplay.Services.Holders.VFXHolder
 {
     public class VFXHolder : IVFXHolder 
     {

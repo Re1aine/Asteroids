@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Audio
+namespace _Project.Code.Logic.Gameplay.Audio
 {
     public class AudioPlayer : MonoBehaviour
     {

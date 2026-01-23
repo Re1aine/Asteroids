@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Code.Tools
+namespace _Project.Code.Tools
 {
     public static class InternetHelper
     {

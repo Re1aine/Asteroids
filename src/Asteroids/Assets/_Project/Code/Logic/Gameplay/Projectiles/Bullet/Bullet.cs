@@ -1,9 +1,9 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.Pause;
+using _Project.Code.Logic.Gameplay.Services.Pause;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay.Projectiles.Bullet
+namespace _Project.Code.Logic.Gameplay.Projectiles.Bullet
 {
     [RequireComponent(typeof(CapsuleCollider2D))]
     public class Bullet : MonoBehaviour

@@ -1,7 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Infrastructure.Common.SceneLoader
+namespace _Project.Code.Infrastructure.Common.SceneLoader
 {
     public interface ISceneLoader
     {

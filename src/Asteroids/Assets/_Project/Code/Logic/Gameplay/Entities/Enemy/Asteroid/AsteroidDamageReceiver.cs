@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
     public class AsteroidDamageReceiver :  IDamageReceiver
     {

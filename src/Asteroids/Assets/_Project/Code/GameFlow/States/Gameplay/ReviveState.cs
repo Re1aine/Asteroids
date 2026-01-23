@@ -1,11 +1,11 @@
-﻿using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.Pause;
-using Code.Logic.Services.HUDProvider;
-using Code.UI;
+﻿using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.Input;
+using _Project.Code.Logic.Gameplay.Services.Pause;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.UI;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Gameplay
+namespace _Project.Code.GameFlow.States.Gameplay
 {
     public class ReviveState : IState
     {

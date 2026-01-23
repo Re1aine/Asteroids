@@ -1,6 +1,6 @@
-﻿using Code.Logic.Services.Repository;
+﻿using _Project.Code.Logic.Services.Repository;
 
-namespace Code.Logic.Gameplay.Services.Holders.RepositoriesHolder
+namespace _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder
 {
     public interface IRepositoriesHolder
     {

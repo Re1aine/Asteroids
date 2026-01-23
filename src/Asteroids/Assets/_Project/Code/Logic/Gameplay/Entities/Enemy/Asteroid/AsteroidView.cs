@@ -1,12 +1,12 @@
 ﻿using System;
-using Code.Logic.Gameplay.Entities.Player;
-using Code.Logic.Gameplay.Projectiles.Bullet;
-using Code.Logic.Gameplay.Services.Boundries;
-using Code.Logic.Gameplay.Services.Pause;
+using _Project.Code.Logic.Gameplay.Entities.Player;
+using _Project.Code.Logic.Gameplay.Projectiles.Bullet;
+using _Project.Code.Logic.Gameplay.Services.Boundries;
+using _Project.Code.Logic.Gameplay.Services.Pause;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.Asteroid
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid
 {
     public class AsteroidView : MonoBehaviour, IDamageable, IDamageDealer
     {

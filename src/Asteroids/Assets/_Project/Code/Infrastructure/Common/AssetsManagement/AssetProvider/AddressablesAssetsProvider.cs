@@ -1,10 +1,10 @@
-﻿using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+﻿using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Infrastructure.Common.AssetsManagement.AssetProvider
+namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetProvider
 {
     public class AddressablesAssetsProvider : IAddressablesAssetsProvider
     {

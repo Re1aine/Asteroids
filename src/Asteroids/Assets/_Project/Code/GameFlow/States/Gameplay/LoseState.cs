@@ -1,18 +1,18 @@
-using Code.Logic.Gameplay.Analytics;
-using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
-using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
-using Code.Logic.Gameplay.Services.Holders.VFXHolder;
-using Code.Logic.Gameplay.Services.Revive;
-using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.Logic.Services.HUDProvider;
-using Code.UI;
+using _Project.Code.Logic.Gameplay.Analytics;
+using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.BulletsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.VFXHolder;
+using _Project.Code.Logic.Gameplay.Services.Revive;
+using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.UI;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Gameplay
+namespace _Project.Code.GameFlow.States.Gameplay
 {
     public class LoseState : IState
     {

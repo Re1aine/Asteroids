@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Observers.UFO
+﻿namespace _Project.Code.Logic.Gameplay.Services.Observers.UFO
 {
     public interface IUFODeathObserver
     {

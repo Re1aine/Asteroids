@@ -1,9 +1,9 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.AdService;
-using Code.Logic.Gameplay.Services.AdService.Ad;
+using _Project.Code.Logic.Gameplay.Services.AdService;
+using _Project.Code.Logic.Gameplay.Services.AdService.Ad;
 using R3;
 
-namespace Code.UI.ReviveWindow
+namespace _Project.Code.UI.ReviveWindow
 {
     public class ReviveWindowModel : IDisposable
     {

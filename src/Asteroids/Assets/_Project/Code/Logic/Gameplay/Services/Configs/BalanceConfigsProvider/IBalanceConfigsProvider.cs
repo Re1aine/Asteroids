@@ -1,7 +1,7 @@
-﻿using Code.Logic.Gameplay.Services.Configs.Configs.Balance;
+﻿using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
+namespace _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
 {
     public interface IBalanceConfigsProvider  
     {

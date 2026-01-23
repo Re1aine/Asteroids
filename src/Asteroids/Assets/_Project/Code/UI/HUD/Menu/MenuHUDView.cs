@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using VContainer;
 
-namespace Code.UI.HUD.Menu
+namespace _Project.Code.UI.HUD.Menu
 {
     public class MenuHUDView : AHUDView
     {

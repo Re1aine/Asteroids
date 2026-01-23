@@ -1,5 +1,5 @@
 ﻿
-namespace Code.UI.HUD.Gameplay
+namespace _Project.Code.UI.HUD.Gameplay
 {
     public class GameplayHUDView : AHUDView
     {

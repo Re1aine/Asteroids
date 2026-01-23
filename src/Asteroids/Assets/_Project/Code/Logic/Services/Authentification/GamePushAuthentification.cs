@@ -1,11 +1,11 @@
-﻿using Code.Infrastructure.Common.LogService;
-using Code.Logic.Services.SDKInitializer;
+﻿using _Project.Code.Infrastructure.Common.LogService;
+using _Project.Code.Logic.Services.SDKInitializer;
 using GamePush;
 using R3;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Code.Logic.Services.Authentification
+namespace _Project.Code.Logic.Services.Authentification
 {
     public class GamePushAuthentification : IAuthentification
     {

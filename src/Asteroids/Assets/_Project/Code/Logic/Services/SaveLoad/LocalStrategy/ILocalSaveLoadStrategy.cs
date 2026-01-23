@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Services.SaveLoad.LocalStrategy
+﻿namespace _Project.Code.Logic.Services.SaveLoad.LocalStrategy
 {
     public interface ILocalSaveLoadStrategy : ISaveLoadStrategy
     {

@@ -1,11 +1,11 @@
 ﻿using System.Threading;
-using Code.Logic.Gameplay.Entities;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Entities;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay
+namespace _Project.Code.Logic.Gameplay
 {
     public class ShockWaveEffector : MonoBehaviour
     {

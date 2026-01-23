@@ -1,4 +1,4 @@
-﻿namespace Code.UI
+﻿namespace _Project.Code.UI
 {
     public enum WindowType
     {

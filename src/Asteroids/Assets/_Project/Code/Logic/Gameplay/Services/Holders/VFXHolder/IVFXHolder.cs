@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Holders.VFXHolder
+﻿namespace _Project.Code.Logic.Gameplay.Services.Holders.VFXHolder
 {
     public interface IVFXHolder
     {

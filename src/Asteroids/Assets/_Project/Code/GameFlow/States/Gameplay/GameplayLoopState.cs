@@ -1,16 +1,16 @@
-﻿using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.Death.PlayerDeathService;
-using Code.Logic.Gameplay.Services.Input;
-using Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver;
-using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
-using Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
-using Code.Logic.Services.HUDProvider;
-using Code.UI;
-using Code.UI.PlayerStatsWindow;
+﻿using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathService;
+using _Project.Code.Logic.Gameplay.Services.Input;
+using _Project.Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver;
+using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
+using _Project.Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
+using _Project.Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.UI;
+using _Project.Code.UI.PlayerStatsWindow;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Gameplay
+namespace _Project.Code.GameFlow.States.Gameplay
 {
     public class GameplayLoopState : IState
     {

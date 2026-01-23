@@ -1,8 +1,8 @@
-﻿using Code.GameFlow.States;
+﻿using _Project.Code.GameFlow.States;
 using Cysharp.Threading.Tasks;
 using VContainer;
 
-namespace Code.GameFlow
+namespace _Project.Code.GameFlow
 {
     public class StateFactory
     {

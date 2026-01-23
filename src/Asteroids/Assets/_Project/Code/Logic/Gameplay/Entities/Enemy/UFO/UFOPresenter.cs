@@ -1,11 +1,11 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.Observers.UFO;
+using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Assets;
+using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
+using _Project.Code.Logic.Gameplay.Services.Observers.UFO;
 using R3;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Entities.Enemy.UFO
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.UFO
 {
     public class UFOPresenter
     {

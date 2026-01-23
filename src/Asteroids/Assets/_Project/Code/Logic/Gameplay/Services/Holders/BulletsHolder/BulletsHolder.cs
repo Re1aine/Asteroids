@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Code.Logic.Gameplay.Projectiles.Bullet;
+using _Project.Code.Logic.Gameplay.Projectiles.Bullet;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Holders.BulletsHolder
+namespace _Project.Code.Logic.Gameplay.Services.Holders.BulletsHolder
 {
     public class BulletsHolder : IBulletsHolder
     {

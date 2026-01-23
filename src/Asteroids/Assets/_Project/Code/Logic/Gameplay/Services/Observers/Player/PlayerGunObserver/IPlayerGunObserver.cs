@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver
+﻿namespace _Project.Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver
 {
     public interface IPlayerGunObserver
     {

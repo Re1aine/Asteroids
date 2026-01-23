@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Logic.Menu.Services.Purchase.Product;
-using Code.Logic.Services.SaveLoad;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using GamePush;
 using R3;
 using VContainer.Unity;
 
-namespace Code.Logic.Services.Repository.Player
+namespace _Project.Code.Logic.Services.Repository.Player
 {
     public class PlayerRepository : IRepository, IInitializable, IDisposable
     {

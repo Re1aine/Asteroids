@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.UI.MenuWindow
+namespace _Project.Code.UI.MenuWindow
 {
     public class MenuWindowModel : IDisposable
     {

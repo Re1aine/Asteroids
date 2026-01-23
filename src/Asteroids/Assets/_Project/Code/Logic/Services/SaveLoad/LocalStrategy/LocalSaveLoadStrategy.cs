@@ -1,13 +1,13 @@
-﻿using Code.Logic.Services.Authentification;
-using Code.Logic.Services.Repository.Player;
-using Code.Logic.Services.SaveLoad.LocalStrategy.Storage;
+﻿using _Project.Code.Logic.Services.Authentification;
+using _Project.Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Services.SaveLoad.LocalStrategy.Storage;
 using Cysharp.Threading.Tasks;
 #if !UNITY_EDITOR
 using UnityEngine.Device;
 using GamePush;
 #endif
 
-namespace Code.Logic.Services.SaveLoad.LocalStrategy
+namespace _Project.Code.Logic.Services.SaveLoad.LocalStrategy
 {
     public class LocalSaveLoadStrategy : ILocalSaveLoadStrategy
     {

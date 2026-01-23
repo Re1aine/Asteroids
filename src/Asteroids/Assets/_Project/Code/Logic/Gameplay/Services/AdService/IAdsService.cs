@@ -1,7 +1,7 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.AdService.Ad;
+using _Project.Code.Logic.Gameplay.Services.AdService.Ad;
 
-namespace Code.Logic.Gameplay.Services.AdService
+namespace _Project.Code.Logic.Gameplay.Services.AdService
 {
     public interface IAdsService
     {

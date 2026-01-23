@@ -1,9 +1,9 @@
-﻿using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Services.HUDProvider;
-using Code.UI;
+﻿using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.UI;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Menu
+namespace _Project.Code.GameFlow.States.Menu
 {
     public class MenuStartState : IState
     {

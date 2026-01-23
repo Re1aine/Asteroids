@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.UI.PlayerStatsWindow
+namespace _Project.Code.UI.PlayerStatsWindow
 {
     public class PlayerStatsWindowPresenter
     {

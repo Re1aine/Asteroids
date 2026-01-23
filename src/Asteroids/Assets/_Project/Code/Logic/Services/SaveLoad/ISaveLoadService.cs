@@ -1,8 +1,8 @@
-﻿using Code.Logic.Services.Repository.Player;
+﻿using _Project.Code.Logic.Services.Repository.Player;
 using Cysharp.Threading.Tasks;
 using R3;
 
-namespace Code.Logic.Services.SaveLoad
+namespace _Project.Code.Logic.Services.SaveLoad
 {
     public interface ISaveLoadService
     {

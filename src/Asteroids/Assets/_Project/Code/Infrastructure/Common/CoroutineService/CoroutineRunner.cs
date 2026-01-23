@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Infrastructure.Common.CoroutineService
+namespace _Project.Code.Infrastructure.Common.CoroutineService
 {
     public class CoroutineRunner : MonoBehaviour, ICoroutineRunner
     {

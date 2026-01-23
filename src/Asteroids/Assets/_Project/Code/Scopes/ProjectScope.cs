@@ -1,25 +1,23 @@
-﻿using Code.EntryPoints;
-using Code.GameFlow;
-using Code.GameFlow.States.Core;
-using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
-using Code.Infrastructure.Common.CoroutineService;
-using Code.Infrastructure.Common.LogService;
-using Code.Infrastructure.Common.SceneLoader;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Services.Authentification;
-using Code.Logic.Services.Repository;
-using Code.Logic.Services.Repository.Player;
-using Code.Logic.Services.SaveLoad;
-using Code.Logic.Services.SaveLoad.CloudStrategy;
-using Code.Logic.Services.SaveLoad.LocalStrategy;
-using Code.Logic.Services.SaveLoad.LocalStrategy.Storage;
-using Code.Logic.Services.SDKInitializer;
-using TMPro;
+﻿using _Project.Code.EntryPoints;
+using _Project.Code.GameFlow;
+using _Project.Code.GameFlow.States.Core;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using _Project.Code.Infrastructure.Common.CoroutineService;
+using _Project.Code.Infrastructure.Common.LogService;
+using _Project.Code.Infrastructure.Common.SceneLoader;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Services.Authentification;
+using _Project.Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Services.SaveLoad;
+using _Project.Code.Logic.Services.SaveLoad.CloudStrategy;
+using _Project.Code.Logic.Services.SaveLoad.LocalStrategy;
+using _Project.Code.Logic.Services.SaveLoad.LocalStrategy.Storage;
+using _Project.Code.Logic.Services.SDKInitializer;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Scopes
+namespace _Project.Code.Scopes
 {
     public class ProjectScope : LifetimeScope
     {

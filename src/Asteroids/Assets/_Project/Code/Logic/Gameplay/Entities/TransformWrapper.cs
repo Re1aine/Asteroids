@@ -1,9 +1,9 @@
-﻿using Code.Logic.Gameplay.Services.Boundries;
-using Code.Logic.Gameplay.Services.PointWrapper;
+﻿using _Project.Code.Logic.Gameplay.Services.Boundries;
+using _Project.Code.Logic.Gameplay.Services.PointWrapper;
 using UnityEngine;
 using VContainer;
 
-namespace Code.Logic.Gameplay.Entities
+namespace _Project.Code.Logic.Gameplay.Entities
 {
     public sealed class TransformWrapper : MonoBehaviour
     {

@@ -1,14 +1,14 @@
-﻿using Code.GameFlow.States.Gameplay;
-using Code.Logic.Gameplay.Entities;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Gameplay.Services.Revive;
-using Code.Logic.Menu.Services.Purchase.Product;
-using Code.Logic.Services.Repository.Player;
+﻿using _Project.Code.GameFlow.States.Gameplay;
+using _Project.Code.Logic.Gameplay.Entities;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Services.Revive;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Services.Repository.Player;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor
+namespace _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor
 {
     public class PlayerDeathProcessor : IPlayerDeathProcessor
     {

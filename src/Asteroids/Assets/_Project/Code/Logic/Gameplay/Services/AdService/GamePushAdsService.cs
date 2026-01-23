@@ -1,14 +1,13 @@
 ﻿using System;
-using Code.Infrastructure.Common.LogService;
-using Code.Logic.Gameplay.Services.AdService.Ad;
-using Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
-using Code.Logic.Menu.Services.Purchase.Product;
-using Code.Logic.Services.Repository.Player;
-using Code.Logic.Services.SDKInitializer;
-using GamePush;
+using _Project.Code.Infrastructure.Common.LogService;
+using _Project.Code.Logic.Gameplay.Services.AdService.Ad;
+using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Services.Repository.Player;
+using _Project.Code.Logic.Services.SDKInitializer;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.AdService
+namespace _Project.Code.Logic.Gameplay.Services.AdService
 {
     public class GamePushAdsService : IAdsService, IDisposable
     {

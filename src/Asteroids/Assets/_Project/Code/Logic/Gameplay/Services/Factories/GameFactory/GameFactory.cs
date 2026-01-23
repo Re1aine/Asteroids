@@ -1,26 +1,26 @@
-﻿using Code.Infrastructure.Common.AssetsManagement;
-using Code.Infrastructure.Common.AssetsManagement.AssetLoader;
-using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
-using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
-using Code.Logic.Gameplay.Entities.Enemy.UFO;
-using Code.Logic.Gameplay.Entities.Player;
-using Code.Logic.Gameplay.Projectiles.Bullet;
-using Code.Logic.Gameplay.Projectiles.LaserBeam;
-using Code.Logic.Gameplay.Services.Configs;
-using Code.Logic.Gameplay.Services.Configs.Configs.Assets;
-using Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
-using Code.Logic.Gameplay.Services.Holders.BulletsHolder;
-using Code.Logic.Gameplay.Services.Holders.UFOsHolder;
-using Code.Logic.Gameplay.Services.Holders.VFXHolder;
-using Code.Logic.Gameplay.Services.Observers.Asteroid;
-using Code.Logic.Gameplay.Services.Observers.UFO;
-using Code.Logic.Gameplay.Services.ScoreCounter;
+﻿using _Project.Code.Infrastructure.Common.AssetsManagement;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetProvider;
+using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+using _Project.Code.Logic.Gameplay.Entities.Enemy.UFO;
+using _Project.Code.Logic.Gameplay.Entities.Player;
+using _Project.Code.Logic.Gameplay.Projectiles.Bullet;
+using _Project.Code.Logic.Gameplay.Projectiles.LaserBeam;
+using _Project.Code.Logic.Gameplay.Services.Configs;
+using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Assets;
+using _Project.Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.BulletsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.VFXHolder;
+using _Project.Code.Logic.Gameplay.Services.Observers.Asteroid;
+using _Project.Code.Logic.Gameplay.Services.Observers.UFO;
+using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Code.Logic.Gameplay.Services.Factories.GameFactory
+namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
 {
     public class GameFactory : IGameFactory
     {

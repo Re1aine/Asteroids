@@ -1,18 +1,18 @@
-﻿using Code.Infrastructure.Common.AssetsManagement;
-using Code.Infrastructure.Common.AssetsManagement.AssetProvider;
-using Code.Logic.Gameplay.Services.AdService;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Gameplay.Services.ScoreCounter;
-using Code.Logic.Services.HUDProvider;
-using Code.UI.HUD;
-using Code.UI.HUD.Gameplay;
-using Code.UI.LoseWindow;
-using Code.UI.PlayerStatsWindow;
-using Code.UI.ReviveWindow;
+﻿using _Project.Code.Infrastructure.Common.AssetsManagement;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetProvider;
+using _Project.Code.Logic.Gameplay.Services.AdService;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.UI.HUD;
+using _Project.Code.UI.HUD.Gameplay;
+using _Project.Code.UI.LoseWindow;
+using _Project.Code.UI.PlayerStatsWindow;
+using _Project.Code.UI.ReviveWindow;
 using Cysharp.Threading.Tasks;
 using VContainer;
 
-namespace Code.UI.UIFactory.GameplayUIFactory
+namespace _Project.Code.UI.UIFactory.GameplayUIFactory
 {
     public class GameplayUIFactory : IGameplayUIFactory
     {

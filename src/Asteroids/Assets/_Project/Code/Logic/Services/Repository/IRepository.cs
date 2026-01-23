@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Code.Logic.Services.Repository
+namespace _Project.Code.Logic.Services.Repository
 {
     public interface IRepository
     {

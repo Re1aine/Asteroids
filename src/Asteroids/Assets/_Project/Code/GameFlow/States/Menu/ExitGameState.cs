@@ -1,7 +1,7 @@
-﻿using Code.Logic.Services.Authentification;
+﻿using _Project.Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Menu
+namespace _Project.Code.GameFlow.States.Menu
 {
     public class ExitGameState : IState
     {

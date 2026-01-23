@@ -1,13 +1,13 @@
-﻿using Code.GameFlow.States.Core;
-using Code.GameFlow.States.Gameplay;
-using Code.Infrastructure.Common.SceneLoader;
+﻿using _Project.Code.GameFlow.States.Core;
+using _Project.Code.GameFlow.States.Gameplay;
+using _Project.Code.Infrastructure.Common.SceneLoader;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace Code.UI.LoseWindow
+namespace _Project.Code.UI.LoseWindow
 {
     public class LoseWindowView : MonoBehaviour
     {

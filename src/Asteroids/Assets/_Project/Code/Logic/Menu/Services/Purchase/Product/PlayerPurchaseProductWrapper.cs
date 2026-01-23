@@ -1,7 +1,7 @@
 ﻿using System;
 using GamePush;
 
-namespace Code.Logic.Menu.Services.Purchase.Product
+namespace _Project.Code.Logic.Menu.Services.Purchase.Product
 {
     public class PlayerPurchaseProductWrapper
     {

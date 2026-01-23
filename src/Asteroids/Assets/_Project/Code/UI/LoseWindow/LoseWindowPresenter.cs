@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.UI.LoseWindow
+namespace _Project.Code.UI.LoseWindow
 {
     public class LoseWindowPresenter
     {

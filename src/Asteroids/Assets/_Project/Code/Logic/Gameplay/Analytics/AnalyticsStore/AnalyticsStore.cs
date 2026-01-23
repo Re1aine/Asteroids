@@ -1,5 +1,5 @@
 ﻿
-namespace Code.Logic.Gameplay.Analytics.AnalyticsStore
+namespace _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore
 {
     public class AnalyticsStore : IAnalyticsStore
     {

@@ -1,7 +1,7 @@
-﻿using Code.Logic.Gameplay.Services.Boundries;
+﻿using _Project.Code.Logic.Gameplay.Services.Boundries;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Services.PointWrapper
+namespace _Project.Code.Logic.Gameplay.Services.PointWrapper
 {
     public class PointWrapService : IPointWrapService
     {

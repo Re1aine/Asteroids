@@ -1,8 +1,8 @@
-﻿using Code.Logic.Gameplay.Services.Providers.CameraProvider;
+﻿using _Project.Code.Logic.Gameplay.Services.Providers.CameraProvider;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Code.Logic.Gameplay.Services.Boundries
+namespace _Project.Code.Logic.Gameplay.Services.Boundries
 {
     public sealed class ScreenBoundaries : IBoundaries, IInitializable
     {

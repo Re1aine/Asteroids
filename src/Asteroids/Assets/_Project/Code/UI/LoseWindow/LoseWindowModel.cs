@@ -1,8 +1,8 @@
 ﻿using System;
-using Code.Logic.Gameplay.Services.ScoreCounter;
+using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
 using R3;
 
-namespace Code.UI.LoseWindow
+namespace _Project.Code.UI.LoseWindow
 {
     public class LoseWindowModel : IDisposable
     {

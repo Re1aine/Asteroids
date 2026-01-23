@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Code.Logic.Gameplay.Entities.Enemy.Asteroid;
+using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 
-namespace Code.Logic.Gameplay.Services.Holders.AsteroidsHolder
+namespace _Project.Code.Logic.Gameplay.Services.Holders.AsteroidsHolder
 {
     public interface IAsteroidsHolder
     {

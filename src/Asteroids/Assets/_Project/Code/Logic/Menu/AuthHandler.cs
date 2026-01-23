@@ -1,13 +1,13 @@
 ﻿using System;
-using Code.GameFlow.States.Menu;
-using Code.Infrastructure.Common.LogService;
-using Code.Logic.Services.Authentification;
+using _Project.Code.GameFlow.States.Menu;
+using _Project.Code.Infrastructure.Common.LogService;
+using _Project.Code.Logic.Services.Authentification;
 using Cysharp.Threading.Tasks;
 using GamePush;
 using R3;
 using VContainer.Unity;
 
-namespace Code.Logic.Menu
+namespace _Project.Code.Logic.Menu
 {
     public class AuthHandler : IInitializable, IDisposable
     {

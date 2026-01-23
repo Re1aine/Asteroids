@@ -1,11 +1,11 @@
 ﻿using System;
-using Code.Infrastructure.Common.LogService;
-using Code.Logic.Menu.Services.Purchase.Product;
-using Code.Logic.Services.SDKInitializer;
+using _Project.Code.Infrastructure.Common.LogService;
+using _Project.Code.Logic.Menu.Services.Purchase.Product;
+using _Project.Code.Logic.Services.SDKInitializer;
 using GamePush;
 using UnityEngine;
 
-namespace Code.Logic.Menu.Services.Purchase
+namespace _Project.Code.Logic.Menu.Services.Purchase
 {
     public class GamePushPurchaseService : IPurchaseService
     {

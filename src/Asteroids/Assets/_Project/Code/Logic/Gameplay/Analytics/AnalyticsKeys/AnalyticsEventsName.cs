@@ -1,4 +1,4 @@
-﻿namespace Code.Logic.Gameplay.Analytics.AnalyticsKeys
+﻿namespace _Project.Code.Logic.Gameplay.Analytics.AnalyticsKeys
 {
     public static class AnalyticsEventsName
     {

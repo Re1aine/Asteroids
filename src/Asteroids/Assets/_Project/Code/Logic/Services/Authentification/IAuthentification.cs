@@ -1,6 +1,6 @@
 ﻿using R3;
 
-namespace Code.Logic.Services.Authentification
+namespace _Project.Code.Logic.Services.Authentification
 {
     public interface IAuthentification
     {

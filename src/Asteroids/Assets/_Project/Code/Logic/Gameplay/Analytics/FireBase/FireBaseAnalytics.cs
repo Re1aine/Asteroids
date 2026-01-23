@@ -1,11 +1,11 @@
 ﻿#if UNITY_EDITOR
-using Code.Logic.Gameplay.Analytics.AnalyticsKeys;
-using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Services.SDKInitializer;
+using _Project.Code.Logic.Gameplay.Analytics.AnalyticsKeys;
+using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Services.SDKInitializer;
 using Firebase.Analytics;
 using UnityEngine;
 
-namespace Code.Logic.Gameplay.Analytics.FireBase
+namespace _Project.Code.Logic.Gameplay.Analytics.FireBase
 {
     public class FireBaseAnalytics : IAnalytics
     {

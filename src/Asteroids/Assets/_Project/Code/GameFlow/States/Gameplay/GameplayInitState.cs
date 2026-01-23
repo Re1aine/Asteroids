@@ -1,16 +1,14 @@
-﻿using Code.Logic.Gameplay;
-using Code.Logic.Gameplay.Analytics;
-using Code.Logic.Gameplay.Audio;
-using Code.Logic.Gameplay.Services.AdService;
-using Code.Logic.Gameplay.Services.Boundries;
-using Code.Logic.Gameplay.Services.Configs;
-using Code.Logic.Gameplay.Services.Death.PlayerDeathService;
-using Code.Logic.Gameplay.Services.Factories.GameFactory;
-using Code.Logic.Gameplay.Services.Providers.PlayerProvider;
-using Code.Logic.Services.HUDProvider;
+﻿using _Project.Code.Logic.Gameplay.Analytics;
+using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.AdService;
+using _Project.Code.Logic.Gameplay.Services.Configs;
+using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathService;
+using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Services.HUDProvider;
 using Cysharp.Threading.Tasks;
 
-namespace Code.GameFlow.States.Gameplay
+namespace _Project.Code.GameFlow.States.Gameplay
 {
     public class GameplayInitState : IState
     {

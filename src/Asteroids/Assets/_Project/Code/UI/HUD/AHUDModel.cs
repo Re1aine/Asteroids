@@ -1,7 +1,7 @@
 ﻿using System;
 using R3;
 
-namespace Code.UI.HUD
+namespace _Project.Code.UI.HUD
 {
     public abstract class AHUDModel : IDisposable
     {

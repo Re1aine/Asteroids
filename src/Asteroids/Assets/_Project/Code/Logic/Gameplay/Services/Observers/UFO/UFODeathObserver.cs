@@ -1,7 +1,7 @@
-﻿using Code.Logic.Gameplay.Analytics.AnalyticsStore;
-using Code.Logic.Gameplay.Entities.Enemy.UFO;
+﻿using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Gameplay.Entities.Enemy.UFO;
 
-namespace Code.Logic.Gameplay.Services.Observers.UFO
+namespace _Project.Code.Logic.Gameplay.Services.Observers.UFO
 {
     public class UFODeathObserver  : IUFODeathObserver
     {

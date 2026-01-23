@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.UI.SelectSavesWindow
+namespace _Project.Code.UI.SelectSavesWindow
 {
     public class SelectSavesWindowModel : IDisposable
     {
