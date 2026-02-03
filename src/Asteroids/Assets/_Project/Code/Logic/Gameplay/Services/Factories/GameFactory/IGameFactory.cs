@@ -16,7 +16,6 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
         UniTask<UFOPresenter> CreateUfo(Vector3 position, Quaternion rotation, int scoreReward = 4);
         UniTask<Bullet> CreateBullet(Vector3 position, Quaternion rotation);
         UniTask<LaserBeam> CreateLaserBeam(Vector2 position, Quaternion rotation);
-        UniTask WarmUp();
         VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation);
     }
 }

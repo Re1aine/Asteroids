@@ -1,5 +1,4 @@
 ﻿using _Project.Code.Infrastructure.Common.AssetsManagement;
-using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using _Project.Code.Infrastructure.Common.AssetsManagement.AssetProvider;
 using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
@@ -30,7 +29,6 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IBulletsHolder _bulletsHolder;
         private readonly IAnalyticsStore _analyticsStore;
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
-        private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
         private readonly IVFXHolder _vfxHolder;
         private readonly IConfigsProvider _configsProvider;
 
@@ -40,7 +38,6 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
             IBulletsHolder bulletsHolder,
             IAnalyticsStore analyticsStore,
             IAddressablesAssetsProvider addressablesAssetsProvider,
-            IAddressablesAssetsLoader addressablesAssetsLoader,
             IVFXHolder vfxHolder,
             IConfigsProvider configsProvider)
         {
@@ -50,22 +47,8 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
             _bulletsHolder = bulletsHolder;
             _analyticsStore = analyticsStore;
             _addressablesAssetsProvider = addressablesAssetsProvider;
-            _addressablesAssetsLoader = addressablesAssetsLoader;
             _vfxHolder = vfxHolder;
             _configsProvider = configsProvider;
-        }
-
-        public async UniTask WarmUp()
-        {
-            var (gameplayKeys, uiKeys) = await UniTask.WhenAll(
-                _addressablesAssetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.Gameplay),
-                _addressablesAssetsLoader.GetAssetsListByLabel<GameObject>(AssetsAddress.UI)
-            );
-            
-            await UniTask.WhenAll(
-                _addressablesAssetsLoader.LoadAll<GameObject>(gameplayKeys),
-                _addressablesAssetsLoader.LoadAll<GameObject>(uiKeys)
-            );
         }
         
         public async UniTask<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
@@ -132,6 +115,7 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
 
         public async UniTask<LaserBeam> CreateLaserBeam(Vector2 position, Quaternion rotation) => 
             await _addressablesAssetsProvider.InstantiateAt<LaserBeam>(AssetsAddress.LaserBeam,position, rotation);
+        
         public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
         {
             VFX prefab = _configsProvider
