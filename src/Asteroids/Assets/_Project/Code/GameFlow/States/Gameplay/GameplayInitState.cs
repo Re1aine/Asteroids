@@ -3,7 +3,6 @@ using _Project.Code.Logic.Gameplay.Audio;
 using _Project.Code.Logic.Gameplay.Services.AdService;
 using _Project.Code.Logic.Gameplay.Services.Configs;
 using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathService;
-using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
 using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using _Project.Code.Logic.Services.HUDProvider;
 using Cysharp.Threading.Tasks;
@@ -16,7 +15,6 @@ namespace _Project.Code.GameFlow.States.Gameplay
         private readonly IHUDProvider _hudProvider;
         private readonly IPlayerProvider _playerProvider;
         private readonly IAnalytics _analytics;
-        private readonly IGameFactory _gameFactory;
         private readonly IAdsService _adsService;
         private readonly IPlayerDeathService _playerDeathService;
         private readonly IConfigsProvider _configsProvider;
@@ -26,7 +24,6 @@ namespace _Project.Code.GameFlow.States.Gameplay
             IHUDProvider hudProvider,
             IPlayerProvider playerProvider,
             IAnalytics analytics,
-            IGameFactory gameFactory,
             IAdsService adsService,
             IPlayerDeathService playerDeathService,
             IConfigsProvider configsProvider,
@@ -36,7 +33,6 @@ namespace _Project.Code.GameFlow.States.Gameplay
             _hudProvider = hudProvider;
             _playerProvider = playerProvider;
             _analytics = analytics;
-            _gameFactory = gameFactory;
             _adsService = adsService;
             _playerDeathService = playerDeathService;
             _configsProvider = configsProvider;
@@ -48,8 +44,6 @@ namespace _Project.Code.GameFlow.States.Gameplay
             await _configsProvider.Initialize();
             
             _analytics.Initialize();
-            
-            await _gameFactory.WarmUp();
             
             _adsService.Initialize();
             

@@ -1,9 +1,12 @@
-﻿using _Project.Code.Logic.Menu.Services.Purchase;
+﻿using _Project.Code.Infrastructure.Common.AssetsManagement;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+using _Project.Code.Logic.Menu.Services.Purchase;
 using _Project.Code.Logic.Menu.Services.Purchase.Catalog;
 using _Project.Code.Logic.Menu.Services.Purchase.Handler;
 using _Project.Code.Logic.Services.HUDProvider;
 using _Project.Code.Logic.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace _Project.Code.GameFlow.States.Menu
 {
@@ -15,6 +18,7 @@ namespace _Project.Code.GameFlow.States.Menu
         private readonly PurchaseHandler _purchaseHandler;
         private readonly IHUDProvider _hudProvider;
         private readonly ISaveLoadService _saveLoadService;
+        private readonly IAddressablesAssetsLoader _addressablesAssetsLoader;
 
         public MenuInitState(
             MenuStateMachine menuStateMachine,
@@ -22,7 +26,8 @@ namespace _Project.Code.GameFlow.States.Menu
             IPurchaseCatalog purchaseCatalog,
             PurchaseHandler purchaseHandler,
             IHUDProvider hudProvider,
-            ISaveLoadService saveLoadService)
+            ISaveLoadService saveLoadService,
+            IAddressablesAssetsLoader  addressablesAssetsLoader)
         {
             _menuStateMachine = menuStateMachine;
             _purchaseService = purchaseService;
@@ -30,10 +35,13 @@ namespace _Project.Code.GameFlow.States.Menu
             _purchaseHandler = purchaseHandler;
             _hudProvider = hudProvider;
             _saveLoadService = saveLoadService;
+            _addressablesAssetsLoader = addressablesAssetsLoader;
         }
 
         public async UniTask Enter()
         {
+            await _addressablesAssetsLoader.LoadAssetsByLabels<GameObject>(AssetsAddress.Gameplay);
+            
             await _saveLoadService.Preload();
 
             _purchaseCatalog.Initialize();

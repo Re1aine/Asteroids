@@ -1,7 +1,9 @@
-﻿using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
+﻿using _Project.Code.Infrastructure.Common.AssetsManagement;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using _Project.Code.Infrastructure.Common.SceneLoader;
 using _Project.Code.Logic.Services.SDKInitializer;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace _Project.Code.GameFlow.States.Core
 {
@@ -24,6 +26,8 @@ namespace _Project.Code.GameFlow.States.Core
         {
             await _addressablesAssetsLoader.Initialize();
             await _sdkInitializer.Initialize();
+
+            await _addressablesAssetsLoader.LoadAssetsByLabels<GameObject>(AssetsAddress.Shared, AssetsAddress.Menu);
             
             _gameStateMachine
                 .Enter<LoadSceneState, GameScenes>(GameScenes.Menu)
