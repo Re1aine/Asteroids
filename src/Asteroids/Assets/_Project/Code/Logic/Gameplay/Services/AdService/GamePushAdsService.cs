@@ -6,6 +6,9 @@ using _Project.Code.Logic.Menu.Services.Purchase.Product;
 using _Project.Code.Logic.Services.Repository.Player;
 using _Project.Code.Logic.Services.SDKInitializer;
 using UnityEngine;
+#if !UNITY_EDITOR && UNITY_WEBGL
+using GamePush;
+#endif
 
 namespace _Project.Code.Logic.Gameplay.Services.AdService
 {
