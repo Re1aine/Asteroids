@@ -6,8 +6,9 @@ namespace _Project.Code.Infrastructure.Common.AssetsManagement
     public static class AssetsAddress
     {
         // Assets Labels Groups
+        public static readonly string Shared = "Shared";
+        public static readonly string Menu = "Menu";
         public static readonly string Gameplay = "Gameplay";
-        public static readonly string UI = "UI";
         
         // Gameplay Entities
         public static readonly string Player = "Player";

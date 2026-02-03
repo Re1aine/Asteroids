@@ -25,13 +25,37 @@ namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader
         
             return await handle.Task;
         }
+
+        public async UniTask LoadAssetsByLabels<T>(params string[] labels) where T : class
+        {
+            if (labels == null || labels.Length == 0)
+                return;
+
+            var allKeys = new List<string>();
         
-        public async UniTask<TAsset[]> LoadAll<TAsset>(List<string> keys) where TAsset : class => 
+            foreach (var label in labels)
+            {
+                if (string.IsNullOrEmpty(label))
+                    continue;
+                
+                List<string> labelKeys = await GetAssetsListByLabel<T>(label);
+                allKeys.AddRange(labelKeys);
+            }
+
+            var uniqueKeys = allKeys.Distinct().ToList();
+        
+            if (uniqueKeys.Count == 0)
+                return;
+
+            await LoadAll<T>(uniqueKeys);
+        }
+        
+        private async UniTask<List<string>> GetAssetsListByLabel<T>(string label) =>
+            await GetAssetsListByLabel(label, typeof(T));
+
+        private async UniTask<TAsset[]> LoadAll<TAsset>(List<string> keys) where TAsset : class => 
             await UniTask.WhenAll(keys.Select(LoadAsset<TAsset>).ToList());
 
-        public async UniTask<List<string>> GetAssetsListByLabel<T>(string label) =>
-            await GetAssetsListByLabel(label, typeof(T));
-        
         private async UniTask<List<string>> GetAssetsListByLabel(string label, Type type)
         {
             AsyncOperationHandle<IList<IResourceLocation>> handle = 

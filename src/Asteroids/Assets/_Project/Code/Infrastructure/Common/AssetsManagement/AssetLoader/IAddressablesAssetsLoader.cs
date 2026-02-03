@@ -7,7 +7,6 @@ namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader
     {
         UniTask Initialize();
         UniTask<T> LoadAsset<T>(string key) where T : class;
-        UniTask<TAsset[]> LoadAll<TAsset>(List<string> keys) where TAsset : class;
-        UniTask<List<string>> GetAssetsListByLabel<T>(string label);
+        UniTask LoadAssetsByLabels<T>(params string[] labels) where T : class;
     }
 }
