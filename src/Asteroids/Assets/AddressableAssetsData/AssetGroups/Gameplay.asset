@@ -33,14 +33,44 @@ MonoBehaviour:
     m_SerializedLabels:
     - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79668e26ff827bd459074f96a1d76efe
+    m_Address: LoseWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
+    m_Address: Gameplay
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aec19c2e608bcbb46b329f0398a87d03
     m_Address: Bullet
     m_ReadOnly: 0
     m_SerializedLabels:
     - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b38fbda3d71c96b43ad2a4b965d5b77c
+    m_Address: GameplayHUD
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1081f28dfe6479459dde5c9441bc5c6
+    m_Address: ReviveWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d2e4b0ab2a1eed74aa90474630031b0f
     m_Address: AsteroidPart
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4ae212142e6a5a478d1da5c7135b918
+    m_Address: PlayerStatsWindow
     m_ReadOnly: 0
     m_SerializedLabels:
     - Gameplay

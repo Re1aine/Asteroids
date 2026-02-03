@@ -15,9 +15,9 @@ MonoBehaviour:
   m_DefaultGroup: f17325ba151959d42b1992c74aaf9696
   m_currentHash:
     serializedVersion: 2
-    Hash: baa1cf6aab46201034487bb915e874ff
+    Hash: 78c1d47e734aed5464c60f4fb9298e08
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_InternalIdNamingMode: 0
@@ -51,19 +51,18 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: 435ffd51ac8057549adbacdba08dd391
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: 41a825da5191f7c42b3b0db4310cbf7b
   m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
-  - {fileID: 11400000, guid: faf060827c75a654ab5b7ef2496f57db, type: 2}
   - {fileID: 11400000, guid: 48587ea1e4d97ad45bbb44c7e29a4b9d, type: 2}
   - {fileID: 11400000, guid: edaac480b3069424fa55f4a854e2dd58, type: 2}
-  - {fileID: 11400000, guid: e17a5b6d23de8204684722a9a64b35c6, type: 2}
+  - {fileID: 11400000, guid: c153b43bf6d66554e9695789bac4cb45, type: 2}
   - {fileID: 11400000, guid: 83efa976d16eca04fbf24a13ec30788f, type: 2}
   - {fileID: 11400000, guid: 7d69519604d8c4e48b17e50d1a43cfea, type: 2}
   m_BuildSettings:
@@ -78,7 +77,21 @@ MonoBehaviour:
       - m_Id: 2cfb1c078c220ad49bc14734e363cb08
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
       - m_Id: 41a825da5191f7c42b3b0db4310cbf7b
-        m_Value: <undefined>
+        m_Value: 
+      - m_Id: 435ffd51ac8057549adbacdba08dd391
+        m_Value: 'ServerData/[BuildTarget]'
+      - m_Id: 83f0c837f9b3ae2438a0ece742fb1461
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: da06e33694cd599408d03a2943bf3b6c
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+    - m_InheritedParent: 
+      m_Id: a0195e30eb114254f846284645c96b0f
+      m_ProfileName: Remote
+      m_Values:
+      - m_Id: 2cfb1c078c220ad49bc14734e363cb08
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 41a825da5191f7c42b3b0db4310cbf7b
+        m_Value: https://s3.eponesh.com/games/files/25456/
       - m_Id: 435ffd51ac8057549adbacdba08dd391
         m_Value: 'ServerData/[BuildTarget]'
       - m_Id: 83f0c837f9b3ae2438a0ece742fb1461
@@ -104,9 +117,9 @@ MonoBehaviour:
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
+    - Shared
+    - Menu
     - Gameplay
-    - UI
-    - Scene
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 06ddd3d92e9708d40a2f1c4b3763f0b4, type: 2}
@@ -119,4 +132,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40bec3777b06485439c220e1cca4f2f7, type: 2}
   - {fileID: 11400000, guid: 1b8eb6cd56ceda043bfb4d5800cac14c, type: 2}
   - {fileID: 11400000, guid: 8d97fbae26c28dc43899ef1368ff4896, type: 2}
-  m_ActiveProfileId: 23903c4af97a1a041a707f49ec68ac0b
+  m_ActiveProfileId: a0195e30eb114254f846284645c96b0f
