@@ -11,7 +11,8 @@ namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader
     public sealed class AddressablesAssetsLoader : IAddressablesAssetsLoader
     {
         private readonly Dictionary<string, AsyncOperationHandle> _handles = new();
-
+        private readonly Dictionary<string, List<string>> _cachedLabels = new();
+        
         public async UniTask Initialize() => await Addressables.InitializeAsync().Task;
 
         public async UniTask<T> LoadAsset<T>(string key) where T : class
@@ -37,8 +38,13 @@ namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader
             {
                 if (string.IsNullOrEmpty(label))
                     continue;
-                
-                List<string> labelKeys = await GetAssetsListByLabel<T>(label);
+
+                if (!_cachedLabels.TryGetValue(label, out var labelKeys))
+                {
+                    labelKeys = await GetAssetsListByLabel<T>(label);
+                    _cachedLabels[label] = labelKeys;
+                }
+
                 allKeys.AddRange(labelKeys);
             }
 
