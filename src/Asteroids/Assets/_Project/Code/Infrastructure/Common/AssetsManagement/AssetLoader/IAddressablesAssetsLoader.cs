@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
 namespace _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader
