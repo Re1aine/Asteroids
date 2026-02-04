@@ -1,0 +1,103 @@
+using _Project.Code.EntryPoints;
+using _Project.Code.GameFlow;
+using _Project.Code.GameFlow.States.Gameplay;
+using _Project.Code.Infrastructure.Common.AssetsManagement.AssetProvider;
+using _Project.Code.Logic.Gameplay;
+using _Project.Code.Logic.Gameplay.Analytics;
+using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
+using _Project.Code.Logic.Gameplay.Analytics.GamePush;
+using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.AdService;
+using _Project.Code.Logic.Gameplay.Services.Boundries;
+using _Project.Code.Logic.Gameplay.Services.Configs;
+using _Project.Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
+using _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
+using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor;
+using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathService;
+using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
+using _Project.Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.BulletsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.UFOsHolder;
+using _Project.Code.Logic.Gameplay.Services.Holders.VFXHolder;
+using _Project.Code.Logic.Gameplay.Services.Input;
+using _Project.Code.Logic.Gameplay.Services.Observers.Player.PlayerGunObserver;
+using _Project.Code.Logic.Gameplay.Services.Pause;
+using _Project.Code.Logic.Gameplay.Services.PointWrapper;
+using _Project.Code.Logic.Gameplay.Services.Providers.CameraProvider;
+using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
+using _Project.Code.Logic.Gameplay.Services.Revive;
+using _Project.Code.Logic.Gameplay.Services.ScoreCounter;
+using _Project.Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner;
+using _Project.Code.Logic.Gameplay.Services.Spawners.UFOsSpawner;
+using _Project.Code.Logic.Services.HUDProvider;
+using _Project.Code.UI.UIFactory;
+using _Project.Code.UI.UIFactory.GameplayUIFactory;
+using UnityEngine;
+using VContainer;
+using VContainer.Unity;
+
+namespace _Project.Code.Scopes
+{
+    public class GameplayScope : LifetimeScope
+    {
+        [SerializeField] private Camera _camera;
+        
+        protected override void Configure(IContainerBuilder builder)
+        {
+            builder.Register<AddressablesAssetsProvider>(Lifetime.Singleton).As<IAddressablesAssetsProvider>();
+            
+            builder.Register<AssetsConfigsProvider>(Lifetime.Singleton).As<IAssetsConfigsProvider>();
+            builder.Register<GamePushRemoteConfigsProvider>(Lifetime.Singleton).As<IBalanceConfigsProvider>();
+            builder.Register<ConfigsProviderFacade>(Lifetime.Singleton).As<IConfigsProvider>();
+            
+            builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
+            builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();
+            
+            builder.Register<InputService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            
+            builder.Register<GamePushAdsService>(Lifetime.Singleton).As<IAdsService>();
+            
+            builder.Register<CameraProvider>(Lifetime.Singleton).As<ICameraProvider>().WithParameter(_camera);
+            builder.Register<PlayerProvider>(Lifetime.Singleton).As<IPlayerProvider>();
+            builder.Register<HUDProvider>(Lifetime.Singleton).As<IHUDProvider>();
+            
+            builder.Register<ScreenBoundaries>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<PointWrapService>(Lifetime.Singleton).As<IPointWrapService>();
+
+            builder.Register<ScoreCountService>(Lifetime.Singleton).As<IScoreCountService>();
+
+            builder.Register<GameFactory>(Lifetime.Singleton).As<IGameFactory>();
+            builder.Register<GameplayUIFactory>(Lifetime.Singleton)
+                .As<IGameplayUIFactory>()
+                .As<IUIFactory>();
+            
+            builder.Register<ReviveService>(Lifetime.Singleton).As<IReviveService>();
+            builder.Register<PlayerDeathProcessor>(Lifetime.Singleton).As<IPlayerDeathProcessor>();
+            
+            builder.Register<PlayerGunObserver>(Lifetime.Singleton).As<IPlayerGunObserver>();
+            
+            builder.Register<PlayerDeathService>(Lifetime.Singleton).As<IPlayerDeathService>();
+
+            builder.Register<UFOsHolder>(Lifetime.Singleton).As<IUFOsHolder>();
+            builder.Register<AsteroidsHolder>(Lifetime.Singleton).As<IAsteroidsHolder>();
+            builder.Register<BulletsHolder>(Lifetime.Singleton).As<IBulletsHolder>();
+            builder.Register<VFXHolder>(Lifetime.Singleton).As<IVFXHolder>();
+            
+            builder.Register<UFOSpawner>(Lifetime.Singleton).As<IUFOSpawner>();
+            builder.Register<AsteroidSpawner>(Lifetime.Singleton).As<IAsteroidSpawner>();
+
+            builder.Register<PauseService>(Lifetime.Singleton).As<IPauseService>();
+            
+            builder.RegisterComponentInHierarchy<BackgroundResizer>();
+            builder.RegisterComponentInHierarchy<AudioPlayer>();
+            builder.RegisterComponentInHierarchy<ShockWaveEffector>();
+            
+            builder.Register<AudioService>(Lifetime.Singleton).As<IAudioService>();
+            
+            builder.Register<StateFactory>(Lifetime.Singleton);
+            builder.Register<GameplayStateMachine>(Lifetime.Singleton);
+
+            builder.RegisterEntryPoint<GameplayEntryPoint>();
+        }
+    } 
+}

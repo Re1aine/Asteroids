@@ -1,0 +1,17 @@
+﻿using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Balance;
+using R3;
+
+namespace _Project.Code.Logic.Gameplay.Entities.Enemy.UFO
+{
+    public class UFOModel
+    {
+        public ReadOnlyReactiveProperty<UfoConfig> Config => _config;
+        
+        private readonly ReactiveProperty<UfoConfig> _config = new();
+        
+        public UFOModel(UfoConfig config)
+        {
+            _config.Value = config;
+        }
+    }
+}
