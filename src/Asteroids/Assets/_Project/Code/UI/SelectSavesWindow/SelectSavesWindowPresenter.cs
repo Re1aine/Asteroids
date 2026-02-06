@@ -14,7 +14,7 @@
         public void Destroy()
         {
             Model.Dispose();
-            View.Destroy();
+            View.Destroy().Forget();
         }
     }
 }
