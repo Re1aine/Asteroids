@@ -26,14 +26,14 @@ public class JuicyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _image.sprite = _onMouseEnterSprite;
+        SetSprite(_onMouseEnterSprite);
         
         _handle = AnimatePulse();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _image.sprite = _onMouseExitSprite;
+        SetSprite(_onMouseExitSprite);
         
         _handle.Cancel();
         
@@ -41,6 +41,14 @@ public class JuicyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             .WithEase(Ease.OutSine)
             .Bind(scale => _rect.localScale = scale)
             .AddTo(this);
+    }
+
+    private void SetSprite(Sprite sprite)
+    {
+        if (_onMouseEnterSprite == null && _onMouseExitSprite == null)
+            return;
+        
+        _image.sprite = sprite;
     }
 
     private MotionHandle AnimatePulse()
