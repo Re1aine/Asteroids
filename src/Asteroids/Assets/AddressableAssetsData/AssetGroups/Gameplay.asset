@@ -69,6 +69,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d98d6a2ab1e4cb4488f374db96bdb977
+    m_Address: TipWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4ae212142e6a5a478d1da5c7135b918
     m_Address: PlayerStatsWindow
     m_ReadOnly: 0
