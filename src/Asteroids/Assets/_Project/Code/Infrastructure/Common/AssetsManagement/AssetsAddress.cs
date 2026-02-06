@@ -24,6 +24,7 @@ namespace _Project.Code.Infrastructure.Common.AssetsManagement
         public static readonly string LoseWindow = "LoseWindow";
         public static readonly string PlayerStatsWindow = "PlayerStatsWindow";
         public static readonly string ReviveWindow = "ReviveWindow";
+        public static readonly string TipWindow = "TipWindow";
         
         //Menu UI Windows
         public static readonly string MenuWindow = "MenuWindow";

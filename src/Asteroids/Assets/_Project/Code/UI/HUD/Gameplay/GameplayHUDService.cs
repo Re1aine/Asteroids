@@ -12,6 +12,8 @@ namespace _Project.Code.UI.HUD.Gameplay
         private LoseWindowPresenter _loseWindow;
         private PlayerStatsWindowPresenter _playerStatsWindow;
         private ReviveWindowPresenter _reviveWindow;
+        
+        private TipView _tipWindow;
     
         public GameplayHUDService(IGameplayUIFactory gameplayUIFactory)
         {
@@ -31,6 +33,9 @@ namespace _Project.Code.UI.HUD.Gameplay
                 case WindowType.ReviveWindow:
                     _reviveWindow = await _gameplayUIFactory.CreateReviveWindow();
                     break;
+                case WindowType.TipWindow:
+                    _tipWindow = await _gameplayUIFactory.CreateTipWindow();
+                    break;
             }
         }
 
@@ -46,6 +51,9 @@ namespace _Project.Code.UI.HUD.Gameplay
                     break;
                 case WindowType.ReviveWindow:
                     _reviveWindow.Destroy();
+                    break;
+                case WindowType.TipWindow:
+                    _tipWindow.Destroy().Forget();
                     break;
             }    
         }

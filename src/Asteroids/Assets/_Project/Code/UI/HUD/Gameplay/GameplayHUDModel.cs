@@ -7,6 +7,8 @@ namespace _Project.Code.UI.HUD.Gameplay
         private readonly ReactiveProperty<bool> _isLoseWindowVisible = new();
         private readonly ReactiveProperty<bool> _isPlayerStatsWindowVisible = new();
         private readonly ReactiveProperty<bool> _isReviveWindowVisible = new();
+        private readonly ReactiveProperty<bool> _isTipWindowVisible = new();
+        
         private readonly CompositeDisposable _disposables = new();
      
         public GameplayHUDModel(GameplayHUDService gameplayHUDService)
@@ -27,7 +29,11 @@ namespace _Project.Code.UI.HUD.Gameplay
                 .Skip(1)
                 .Subscribe(isVisible => OnWindowVisibilityChanged(WindowType.ReviveWindow, isVisible))
                 .AddTo(_disposables);
-         
+            
+            _isTipWindowVisible
+                .Skip(1)
+                .Subscribe(isVisible => OnWindowVisibilityChanged(WindowType.TipWindow, isVisible))
+                .AddTo(_disposables);
         }
      
         public override void ShowWindow(WindowType windowType)
@@ -43,7 +49,9 @@ namespace _Project.Code.UI.HUD.Gameplay
                 case WindowType.ReviveWindow:
                     _isReviveWindowVisible.Value = true;
                     break;
-             
+                case WindowType.TipWindow:
+                    _isTipWindowVisible.Value = true;
+                    break;
             }
          
         }
@@ -59,6 +67,9 @@ namespace _Project.Code.UI.HUD.Gameplay
                     break;
                 case WindowType.ReviveWindow:
                     _isReviveWindowVisible.Value = false;
+                    break;
+                case WindowType.TipWindow:
+                    _isTipWindowVisible.Value = false;
                     break;
             }
          
