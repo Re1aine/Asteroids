@@ -36,7 +36,7 @@ namespace _Project.Code.UI.ReviveWindow
             _disposables.Dispose();
         
             Model.Dispose();
-            View.Destroy();
+            View.Destroy().Forget();
         }
     }
 }
