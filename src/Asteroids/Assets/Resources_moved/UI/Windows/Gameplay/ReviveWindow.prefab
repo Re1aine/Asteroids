@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fill: {fileID: 1545114016905596128}
+  _frame: {fileID: 3501952808759455822}
   _durationBounce: 1
   _bounceScale: 1.15
   _pulseStepSpeed: 0.005

@@ -1,7 +1,9 @@
-﻿using LitMotion;
+﻿using _Project.Code.Logic.Gameplay.Audio;
+using LitMotion;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VContainer;
 
 public class JuicyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -11,24 +13,34 @@ public class JuicyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [Header("AnimationSettings")]
     [SerializeField] private float _bounceScale;
     [SerializeField] private float _durationBounce;
-
+    
+    private IAudioService _audioService;
+    
     private MotionHandle _handle;
-    
-    private RectTransform _rect;
-    
-    private Image _image;
 
+    private RectTransform _rect;
+
+    private Image _image;
+    
     private void Awake()
     {
         _rect = GetComponent<RectTransform>();
         _image = GetComponent<Image>();
     }
 
+    [Inject]
+    public void Construct(IAudioService audioService)
+    {
+        _audioService = audioService;
+    }
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         SetSprite(_onMouseEnterSprite);
         
         _handle = AnimatePulse();
+        
+        _audioService.PlaySound(SoundType.ButtonOver);
     }
 
     public void OnPointerExit(PointerEventData eventData)

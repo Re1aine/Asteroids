@@ -18,12 +18,14 @@ MonoBehaviour:
   - m_GUID: 5298468aedf01234cb16b01d1b48b1bb
     m_Address: VFXConfig
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: efa07d065eb7e2d48b072079df6d731d
     m_Address: AudioConfig
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Configs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1da618e165a982245bd7ebec961614f7, type: 2}

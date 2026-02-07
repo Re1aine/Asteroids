@@ -4,6 +4,9 @@
     {
         BulletShoot = 0,
         LaserShoot = 1,
-        Music = 2
+        Music = 2,
+        
+        MainMenuMusic = 3,
+        ButtonOver = 4
     }
 }

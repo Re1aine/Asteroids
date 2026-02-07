@@ -25,9 +25,9 @@ public class MenuWordView : MonoBehaviour
 
     private async UniTaskVoid PlayWaveAnimation()
     {
-        while (_cts.IsCancellationRequested)
+        while (!_cts.IsCancellationRequested)
         {
-            await UniTask.Delay((int)(1000 * _delayWordJump));
+            await UniTask.Delay((int)(1000 * _delayWordJump), false, PlayerLoopTiming.Update, _cts.Token);
             await JumpWave();   
         }
     }
@@ -37,7 +37,7 @@ public class MenuWordView : MonoBehaviour
         for (int i = 0; i < _letters.Count; i++)
         {
             JumpLetter(i).Forget();
-            await UniTask.Delay((int)(1000 * _delayLetterJump));
+            await UniTask.Delay((int)(1000 * _delayLetterJump), false, PlayerLoopTiming.Update, _cts.Token);
         }
     }
 

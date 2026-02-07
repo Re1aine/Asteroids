@@ -5,6 +5,8 @@ using _Project.Code.Infrastructure.Common.AssetsManagement.AssetLoader;
 using _Project.Code.Infrastructure.Common.CoroutineService;
 using _Project.Code.Infrastructure.Common.LogService;
 using _Project.Code.Infrastructure.Common.SceneLoader;
+using _Project.Code.Logic.Gameplay.Audio;
+using _Project.Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
 using _Project.Code.Logic.Gameplay.Services.Holders.RepositoriesHolder;
 using _Project.Code.Logic.Services.Authentification;
 using _Project.Code.Logic.Services.Repository.Player;
@@ -22,6 +24,8 @@ namespace _Project.Code.Scopes
     public class ProjectScope : LifetimeScope
     {
         [SerializeField] private CoroutineRunner _coroutineRunner;
+        
+        [SerializeField] private AudioPlayer _audioPlayer;
 
         protected override void Awake()
         {
@@ -34,9 +38,12 @@ namespace _Project.Code.Scopes
             builder.Register<LogService>(Lifetime.Singleton).As<ILogService>();
             
             builder.RegisterComponentInNewPrefab(_coroutineRunner, Lifetime.Singleton).As<ICoroutineRunner>();
-
+            builder.RegisterComponentInNewPrefab(_audioPlayer, Lifetime.Singleton).As<AudioPlayer>();
+            
             builder.Register<AddressablesAssetsLoader>(Lifetime.Singleton).As<IAddressablesAssetsLoader>();
 
+            builder.Register<AssetsConfigsProvider>(Lifetime.Singleton).As<IAssetsConfigsProvider>();
+            
             builder.Register<SDKInitializer>(Lifetime.Singleton).As<ISDKInitializer>();
             
             builder.Register<GamePushAuthentification>(Lifetime.Singleton).As<IAuthentification>();
@@ -50,6 +57,8 @@ namespace _Project.Code.Scopes
             builder.Register<RepositoriesHolder>(Lifetime.Singleton).As<IRepositoriesHolder>();
             
             builder.Register<SceneLoader>(Lifetime.Singleton).As<ISceneLoader>();
+            
+            builder.Register<AudioService>(Lifetime.Singleton).As<IAudioService>();
 
             builder.Register<StateFactory>(Lifetime.Singleton);
             builder.Register<GameStateMachine>(Lifetime.Singleton);

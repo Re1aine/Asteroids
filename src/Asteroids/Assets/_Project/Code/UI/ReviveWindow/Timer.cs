@@ -13,6 +13,7 @@ namespace _Project.Code.UI.ReviveWindow
         private readonly Subject<Unit> _ended = new();
 
         [SerializeField] private Image _fill;
+        [SerializeField] private Image _frame;
         
         [Header("AnimationSettings")]
         [SerializeField] private float _durationBounce;
@@ -50,6 +51,9 @@ namespace _Project.Code.UI.ReviveWindow
                 
                 _fill.fillAmount = 1f - progress;
 
+                _fill.color = Color.Lerp(Color.cyan, Color.red, progress);
+                _frame.color = Color.Lerp(Color.cyan, Color.red, progress);
+                
                 _handlePulse.PlaybackSpeed += _pulseStepSpeed;
                 
                 elapsedTime += Time.deltaTime;

@@ -1,7 +1,6 @@
 ﻿using _Project.Code.Logic.Gameplay.Analytics;
-using _Project.Code.Logic.Gameplay.Audio;
 using _Project.Code.Logic.Gameplay.Services.AdService;
-using _Project.Code.Logic.Gameplay.Services.Configs;
+using _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
 using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathService;
 using _Project.Code.Logic.Gameplay.Services.Providers.PlayerProvider;
 using _Project.Code.Logic.Services.HUDProvider;
@@ -17,17 +16,15 @@ namespace _Project.Code.GameFlow.States.Gameplay
         private readonly IAnalytics _analytics;
         private readonly IAdsService _adsService;
         private readonly IPlayerDeathService _playerDeathService;
-        private readonly IConfigsProvider _configsProvider;
-        private readonly IAudioService _audioService;
-
+        private readonly IBalanceConfigsProvider _balanceConfigsProvider;
+        
         public GameplayInitState(GameplayStateMachine gameplayStateMachine, 
             IHUDProvider hudProvider,
             IPlayerProvider playerProvider,
             IAnalytics analytics,
             IAdsService adsService,
             IPlayerDeathService playerDeathService,
-            IConfigsProvider configsProvider,
-            IAudioService audioService)
+            IBalanceConfigsProvider balanceConfigsProvider)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _hudProvider = hudProvider;
@@ -35,13 +32,12 @@ namespace _Project.Code.GameFlow.States.Gameplay
             _analytics = analytics;
             _adsService = adsService;
             _playerDeathService = playerDeathService;
-            _configsProvider = configsProvider;
-            _audioService = audioService;
+            _balanceConfigsProvider = balanceConfigsProvider;
         }
 
         public async UniTask Enter()
         {
-            await _configsProvider.Initialize();
+            await _balanceConfigsProvider.Initialize();
             
             _analytics.Initialize();
             
@@ -49,8 +45,6 @@ namespace _Project.Code.GameFlow.States.Gameplay
             
             await _playerProvider.Initialize();
             await _hudProvider.Initialize();
-
-            _audioService.Initialize();
             
             _playerDeathService.Initialize();
             

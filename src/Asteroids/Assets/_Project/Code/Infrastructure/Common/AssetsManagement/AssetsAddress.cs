@@ -9,6 +9,7 @@ namespace _Project.Code.Infrastructure.Common.AssetsManagement
         public static readonly string Shared = "Shared";
         public static readonly string Menu = "Menu";
         public static readonly string Gameplay = "Gameplay";
+        public static readonly string Configs = "Configs";
         
         // Gameplay Entities
         public static readonly string Player = "Player";

@@ -6,11 +6,8 @@ using _Project.Code.Logic.Gameplay;
 using _Project.Code.Logic.Gameplay.Analytics;
 using _Project.Code.Logic.Gameplay.Analytics.AnalyticsStore;
 using _Project.Code.Logic.Gameplay.Analytics.GamePush;
-using _Project.Code.Logic.Gameplay.Audio;
 using _Project.Code.Logic.Gameplay.Services.AdService;
 using _Project.Code.Logic.Gameplay.Services.Boundries;
-using _Project.Code.Logic.Gameplay.Services.Configs;
-using _Project.Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
 using _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
 using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathProcessor;
 using _Project.Code.Logic.Gameplay.Services.Death.PlayerDeathService;
@@ -46,9 +43,7 @@ namespace _Project.Code.Scopes
         {
             builder.Register<AddressablesAssetsProvider>(Lifetime.Singleton).As<IAddressablesAssetsProvider>();
             
-            builder.Register<AssetsConfigsProvider>(Lifetime.Singleton).As<IAssetsConfigsProvider>();
             builder.Register<GamePushRemoteConfigsProvider>(Lifetime.Singleton).As<IBalanceConfigsProvider>();
-            builder.Register<ConfigsProviderFacade>(Lifetime.Singleton).As<IConfigsProvider>();
             
             builder.Register<AnalyticsStore>(Lifetime.Singleton).As<IAnalyticsStore>();
             builder.Register<GamePushAnalytics>(Lifetime.Singleton).As<IAnalytics>();
@@ -89,10 +84,7 @@ namespace _Project.Code.Scopes
             builder.Register<PauseService>(Lifetime.Singleton).As<IPauseService>();
             
             builder.RegisterComponentInHierarchy<BackgroundResizer>();
-            builder.RegisterComponentInHierarchy<AudioPlayer>();
             builder.RegisterComponentInHierarchy<ShockWaveEffector>();
-            
-            builder.Register<AudioService>(Lifetime.Singleton).As<IAudioService>();
             
             builder.Register<StateFactory>(Lifetime.Singleton);
             builder.Register<GameplayStateMachine>(Lifetime.Singleton);

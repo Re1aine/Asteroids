@@ -49,6 +49,7 @@ namespace _Project.Code.GameFlow.States.Gameplay
             _playerGunObserver.Start();
             
             _inputService.Enable();
+            
             _asteroidSpawner.Enable();
             _ufoSpawner.Enable();
             

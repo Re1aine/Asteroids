@@ -17,7 +17,12 @@ namespace _Project.Code.Logic.Gameplay.Audio
                 [SoundType.BulletShoot] = SoundCategory.ShortSounds,
                 [SoundType.LaserShoot] = SoundCategory.ShortSounds,
                 [SoundType.Music] = SoundCategory.Music,
+                
+                [SoundType.MainMenuMusic] = SoundCategory.Music,
+                [SoundType.ButtonOver] = SoundCategory.ShortSounds,
             };
+            
+            DontDestroyOnLoad(this);
         }
 
         public void PlaySound(SoundType type, AudioClip clip)
