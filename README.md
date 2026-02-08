@@ -16,7 +16,7 @@ A classic arcade-style Asteroids game built in Unity.
 3. Play
 
 ## 📁 Project Structure
-Assets/Code/
+Assets/_Project/Code/
 - ├── EntryPoints/          # Bootstrappers & initialization
 - ├── GameFlow/             # State machines & states
 - ├── Infrastructure/       # Services
@@ -40,12 +40,15 @@ Assets/Code/
 - **Ad Service** – integrated Interstitial, Rewarded ad units
 - **IAP Service** – in‑app purchases with receipt validation and platform support  
 - **Analytics Service** – custom event tracking, player metrics, and data pipelines  
+- **Remote Addressables** - remote content delivery, live asset updates, and versioned bundles without rebuilding the app
 
 ## 🛠️ Technology Stack
 - **R3** for reactive streams and events
 - **Addressables** for assets management
 - **UniTask** for modern async/await
 - **VContainer** for inject dependencies
+- **GamePush SDK** for cloud saves, player auth, for configs, assets etc.
+- **LitMotion** for tweening UI and gameplay animations
 
 # Gameplay
 ![Gameplay](https://github.com/user-attachments/assets/b40d5423-daac-4d10-a7d0-30596022fadc)
