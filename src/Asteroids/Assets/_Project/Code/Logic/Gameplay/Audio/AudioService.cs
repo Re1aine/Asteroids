@@ -5,18 +5,10 @@ namespace _Project.Code.Logic.Gameplay.Audio
 {
     public class AudioService : IAudioService
     {
-        //private readonly IConfigsProvider _configsProvider;
-    
         private readonly AudioPlayer _audioPlayer;
         private AudioConfig _audioConfig;
         
         private readonly IAssetsConfigsProvider _assetConfigProvider;
-
-        //public AudioService(IConfigsProvider configsProvider, AudioPlayer audioPlayer)
-        //{
-        //    _configsProvider = configsProvider;
-        //    _audioPlayer = audioPlayer;
-        //}
         
         public AudioService(IAssetsConfigsProvider assetsConfigsProvider, AudioPlayer audioPlayer)
         {

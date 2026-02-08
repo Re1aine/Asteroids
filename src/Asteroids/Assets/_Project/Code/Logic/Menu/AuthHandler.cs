@@ -63,12 +63,12 @@ namespace _Project.Code.Logic.Menu
                 return;
         
             _secretCodeDeliverer.SetSecretCode(GP_Player.GetString(AnonymousAuthKey));
-            _secretCodeDeliverer.gameObject.SetActive(true);
+            _secretCodeDeliverer.CopyToClipboard();
         }
 
         private void OnLoginCompleted()
         {
-            _secretCodeDeliverer.gameObject.SetActive(false);
+            _secretCodeDeliverer.Destroy(); 
             _menuStateMachine.Enter<MenuInitState>().Forget();
         }
         

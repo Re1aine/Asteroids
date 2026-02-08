@@ -2,7 +2,6 @@
 using _Project.Code.GameFlow;
 using _Project.Code.GameFlow.States.Menu;
 using _Project.Code.Infrastructure.Common.AssetsManagement.AssetProvider;
-using _Project.Code.Logic.Gameplay.Audio;
 using _Project.Code.Logic.Menu;
 using _Project.Code.Logic.Menu.Services.Purchase;
 using _Project.Code.Logic.Menu.Services.Purchase.Catalog;

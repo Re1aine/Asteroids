@@ -24,7 +24,6 @@ namespace _Project.Code.Scopes
     public class ProjectScope : LifetimeScope
     {
         [SerializeField] private CoroutineRunner _coroutineRunner;
-        
         [SerializeField] private AudioPlayer _audioPlayer;
 
         protected override void Awake()

@@ -48,4 +48,4 @@ MonoBehaviour:
     TypeName: _Project.Code.Scopes.ProjectScope
   autoRun: 1
   autoInjectGameObjects: []
-  _codeDeliverer: {fileID: 0}
+  _codeDeliverer: {fileID: 8944727571655741571, guid: cc40c31ff536f2140af37f424ffe68be, type: 3}
