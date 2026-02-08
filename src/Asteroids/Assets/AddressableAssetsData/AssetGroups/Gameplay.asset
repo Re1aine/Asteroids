@@ -33,6 +33,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44cbaf8fd513cc54c84a6304a2658fd6
+    m_Address: Assets/_Project/Art/Sprites/Sci-Fi Pack/PNG/Button14.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 79668e26ff827bd459074f96a1d76efe
     m_Address: LoseWindow
     m_ReadOnly: 0
@@ -45,11 +50,21 @@ MonoBehaviour:
     m_SerializedLabels:
     - Gameplay
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ea76d14ab436ae4a891f4a56cbc89de
+    m_Address: Assets/_Project/Art/Sprites/Sci-Fi Pack/PNG/MainPanel01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aec19c2e608bcbb46b329f0398a87d03
     m_Address: Bullet
     m_ReadOnly: 0
     m_SerializedLabels:
     - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aedf4399a620dfc42b5eabcbbe6099a3
+    m_Address: Assets/_Project/Art/Sprites/Sci-Fi Pack/PNG/Button11.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b38fbda3d71c96b43ad2a4b965d5b77c
     m_Address: GameplayHUD
@@ -65,6 +80,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d2e4b0ab2a1eed74aa90474630031b0f
     m_Address: AsteroidPart
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Gameplay
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d98d6a2ab1e4cb4488f374db96bdb977
+    m_Address: TipWindow
     m_ReadOnly: 0
     m_SerializedLabels:
     - Gameplay

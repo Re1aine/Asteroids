@@ -39,7 +39,7 @@ namespace _Project.Code.UI.PlayerStatsWindow
         { 
             _disposables.Dispose();
             Model.Dispose();
-            View.Destroy();
+            View.Destroy().Forget();
         }
     }
 }

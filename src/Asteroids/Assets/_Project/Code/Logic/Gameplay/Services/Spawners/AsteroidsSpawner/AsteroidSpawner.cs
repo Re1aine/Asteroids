@@ -2,7 +2,7 @@
 using _Project.Code.Infrastructure.Common.CoroutineService;
 using _Project.Code.Logic.Gameplay.Entities.Enemy.Asteroid;
 using _Project.Code.Logic.Gameplay.Services.Boundries;
-using _Project.Code.Logic.Gameplay.Services.Configs;
+using _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
 using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Balance;
 using _Project.Code.Logic.Gameplay.Services.Factories.GameFactory;
 using _Project.Code.Logic.Gameplay.Services.Pause;
@@ -22,7 +22,7 @@ namespace _Project.Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IBoundaries _boundaries;
         private readonly IPauseService _pauseService;
-        private readonly IConfigsProvider _configsProvider;
+        private readonly IBalanceConfigsProvider _balanceConfigsProvider;
 
         private Coroutine _coroutine;
         
@@ -30,20 +30,20 @@ namespace _Project.Code.Logic.Gameplay.Services.Spawners.AsteroidsSpawner
     
         public AsteroidSpawner(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IBoundaries boundaries,
             IPauseService pauseService,
-            IConfigsProvider configsProvider)
+            IBalanceConfigsProvider balanceConfigsProvider)
         {
             _gameFactory = gameFactory;
             _coroutineRunner = coroutineRunner;
             _boundaries = boundaries;
             _pauseService = pauseService;
-            _configsProvider = configsProvider;
+            _balanceConfigsProvider = balanceConfigsProvider;
             
             Configure();
         }
 
         private void Configure()
         {
-            _config = _configsProvider.AsteroidSpawnerConfig;
+            _config = _balanceConfigsProvider.AsteroidSpawnerConfig;
 
             _spawnCooldown = _config.SpawnCooldown;
             _minRadiusSpawn = _config.MinRadiusSpawn;

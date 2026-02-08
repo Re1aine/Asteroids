@@ -49,3 +49,4 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _coroutineRunner: {fileID: 3712416033328853094, guid: dca02724fb86ba849b15ed92c8c78f9f, type: 3}
+  _audioPlayer: {fileID: 7762786951829850166, guid: 408b2e60dc65d074a96613195aa8dff2, type: 3}

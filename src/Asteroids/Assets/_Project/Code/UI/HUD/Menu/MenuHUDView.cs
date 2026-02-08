@@ -10,7 +10,12 @@ namespace _Project.Code.UI.HUD.Menu
         public override void Build()
         {
             _noAdsButtonView.gameObject.SetActive(true);
+            
+#if !UNITY_EDITOR && UNITY_WEBGL
+            _devWindowView.gameObject.SetActive(false);
+#else
             _devWindowView.gameObject.SetActive(true);
+#endif
         }
     }
 }

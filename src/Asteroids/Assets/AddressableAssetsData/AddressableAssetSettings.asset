@@ -120,6 +120,7 @@ MonoBehaviour:
     - Shared
     - Menu
     - Gameplay
+    - Configs
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 06ddd3d92e9708d40a2f1c4b3763f0b4, type: 2}

@@ -1,5 +1,4 @@
-﻿
-namespace _Project.Code.Logic.Gameplay.Audio
+﻿namespace _Project.Code.Logic.Gameplay.Audio
 {
     public interface IAudioService
     {

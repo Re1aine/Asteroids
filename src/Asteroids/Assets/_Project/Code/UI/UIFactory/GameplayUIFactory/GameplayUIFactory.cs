@@ -74,5 +74,12 @@ namespace _Project.Code.UI.UIFactory.GameplayUIFactory
             
             return new ReviveWindowPresenter(model, view);
         }
+
+        public async UniTask<TipView> CreateTipWindow()
+        {
+            return await _addressablesAssetsProvider.Instantiate<TipView>(
+                AssetsAddress.TipWindow,
+                _resolver.Resolve<IHUDProvider>().HUD.View.transform);
+        }
     }
 }

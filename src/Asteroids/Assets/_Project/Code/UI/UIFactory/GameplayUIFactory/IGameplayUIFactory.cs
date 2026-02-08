@@ -8,9 +8,8 @@ namespace _Project.Code.UI.UIFactory.GameplayUIFactory
     public interface IGameplayUIFactory : IUIFactory
     {
         UniTask<LoseWindowPresenter> CreateLoseWindow();
-
         UniTask<PlayerStatsWindowPresenter> CreatePlayerStatsWindow();
-
         UniTask<ReviveWindowPresenter> CreateReviveWindow();
+        UniTask<TipView> CreateTipWindow();
     }
 }

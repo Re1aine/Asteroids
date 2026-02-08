@@ -45,7 +45,6 @@ namespace _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider
             {
                 _isInitialized = true;
                 _logService.Log("[Remote Config initialized successfully]", Color.green, true);
-
             }
             else
             {

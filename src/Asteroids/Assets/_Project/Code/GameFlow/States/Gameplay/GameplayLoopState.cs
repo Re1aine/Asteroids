@@ -49,13 +49,15 @@ namespace _Project.Code.GameFlow.States.Gameplay
             _playerGunObserver.Start();
             
             _inputService.Enable();
+            
             _asteroidSpawner.Enable();
             _ufoSpawner.Enable();
             
             _audioService.PlaySound(SoundType.Music);
             
             _hudProvider.HUD.ShowWindow(WindowType.PlayerStatsWindow);
-            
+            _hudProvider.HUD.ShowWindow(WindowType.TipWindow);
+                
             return default;
         }
 
@@ -68,7 +70,8 @@ namespace _Project.Code.GameFlow.States.Gameplay
             _playerGunObserver.Stop();
             
             _hudProvider.HUD.HideWindow(WindowType.PlayerStatsWindow);
-            
+            _hudProvider.HUD.HideWindow(WindowType.TipWindow);
+                
             return default;
         }
     }

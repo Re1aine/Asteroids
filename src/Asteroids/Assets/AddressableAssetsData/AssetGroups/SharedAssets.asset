@@ -40,12 +40,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Shared
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3f9215ea0144899419cfbc0957140d3f
-    m_Address: Assets/DefaultVolumeProfile.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Shared
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f586378b4e144a9851e7b34d9b748ee
     m_Address: Fonts & Materials/LiberationSans SDF
     m_ReadOnly: 0

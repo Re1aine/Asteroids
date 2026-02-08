@@ -6,7 +6,8 @@ using _Project.Code.Logic.Gameplay.Entities.Enemy.UFO;
 using _Project.Code.Logic.Gameplay.Entities.Player;
 using _Project.Code.Logic.Gameplay.Projectiles.Bullet;
 using _Project.Code.Logic.Gameplay.Projectiles.LaserBeam;
-using _Project.Code.Logic.Gameplay.Services.Configs;
+using _Project.Code.Logic.Gameplay.Services.Configs.AssetsConfigProvider;
+using _Project.Code.Logic.Gameplay.Services.Configs.BalanceConfigsProvider;
 using _Project.Code.Logic.Gameplay.Services.Configs.Configs.Assets;
 using _Project.Code.Logic.Gameplay.Services.Holders.AsteroidsHolder;
 using _Project.Code.Logic.Gameplay.Services.Holders.BulletsHolder;
@@ -30,7 +31,8 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
         private readonly IAnalyticsStore _analyticsStore;
         private readonly IAddressablesAssetsProvider _addressablesAssetsProvider;
         private readonly IVFXHolder _vfxHolder;
-        private readonly IConfigsProvider _configsProvider;
+        private readonly IBalanceConfigsProvider _balanceConfigsProvider;
+        private readonly IAssetsConfigsProvider _assetsConfigsProvider;
 
         public GameFactory(IScoreCountService scoreCountService,
             IUFOsHolder ufOsHolder,
@@ -39,7 +41,8 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
             IAnalyticsStore analyticsStore,
             IAddressablesAssetsProvider addressablesAssetsProvider,
             IVFXHolder vfxHolder,
-            IConfigsProvider configsProvider)
+            IBalanceConfigsProvider balanceConfigsProvider,
+            IAssetsConfigsProvider assetsConfigsProvider)
         {
             _scoreCountService = scoreCountService;
             _ufOsHolder = ufOsHolder;
@@ -48,7 +51,8 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
             _analyticsStore = analyticsStore;
             _addressablesAssetsProvider = addressablesAssetsProvider;
             _vfxHolder = vfxHolder;
-            _configsProvider = configsProvider;
+            _balanceConfigsProvider = balanceConfigsProvider;
+            _assetsConfigsProvider = assetsConfigsProvider;
         }
         
         public async UniTask<PlayerPresenter> CreatePlayer(Vector3 position, Quaternion rotation)
@@ -56,7 +60,7 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
             PlayerView playerView = await _addressablesAssetsProvider.Instantiate<PlayerView>(AssetsAddress.Player);
             
             PlayerPresenter presenter = new PlayerPresenter(
-                new PlayerModel(_configsProvider.PlayerConfig, _configsProvider.GunConfig),
+                new PlayerModel(_balanceConfigsProvider.PlayerConfig, _balanceConfigsProvider.GunConfig),
                 playerView);
 
             presenter.Init(
@@ -71,7 +75,7 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
             AsteroidView view = await _addressablesAssetsProvider.InstantiateAt<AsteroidView>(AssetsAddress.GetAddressForAsteroid(type), position, rotation);
             
             AsteroidPresenter presenter = new AsteroidPresenter(
-                new AsteroidModel(type, _configsProvider.AsteroidConfig),
+                new AsteroidModel(type, _balanceConfigsProvider.AsteroidConfig),
                 view);
 
             presenter.Init(
@@ -90,7 +94,7 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
             UFOView view = await _addressablesAssetsProvider.InstantiateAt<UFOView>(AssetsAddress.UFO, position, rotation);
             
             UFOPresenter presenter = new UFOPresenter(
-                new UFOModel(_configsProvider.UfoConfig),
+                new UFOModel(_balanceConfigsProvider.UfoConfig),
                 view);
 
             presenter.Init(
@@ -118,7 +122,7 @@ namespace _Project.Code.Logic.Gameplay.Services.Factories.GameFactory
         
         public VFX CreateVFX(VFXType type, Vector3 position, Quaternion rotation)
         {
-            VFX prefab = _configsProvider
+            VFX prefab = _assetsConfigsProvider
                 .VFXConfig
                 .GetVFXByType(type);
 
